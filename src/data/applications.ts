@@ -577,11 +577,11 @@ export const applications: Application[] = [
   {
     id: "clinical-compass",
     title: "Graston Clinical Compass",
-    tagline: "Intelligent protocol builder guiding clinical reasoning and treatment planning",
+    tagline: "A Digital Mentor for Clinical Excellence.",
     category: ["Clinical Tools", "Education"],
     tags: ["JavaScript", "Clinical Decision Support", "Protocol Generation", "Interactive Workflow"],
     thumbnail: "/apps/clinical-compass-thumbnail.png",
-    demoUrl: "/demos/clinical-compass",
+    demoUrl: "https://dazzling-tiger-zoom.vercel.app/",
     overview: "A sophisticated clinical decision support tool that guides practitioners through evidence-based treatment protocol development using a step-by-step questionnaire, integrating clinical reasoning, anatomical knowledge, and instrument selection into actionable treatment plans.",
     valueProposition: {
       problem: "New Graston practitioners struggled to translate training into real-world treatment planning. Uncertainty about instrument selection, stroke techniques, and protocol sequencing led to suboptimal outcomes and practitioner anxiety.",

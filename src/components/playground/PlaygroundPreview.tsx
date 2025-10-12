@@ -6,7 +6,17 @@ import { staggerContainer, staggerItem, cardHover } from "../../utils/animations
 import "./PlaygroundPreview.css";
 
 const PlaygroundPreview: React.FC = () => {
-  const featuredApps = applications.slice(0, 3);
+  const featuredApps = applications.slice(0, 4);
+
+  const getAppIcon = (appId: string) => {
+    const iconMap: { [key: string]: string } = {
+      'clinical-compass': '🧭',
+      'gt9-pricing-sheet': '🚀',
+      'license-requirements-tool': '📋',
+      'roi-calculator': '💰'
+    };
+    return iconMap[appId] || '🎓';
+  };
 
   return (
     <section className="playground-preview">
@@ -39,7 +49,7 @@ const PlaygroundPreview: React.FC = () => {
               variants={staggerItem}
               whileHover={cardHover}
             >
-              <div className="app-card-icon">{app.id === 'clinical-compass' ? '🧭' : app.id === 'gt9-pricing-sheet' ? '🚀' : '🎓'}</div>
+              <div className="app-card-icon">{getAppIcon(app.id)}</div>
               <h3>{app.title}</h3>
               <p>{app.tagline}</p>
               
