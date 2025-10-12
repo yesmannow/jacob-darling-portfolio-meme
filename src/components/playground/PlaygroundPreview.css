@@ -1,0 +1,185 @@
+.playground-preview {
+  padding: 6rem 2rem;
+  background: linear-gradient(180deg, rgba(136, 171, 242, 0.03) 0%, transparent 100%);
+}
+
+.playground-content {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.playground-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.playground-header h2 {
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: #fafbfc;
+}
+
+.playground-subtitle {
+  font-size: 1.3rem;
+  color: #9ca3af;
+  line-height: 1.7;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.playground-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2.5rem;
+  margin-bottom: 3rem;
+}
+
+.playground-app-card {
+  background: rgba(136, 171, 242, 0.05);
+  border: 1px solid rgba(136, 171, 242, 0.1);
+  border-radius: 16px;
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.playground-app-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, #88ABF2, #a8c5ff);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.playground-app-card:hover::before {
+  transform: scaleX(1);
+}
+
+.app-card-icon {
+  font-size: 4rem;
+  line-height: 1;
+}
+
+.playground-app-card h3 {
+  font-size: 1.6rem;
+  color: #88ABF2;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.playground-app-card p {
+  font-size: 1.05rem;
+  color: #9ca3af;
+  line-height: 1.6;
+  margin: 0;
+  font-style: italic;
+}
+
+.app-card-features {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem 0;
+  border-top: 1px solid rgba(136, 171, 242, 0.1);
+  border-bottom: 1px solid rgba(136, 171, 242, 0.1);
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.95rem;
+  color: #d1d5db;
+}
+
+.feature-icon {
+  font-size: 1.2rem;
+}
+
+.feature-text {
+  font-weight: 500;
+}
+
+.app-card-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: auto;
+}
+
+.app-btn {
+  flex: 1;
+  padding: 0.85rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.app-btn.primary {
+  background: #88ABF2;
+  color: #0D0D0D;
+}
+
+.app-btn.primary:hover {
+  background: #a8c5ff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(136, 171, 242, 0.3);
+}
+
+.app-btn.secondary {
+  background: transparent;
+  color: #88ABF2;
+  border: 2px solid #88ABF2;
+}
+
+.app-btn.secondary:hover {
+  background: rgba(136, 171, 242, 0.1);
+  transform: translateY(-2px);
+}
+
+.playground-cta {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.view-all-apps {
+  display: inline-block;
+  color: #88ABF2;
+  font-weight: 600;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.view-all-apps:hover {
+  color: #a8c5ff;
+  transform: translateX(5px);
+}
+
+@media (max-width: 768px) {
+  .playground-preview {
+    padding: 4rem 1rem;
+  }
+
+  .playground-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .app-card-actions {
+    flex-direction: column;
+  }
+}
