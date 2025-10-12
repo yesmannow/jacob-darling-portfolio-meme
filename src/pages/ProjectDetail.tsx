@@ -1,17 +1,68 @@
 import React from "react";
-import { useParams, Link } from "react-router-dom";
-// TODO: Import project data
+import { useParams, Link, Navigate } from "react-router-dom";
+import { projects } from "../data/projects";
+import "./ProjectDetail.css";
 
 const ProjectDetail: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
-  // TODO: Find project from data using slug
+  const project = projects.find((p) => p.slug === slug);
+
+  if (!project) {
+    return <Navigate to="/projects" replace />;
+  }
 
   return (
     <main className="project-detail">
-      <Link to="/projects">← Back to Projects</Link>
-      <section>
-        <h1>Project Title</h1>
-        <p>Purpose, problem, process, screenshots, links...</p>
+      <Link to="/projects" className="back-link">← Back to Projects</Link>
+      
+      <section className="project-header">
+        <h1>{project.title}</h1>
+        <div className="project-tags">
+          {project.tags.map((tag) => (
+            <span key={tag} className="tag">{tag}</span>
+          ))}
+        </div>
+      </section>
+
+      <section className="project-description">
+        <p className="lead">{project.description}</p>
+        <p>{project.longDescription}</p>
+      </section>
+
+      {project.gallery && project.gallery.length > 0 && (
+        <section className="project-gallery">
+          <h2>Gallery</h2>
+          <div className="gallery-grid">
+            {project.gallery.map((image, index) => (
+              <div key={index} className="gallery-item">
+                <img src={image} alt={`${project.title} - Image ${index + 1}`} />
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <section className="project-links">
+        {project.link && (
+          <a 
+            href={project.link} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="btn btn-primary"
+          >
+            Visit Website
+          </a>
+        )}
+        {project.github && (
+          <a 
+            href={project.github} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="btn btn-secondary"
+          >
+            View on GitHub
+          </a>
+        )}
       </section>
     </main>
   );

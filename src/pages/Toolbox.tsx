@@ -1,13 +1,184 @@
-import React from "react";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import AnimatedSection from "../components/animations/AnimatedSection";
+import SkillsRadar from "../components/skills/SkillsRadar";
+import ToolboxEcosystem from "../components/diagrams/ToolboxEcosystem";
+import { 
+  ZapIcon, 
+  ShieldIcon, 
+  ActivityIcon, 
+  ServerIcon, 
+  TargetIcon, 
+  RepeatIcon, 
+  PaletteIcon, 
+  CreditCardIcon,
+  ChevronDownIcon 
+} from "../components/icons/TechIcons";
+import { fadeInUp, staggerContainer, staggerItem } from "../utils/animations";
+import { technicalCategories, technologyStacks } from "../data/toolbox";
+import "./Toolbox.css";
 
-const Toolbox: React.FC = () => (
-  <main className="toolbox">
-    <h1>Toolbox</h1>
-    <p>
-      These are the tools I use to bridge creative strategy and technical execution.
-    </p>
-    {/* TODO: Map over toolbox data and display cards by category */}
-  </main>
-);
+const Toolbox: React.FC = () => {
+  const [expandedCategory, setExpandedCategory] = useState<number | null>(null);
+
+  const toggleCategory = (index: number) => {
+    setExpandedCategory(expandedCategory === index ? null : index);
+  };
+
+  const getIconForCategory = (title: string) => {
+    const iconMap: { [key: string]: React.ReactNode } = {
+      "Marketing Strategy & Planning": <TargetIcon className="w-5 h-5" />,
+      "Marketing Automation & CRM": <RepeatIcon className="w-5 h-5" />,
+      "Performance & Optimization": <ZapIcon className="w-5 h-5" />,
+      "Security & Infrastructure": <ShieldIcon className="w-5 h-5" />,
+      "Analytics & Conversion Tracking": <ActivityIcon className="w-5 h-5" />,
+      "Server Administration & DevOps": <ServerIcon className="w-5 h-5" />,
+      "Content & Creative": <PaletteIcon className="w-5 h-5" />,
+      "E-commerce & Payments": <CreditCardIcon className="w-5 h-5" />
+    };
+    return iconMap[title] || <ZapIcon className="w-5 h-5" />;
+  };
+
+  return (
+    <main className="toolbox-page">
+      <AnimatedSection>
+        <section className="toolbox-header">
+          <motion.h1 variants={fadeInUp}>Technical Skills & Expertise</motion.h1>
+          <motion.p className="lead" variants={fadeInUp}>
+            My technical expertise powers marketing outcomes. Deep knowledge across performance optimization,
+            security implementation, analytics systems, and server administration enables me to build
+            marketing systems that are both sophisticated and reliable.
+          </motion.p>
+        </section>
+      </AnimatedSection>
+
+      <SkillsRadar />
+
+      <ToolboxEcosystem />
+
+      <AnimatedSection delay={0.2}>
+        <section className="technical-categories">
+          <div className="section-intro">
+            <h2>Core Technical Categories</h2>
+            <p>Specialized expertise organized by technical discipline</p>
+          </div>
+
+          <div className="categories-list">
+            {technicalCategories.map((category, index) => (
+              <motion.div
+                key={index}
+                className={`category-card ${expandedCategory === index ? 'expanded' : ''}`}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+              >
+                <button
+                  className="category-header"
+                  onClick={() => toggleCategory(index)}
+                  aria-expanded={expandedCategory === index}
+                >
+                  <div className="header-content">
+                    <div className="icon-wrapper">
+                      {getIconForCategory(category.title)}
+                    </div>
+                    <div className="text-content">
+                      <h3>{category.title}</h3>
+                      <p className="description">{category.description}</p>
+                    </div>
+                  </div>
+                  <ChevronDownIcon className={`chevron ${expandedCategory === index ? 'rotated' : ''}`} />
+                </button>
+
+                <AnimatePresence initial={false}>
+                  {expandedCategory === index && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3, ease: "easeInOut" }}
+                      style={{ overflow: "hidden" }}
+                    >
+                      <div className="category-skills">
+                        <div className="skills-grid">
+                          {category.skills.map((skill, skillIndex) => (
+                            <motion.div 
+                              key={skillIndex} 
+                              className="skill-item"
+                              initial={{ opacity: 0, x: -10 }}
+                              animate={{ opacity: 1, x: 0 }}
+                              transition={{ delay: skillIndex * 0.03 }}
+                            >
+                              <div className="skill-dot"></div>
+                              <span>{skill}</span>
+                            </motion.div>
+                          ))}
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            ))}
+          </div>
+        </section>
+      </AnimatedSection>
+
+      <AnimatedSection delay={0.3}>
+        <section className="technology-stacks">
+          <div className="section-intro">
+            <h2>Technology Stacks</h2>
+            <p>Comprehensive tool proficiency across development, analytics, and marketing platforms</p>
+          </div>
+
+          <motion.div
+            className="stacks-grid"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            {technologyStacks.map((stack, index) => (
+              <motion.div
+                key={index}
+                className="stack-card"
+                variants={staggerItem}
+                whileHover={{ scale: 1.05, translateY: -5 }}
+                transition={{ duration: 0.2 }}
+              >
+                <div className="stack-header">
+                  <span className="stack-icon">{stack.icon}</span>
+                  <h3>{stack.category}</h3>
+                </div>
+                <div className="stack-technologies">
+                  {stack.technologies.map((tech, techIndex) => (
+                    <div key={techIndex} className="tech-item">
+                      {tech}
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </section>
+      </AnimatedSection>
+
+      <AnimatedSection delay={0.4}>
+        <section className="toolbox-cta">
+          <h2>Want to see these skills in action?</h2>
+          <p>Explore my case studies to see how I apply these technical capabilities to solve real business challenges.</p>
+          <motion.a
+            href="/case-studies"
+            className="cta-button"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            View Case Studies →
+          </motion.a>
+        </section>
+      </AnimatedSection>
+    </main>
+  );
+};
 
 export default Toolbox;

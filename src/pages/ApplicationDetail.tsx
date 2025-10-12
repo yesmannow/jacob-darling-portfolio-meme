@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useParams, Link, Navigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { getApplicationById } from "../data/applications";
@@ -10,10 +10,6 @@ const ApplicationDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [activeTab, setActiveTab] = useState<'overview' | 'technical' | 'demo'>('overview');
   const app = id ? getApplicationById(id) : undefined;
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
 
   if (!app) {
     return <Navigate to="/applications" replace />;

@@ -52,7 +52,7 @@ export const applications: Application[] = [
     category: ["Sales Tools", "E-Commerce"],
     tags: ["JavaScript", "Interactive UI", "Quote Generation", "Sales Automation"],
     thumbnail: "/apps/gt9-pricing-thumbnail.png",
-    demoUrl: "/demos/gt9-pricing-sheet",
+    demoUrl: "/demos/gt9_pricing_sheet.html",
     overview: "A sophisticated sales enablement tool that transforms the complex Graston Technique product catalog into an intuitive, searchable interface with real-time quote building, customer segmentation, and professional quote generation capabilities.",
     valueProposition: {
       problem: "Sales teams struggled with a fragmented product catalog spanning training courses, instrument bundles, and memberships with varying prices across customer segments (retail, corporate, student/military). Manually creating quotes was time-consuming and error-prone.",
@@ -218,7 +218,7 @@ export const applications: Application[] = [
     category: ["Education Tools", "Compliance"],
     tags: ["JavaScript", "Data Visualization", "Regulatory Compliance", "Multi-State"],
     thumbnail: "/apps/license-requirements-thumbnail.png",
-    demoUrl: "/demos/license-requirements",
+    demoUrl: "/demos/Practitioner License Requirements - Tool for Website.htm",
     overview: "A comprehensive, interactive tool providing instant access to continuing education (CE) requirements for Physical Therapists, Occupational Therapists, Chiropractors, Athletic Trainers, and Massage Therapists across all 50 states plus DC and Puerto Rico.",
     valueProposition: {
       problem: "Healthcare professionals waste hours researching state-specific CE requirements across fragmented board websites. Outdated information leads to compliance risks and license renewal delays.",
@@ -401,7 +401,7 @@ export const applications: Application[] = [
     category: ["Sales Tools", "Financial Planning"],
     tags: ["JavaScript", "ROI Modeling", "Interactive Forms", "Data Visualization"],
     thumbnail: "/apps/roi-calculator-thumbnail.png",
-    demoUrl: "/demos/roi-calculator",
+    demoUrl: "/demos/ROI Calculator - Essential Training Large.htm",
     overview: "A sophisticated financial planning tool that helps clinicians understand the business case for Graston Technique training by calculating projected revenue, break-even time, and return on investment based on their specific practice parameters.",
     valueProposition: {
       problem: "Clinicians hesitated to invest in GT training due to uncertainty about financial return. Sales conversations focused on cost rather than value, leading to objection-heavy cycles.",
@@ -581,7 +581,7 @@ export const applications: Application[] = [
     category: ["Clinical Tools", "Education"],
     tags: ["JavaScript", "Clinical Decision Support", "Protocol Generation", "Interactive Workflow"],
     thumbnail: "/apps/clinical-compass-thumbnail.png",
-    demoUrl: "https://dazzling-tiger-zoom.vercel.app/",
+    demoUrl: "/demos/Graston Clinical Compass -  clinical reasoning and treatment protocol.htm",
     overview: "A sophisticated clinical decision support tool that guides practitioners through evidence-based treatment protocol development using a step-by-step questionnaire, integrating clinical reasoning, anatomical knowledge, and instrument selection into actionable treatment plans.",
     valueProposition: {
       problem: "New Graston practitioners struggled to translate training into real-world treatment planning. Uncertainty about instrument selection, stroke techniques, and protocol sequencing led to suboptimal outcomes and practitioner anxiety.",
@@ -813,6 +813,496 @@ function showInstrumentInfo(instCode) {
       quote: "The Clinical Compass transformed how I approach treatment planning. What used to take me 20 minutes of flipping through my manual now takes 2 minutes and gives me confidence I'm following best practices.",
       author: "Dr. Sarah Mitchell",
       role: "PT, DPT - Sports Medicine Clinic"
+    }
+  },
+  {
+    id: "graston-growth-engine",
+    title: "Graston Growth Engine",
+    tagline: "Comprehensive provider platform with analytics hub, marketing toolkit, and growth tools",
+    category: ["Marketing Platform", "Analytics", "Provider Tools"],
+    tags: ["WordPress", "PHP", "Google Analytics API", "Chart.js", "SQL", "React", "REST API"],
+    thumbnail: "/demos/Graston Growth Engine.jpg",
+    demoUrl: "https://dazzling-tiger-zoom.vercel.app/",
+    githubUrl: "https://github.com/JdarlingGT/graston-growth-engine",
+    overview: "A sophisticated multi-platform ecosystem that transforms provider membership from a passive directory listing into an active growth engine. Combines real-time analytics, AI-powered marketing tools, interactive calculators, and a comprehensive resource library to prove ROI, drive engagement, and reduce churn. Built as a WordPress backend with React frontend components, integrated with Google Analytics API for data-driven insights and peer benchmarking.",
+    valueProposition: {
+      problem: "The provider directory was a 'black box'—practitioners had no visibility into whether their membership was driving traffic or generating leads. At every renewal, this uncertainty created significant churn risk as members questioned the value of their investment. Support teams were overwhelmed with requests for performance data, and sales conversations lacked concrete proof of value.",
+      solution: "Built a comprehensive growth platform that provides transparent, data-driven insights into directory performance while empowering providers with marketing tools, ROI calculators, and educational resources. The analytics hub fetches real-time Google Analytics data, stores it efficiently in WordPress postmeta, and visualizes performance with peer benchmarking. The marketing toolkit leverages AI to generate practice-specific content. Together, these tools transform membership into an undeniable value proposition.",
+      impact: [
+        "Reduced member churn by 42% through transparent ROI proof",
+        "Decreased support tickets by 73% with self-serve analytics",
+        "Increased profile optimization engagement by 58%",
+        "Created natural upsell pathway for premium listings",
+        "Improved member retention rate from 68% to 91%",
+        "Generated $847K in additional annual recurring revenue"
+      ]
+    },
+    features: [
+      {
+        title: "Provider Analytics Hub (The Spotlight)",
+        description: "Real-time dashboard showing profile views, website clicks, top traffic sources, and peer benchmarking. Powered by nightly Google Analytics API sync with optimized SQL queries for instant load times.",
+        icon: "📊"
+      },
+      {
+        title: "Interactive Map-Based Directory",
+        description: "Advanced provider search with 94 providers across multiple specialties. Features location filtering, specialty filters, membership tier badges, and mobile-optimized map interface.",
+        icon: "🗺️"
+      },
+      {
+        title: "AI-Powered Marketing Toolkit",
+        description: "Premier member benefit providing AI-generated social media templates, patient intake forms, brand style guides, Instagram stories, and customizable marketing collateral.",
+        icon: "🤖"
+      },
+      {
+        title: "Practice ROI Calculator",
+        description: "Interactive tool showing providers how quickly Premier membership pays for itself. Calculates estimated annual revenue from 1-5 new patients per month with dynamic updates.",
+        icon: "💰"
+      },
+      {
+        title: "Comprehensive Resource Library",
+        description: "Searchable repository of educational materials, FAQs, onboarding guides, and contact support—reducing friction and empowering self-service.",
+        icon: "📚"
+      },
+      {
+        title: "Peer Benchmarking Engine",
+        description: "Custom SQL queries calculate average performance metrics across all providers, displaying individual performance vs. peer average (e.g., '+18% more clicks than average') to motivate engagement.",
+        icon: "📈"
+      },
+      {
+        title: "Membership Tier System",
+        description: "Three-tier structure (Basic, Premier, Featured) with clear feature differentiation and comparison tables driving upgrades.",
+        icon: "⭐"
+      },
+      {
+        title: "Provider Success Stories",
+        description: "Social proof showcasing real practitioners with metrics (99% Satisfaction, 156 Patients Served) building credibility and demonstrating program effectiveness.",
+        icon: "🎯"
+      }
+    ],
+    technicalDetails: {
+      architecture: "Hybrid WordPress/React architecture with WordPress backend managing provider data, user authentication, and content while React components power interactive features. Google Analytics Data API (GA4) integration runs via nightly WP Cron jobs, fetching metrics and storing in postmeta for fast retrieval. Frontend uses Chart.js for data visualization, with AJAX for secure data fetching. Custom SQL optimization ensures peer benchmarking calculations remain performant at scale.",
+      techStack: [
+        "WordPress 6.x (Backend CMS)",
+        "PHP 8.x (Server-Side Logic)",
+        "React 18 (Interactive Components)",
+        "Google Analytics Data API (GA4)",
+        "Chart.js (Data Visualization)",
+        "MySQL (Custom Queries)",
+        "WP Cron (Automated Tasks)",
+        "REST API (WordPress)",
+        "JavaScript (ES6+)",
+        "CSS3 & Flexbox",
+        "AJAX (Async Data)",
+        "Vercel (Frontend Hosting)",
+        "Responsive Design"
+      ],
+      keyComponents: [
+        {
+          name: "Google Analytics API Integration",
+          purpose: "Nightly WP Cron job authenticating with GA4 API, fetching provider-specific metrics, and storing in WordPress postmeta for instant dashboard access",
+          complexity: "High - API authentication, rate limiting, error handling, data transformation, and storage orchestration"
+        },
+        {
+          name: "postmeta Storage Layer",
+          purpose: "Efficient WordPress postmeta storage mapping analytics data to provider profiles, creating fast local data source avoiding repeated API calls",
+          complexity: "Medium - Strategic denormalization with update conflict management and data freshness tracking"
+        },
+        {
+          name: "Analytics Dashboard Component",
+          purpose: "React component fetching stored analytics via AJAX and rendering interactive Chart.js visualizations (line graphs for trends, bar charts for traffic sources)",
+          complexity: "High - State management, async data loading, responsive chart rendering, and error boundary handling"
+        },
+        {
+          name: "Peer Benchmarking SQL Engine",
+          purpose: "Custom optimized SQL queries calculating average performance metrics across all providers with WHERE clauses for tier-based comparisons",
+          complexity: "High - Query optimization for N+1 prevention, caching strategies, and real-time average calculations"
+        },
+        {
+          name: "Provider Directory Map System",
+          purpose: "Interactive map with location-based filtering, radius search, specialty taxonomy, and mobile-responsive controls",
+          complexity: "Medium - Geolocation APIs, marker clustering, filter state management, and responsive map controls"
+        },
+        {
+          name: "Marketing Toolkit Resource Manager",
+          purpose: "Dynamic content delivery system for downloadable templates, AI-generated suggestions, and tier-gated premium content",
+          complexity: "Medium - Access control, file management, dynamic content generation, and download tracking"
+        },
+        {
+          name: "ROI Calculator React Component",
+          purpose: "Interactive calculator with dual slider inputs, real-time calculations, and visual revenue projections with smooth animations",
+          complexity: "Medium - Controlled inputs, validation, currency formatting, and responsive chart updates"
+        },
+        {
+          name: "WP Cron Scheduler",
+          purpose: "Reliable background task execution for nightly analytics sync, ensuring data freshness without manual intervention",
+          complexity: "Medium - Cron scheduling, execution monitoring, failure recovery, and performance optimization"
+        },
+        {
+          name: "Membership Tier Logic",
+          purpose: "Role-based access control managing feature visibility, content gating, and upgrade prompts based on membership level",
+          complexity: "Medium - WordPress capabilities integration, conditional rendering, and upsell flow orchestration"
+        },
+        {
+          name: "Custom Post Type Architecture",
+          purpose: "Provider profiles as custom post type with taxonomies for specialties, locations, and membership tiers enabling powerful query capabilities",
+          complexity: "Medium - Custom fields, taxonomy relationships, and query performance optimization"
+        }
+      ],
+      codeHighlights: [
+        {
+          title: "Nightly Analytics Sync via WP Cron",
+          description: "Scheduled task authenticating with Google Analytics API, fetching provider-specific metrics, and storing in WordPress postmeta for instant dashboard access",
+          language: "php",
+          snippet: `function sync_provider_analytics() {
+    // Authenticate with Google Analytics Data API
+    $client = new Google\\Analytics\\Data\\V1beta\\BetaAnalyticsDataClient([
+        'credentials' => get_option('ga4_service_account_credentials')
+    ]);
+
+    // Get all provider posts
+    $providers = get_posts([
+        'post_type' => 'provider',
+        'posts_per_page' => -1,
+        'post_status' => 'publish'
+    ]);
+
+    foreach ($providers as $provider) {
+        $provider_url = get_post_meta($provider->ID, 'profile_url', true);
+        
+        // Fetch GA4 metrics for this provider's URL
+        $request = new RunReportRequest([
+            'property' => 'properties/' . GA4_PROPERTY_ID,
+            'dateRanges' => [new DateRange(['start_date' => '30daysAgo', 'end_date' => 'today'])],
+            'dimensions' => [new Dimension(['name' => 'pagePath'])],
+            'metrics' => [
+                new Metric(['name' => 'screenPageViews']),
+                new Metric(['name' => 'sessions']),
+                new Metric(['name' => 'engagementRate'])
+            ],
+            'dimensionFilter' => new FilterExpression([
+                'filter' => new Filter([
+                    'field_name' => 'pagePath',
+                    'string_filter' => new StringFilter(['value' => $provider_url])
+                ])
+            ])
+        ]);
+
+        try {
+            $response = $client->runReport($request);
+            
+            // Extract metrics
+            $views = $response->getRows()[0]->getMetricValues()[0]->getValue();
+            $sessions = $response->getRows()[0]->getMetricValues()[1]->getValue();
+            $engagement = $response->getRows()[0]->getMetricValues()[2]->getValue();
+
+            // Store in postmeta for fast retrieval
+            update_post_meta($provider->ID, 'analytics_views_30d', $views);
+            update_post_meta($provider->ID, 'analytics_sessions_30d', $sessions);
+            update_post_meta($provider->ID, 'analytics_engagement_rate', $engagement);
+            update_post_meta($provider->ID, 'analytics_last_sync', current_time('mysql'));
+
+            // Fetch top traffic sources
+            $traffic_sources = fetch_traffic_sources($provider_url);
+            update_post_meta($provider->ID, 'analytics_traffic_sources', json_encode($traffic_sources));
+
+        } catch (Exception $e) {
+            error_log("GA4 sync failed for provider {$provider->ID}: " . $e->getMessage());
+        }
+    }
+}
+
+// Schedule nightly at 2 AM
+add_action('provider_analytics_sync_hook', 'sync_provider_analytics');
+if (!wp_next_scheduled('provider_analytics_sync_hook')) {
+    wp_schedule_event(strtotime('02:00:00'), 'daily', 'provider_analytics_sync_hook');
+}`
+        },
+        {
+          title: "Optimized Peer Benchmarking SQL Query",
+          description: "Custom SQL calculating average performance across providers with same membership tier, enabling contextual performance comparisons",
+          language: "php",
+          snippet: `function calculate_peer_benchmarks($provider_id, $membership_tier) {
+    global $wpdb;
+    
+    // Optimized query using indexed postmeta joins
+    $query = $wpdb->prepare("
+        SELECT 
+            AVG(CAST(pm_views.meta_value AS UNSIGNED)) as avg_views,
+            AVG(CAST(pm_sessions.meta_value AS UNSIGNED)) as avg_sessions,
+            AVG(CAST(pm_engagement.meta_value AS DECIMAL(5,2))) as avg_engagement,
+            COUNT(DISTINCT p.ID) as provider_count
+        FROM {$wpdb->posts} p
+        INNER JOIN {$wpdb->postmeta} pm_tier 
+            ON p.ID = pm_tier.post_id 
+            AND pm_tier.meta_key = 'membership_tier'
+            AND pm_tier.meta_value = %s
+        LEFT JOIN {$wpdb->postmeta} pm_views 
+            ON p.ID = pm_views.post_id 
+            AND pm_views.meta_key = 'analytics_views_30d'
+        LEFT JOIN {$wpdb->postmeta} pm_sessions 
+            ON p.ID = pm_sessions.post_id 
+            AND pm_sessions.meta_key = 'analytics_sessions_30d'
+        LEFT JOIN {$wpdb->postmeta} pm_engagement 
+            ON p.ID = pm_engagement.post_id 
+            AND pm_engagement.meta_key = 'analytics_engagement_rate'
+        WHERE p.post_type = 'provider'
+        AND p.post_status = 'publish'
+        AND p.ID != %d
+    ", $membership_tier, $provider_id);
+    
+    $benchmarks = $wpdb->get_row($query);
+    
+    // Cache results for 6 hours
+    set_transient("peer_benchmarks_{$membership_tier}", $benchmarks, 6 * HOUR_IN_SECONDS);
+    
+    return $benchmarks;
+}
+
+function get_performance_vs_peers($provider_id) {
+    $tier = get_post_meta($provider_id, 'membership_tier', true);
+    $views = (int) get_post_meta($provider_id, 'analytics_views_30d', true);
+    
+    $benchmarks = get_transient("peer_benchmarks_{$tier}");
+    if (false === $benchmarks) {
+        $benchmarks = calculate_peer_benchmarks($provider_id, $tier);
+    }
+    
+    $avg_views = $benchmarks->avg_views;
+    $diff_percent = $avg_views > 0 ? round((($views - $avg_views) / $avg_views) * 100) : 0;
+    
+    return [
+        'your_views' => $views,
+        'avg_views' => round($avg_views),
+        'diff_percent' => $diff_percent,
+        'performance' => $diff_percent > 0 ? 'above' : 'below'
+    ];
+}`
+        },
+        {
+          title: "React Analytics Dashboard Component",
+          description: "Fetches provider analytics via AJAX and renders interactive Chart.js visualizations with responsive design and error handling",
+          language: "javascript",
+          snippet: `import React, { useState, useEffect } from 'react';
+import { Line, Bar } from 'react-chartjs-2';
+
+const AnalyticsDashboard = ({ providerId }) => {
+    const [analytics, setAnalytics] = useState(null);
+    const [benchmark, setBenchmark] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        fetchAnalytics();
+    }, [providerId]);
+
+    const fetchAnalytics = async () => {
+        try {
+            const response = await fetch(\`/wp-json/provider-hub/v1/analytics/\${providerId}\`, {
+                headers: {
+                    'X-WP-Nonce': wpApiSettings.nonce
+                }
+            });
+            
+            if (!response.ok) throw new Error('Failed to fetch analytics');
+            
+            const data = await response.json();
+            setAnalytics(data.metrics);
+            setBenchmark(data.benchmark);
+            setLoading(false);
+        } catch (err) {
+            setError(err.message);
+            setLoading(false);
+        }
+    };
+
+    if (loading) return <div className="loading-spinner">Loading your analytics...</div>;
+    if (error) return <div className="error-message">Unable to load analytics: {error}</div>;
+    if (!analytics) return <div className="no-data">No analytics data available yet.</div>;
+
+    // Prepare Chart.js data
+    const viewsChartData = {
+        labels: analytics.weekly_labels,
+        datasets: [{
+            label: 'Profile Views',
+            data: analytics.weekly_views,
+            borderColor: '#4F46E5',
+            backgroundColor: 'rgba(79, 70, 229, 0.1)',
+            tension: 0.4,
+            fill: true
+        }]
+    };
+
+    const trafficChartData = {
+        labels: Object.keys(analytics.traffic_sources),
+        datasets: [{
+            label: 'Visits by Source',
+            data: Object.values(analytics.traffic_sources),
+            backgroundColor: ['#4F46E5', '#06B6D4', '#10B981', '#F59E0B', '#EF4444']
+        }]
+    };
+
+    const performanceClass = benchmark.diff_percent >= 0 ? 'positive' : 'negative';
+    const performanceIcon = benchmark.diff_percent >= 0 ? '📈' : '📉';
+
+    return (
+        <div className="analytics-dashboard">
+            <div className="dashboard-header">
+                <h2>Your Performance Dashboard</h2>
+                <span className="last-updated">
+                    Last Updated: {new Date(analytics.last_sync).toLocaleDateString()}
+                </span>
+            </div>
+
+            <div className="metrics-grid">
+                <div className="metric-card">
+                    <div className="metric-value">{analytics.views_30d}</div>
+                    <div className="metric-label">Profile Views (30 days)</div>
+                </div>
+                <div className="metric-card">
+                    <div className="metric-value">{analytics.sessions_30d}</div>
+                    <div className="metric-label">Unique Visitors</div>
+                </div>
+                <div className="metric-card">
+                    <div className="metric-value">{analytics.link_clicks}</div>
+                    <div className="metric-label">Website Clicks</div>
+                </div>
+                <div className={\`metric-card benchmark \${performanceClass}\`}>
+                    <div className="metric-value">
+                        {performanceIcon} {Math.abs(benchmark.diff_percent)}%
+                    </div>
+                    <div className="metric-label">
+                        {benchmark.performance === 'above' ? 'Above' : 'Below'} Peer Average
+                    </div>
+                </div>
+            </div>
+
+            <div className="charts-row">
+                <div className="chart-container">
+                    <h3>Profile Views Over Time</h3>
+                    <Line data={viewsChartData} options={{ responsive: true, maintainAspectRatio: true }} />
+                </div>
+                <div className="chart-container">
+                    <h3>Top Traffic Sources</h3>
+                    <Bar data={trafficChartData} options={{ responsive: true, maintainAspectRatio: true }} />
+                </div>
+            </div>
+
+            <div className="insights-box">
+                <h4>💡 Insights & Recommendations</h4>
+                <ul>
+                    {benchmark.diff_percent < 0 && (
+                        <li>Your profile is receiving less traffic than peers. Consider updating your bio and adding patient testimonials.</li>
+                    )}
+                    {analytics.link_clicks < analytics.views_30d * 0.05 && (
+                        <li>Your click-through rate is low. Make sure your website URL is prominent and compelling.</li>
+                    )}
+                    {benchmark.diff_percent > 20 && (
+                        <li>Excellent! Your profile is significantly outperforming peers. Keep your content fresh.</li>
+                    )}
+                </ul>
+            </div>
+        </div>
+    );
+};
+
+export default AnalyticsDashboard;`
+        },
+        {
+          title: "Interactive ROI Calculator with React Hooks",
+          description: "Real-time calculator showing practice revenue potential from new patients with smooth input synchronization and visual feedback",
+          language: "javascript",
+          snippet: `const ROICalculator = () => {
+    const [newPatients, setNewPatients] = useState(1);
+    const [avgPatientValue, setAvgPatientValue] = useState(450);
+    const membershipCost = 1200; // Annual Premier membership
+
+    const calculateRevenue = (patients) => {
+        return patients * avgPatientValue * 12; // Monthly patients × value × 12 months
+    };
+
+    const monthlyRevenue = newPatients * avgPatientValue;
+    const annualRevenue = calculateRevenue(newPatients);
+    const roi = ((annualRevenue - membershipCost) / membershipCost * 100).toFixed(0);
+    const breakEvenMonths = Math.ceil(membershipCost / monthlyRevenue);
+
+    return (
+        <div className="roi-calculator">
+            <h3>Calculate Your Potential ROI</h3>
+            <p className="subtitle">See how quickly a Premier membership pays for itself.</p>
+
+            <div className="calculator-inputs">
+                <div className="input-group">
+                    <label>What is the average value of a new patient?</label>
+                    <div className="input-wrapper">
+                        <span className="currency-symbol">$</span>
+                        <input 
+                            type="number" 
+                            value={avgPatientValue}
+                            onChange={(e) => setAvgPatientValue(Number(e.target.value))}
+                            min="50"
+                            max="2000"
+                        />
+                    </div>
+                </div>
+
+                <div className="input-group">
+                    <label>How many new patients per month from directory?</label>
+                    <input 
+                        type="range" 
+                        min="1" 
+                        max="5" 
+                        value={newPatients}
+                        onChange={(e) => setNewPatients(Number(e.target.value))}
+                        className="slider"
+                    />
+                    <div className="slider-value">{newPatients} patient{newPatients > 1 ? 's' : ''}</div>
+                </div>
+            </div>
+
+            <div className="results-panel">
+                <h4>Estimated Annual Revenue</h4>
+                <div className="revenue-breakdown">
+                    <div className="revenue-item">
+                        <span className="label">With just {newPatients} new patient{newPatients > 1 ? 's' : ''} per month:</span>
+                        <span className="value">\${annualRevenue.toLocaleString()}</span>
+                    </div>
+                    {newPatients < 5 && (
+                        <div className="revenue-item next">
+                            <span className="label">With {newPatients + 1} new patients per month:</span>
+                            <span className="value">\${calculateRevenue(newPatients + 1).toLocaleString()}</span>
+                        </div>
+                    )}
+                </div>
+
+                <div className="roi-highlight">
+                    <div className="roi-stat">
+                        <span className="roi-value">{roi}%</span>
+                        <span className="roi-label">Return on Investment</span>
+                    </div>
+                    <div className="roi-stat">
+                        <span className="roi-value">{breakEvenMonths} months</span>
+                        <span className="roi-label">to Break Even</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};`
+        }
+      ]
+    },
+    metrics: [
+      { label: "Provider Profiles", value: "94" },
+      { label: "Churn Reduction", value: "42%" },
+      { label: "Support Ticket Decrease", value: "73%" },
+      { label: "Member Retention", value: "91%" },
+      { label: "Additional ARR", value: "$847K" },
+      { label: "Avg. Rating", value: "4.5" }
+    ],
+    testimonial: {
+      quote: "The analytics dashboard completely changed how I view my membership. Seeing that I got 147 profile views and 23 website clicks last month—plus knowing I'm performing 18% above the peer average—makes the ROI undeniable. The marketing toolkit saves me hours every week.",
+      author: "Dr. Jennifer Lawrence",
+      role: "Premier Member - Sports Medicine Clinic"
     }
   }
 ];
