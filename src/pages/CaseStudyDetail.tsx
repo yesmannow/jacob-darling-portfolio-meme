@@ -4,52 +4,92 @@ import { motion } from "framer-motion";
 import { getCaseStudyBySlug } from "../data/caseStudies";
 import { fadeInUp, staggerContainer, staggerItem } from "../utils/animations";
 import AnimatedSection from "../components/animations/AnimatedSection";
+import { getCaseStudyDiagrams } from "../components/diagrams/caseStudyDiagrams";
 import "./CaseStudyDetail.css";
 
 const CaseStudyDetail: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const caseStudy = slug ? getCaseStudyBySlug(slug) : undefined;
+  const diagrams = slug ? getCaseStudyDiagrams(slug) : [];
 
   if (!caseStudy) {
     return <Navigate to="/case-studies" replace />;
   }
 
   return (
-    <main className="case-study-detail">
-      <AnimatedSection>
-        <div className="back-nav">
+    <main className="case-study-detail-modern">
+      {/* Hero Section */}
+      <motion.section 
+        className="detail-hero"
+        style={{ background: `radial-gradient(circle at 50% 20%, ${caseStudy.color}15 0%, transparent 60%)` }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+      >
+        <div className="detail-hero-content">
           <Link to="/case-studies" className="back-link">
-            ← Back to Case Studies
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+            Back to Case Studies
           </Link>
-        </div>
-      </AnimatedSection>
 
-      <AnimatedSection delay={0.1}>
-        <header className="detail-header">
-          <motion.div variants={fadeInUp}>
-            <h1>{caseStudy.title}</h1>
-            <p className="tagline">{caseStudy.tagline}</p>
+          <motion.div 
+            className="hero-icon-large"
+            style={{ background: `${caseStudy.color}15` }}
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ delay: 0.2, duration: 0.6 }}
+          >
+            <span className="icon-large" style={{ filter: `drop-shadow(0 4px 12px ${caseStudy.color}60)` }}>
+              {caseStudy.icon}
+            </span>
           </motion.div>
 
-          <motion.div className="header-meta" variants={fadeInUp}>
-            <div className="categories">
-              {caseStudy.category.map(cat => (
-                <span key={cat} className="category-badge">{cat}</span>
-              ))}
-            </div>
-            <div className="tags">
-              {caseStudy.tags.map(tag => (
-                <span key={tag} className="tag">{tag}</span>
-              ))}
-            </div>
-          </motion.div>
-        </header>
-      </AnimatedSection>
-
-      <AnimatedSection delay={0.2}>
-        <section className="metrics-showcase">
           <motion.div
-            className="metrics-grid"
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.3, duration: 0.8 }}
+          >
+            <h1 className="detail-title">{caseStudy.title}</h1>
+            <p className="detail-tagline">{caseStudy.tagline}</p>
+          </motion.div>
+
+          <motion.div 
+            className="detail-meta"
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.5 }}
+          >
+            <div className="meta-categories">
+              {caseStudy.category.map(cat => (
+                <span 
+                  key={cat} 
+                  className="meta-category"
+                  style={{ 
+                    background: `${caseStudy.color}20`,
+                    color: caseStudy.color,
+                    borderColor: `${caseStudy.color}30`
+                  }}
+                >
+                  {cat}
+                </span>
+              ))}
+            </div>
+            <div className="meta-tags">
+              {caseStudy.tags.map(tag => (
+                <span key={tag} className="meta-tag">{tag}</span>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </motion.section>
+
+      {/* Metrics Showcase */}
+      <AnimatedSection delay={0.2}>
+        <section className="metrics-modern">
+          <motion.div
+            className="metrics-container"
             variants={staggerContainer}
             initial="hidden"
             whileInView="visible"
@@ -58,15 +98,16 @@ const CaseStudyDetail: React.FC = () => {
             {caseStudy.metrics.map((metric, index) => (
               <motion.div
                 key={index}
-                className="metric-card"
+                className="metric-modern-card"
                 variants={staggerItem}
-                whileHover={{
-                  y: -5,
-                  boxShadow: "0 12px 32px rgba(136, 171, 242, 0.2)"
-                }}
+                whileHover={{ y: -8, scale: 1.02 }}
               >
-                <div className="metric-value">{metric.value}</div>
-                <div className="metric-label">{metric.label}</div>
+                <div 
+                  className="metric-accent" 
+                  style={{ background: `linear-gradient(135deg, ${caseStudy.color}, ${caseStudy.color}80)` }}
+                />
+                <div className="metric-modern-value">{metric.value}</div>
+                <div className="metric-modern-label">{metric.label}</div>
               </motion.div>
             ))}
           </motion.div>
@@ -101,6 +142,15 @@ const CaseStudyDetail: React.FC = () => {
                   .replace(/^(.+)$/gm, '<p>$1</p>') || ''
               }}
             />
+            
+            {/* Visual Architecture Diagrams */}
+            {diagrams.length > 0 && (
+              <div className="architecture-diagrams">
+                {diagrams.map((DiagramComponent, index) => (
+                  <DiagramComponent key={index} />
+                ))}
+              </div>
+            )}
           </section>
         </AnimatedSection>
 

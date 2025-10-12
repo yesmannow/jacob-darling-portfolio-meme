@@ -2,12 +2,11 @@ import React, { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { caseStudies, getCategories } from "../data/caseStudies";
-import { staggerContainer, staggerItem, cardHover } from "../utils/animations";
-import AnimatedSection from "../components/animations/AnimatedSection";
 import "./CaseStudies.css";
 
 const CaseStudies: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState<string>("All");
+  const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const categories = ["All", ...getCategories()];
 
   const filteredStudies = useMemo(() => {
@@ -15,95 +14,222 @@ const CaseStudies: React.FC = () => {
     return caseStudies.filter(study => study.category.includes(activeFilter));
   }, [activeFilter]);
 
+  // Get featured count
+  const featuredCount = caseStudies.filter(s => s.featured).length;
+
   return (
-    <main className="case-studies-page">
-      <AnimatedSection>
-        <section className="case-studies-header">
-          <h1>Selected Works</h1>
-          <p>Deep dives into transformative projects that showcase the power of strategic marketing combined with technical excellence.</p>
-        </section>
-      </AnimatedSection>
+    <main className="case-studies-modern">
+      {/* Hero Section */}
+      <motion.section 
+        className="case-studies-hero"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+      >
+        <div className="hero-content-cases">
+          <motion.div 
+            className="hero-badge"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+          >
+            ★ Tech & Marketing
+          </motion.div>
+          
+          <motion.h1 
+            className="case-studies-title"
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.3, duration: 0.8 }}
+          >
+            Selected Works
+          </motion.h1>
+          
+          <motion.p 
+            className="case-studies-subtitle"
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.4, duration: 0.8 }}
+          >
+            Deep dives into transformative projects that showcase the power of strategic 
+            marketing combined with technical excellence
+          </motion.p>
 
-      <AnimatedSection delay={0.2}>
-        <section className="filter-bar">
-          <div className="filter-container">
-            <span className="filter-label">Filter by:</span>
-            <div className="filter-buttons">
-              {categories.map(category => (
-                <motion.button
-                  key={category}
-                  className={`filter-btn ${activeFilter === category ? "active" : ""}`}
-                  onClick={() => setActiveFilter(category)}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  {category}
-                </motion.button>
-              ))}
+          {/* Stats */}
+          <motion.div 
+            className="case-stats"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6 }}
+          >
+            <div className="stat-item">
+              <div className="stat-number">{caseStudies.length}</div>
+              <div className="stat-label">Case Studies</div>
             </div>
-          </div>
-        </section>
-      </AnimatedSection>
+            <div className="stat-item">
+              <div className="stat-number">{featuredCount}</div>
+              <div className="stat-label">Featured Projects</div>
+            </div>
+            <div className="stat-item">
+              <div className="stat-number">100%</div>
+              <div className="stat-label">Real Results</div>
+            </div>
+          </motion.div>
+        </div>
+      </motion.section>
 
-      <section className="case-studies-grid-section">
+      {/* Filter Bar */}
+      <section className="filter-section">
+        <motion.div 
+          className="filter-controls"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.7 }}
+        >
+          <div className="filter-pills">
+            {categories.map((category, idx) => (
+              <motion.button
+                key={category}
+                className={`filter-pill ${activeFilter === category ? 'active' : ''}`}
+                onClick={() => setActiveFilter(category)}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.8 + idx * 0.05 }}
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                {category}
+              </motion.button>
+            ))}
+          </div>
+
+          <div className="view-toggle">
+            <button 
+              className={viewMode === "grid" ? "active" : ""}
+              onClick={() => setViewMode("grid")}
+              aria-label="Grid view"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <rect x="3" y="3" width="7" height="7" rx="1"/>
+                <rect x="14" y="3" width="7" height="7" rx="1"/>
+                <rect x="3" y="14" width="7" height="7" rx="1"/>
+                <rect x="14" y="14" width="7" height="7" rx="1"/>
+              </svg>
+            </button>
+            <button 
+              className={viewMode === "list" ? "active" : ""}
+              onClick={() => setViewMode("list")}
+              aria-label="List view"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <line x1="8" y1="6" x2="21" y2="6"/>
+                <line x1="8" y1="12" x2="21" y2="12"/>
+                <line x1="8" y1="18" x2="21" y2="18"/>
+                <line x1="3" y1="6" x2="3.01" y2="6"/>
+                <line x1="3" y1="12" x2="3.01" y2="12"/>
+                <line x1="3" y1="18" x2="3.01" y2="18"/>
+              </svg>
+            </button>
+          </div>
+        </motion.div>
+      </section>
+
+      {/* Case Studies Grid */}
+      <section className="cases-section">
         <AnimatePresence mode="wait">
           <motion.div
-            key={activeFilter}
-            className="case-studies-grid"
-            variants={staggerContainer}
-            initial="hidden"
-            animate="visible"
-            exit="hidden"
+            key={activeFilter + viewMode}
+            className={`cases-${viewMode}`}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.4 }}
           >
             {filteredStudies.map((study, index) => (
               <motion.div
                 key={study.slug}
-                variants={staggerItem}
-                whileHover={cardHover}
-                layout
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.05, duration: 0.4 }}
               >
-                <Link to={`/case-studies/${study.slug}`} className="case-study-card">
-                  <div className="card-header">
-                    <h3>{study.title}</h3>
-                    <p className="tagline">{study.tagline}</p>
-                    <div className="category-tags">
-                      {study.category.map(cat => (
-                        <span key={cat} className="category-tag">{cat}</span>
-                      ))}
+                <Link to={`/case-studies/${study.slug}`} className="case-card">
+                  <div className="case-card-inner">
+                    {/* Icon Header */}
+                    <div className="case-icon" style={{ background: `${study.color}15` }}>
+                      <span className="icon-emoji" style={{ filter: `drop-shadow(0 2px 8px ${study.color}40)` }}>
+                        {study.icon}
+                      </span>
                     </div>
-                  </div>
-                  
-                  <div className="card-body">
-                    <p className="challenge-preview">
-                      <strong>Challenge:</strong> {study.challenge}
-                    </p>
-                    <p className="strategy-preview">
-                      <strong>Solution:</strong> {study.strategy}
-                    </p>
-                    
-                    <div className="key-highlights">
-                      <strong>Key Highlights:</strong>
-                      <ul>
-                        {study.metrics.map((metric, idx) => (
-                          <li key={idx}>
-                            <span className="highlight-label">{metric.label}:</span>{' '}
-                            <span className="highlight-value">{metric.value}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
 
-                  <div className="card-footer">
-                    <div className="tags">
-                      {study.tags.slice(0, 3).map(tag => (
-                        <span key={tag} className="tag">{tag}</span>
-                      ))}
-                      {study.tags.length > 3 && (
-                        <span className="tag-more">+{study.tags.length - 3}</span>
-                      )}
+                    {/* Content */}
+                    <div className="case-content">
+                      <div className="case-header">
+                        <h3 className="case-title">{study.title}</h3>
+                        <p className="case-tagline">{study.tagline}</p>
+                      </div>
+
+                      {/* Categories */}
+                      <div className="case-categories">
+                        {study.category.map(cat => (
+                          <span key={cat} className="category-tag" style={{ 
+                            background: `${study.color}20`,
+                            color: study.color,
+                            borderColor: `${study.color}30`
+                          }}>
+                            {cat}
+                          </span>
+                        ))}
+                      </div>
+
+                      {/* Challenge Preview */}
+                      <div className="case-preview">
+                        <p className="preview-label">Challenge</p>
+                        <p className="preview-text">{study.challenge}</p>
+                      </div>
+
+                      {/* Metrics */}
+                      <div className="case-metrics">
+                        {study.metrics.slice(0, 2).map((metric, idx) => (
+                          <div key={idx} className="metric-item">
+                            <div className="metric-icon">✓</div>
+                            <div className="metric-content">
+                              <div className="metric-label">{metric.label}</div>
+                              <div className="metric-value" style={{ color: study.color }}>
+                                {metric.value}
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* Tech Tags */}
+                      <div className="case-tech-tags">
+                        {study.tags.slice(0, 3).map(tag => (
+                          <span key={tag} className="tech-tag">{tag}</span>
+                        ))}
+                        {study.tags.length > 3 && (
+                          <span className="tech-tag-more">+{study.tags.length - 3}</span>
+                        )}
+                      </div>
                     </div>
-                    <span className="read-more">View Case Study →</span>
+
+                    {/* Footer */}
+                    <div className="case-footer">
+                      <span className="view-case">
+                        View Case Study
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                      </span>
+                    </div>
+
+                    {/* Hover Gradient */}
+                    <div 
+                      className="case-gradient-overlay"
+                      style={{ 
+                        background: `linear-gradient(135deg, ${study.color}08 0%, transparent 100%)`
+                      }}
+                    />
                   </div>
                 </Link>
               </motion.div>
@@ -111,13 +237,16 @@ const CaseStudies: React.FC = () => {
           </motion.div>
         </AnimatePresence>
 
+        {/* No Results */}
         {filteredStudies.length === 0 && (
           <motion.div
             className="no-results"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
           >
-            <p>No case studies found for this filter.</p>
+            <div className="no-results-icon">🔍</div>
+            <h3>No case studies found</h3>
+            <p>Try selecting a different category filter</p>
           </motion.div>
         )}
       </section>

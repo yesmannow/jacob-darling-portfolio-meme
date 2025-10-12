@@ -2,6 +2,7 @@ import React from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import PageTransition from "../components/animations/PageTransition";
+import ScrollToTop from "../components/utilities/ScrollToTop";
 import Home from "../pages/Home";
 import About from "../pages/About";
 import CaseStudies from "../pages/CaseStudies";
@@ -11,6 +12,8 @@ import Projects from "../pages/Projects";
 import ProjectDetail from "../pages/ProjectDetail";
 import Applications from "../pages/Applications";
 import ApplicationDetail from "../pages/ApplicationDetail";
+import Photography from "../pages/Photography";
+import Design from "../pages/Design";
 import Testimonials from "../pages/Testimonials";
 import Resume from "../pages/Resume";
 import Contact from "../pages/Contact";
@@ -19,8 +22,10 @@ const AppRouter: React.FC = () => {
   const location = useLocation();
   
   return (
-    <AnimatePresence mode="wait">
-      <Routes location={location} key={location.pathname}>
+    <>
+      <ScrollToTop />
+      <AnimatePresence mode="wait">
+        <Routes location={location} key={location.pathname}>
         <Route path="/" element={<PageTransition><Home /></PageTransition>} />
         <Route path="/about" element={<PageTransition><About /></PageTransition>} />
         <Route path="/case-studies" element={<PageTransition><CaseStudies /></PageTransition>} />
@@ -30,11 +35,14 @@ const AppRouter: React.FC = () => {
         <Route path="/projects/:slug" element={<PageTransition><ProjectDetail /></PageTransition>} />
         <Route path="/applications" element={<PageTransition><Applications /></PageTransition>} />
         <Route path="/applications/:id" element={<PageTransition><ApplicationDetail /></PageTransition>} />
+        <Route path="/photography" element={<PageTransition><Photography /></PageTransition>} />
+        <Route path="/design" element={<PageTransition><Design /></PageTransition>} />
         <Route path="/testimonials" element={<PageTransition><Testimonials /></PageTransition>} />
         <Route path="/resume" element={<PageTransition><Resume /></PageTransition>} />
         <Route path="/contact" element={<PageTransition><Contact /></PageTransition>} />
-      </Routes>
-    </AnimatePresence>
+        </Routes>
+      </AnimatePresence>
+    </>
   );
 };
 

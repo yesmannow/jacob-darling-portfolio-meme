@@ -14,8 +14,11 @@ const Footer: React.FC = () => (
           <ul>
             <li><a href="/about">About</a></li>
             <li><a href="/case-studies">Case Studies</a></li>
+            <li><a href="/applications">Applications</a></li>
+            <li><a href="/design">Design</a></li>
+            <li><a href="/photography">Photography</a></li>
             <li><a href="/toolbox">Toolbox</a></li>
-            <li><a href="/projects">Projects</a></li>
+            <li><a href="/resume">Résumé</a></li>
           </ul>
         </div>
         <div className="footer-section">
@@ -23,7 +26,7 @@ const Footer: React.FC = () => (
           <ul>
             <li><a href="https://linkedin.com/in/jacobdarling" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
             <li><a href="https://github.com/JdarlingGT" target="_blank" rel="noopener noreferrer">GitHub</a></li>
-            <li><a href="mailto:jacob@example.com">Email</a></li>
+            <li><a href="/contact">Contact Me</a></li>
           </ul>
         </div>
       </div>
