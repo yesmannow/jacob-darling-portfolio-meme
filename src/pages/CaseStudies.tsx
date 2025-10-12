@@ -19,8 +19,8 @@ const CaseStudies: React.FC = () => {
     <main className="case-studies-page">
       <AnimatedSection>
         <section className="case-studies-header">
-          <h1>Case Studies</h1>
-          <p>Every project starts with a problem — and ends with a measurable impact.</p>
+          <h1>Selected Works</h1>
+          <p>Deep dives into transformative projects that showcase the power of strategic marketing combined with technical excellence.</p>
         </section>
       </AnimatedSection>
 
@@ -66,6 +66,11 @@ const CaseStudies: React.FC = () => {
                   <div className="card-header">
                     <h3>{study.title}</h3>
                     <p className="tagline">{study.tagline}</p>
+                    <div className="category-tags">
+                      {study.category.map(cat => (
+                        <span key={cat} className="category-tag">{cat}</span>
+                      ))}
+                    </div>
                   </div>
                   
                   <div className="card-body">
@@ -75,15 +80,18 @@ const CaseStudies: React.FC = () => {
                     <p className="strategy-preview">
                       <strong>Solution:</strong> {study.strategy}
                     </p>
-                  </div>
-
-                  <div className="card-metrics">
-                    {study.metrics.map((metric, idx) => (
-                      <div key={idx} className="metric">
-                        <span className="metric-value">{metric.value}</span>
-                        <span className="metric-label">{metric.label}</span>
-                      </div>
-                    ))}
+                    
+                    <div className="key-highlights">
+                      <strong>Key Highlights:</strong>
+                      <ul>
+                        {study.metrics.map((metric, idx) => (
+                          <li key={idx}>
+                            <span className="highlight-label">{metric.label}:</span>{' '}
+                            <span className="highlight-value">{metric.value}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
 
                   <div className="card-footer">
@@ -95,7 +103,7 @@ const CaseStudies: React.FC = () => {
                         <span className="tag-more">+{study.tags.length - 3}</span>
                       )}
                     </div>
-                    <span className="read-more">Read Case Study →</span>
+                    <span className="read-more">View Case Study →</span>
                   </div>
                 </Link>
               </motion.div>
