@@ -16,6 +16,8 @@ const Applications = React.lazy(() => import("../pages/Applications"));
 const ApplicationDetail = React.lazy(() => import("../pages/ApplicationDetail"));
 const Photography = React.lazy(() => import("../pages/Photography"));
 const Design = React.lazy(() => import("../pages/Design"));
+const SideProjects = React.lazy(() => import("../pages/SideProjects"));
+const SideProjectDetail = React.lazy(() => import("../pages/side-projects/SideProjectDetail"));
 const Testimonials = React.lazy(() => import("../pages/Testimonials"));
 const Resume = React.lazy(() => import("../pages/Resume"));
 const Contact = React.lazy(() => import("../pages/Contact"));
@@ -54,6 +56,8 @@ const AppRouter: React.FC = () => {
             <Route path="/applications/:id" element={<PageTransition><ApplicationDetail /></PageTransition>} />
             <Route path="/photography" element={<PageTransition><Photography /></PageTransition>} />
             <Route path="/design" element={<PageTransition><Design /></PageTransition>} />
+            <Route path="/side-projects" element={<PageTransition><SideProjects /></PageTransition>} />
+            <Route path="/side-projects/:slug" element={<PageTransition><SideProjectDetail /></PageTransition>} />
             <Route path="/testimonials" element={<PageTransition><Testimonials /></PageTransition>} />
             <Route path="/resume" element={<PageTransition><Resume /></PageTransition>} />
             <Route path="/contact" element={<PageTransition><Contact /></PageTransition>} />
