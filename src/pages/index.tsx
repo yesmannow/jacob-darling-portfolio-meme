@@ -1,21 +1,59 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect } from "react";
 import { motion } from "framer-motion";
 import Hero from "../components/home/Hero";
-// import Navbar from "../components/home/Navbar"; // Removed: Using global Header from App.tsx
-import CaseStudies from "../components/home/CaseStudies";
-import About from "../components/home/About";
-import Contact from "../components/home/Contact";
+import IntroStatement from "../components/home/IntroStatement";
+import GlanceMetrics from "../components/home/GlanceMetrics";
+import FeaturedWork from "../components/home/FeaturedWork";
+import AboutSnapshot from "../components/home/AboutSnapshot";
+import Toolbox from "../components/home/Toolbox";
+import Awards from "../components/home/Awards";
+import CTA from "../components/home/CTA";
+import ScrollProgress from "../components/ui/ScrollProgress";
 import lenis from "../utils/motion-sync";
 
 const HomePage: React.FC = () => {
+  useEffect(() => {
+    // Initialize smooth scroll
+    lenis.start();
+    
+    return () => {
+      lenis.stop();
+    };
+  }, []);
+
   return (
     <>
-      {/* Navbar removed - using global Header from App.tsx */}
+      {/* UX Enhancement Components */}
+      <ScrollProgress />
+      
+      {/* Cinematic Hero Section */}
       <Hero />
-      <Suspense fallback={<div>Loading...</div>}>
-        <CaseStudies />
-        <About />
-        <Contact />
+      
+      <Suspense fallback={
+        <div className="flex items-center justify-center min-h-screen bg-black">
+          <div className="w-8 h-8 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
+        </div>
+      }>
+        {/* Design Philosophy */}
+        <IntroStatement />
+        
+        {/* Impact Metrics Dashboard */}
+        <GlanceMetrics />
+        
+        {/* Featured Case Studies */}
+        <FeaturedWork />
+        
+        {/* About Snapshot */}
+        <AboutSnapshot />
+        
+        {/* Creative Toolbox */}
+        <Toolbox />
+        
+        {/* Awards & Recognition */}
+        <Awards />
+        
+        {/* Final CTA */}
+        <CTA />
       </Suspense>
     </>
   );

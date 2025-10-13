@@ -8,6 +8,9 @@ import resumeData from "../data/resume.json";
 import HeroIntro from "../components/resume/HeroIntro";
 import Section from "../components/resume/Section";
 import CTAButtons from "../components/resume/CTAButtons";
+import ExperienceTimeline from "../components/resume/ExperienceTimeline";
+import TimelineNavigation from "../components/resume/TimelineNavigation";
+import AwardShowcase from "../components/awards/AwardShowcase";
 import "./Resume.css";
 
 const Resume: React.FC = () => {
@@ -124,73 +127,16 @@ const Resume: React.FC = () => {
           {/* CTA Buttons */}
           <CTAButtons />
 
-          {/* Experience Section */}
-          <Section title="Professional Experience" subtitle="Building systems that scale and strategies that deliver" gradient="purple" delay={0.2}>
-            <div className="space-y-8">
-              {experience.map((job, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: -30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="relative pl-8 border-l-2 border-purple-500/50"
-                >
-                  <div className="absolute -left-2 top-0 w-4 h-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full" />
-                  
-                  <div className="mb-6">
-                    <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-3">
-                      <div>
-                        <h3 className="text-xl font-bold text-white mb-1">{job.role}</h3>
-                        <p className="text-purple-400 font-semibold">{job.company}</p>
-                      </div>
-                      <div className="text-gray-400 text-sm mt-2 md:mt-0">
-                        <p>{job.dates}</p>
-                        <p>{job.location}</p>
-                      </div>
-                    </div>
-                    
-                    <p className="text-gray-300 mb-4 leading-relaxed">{job.summary}</p>
-                    
-                    <div className="mb-4">
-                      <h4 className="text-sm font-semibold text-purple-400 mb-3">Key Achievements</h4>
-                      <ul className="space-y-2">
-                        {job.achievements.map((achievement, idx) => (
-                          <motion.li
-                            key={idx}
-                            initial={{ opacity: 0, x: -20 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.4, delay: (index * 0.1) + (idx * 0.05) }}
-                            className="flex items-start gap-3 text-gray-300 text-sm"
-                          >
-                            <div className="w-1.5 h-1.5 bg-purple-400 rounded-full mt-2 flex-shrink-0" />
-                            <span>{achievement}</span>
-                          </motion.li>
-                        ))}
-                      </ul>
-                    </div>
-                    
-                    {job.technologies && (
-                      <div>
-                        <h4 className="text-sm font-semibold text-purple-400 mb-3">Technologies Used</h4>
-                        <div className="flex flex-wrap gap-2">
-                          {job.technologies.map((tech, idx) => (
-                            <span
-                              key={tech}
-                              className="px-3 py-1 bg-purple-500/20 border border-purple-500/30 rounded-full text-xs text-purple-300"
-                            >
-                              {tech}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </Section>
+          {/* Timeline Navigation */}
+          <TimelineNavigation />
+
+          {/* Cinematic Experience Timeline */}
+          <ExperienceTimeline />
+
+          {/* Awards & Recognition */}
+          <div id="awards-section">
+            <AwardShowcase />
+          </div>
 
           {/* Skills & Tools Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
