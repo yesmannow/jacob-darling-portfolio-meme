@@ -1,30 +1,25 @@
 import React, { useEffect } from "react";
-// import Lenis from "lenis"; // Removed: Lenis initialized in motion-sync.ts
 import AppRouter from "./router/AppRouter";
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
-// import CustomCursor from "./components/interactive/CustomCursor"; // Removed: Making human the hero
 import ScrollToTop from "./components/utils/ScrollToTop";
 import BackToTop from "./components/utilities/BackToTop";
-// import LogoIntro from "./components/animations/LogoIntro"; // Removed: Taco ninja logo
-// import BackgroundLogos from "./components/animations/BackgroundLogos"; // Removed: Uses old logo
 import PersonSchema from "./components/seo/PersonSchema";
-import lenis from "./utils/motion-sync"; // Import shared Lenis instance
-import "lenis/dist/lenis.css"; // Import Lenis CSS for smooth scrolling
-// Removed: globals.css imported in main.tsx to avoid duplication
+import { initLenis, destroyLenis } from "./utils/motion-sync";
+import "lenis/dist/lenis.css";
 
 const App: React.FC = () => {
-  // Lenis initialization moved to motion-sync.ts to avoid duplication
   useEffect(() => {
-    // Ensure scrolling works even if Lenis fails
+    // Initialize global Lenis instance
+    const lenis = initLenis();
+    
+    // Ensure native scrolling works as fallback
     document.documentElement.style.overflow = 'auto';
     document.body.style.overflow = 'auto';
     
     // Cleanup on unmount
     return () => {
-      if (lenis) {
-        lenis.destroy();
-      }
+      destroyLenis();
     };
   }, []);
 
