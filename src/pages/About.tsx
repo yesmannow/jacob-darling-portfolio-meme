@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import AnimatedSection from "../components/animations/AnimatedSection";
@@ -24,38 +24,72 @@ const timelineNodes: TimelineNode[] = [
     id: "launchpad",
     title: "The Launchpad",
     subtitle: "My First Marketing Position",
-    content: "Learned to stretch budgets, design visuals, and prove ROI when few believed marketing was measurable.",
+    content: "Stretched budgets. Designed visuals. Proved ROI when no one thought marketing could be measured.",
     year: "Early Career"
   },
   {
     id: "pike-medical",
     title: "Pike Medical Consultants",
     subtitle: "Healthcare Meets Hustle",
-    content: "Built PrimaryCare Indy & UrgentCare Indy sites. Ran Google Ads driving thousands of patient visits. Designed logos, outdoor banners, and seasonal email campaigns. Blended brand, web, and patient acquisition into one machine.",
+    content: "Built two healthcare sites from scratch. Ran ads that drove thousands through the door. Designed everything from logos to billboards.\n\nThen blended it all into one patient acquisition machine.",
     year: "Agency Experience"
   },
   {
     id: "graston-technique",
     title: "Graston Technique®",
     subtitle: "National Transformation",
-    content: "Architected a full-stack marketing system: 400+ CRM automations, AI-powered support reducing tickets by 70%, 'Buy Now, Choose Later' checkout lifting conversions 40%. Mastered strategy + systems at scale.",
+    content: "Built a marketing system that thinks for itself.\n\n400+ automations. AI support that cut tickets by 70%. A checkout flow that lifted conversions 40%.\n\nThis is where I learned to make strategy and systems speak the same language.",
     year: "Enterprise Role"
   },
   {
     id: "current-portfolio",
     title: "Current Portfolio",
     subtitle: "Marketing Strategist & Systems Architect",
-    content: "Specializing in bridging brand storytelling with technical execution. From AI and automation to SEO and design, I turn abstract goals into revenue-focused ecosystems.",
+    content: "I bridge the gap between brand and build.\n\nFrom AI to animation. SEO to storytelling. Strategy to systems.\n\nI turn what you imagine into what you measure.",
     year: "Present"
+  }
+];
+
+// Bio images for rotating gallery
+const bioImages = [
+  {
+    src: "/images/bio/bio-photo.jpg",
+    alt: "Jacob Darling - Professional portrait in cinematic lighting",
+    variant: "hero"
+  },
+  {
+    src: "/images/bio/241311036_10117555583372059_173429180650836298_n.webp",
+    alt: "Jacob Darling - Casual outdoor portrait",
+    variant: "casual"
+  },
+  {
+    src: "/images/bio/Untitled-1 (Custom).png",
+    alt: "Jacob Darling - Black and white portrait",
+    variant: "monochrome"
+  },
+  {
+    src: "/images/bio/1732967007485.jpg",
+    alt: "Jacob Darling - Candid moment portrait",
+    variant: "candid"
   }
 ];
 
 const About: React.FC = () => {
   const [expandedNode, setExpandedNode] = useState<string | null>(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const toggleNode = (nodeId: string) => {
     setExpandedNode(expandedNode === nodeId ? null : nodeId);
   };
+
+  // Rotating bio gallery effect
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % bioImages.length);
+    }, 6000); // Change image every 6 seconds
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <main className="about-page">
@@ -65,14 +99,57 @@ const About: React.FC = () => {
           
           <motion.div className="intro-content" variants={fadeInUp}>
             <div className="bio-photo-wrapper">
-              <motion.img 
-                src="/images/bio/bio-photo.jpg" 
-                alt="Jacob Darling - Marketing Strategist & Systems Architect"
-                className="bio-photo"
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.6, delay: 0.3 }}
-              />
+              {/* Cinematic Rotating Bio Gallery */}
+              <div className="bio-gallery" style={{ position: "relative", width: "100%", height: "400px", borderRadius: "1rem", overflow: "hidden" }}>
+                <AnimatePresence mode="wait">
+                  <motion.img
+                    key={currentImageIndex}
+                    src={bioImages[currentImageIndex].src}
+                    alt={bioImages[currentImageIndex].alt}
+                    className="bio-photo"
+                    style={{ 
+                      position: "absolute",
+                      inset: 0,
+                      width: "100%", 
+                      height: "100%", 
+                      objectFit: "cover",
+                      filter: "contrast(1.05) saturate(1.1) brightness(0.95)"
+                    }}
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 1.05 }}
+                    transition={{ duration: 1.2, ease: "easeInOut" }}
+                  />
+                </AnimatePresence>
+                
+                {/* Image indicator dots */}
+                <div style={{ 
+                  position: "absolute", 
+                  bottom: "1rem", 
+                  left: "50%", 
+                  transform: "translateX(-50%)",
+                  display: "flex",
+                  gap: "0.5rem",
+                  zIndex: 10
+                }}>
+                  {bioImages.map((_, index) => (
+                    <motion.button
+                      key={index}
+                      onClick={() => setCurrentImageIndex(index)}
+                      style={{
+                        width: "8px",
+                        height: "8px",
+                        borderRadius: "50%",
+                        border: "none",
+                        background: index === currentImageIndex ? "#EC4899" : "rgba(255,255,255,0.5)",
+                        cursor: "pointer"
+                      }}
+                      whileHover={{ scale: 1.2 }}
+                      whileTap={{ scale: 0.9 }}
+                    />
+                  ))}
+                </div>
+              </div>
             </div>
             <div className="intro-text">
               <p className="lead">

@@ -72,9 +72,12 @@ const Contact: React.FC = () => {
     <main className="contact-page">
       <AnimatedSection>
         <section className="contact-header">
-          <motion.h1 variants={fadeInUp}>Let's Build Something Remarkable</motion.h1>
+          <motion.h1 variants={fadeInUp}>Let's Create What Doesn't Exist Yet.</motion.h1>
           <motion.p className="lead" variants={fadeInUp}>
-            If you're looking to simplify your marketing systems, optimize workflows, or just explore an idea — I'd love to connect.
+            Have a challenge that needs solving? A system that needs building?
+            An idea that needs shaping?
+            <br /><br />
+            Let's talk.
           </motion.p>
         </section>
       </AnimatedSection>

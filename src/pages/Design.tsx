@@ -1,105 +1,152 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
 import AnimatedSection from "../components/animations/AnimatedSection";
 import { fadeInUp } from "../utils/animations";
+import { loadDesignImages, getDesignCategories, categoryColors, type DesignItem } from "../utils/loadDesign";
+import designManifest from "../../public/images/design/manifest.json";
 import "./Design.css";
 
-interface DesignItem {
-  id: string;
-  src: string;
-  title: string;
-  category: string;
-  description?: string;
-  size?: "small" | "medium" | "large" | "wide" | "tall";
-}
+gsap.registerPlugin(ScrollTrigger);
 
-const designPortfolio: DesignItem[] = [
-  // Branding & Logos
-  { id: "d01", src: "/images/design/Logo 6.jpg", title: "Brand Identity System", category: "Branding", size: "large" },
-  { id: "d02", src: "/images/design/Font 1.png", title: "Custom Typography", category: "Branding", size: "medium" },
-  { id: "d03", src: "/images/design/AM-Logo.png", title: "AM Logo Design", category: "Branding", size: "small" },
-  { id: "d04", src: "/images/design/BF MOGOGRAM final-02.jpg", title: "BF Monogram", category: "Branding", size: "small" },
-  { id: "d05", src: "/images/design/logo-01.png", title: "Corporate Logo", category: "Branding", size: "medium" },
-  { id: "d06", src: "/images/design/Herbs Rub Logo.png", title: "Herbs & Rub Branding", category: "Branding", size: "tall" },
-  
-  // Print & Advertising
-  { id: "d07", src: "/images/design/2020 Forty Under 40 Ad.jpg", title: "Forty Under 40 Recognition", category: "Print", size: "wide" },
-  { id: "d08", src: "/images/design/2021 Health Care Ad.png", title: "Healthcare Campaign", category: "Print", size: "large" },
-  { id: "d09", src: "/images/design/Flu Shot 2021.jpg", title: "Flu Shot Awareness", category: "Print", size: "medium" },
-  
-  // Digital Marketing
-  { id: "d10", src: "/images/design/Online Doctor Consultation Instagram Post.png", title: "Telehealth Social Post", category: "Digital", size: "medium" },
-  { id: "d11", src: "/images/design/My Post (2).jpg", title: "Social Media Graphics", category: "Digital", size: "small" },
-  { id: "d12", src: "/images/design/Adobe_Express_20220527_2105230.6071119382485303.png", title: "Digital Marketing Suite", category: "Digital", size: "wide" },
-  
-  // Sales & Promotions
-  { id: "d13", src: "/images/design/25 percent sale - Spring.png", title: "Spring Sale Campaign", category: "Sales", size: "tall" },
-  { id: "d14", src: "/images/design/Dog Summer Sale-1.png", title: "Summer Pet Promo", category: "Sales", size: "medium" },
-  
-  // Product Design
-  { id: "d15", src: "/images/design/Koozie design - final.png", title: "Koozie Merchandise", category: "Product", size: "small" },
-  { id: "d16", src: "/images/design/Front Updated.png", title: "Product Packaging Front", category: "Product", size: "medium" },
-  { id: "d17", src: "/images/design/Back 1.png", title: "Product Packaging Back", category: "Product", size: "medium" },
-  { id: "d18", src: "/images/design/ChoppedBrisketSandwich_LG.jpg", title: "Food Menu Design", category: "Product", size: "large" },
-  
-  // Creative Concepts
-  { id: "d19", src: "/images/design/DALL·E 2024-11-13 08.06.53 - A playful, cartoonish scene showing jars labeled 'Jacob's Berry Berry Hot Sauce' filled with hot sauce containing blueberries, raspberries, and blackb.webp", title: "Hot Sauce Concept - Playful", category: "Concept", size: "wide" },
-  { id: "d20", src: "/images/design/DALL·E 2024-11-13 08.13.08 - A dark, intense scene showing bottles of Jacob's Berry Berry Hot Sauce sitting on shelves. Inside the bottles, transformed blueberries, raspberries, a.webp", title: "Hot Sauce Concept - Dark", category: "Concept", size: "tall" },
-  
-  // Event & Racing Graphics
-  { id: "d21", src: "/images/design/Blue - RBE Indy 500 Design.png", title: "Indy 500 Racing Graphics", category: "Event", size: "large" },
-  { id: "d22", src: "/images/design/Jacob Brady resized.jpg", title: "Event Branding", category: "Event", size: "medium" },
-  
-  // Social Media Portfolio
-  { id: "d23", src: "/images/design/236802803_10117457411055169_5004587858113382909_n.jpg", title: "Social Graphics Portfolio 1", category: "Digital", size: "small" },
-  { id: "d24", src: "/images/design/323700270_2415730071915448_2322941324611558798_n.jpg", title: "Social Graphics Portfolio 2", category: "Digital", size: "small" },
-  { id: "d25", src: "/images/design/521745_229161850524724_1718400251_n.jpg", title: "Social Graphics Portfolio 3", category: "Digital", size: "small" },
-  
-  // Advanced Work
-  { id: "d26", src: "/images/design/IMG_20211002_204207_713.jpg", title: "Marketing Collateral", category: "Print", size: "medium" },
-  { id: "d27", src: "/images/design/IMG_20211225_203321_050.jpg", title: "Holiday Campaign", category: "Print", size: "small" },
-  { id: "d28", src: "/images/design/IMG_20220402_195539_486.jpg", title: "Brand Materials", category: "Branding", size: "small" },
-  { id: "d29", src: "/images/design/IMG_20220513_222748_444.jpg", title: "Product Photography Styling", category: "Product", size: "wide" },
-  { id: "d30", src: "/images/design/IMG_20220529_193948_726.jpg", title: "Visual Identity Set", category: "Branding", size: "tall" },
-  { id: "d31", src: "/images/design/IMG_20220529_195734_101.jpg", title: "Brand Assets", category: "Branding", size: "medium" },
-  { id: "d32", src: "/images/design/IMG_20220606_011741_906.jpg", title: "Marketing Suite", category: "Digital", size: "large" },
-  { id: "d33", src: "/images/design/IMG_20220607_151217_860.jpg", title: "Campaign Graphics", category: "Print", size: "small" },
-  { id: "d34", src: "/images/design/IMG_20220612_010021_558.jpg", title: "Promotional Design", category: "Sales", size: "medium" },
-  { id: "d35", src: "/images/design/IMG_20220701_141651_802.jpg", title: "Digital Ads", category: "Digital", size: "small" },
-  { id: "d36", src: "/images/design/IMG_20220709_015653_187.jpg", title: "Social Campaign", category: "Digital", size: "medium" },
-  { id: "d37", src: "/images/design/IMG_20220723_183814_569.jpg", title: "Brand Experience", category: "Branding", size: "wide" },
-  { id: "d38", src: "/images/design/IMG_20220901_174114_810.jpg", title: "Event Marketing", category: "Event", size: "small" },
-  { id: "d39", src: "/images/design/IMG_20220904_153503_226.jpg", title: "Product Launch", category: "Product", size: "tall" },
-  { id: "d40", src: "/images/design/IMG_20221023_020849_206.jpg", title: "Brand Collateral", category: "Branding", size: "medium" },
-  { id: "d41", src: "/images/design/IMG_20221029_025225_059.jpg", title: "Promotional Materials", category: "Sales", size: "small" },
-  { id: "d42", src: "/images/design/IMG_20221029_031339_559.jpg", title: "Marketing Campaign", category: "Print", size: "large" },
-  { id: "d43", src: "/images/design/IMG_20230617_015647_366.jpg", title: "Visual Campaign", category: "Digital", size: "medium" },
-  { id: "d44", src: "/images/design/bird.png", title: "Illustration Design", category: "Concept", size: "small" },
-  { id: "d45", src: "/images/design/CA.jpg", title: "CA Branding", category: "Branding", size: "small" },
-  { id: "d46", src: "/images/design/file_0000000040d46230b3f420ddf8f917de.png", title: "Design Concept 1", category: "Concept", size: "medium" },
-  { id: "d47", src: "/images/design/file_000000009d0861f8a59c35ae82dde4b7 (1).png", title: "Design Concept 2", category: "Concept", size: "medium" },
-  { id: "d48", src: "/images/design/file_00000000c524623091018296ba5b34a3.png", title: "Design Concept 3", category: "Concept", size: "large" }
-];
-
-const categories = ["All", "Branding", "Digital", "Print", "Product", "Sales", "Event", "Concept"];
-
-const categoryColors: Record<string, string> = {
-  Branding: "#f093fb",
-  Digital: "#4facfe",
-  Print: "#43e97b",
-  Product: "#fa709a",
-  Sales: "#feca57",
-  Event: "#ff6b6b",
-  Concept: "#a8edea"
-};
 
 const Design: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState("All");
   const [selectedDesign, setSelectedDesign] = useState<DesignItem | null>(null);
 
+  // Load all design images dynamically
+  const designPortfolio = useMemo(() => loadDesignImages(), []);
+  const categories = useMemo(() => getDesignCategories(designPortfolio), [designPortfolio]);
+
   const filteredDesigns = activeCategory === "All" 
     ? designPortfolio 
     : designPortfolio.filter(design => design.category === activeCategory);
+
+  // Enhanced GSAP Cinematic Animations
+  useEffect(() => {
+    const designs = gsap.utils.toArray(".design-card");
+    
+    designs.forEach((design: any, index) => {
+      // Cinematic entrance with 3D depth
+      gsap.fromTo(
+        design,
+        { 
+          autoAlpha: 0, 
+          y: 70, 
+          scale: 0.88,
+          rotateY: 15,
+          rotateX: 10,
+          filter: "blur(6px) brightness(0.7)"
+        },
+        {
+          duration: 1.4,
+          autoAlpha: 1,
+          y: 0,
+          scale: 1,
+          rotateY: 0,
+          rotateX: 0,
+          filter: "blur(0px) brightness(1)",
+          ease: "power4.out",
+          scrollTrigger: {
+            trigger: design,
+            start: "top 88%",
+            end: "top 25%",
+            toggleActions: "play none none reverse",
+            scrub: 0.2
+          },
+          delay: index * 0.06
+        }
+      );
+
+      // Individual image parallax with depth
+      gsap.to(design.querySelector("img"), {
+        scrollTrigger: {
+          trigger: design,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 1.5
+        },
+        y: -40,
+        scale: 1.08,
+        filter: "brightness(1.1)"
+      });
+
+      // Hover enhancement with GSAP
+      design.addEventListener("mouseenter", () => {
+        gsap.to(design, {
+          scale: 1.03,
+          y: -12,
+          rotateY: 3,
+          boxShadow: "0 25px 50px rgba(0,0,0,0.25), 0 0 30px rgba(136,171,242,0.2)",
+          duration: 0.4,
+          ease: "power2.out"
+        });
+      });
+
+      design.addEventListener("mouseleave", () => {
+        gsap.to(design, {
+          scale: 1,
+          y: 0,
+          rotateY: 0,
+          boxShadow: "0 10px 20px rgba(0,0,0,0.1)",
+          duration: 0.4,
+          ease: "power2.out"
+        });
+      });
+    });
+
+    // Enhanced hero parallax with multiple layers
+    gsap.to(".design-hero", {
+      scrollTrigger: {
+        trigger: ".design-hero",
+        start: "top top",
+        end: "bottom top",
+        scrub: 1.5
+      },
+      y: 220,
+      opacity: 0.3,
+      scale: 1.12,
+      filter: "blur(3px)"
+    });
+
+    // Floating categories with depth
+    gsap.to(".floating-categories", {
+      scrollTrigger: {
+        trigger: ".floating-categories",
+        start: "top 80%",
+        end: "bottom 20%",
+        scrub: 1
+      },
+      y: -60,
+      opacity: 0.85,
+      scale: 0.98
+    });
+
+    // Enhanced glow effect on category pills
+    gsap.utils.toArray(".category-pill").forEach((pill: any, index) => {
+      gsap.fromTo(pill, 
+        {
+          boxShadow: "0 0 0px rgba(136, 171, 242, 0)"
+        },
+        {
+          scrollTrigger: {
+            trigger: pill,
+            start: "top 90%",
+            toggleActions: "play none none reverse"
+          },
+          boxShadow: "0 0 25px rgba(136, 171, 242, 0.4), 0 0 50px rgba(136, 171, 242, 0.2)",
+          duration: 0.8,
+          delay: index * 0.1,
+          ease: "power2.out"
+        }
+      );
+    });
+
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    };
+  }, [filteredDesigns]);
 
   return (
     <main className="design-page-modern">

@@ -1,81 +1,107 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useMemo } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
 import AnimatedSection from "../components/animations/AnimatedSection";
 import TextReveal from "../components/animations/TextReveal";
 import { fadeInUp } from "../utils/animations";
+import { loadPhotographyImages, getPhotoCategories, categoryColors, type PhotoItem } from "../utils/loadPhotography";
+import photographyManifest from "../../public/images/photography/manifest.json";
 import "./Photography.css";
 
-interface PhotoItem {
-  id: string;
-  src: string;
-  title: string;
-  category: string;
-  description?: string;
-  size?: "small" | "medium" | "large" | "wide" | "tall";
-}
-
-const photoGallery: PhotoItem[] = [
-  { id: "photo-01", src: "/images/photography/20211024_075305~4.jpg", title: "Mountain Vista", category: "Landscape", size: "large" },
-  { id: "photo-02", src: "/images/photography/20220722_053113.jpg", title: "Golden Hour", category: "Landscape", size: "tall" },
-  { id: "photo-03", src: "/images/photography/MVIMG_20190720_204815-EFFECTS.jpg", title: "Urban Effects", category: "Creative", size: "wide" },
-  { id: "photo-04", src: "/images/photography/20240704_180246.jpg", title: "Summer Sunset", category: "Landscape", size: "medium" },
-  { id: "photo-05", src: "/images/photography/20240803_192159.jpg", title: "Evening Light", category: "Nature", size: "small" },
-  { id: "photo-06", src: "/images/photography/IMG_20230604_154323_912.jpg", title: "Architectural Detail", category: "Architecture", size: "tall" },
-  { id: "photo-07", src: "/images/photography/20220605_202214~2.jpg", title: "Night Scene", category: "Urban", size: "medium" },
-  { id: "photo-08", src: "/images/photography/20230528_105239~3.jpg", title: "Spring Morning", category: "Nature", size: "wide" },
-  { id: "photo-09", src: "/images/photography/20230702_190719.jpg", title: "City Life", category: "Urban", size: "small" },
-  { id: "photo-10", src: "/images/photography/20231104_163213.jpg", title: "Autumn Colors", category: "Nature", size: "medium" },
-  { id: "photo-11", src: "/images/photography/20240512_112541~3.jpg", title: "Architectural Lines", category: "Architecture", size: "large" },
-  { id: "photo-12", src: "/images/photography/20240512_112942~3.jpg", title: "Modern Design", category: "Architecture", size: "small" },
-  { id: "photo-13", src: "/images/photography/20240607_201806.jpg", title: "Evening Sky", category: "Landscape", size: "wide" },
-  { id: "photo-14", src: "/images/photography/20240628_185356.jpg", title: "Coastal View", category: "Landscape", size: "tall" },
-  { id: "photo-15", src: "/images/photography/20240628_201038.jpg", title: "Sunset Glow", category: "Landscape", size: "medium" },
-  { id: "photo-16", src: "/images/photography/20240628_214922.jpg", title: "Night Colors", category: "Urban", size: "small" },
-  { id: "photo-17", src: "/images/photography/20240629_214911.jpg", title: "City Lights", category: "Urban", size: "large" },
-  { id: "photo-18", src: "/images/photography/20240704_175213.jpg", title: "Independence Day", category: "Event", size: "medium" },
-  { id: "photo-19", src: "/images/photography/20240704_175407_07.jpg", title: "Celebration Moments", category: "Event", size: "small" },
-  { id: "photo-20", src: "/images/photography/20240704_175539.jpg", title: "Festive Atmosphere", category: "Event", size: "wide" },
-  { id: "photo-21", src: "/images/photography/20240704_180423.jpg", title: "Summer Festival", category: "Event", size: "tall" },
-  { id: "photo-22", src: "/images/photography/20240704_180538.jpg", title: "Crowd Energy", category: "Event", size: "medium" },
-  { id: "photo-23", src: "/images/photography/20240712_210010.jpg", title: "Evening Ambiance", category: "Urban", size: "small" },
-  { id: "photo-24", src: "/images/photography/20240713_065705.jpg", title: "Morning Mist", category: "Nature", size: "large" },
-  { id: "photo-25", src: "/images/photography/20240713_122302.jpg", title: "Midday Scene", category: "Landscape", size: "medium" },
-  { id: "photo-26", src: "/images/photography/20240713_151221.jpg", title: "Afternoon Light", category: "Nature", size: "small" },
-  { id: "photo-27", src: "/images/photography/20240803_184432.jpg", title: "Dusk Moments", category: "Landscape", size: "wide" },
-  { id: "photo-28", src: "/images/photography/IMG_0725.jpg", title: "Natural Beauty", category: "Nature", size: "tall" },
-  { id: "photo-29", src: "/images/photography/IMG_20220806_174817_396.jpg", title: "Creative Angle", category: "Creative", size: "medium" },
-  { id: "photo-30", src: "/images/photography/IMG_20240803_210044.jpg", title: "Night Photography", category: "Urban", size: "large" },
-  { id: "photo-31", src: "/images/photography/PSX_20240717_043437.jpg", title: "Edited Scene", category: "Creative", size: "small" },
-  { id: "photo-32", src: "/images/photography/PSX_20240717_043501.jpg", title: "Artistic Edit", category: "Creative", size: "medium" },
-  { id: "photo-33", src: "/images/photography/PSX_20240717_044925.jpg", title: "Creative Vision", category: "Creative", size: "wide" },
-  { id: "photo-34", src: "/images/photography/20210903_182855.jpg", title: "Late Summer", category: "Nature", size: "small" },
-  { id: "photo-35", src: "/images/photography/2020-06-04(1).jpg", title: "Early Summer", category: "Nature", size: "tall" },
-  { id: "photo-36", src: "/images/photography/00100dPORTRAIT_00100_BURST20180224211719099_COVER~2.jpg", title: "Portrait Series", category: "Portrait", size: "large" },
-  { id: "photo-37", src: "/images/photography/1000000219 (1).jpg", title: "Candid Moment", category: "Portrait", size: "medium" },
-  { id: "photo-38", src: "/images/photography/QVZmSFl0bmlBMHVYd3JhSw.jpg", title: "Street Scene", category: "Urban", size: "small" },
-  { id: "photo-39", src: "/images/photography/SmartSelect_20220905_175600_Facebook.jpg", title: "Social Capture", category: "Event", size: "wide" },
-  { id: "photo-40", src: "/images/photography/image.jpg", title: "Memorable Shot", category: "Creative", size: "medium" }
-];
-
-const categories = ["All", "Landscape", "Nature", "Urban", "Architecture", "Event", "Portrait", "Creative"];
-
-const categoryColors: Record<string, string> = {
-  Landscape: "#667eea",
-  Nature: "#48bb78",
-  Urban: "#ed8936",
-  Architecture: "#9f7aea",
-  Event: "#f56565",
-  Portrait: "#ed64a6",
-  Creative: "#4299e1"
-};
+gsap.registerPlugin(ScrollTrigger);
 
 const Photography: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState("All");
   const [selectedPhoto, setSelectedPhoto] = useState<PhotoItem | null>(null);
 
+  // Load all photography images dynamically
+  const photoGallery = useMemo(() => loadPhotographyImages(), []);
+  const categories = useMemo(() => getPhotoCategories(photoGallery), [photoGallery]);
+
   const filteredPhotos = activeCategory === "All" 
     ? photoGallery 
     : photoGallery.filter(photo => photo.category === activeCategory);
+
+  // Enhanced GSAP Cinematic Animations
+  useEffect(() => {
+    const photos = gsap.utils.toArray(".photo-card");
+    
+    photos.forEach((photo: any, index) => {
+      // Cinematic entrance with depth
+      gsap.fromTo(
+        photo,
+        { 
+          autoAlpha: 0, 
+          y: 80, 
+          scale: 0.85,
+          rotateX: 25,
+          rotateY: 5,
+          filter: "blur(8px)"
+        },
+        {
+          duration: 1.5,
+          autoAlpha: 1,
+          y: 0,
+          scale: 1,
+          rotateX: 0,
+          rotateY: 0,
+          filter: "blur(0px)",
+          ease: "power4.out",
+          scrollTrigger: {
+            trigger: photo,
+            start: "top 90%",
+            end: "top 30%",
+            toggleActions: "play none none reverse",
+            scrub: 0.3
+          },
+          delay: index * 0.08
+        }
+      );
+
+      // Subtle parallax on individual images
+      gsap.to(photo.querySelector("img"), {
+        scrollTrigger: {
+          trigger: photo,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 1
+        },
+        y: -30,
+        scale: 1.05
+      });
+    });
+
+    // Enhanced hero parallax with multiple layers
+    gsap.to(".photo-hero", {
+      scrollTrigger: {
+        trigger: ".photo-hero",
+        start: "top top",
+        end: "bottom top",
+        scrub: 1
+      },
+      y: 250,
+      opacity: 0.2,
+      scale: 1.15,
+      filter: "blur(2px)"
+    });
+
+    // Floating categories animation
+    gsap.to(".floating-categories", {
+      scrollTrigger: {
+        trigger: ".floating-categories",
+        start: "top 80%",
+        end: "bottom 20%",
+        scrub: 1
+      },
+      y: -50,
+      opacity: 0.8
+    });
+
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    };
+  }, [filteredPhotos]);
 
   return (
     <main className="photography-page-modern">

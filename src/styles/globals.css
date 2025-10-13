@@ -1,41 +1,16 @@
-/* CSS Variables - New Color Scheme */
-:root {
-  /* Primary Colors */
-  --color-primary-dark: #081E26;
-  --color-primary-blue: #B8D0D9;
-  --color-light-gray: #D9D9D9;
-  --color-medium-gray: #737373;
-  --color-black: #0D0D0D;
-  
-  /* Accent Colors */
-  --color-accent: #B8D0D9;
-  --color-accent-hover: #9fb9c4;
-  
-  /* Text Colors */
-  --color-text-primary: #D9D9D9;
-  --color-text-secondary: #B8D0D9;
-  --color-text-muted: #737373;
-  
-  /* Background Colors */
-  --color-bg-primary: #0D0D0D;
-  --color-bg-secondary: #081E26;
-  --color-bg-card: rgba(184, 208, 217, 0.05);
-  --color-bg-card-hover: rgba(184, 208, 217, 0.1);
-  
-  /* Border Colors */
-  --color-border: rgba(184, 208, 217, 0.15);
-  --color-border-hover: rgba(184, 208, 217, 0.3);
-  
-  /* Fonts */
-  --font-primary: 'Gineso', 'Space Grotesk', 'Inter', -apple-system, sans-serif;
-  --font-secondary: 'Inter', -apple-system, sans-serif;
-  
-  /* Shadows */
-  --shadow-sm: 0 2px 8px rgba(8, 30, 38, 0.1);
-  --shadow-md: 0 4px 16px rgba(8, 30, 38, 0.15);
-  --shadow-lg: 0 8px 32px rgba(8, 30, 38, 0.2);
-  --shadow-accent: 0 4px 20px rgba(184, 208, 217, 0.3);
-}
+/* ===================================================================
+   JACOB DARLING PORTFOLIO - GLOBAL STYLES
+   Cinematic • Modern • Technological Elegance
+   =================================================================== */
+
+/* Import Brand Identity System */
+@import './tokens.css';
+@import './typography.css';
+@import './bio-cinematic.css';
+
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities; */
 
 * {
   box-sizing: border-box;
@@ -43,12 +18,12 @@
 
 body {
   margin: 0;
-  font-family: var(--font-secondary);
+  font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: var(--color-bg-primary);
-  color: var(--color-text-primary);
-  line-height: 1.6;
+  background: var(--color-bg);
+  color: var(--color-text);
+  line-height: var(--leading-normal);
   overflow-x: hidden;
 }
 
@@ -69,21 +44,62 @@ main {
 }
 
 a {
-  color: var(--color-accent);
+  color: var(--color-primary);
   text-decoration: none;
-  transition: color 0.3s ease;
+  transition: color var(--duration-fast) ease;
 }
 
 a:hover {
-  color: var(--color-accent-hover);
+  color: var(--color-accent);
 }
 
-h1, h2, h3, h4, h5, h6 {
-  margin: 0;
-  font-family: var(--font-primary);
-  font-weight: 700;
-  line-height: 1.2;
-  color: var(--color-text-primary);
+/* ===== BRAND BUTTON STYLES ===== */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-md) var(--space-xl);
+  background: var(--gradient-brand);
+  color: white;
+  font-family: var(--font-body);
+  font-weight: var(--weight-semibold);
+  font-size: var(--text-base);
+  border: none;
+  border-radius: var(--radius-lg);
+  text-decoration: none;
+  cursor: pointer;
+  transition: all var(--duration-normal) ease;
+  box-shadow: var(--shadow-brand);
+}
+
+.btn-primary:hover {
+  transform: scale(1.05);
+  box-shadow: var(--glow-brand);
+  color: white;
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-md) var(--space-xl);
+  background: transparent;
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-weight: var(--weight-semibold);
+  font-size: var(--text-base);
+  border: 2px solid var(--color-primary);
+  border-radius: var(--radius-lg);
+  text-decoration: none;
+  cursor: pointer;
+  transition: all var(--duration-normal) ease;
+}
+
+.btn-secondary:hover {
+  background: var(--gradient-brand);
+  color: white;
+  transform: scale(1.05);
+  box-shadow: var(--glow-brand);
 }
 
 p {
@@ -131,3 +147,20 @@ input, textarea, select {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-accent);
 }
+
+/* Animations */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* @media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+} */

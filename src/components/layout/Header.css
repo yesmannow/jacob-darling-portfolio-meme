@@ -129,8 +129,6 @@
 
 @media (max-width: 768px) {
   .main-nav {
-    flex-direction: column;
-    gap: 1rem;
     padding: 1rem;
   }
   
@@ -138,5 +136,31 @@
     flex-wrap: wrap;
     gap: 1rem;
     justify-content: center;
+  }
+
+  .desktop-nav {
+    display: none;
+  }
+
+  .mobile-menu-btn {
+    display: flex;
+    background: none;
+    border: none;
+    color: var(--color-text-primary);
+    cursor: pointer;
+    padding: 0.5rem;
+  }
+
+  .mobile-menu {
+    overflow: hidden;
+    background: rgba(13, 13, 13, 0.95);
+    backdrop-filter: blur(10px);
+  }
+
+  .mobile-nav {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+    text-align: center;
   }
 }

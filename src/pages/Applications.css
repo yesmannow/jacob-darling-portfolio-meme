@@ -14,7 +14,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('/images/site design assests/tech-18050.gif');
+  /* background-image: url('/images/site design assests/tech-18050.gif'); */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -31,7 +31,7 @@
   right: -15%;
   width: 800px;
   height: 800px;
-  background-image: url('/images/site design assests/blockchain-9027651_1280.png');
+  /* background-image: url('/images/site design assests/blockchain-9027651_1280.png'); */
   background-size: contain;
   background-repeat: no-repeat;
   opacity: 0.025;

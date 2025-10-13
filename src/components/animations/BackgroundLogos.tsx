@@ -44,7 +44,7 @@ const BackgroundLogos: React.FC = () => {
           }}
         >
           <img
-            src="/images/site design assests/JD Logo 2.png"
+            src="/images/design/logo-01.png"
             alt=""
             className="bg-logo-image"
             draggable="false"
@@ -69,7 +69,7 @@ const BackgroundLogos: React.FC = () => {
         }}
       >
         <img
-          src="/images/site design assests/JD Logo 2.png"
+          src="/images/design/logo-01.png"
           alt=""
           className="bg-logo-image"
           draggable="false"
@@ -93,7 +93,7 @@ const BackgroundLogos: React.FC = () => {
         }}
       >
         <img
-          src="/images/site design assests/JD Logo 2.png"
+          src="/images/design/logo-01.png"
           alt=""
           className="bg-logo-image"
           draggable="false"

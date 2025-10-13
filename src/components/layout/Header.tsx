@@ -1,20 +1,27 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, useScroll, useMotionValueEvent } from "framer-motion";
+import { Menu, X } from "lucide-react";
 import { navLinkHover, buttonHover } from "../../utils/animations";
-import Logo from "../logo/Logo";
+import Logo from "../branding/Logo";
 import "./Header.css";
 
 const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isHidden, setIsHidden] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { scrollY } = useScroll();
+  const [lastScrollY, setLastScrollY] = useState(0);
 
-  React.useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    setIsScrolled(latest > 50);
+    if (latest > lastScrollY && latest > 100) {
+      setIsHidden(true);
+    } else {
+      setIsHidden(false);
+    }
+    setLastScrollY(latest);
+  });
 
   const navItems = [
     { path: "/about", label: "About" },
@@ -29,9 +36,9 @@ const Header: React.FC = () => {
   return (
     <motion.header 
       className={`main-header ${isScrolled ? "scrolled" : ""}`}
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
+      initial={{ y: 0 }}
+      animate={{ y: isHidden ? -100 : 0 }}
+      transition={{ duration: 0.3, ease: "easeInOut" }}
     >
       <nav className="main-nav">
         <motion.div 
@@ -45,7 +52,8 @@ const Header: React.FC = () => {
           </Link>
         </motion.div>
         
-        <ul className="nav-links">
+        {/* Desktop Nav */}
+        <ul className="nav-links desktop-nav">
           {navItems.map((item) => (
             <motion.li key={item.path} whileHover={navLinkHover}>
               <Link to={item.path}>{item.label}</Link>
@@ -55,7 +63,43 @@ const Header: React.FC = () => {
             <Link to="/contact" className="nav-cta">Contact</Link>
           </motion.li>
         </ul>
+
+        {/* Mobile Hamburger */}
+        <motion.button
+          className="mobile-menu-btn"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+        >
+          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        </motion.button>
       </nav>
+
+      {/* Mobile Menu */}
+      <motion.div
+        className="mobile-menu"
+        initial={{ opacity: 0, height: 0 }}
+        animate={{
+          opacity: isMobileMenuOpen ? 1 : 0,
+          height: isMobileMenuOpen ? "auto" : 0
+        }}
+        transition={{ duration: 0.3 }}
+      >
+        <ul className="nav-links mobile-nav">
+          {navItems.map((item) => (
+            <motion.li key={item.path} whileHover={navLinkHover}>
+              <Link to={item.path} onClick={() => setIsMobileMenuOpen(false)}>
+                {item.label}
+              </Link>
+            </motion.li>
+          ))}
+          <motion.li whileHover={buttonHover} whileTap={{ scale: 0.95 }}>
+            <Link to="/contact" className="nav-cta" onClick={() => setIsMobileMenuOpen(false)}>
+              Contact
+            </Link>
+          </motion.li>
+        </ul>
+      </motion.div>
     </motion.header>
   );
 };
