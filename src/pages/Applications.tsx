@@ -6,18 +6,6 @@ import { staggerContainer, staggerItem } from "../utils/animations";
 import AnimatedSection from "../components/animations/AnimatedSection";
 import "./Applications.css";
 
-interface Application {
-  id: string;
-  title: string;
-  tagline: string;
-  category: string[];
-  tags: string[];
-  features: { icon: string; title: string; description: string }[];
-  metrics?: { value: string; label: string }[];
-  technicalDetails: { techStack: string[] };
-  demoUrl: string;
-  overview: string;
-}
 
 const Applications: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState<string>("All");
@@ -55,10 +43,11 @@ const Applications: React.FC = () => {
   
   const getAppImage = (appId: string) => {
     const imageMap: { [key: string]: string } = {
-      'clinical-compass': '/demos/images of apps/Screenshot of Graston Clinical Compass - Intelligent Protocol Builder.jpg',
-      'gt9-pricing-sheet': '/demos/images of apps/Screenshot of Graston Technique® Smart Pricing Tool.jpg',
-      'license-requirements-tool': '/demos/images of apps/Screenshot of Practitioner License Requirements _ Graston Technique.jpg',
-      'roi-calculator': '/demos/images of apps/Screenshot of Graston Technique ROI Calculator.jpg'
+      'clinical-compass': '/apps/clinical-compass-thumbnail.png',
+      'gt9-pricing-sheet': '/apps/gt9-pricing-thumbnail.png',
+      'license-requirements-tool': '/apps/license-requirements-thumbnail.png',
+      'roi-calculator': '/apps/roi-calculator-thumbnail.png',
+      'graston-growth-engine': '/apps/graston-growth-engine-thumbnail.png'
     };
     return imageMap[appId] || '';
   };
@@ -68,7 +57,8 @@ const Applications: React.FC = () => {
       'clinical-compass': { icon: '🧠', gradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' },
       'gt9-pricing-sheet': { icon: '💎', gradient: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)' },
       'license-requirements-tool': { icon: '📚', gradient: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)' },
-      'roi-calculator': { icon: '📊', gradient: 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)' }
+      'roi-calculator': { icon: '📊', gradient: 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)' },
+      'graston-growth-engine': { icon: '🚀', gradient: 'linear-gradient(135deg, #88ABF2 0%, #EC4899 100%)' }
     };
     return iconMap[appId] || { icon: '🎓', gradient: 'linear-gradient(135deg, #88ABF2 0%, #B8D0D9 100%)' };
   };

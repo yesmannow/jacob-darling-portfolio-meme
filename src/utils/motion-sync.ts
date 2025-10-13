@@ -10,9 +10,43 @@ const lenis = new Lenis({
   duration: 1.2,
   easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
   smoothWheel: true,
-  syncTouch: true,
-  touchMultiplier: 35,
+  syncTouch: false, // Disable smooth touch for better mobile compatibility
+  touchMultiplier: 2,
+  infinite: false,
+  wrapper: window,
+  content: document.documentElement,
 });
+
+// Handle scroll events for better compatibility
+lenis.on('scroll', (e) => {
+  // Sync with GSAP ScrollTrigger
+  ScrollTrigger.update();
+});
+
+// Refresh Lenis when content changes (for route changes)
+export function refreshLenis() {
+  if (lenis) {
+    // Force a resize to recalculate scroll height
+    lenis.resize();
+    
+    // Refresh ScrollTrigger instances
+    ScrollTrigger.refresh();
+    
+    // Additional refresh after a delay to catch any lazy-loaded content
+    setTimeout(() => {
+      lenis.resize();
+      ScrollTrigger.refresh();
+    }, 300);
+  }
+}
+
+// Debug function to check if scrolling is working
+export function debugScrolling() {
+  console.log('Lenis instance:', lenis);
+  console.log('Document height:', document.documentElement.scrollHeight);
+  console.log('Window height:', window.innerHeight);
+  console.log('Can scroll:', document.documentElement.scrollHeight > window.innerHeight);
+}
 
 // Global animation state management
 class MotionSync {
@@ -22,9 +56,11 @@ class MotionSync {
   // Register anime.js animation for cleanup
   registerAnime(animation: any) {
     this.activeAnimations.add(animation);
-    animation.finished.then(() => {
-      this.activeAnimations.delete(animation);
-    });
+    if (animation && animation.finished) {
+      animation.finished.then(() => {
+        this.activeAnimations.delete(animation);
+      });
+    }
   }
 
   // Register GSAP animation for cleanup
@@ -34,21 +70,37 @@ class MotionSync {
 
   // Pause all animations (useful for performance)
   pauseAll() {
-    this.activeAnimations.forEach(anim => anim.pause());
-    this.scrollAnimations.forEach(anim => anim.pause());
+    this.activeAnimations.forEach(anim => {
+      if (anim && typeof anim.pause === "function") {
+        anim.pause();
+      }
+    });
+    this.scrollAnimations.forEach(anim => {
+      if (anim && typeof anim.pause === "function") {
+        anim.pause();
+      }
+    });
   }
 
   // Resume all animations
   resumeAll() {
-    this.activeAnimations.forEach(anim => anim.play());
-    this.scrollAnimations.forEach(anim => anim.resume());
+    this.activeAnimations.forEach(anim => {
+      if (anim && typeof anim.play === "function") {
+        anim.play();
+      }
+    });
+    this.scrollAnimations.forEach(anim => {
+      if (anim && typeof anim.resume === "function") {
+        anim.resume();
+      }
+    });
   }
 
   // Clean up completed animations
   cleanup() {
     this.activeAnimations.clear();
     this.scrollAnimations.forEach(anim => {
-      if (!anim.isActive()) {
+      if (anim && !anim.isActive()) {
         this.scrollAnimations.delete(anim);
       }
     });
@@ -58,16 +110,14 @@ class MotionSync {
 export const motionSync = new MotionSync();
 
 // Enhanced RAF loop with performance monitoring
-let lastTime = 0;
 function raf(time: number) {
-  const deltaTime = time - lastTime;
-  lastTime = time;
-  
-  // Throttle if frame rate drops too low
-  if (deltaTime < 33) { // ~30fps minimum
+  // Update Lenis
+  if (lenis) {
     lenis.raf(time);
-    ScrollTrigger.update();
   }
+  
+  // Update ScrollTrigger
+  ScrollTrigger.update();
   
   // Cleanup every 60 frames
   if (Math.floor(time / 1000) % 1 === 0) {
@@ -76,7 +126,16 @@ function raf(time: number) {
   
   requestAnimationFrame(raf);
 }
+
+// Start the RAF loop
 requestAnimationFrame(raf);
+
+// Initialize Lenis after DOM is ready
+if (typeof window !== 'undefined') {
+  window.addEventListener('DOMContentLoaded', () => {
+    refreshLenis();
+  });
+}
 
 // Cinematic scroll synchronization with enhanced effects
 export function useCinematicScrollSync() {

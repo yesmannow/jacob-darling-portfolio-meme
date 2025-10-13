@@ -11,6 +11,7 @@ import CTAButtons from "../components/resume/CTAButtons";
 import ExperienceTimeline from "../components/resume/ExperienceTimeline";
 import TimelineNavigation from "../components/resume/TimelineNavigation";
 import AwardShowcase from "../components/awards/AwardShowcase";
+import AwardsSection from "../components/resume/AwardsSection";
 import "./Resume.css";
 
 const Resume: React.FC = () => {
@@ -18,7 +19,7 @@ const Resume: React.FC = () => {
   const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
   const [cinematicMode, setCinematicMode] = useState(true);
   
-  const { name, title, summary, contact, experience, skills, tools, education, stats } = resumeData;
+  const { name, title, summary, contact, experience, skills, tools, education, communityLeadership, stats } = resumeData;
 
   const handlePDFGeneration = () => {
     setIsGeneratingPDF(true);
@@ -186,17 +187,45 @@ const Resume: React.FC = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="text-center p-6 bg-blue-500/10 border border-blue-500/20 rounded-xl"
+                className="relative overflow-hidden text-center p-6 bg-blue-500/10 border border-blue-500/20 rounded-xl"
               >
-                <h3 className="text-xl font-bold text-blue-400 mb-2">{edu.degree}</h3>
-                <p className="text-lg text-gray-300 mb-2">{edu.institution}</p>
-                <p className="text-gray-400 mb-3">{edu.year}</p>
-                {edu.details && (
-                  <p className="text-sm text-gray-400 italic">{edu.details}</p>
-                )}
+                <img src="/images/education/iu-campus.png" alt="Indiana University Campus" className="absolute top-0 left-0 w-full h-full object-cover opacity-10 z-0" />
+                <div className="relative z-10 flex flex-col items-center">
+                    <img src="/images/education/iu-logo.png" alt="Indiana University Logo" className="w-16 h-16 mb-4" />
+                    <h3 className="text-xl font-bold text-blue-400 mb-2">{edu.degree}</h3>
+                    <p className="text-lg text-gray-300 mb-2">{edu.institution}</p>
+                    <p className="text-gray-400 mb-3">{edu.year}</p>
+                    {edu.details && (
+                      <p className="text-sm text-gray-400 italic">{edu.details}</p>
+                    )}
+                </div>
               </motion.div>
             ))}
           </Section>
+
+          {/* Community Leadership */}
+          <Section title="Community Leadership" gradient="purple" delay={0.6}>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {communityLeadership.map((role, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  className="text-center p-6 bg-purple-500/10 border border-purple-500/20 rounded-xl"
+                >
+                  <h3 className="text-xl font-bold text-purple-400 mb-2">{role.role}</h3>
+                  <p className="text-lg text-gray-300 mb-2">{role.organization}</p>
+                  <p className="text-gray-400 mb-3">{role.dates}</p>
+                  <p className="text-sm text-gray-400">{role.summary}</p>
+                </motion.div>
+              ))}
+            </div>
+          </Section>
+
+          {/* 🏆 Gold Key Award Section */}
+          <AwardsSection />
 
           {/* Final CTA */}
           <motion.div
@@ -380,7 +409,7 @@ const Resume: React.FC = () => {
         transition={{ delay: 1.4, duration: 0.6 }}
       >
         <div className="section-nav">
-          {["experience", "skills", "tools", "education"].map((section) => (
+          {["experience", "skills", "tools", "education", "community"].map((section) => (
             <motion.button
               key={section}
               className={`section-btn ${activeSection === section ? "active" : ""}`}
@@ -388,7 +417,7 @@ const Resume: React.FC = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              {section.charAt(0).toUpperCase() + section.slice(1)}
+              {section === "community" ? "Community Leadership" : section.charAt(0).toUpperCase() + section.slice(1)}
             </motion.button>
           ))}
         </div>
@@ -533,6 +562,33 @@ const Resume: React.FC = () => {
                 <h4>{edu.institution}</h4>
                 <p className="edu-year">{edu.year}</p>
                 {edu.details && <p className="edu-details">{edu.details}</p>}
+              </motion.div>
+            ))}
+          </div>
+        </motion.section>
+      )}
+
+      {/* Community Leadership Section */}
+      {activeSection === "community" && (
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <div className="education-section">
+            <h2>Community Leadership</h2>
+            {communityLeadership.map((role, index) => (
+              <motion.div
+                key={index}
+                className="education-card"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+              >
+                <h3>{role.role}</h3>
+                <h4>{role.organization}</h4>
+                <p className="edu-year">{role.dates}</p>
+                <p className="edu-details">{role.summary}</p>
               </motion.div>
             ))}
           </div>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronUp, Building2, Award, User, GraduationCap } from 'lucide-react';
+import { ChevronUp, Building2, Award, User, GraduationCap, Eye, EyeOff } from 'lucide-react';
 import { scrollToSection, companyThemes } from '../../utils/narrativeMotion';
 import resumeData from '../../data/resume.json';
 
@@ -11,6 +11,7 @@ interface TimelineNavigationProps {
 const TimelineNavigation: React.FC<TimelineNavigationProps> = ({ className = '' }) => {
   const [activeSection, setActiveSection] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
+  const [isHidden, setIsHidden] = useState(false);
 
   // Map company names to theme keys
   const getCompanyTheme = (companyName: string) => {
@@ -71,6 +72,10 @@ const TimelineNavigation: React.FC<TimelineNavigationProps> = ({ className = '' 
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const toggleVisibility = () => {
+    setIsHidden(!isHidden);
+  };
+
   return (
     <AnimatePresence>
       {isVisible && (
@@ -86,8 +91,18 @@ const TimelineNavigation: React.FC<TimelineNavigationProps> = ({ className = '' 
             {/* Background */}
             <div className="absolute inset-0 bg-black/80 backdrop-blur-sm border border-white/10 rounded-2xl" />
             
+            {/* Hide Button */}
+            <motion.button
+              className="absolute -top-12 right-0 w-10 h-10 flex items-center justify-center bg-black/80 backdrop-blur-sm border border-white/10 rounded-lg text-gray-400 hover:text-white transition-colors duration-200"
+              onClick={toggleVisibility}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              {isHidden ? <Eye className="w-5 h-5" /> : <EyeOff className="w-5 h-5" />}
+            </motion.button>
+
             {/* Navigation Items */}
-            <div className="relative p-4 space-y-2">
+            <div className={`relative p-4 space-y-2 ${isHidden ? 'hidden' : ''}`}>
               {navItems.map((item, index) => {
                 const isActive = activeSection === index;
                 

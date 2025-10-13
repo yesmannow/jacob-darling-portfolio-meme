@@ -821,7 +821,7 @@ function showInstrumentInfo(instCode) {
     tagline: "Comprehensive provider platform with analytics hub, marketing toolkit, and growth tools",
     category: ["Marketing Platform", "Analytics", "Provider Tools"],
     tags: ["WordPress", "PHP", "Google Analytics API", "Chart.js", "SQL", "React", "REST API"],
-    thumbnail: "/demos/Graston Growth Engine.jpg",
+    thumbnail: "/apps/graston-growth-engine-thumbnail.png",
     demoUrl: "https://dazzling-tiger-zoom.vercel.app/",
     githubUrl: "https://github.com/JdarlingGT/graston-growth-engine",
     overview: "A sophisticated multi-platform ecosystem that transforms provider membership from a passive directory listing into an active growth engine. Combines real-time analytics, AI-powered marketing tools, interactive calculators, and a comprehensive resource library to prove ROI, drive engagement, and reduce churn. Built as a WordPress backend with React frontend components, integrated with Google Analytics API for data-driven insights and peer benchmarking.",

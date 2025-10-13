@@ -1,6 +1,7 @@
 export interface CaseStudy {
   slug: string;
   title: string;
+  image: string;
   tagline: string;
   category: string[];
   tags: string[];
@@ -23,6 +24,7 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: "healthcare-campaign",
     title: "Healthcare Marketing Campaign",
+    image: "/images/auto-generated/case-studies/healthcare-campaign.webp",
     tagline: "Comprehensive healthcare advertising design system that builds trust while remaining accessible",
     category: ["Design", "Healthcare"],
     tags: ["healthcare", "advertising", "campaign", "medical", "branding"],
@@ -38,7 +40,8 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: "promotional-campaigns",
-    title: "Seasonal Promotional Campaigns", 
+    title: "Seasonal Promotional Campaigns",
+    image: "/images/auto-generated/case-studies/promotional-campaigns.webp",
     tagline: "Dynamic promotional design system for retail marketing that adapts to seasons while driving conversions",
     category: ["Design", "Marketing"],
     tags: ["promotional", "seasonal", "retail", "marketing", "campaigns"],
@@ -55,6 +58,7 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: "brand-identity-systems",
     title: "Brand Identity Systems",
+    image: "/images/auto-generated/case-studies/brand-identity-systems.webp",
     tagline: "Comprehensive brand identity development for diverse clients across multiple industries",
     category: ["Design", "Branding"],
     tags: ["branding", "identity", "logo", "systems", "visual-identity"],
@@ -71,6 +75,7 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: "proactive-support-engine",
     title: "The Proactive Support Engine",
+    image: "/images/auto-generated/case-studies/proactive-support-engine.webp",
     tagline: "Transforming Customer Support from a Cost Center to a Strategic Asset with an Intelligent, CRM-Aware Assistant",
     category: ["Marketing Systems", "Automation"],
     tags: ["AI", "CRM Integration", "Customer Support", "Cloudflare Workers"],
@@ -98,13 +103,14 @@ export const caseStudies: CaseStudy[] = [
 - **Improved Data Insights:** Valuable insights into common friction points enabled proactive documentation and UX improvements
 - **Higher Quality Agent Interactions:** Agents now act as strategic advisors rather than ticket-takers, more engaged and empowered
 
-This project demonstrated how thoughtful automation and deep system integration create a win-win: a more efficient business and a happier, more successful customer base.`
+This project demonstrated how thoughtful automation and deep system integration create a win-win: a more efficient business and a happier, more successful customer base.`,
     },
     featured: true
   },
   {
     slug: "command-center",
     title: "The Command Center",
+    image: "/images/auto-generated/case-studies/command-center.webp",
     tagline: "Unifying Fragmented Data into a Single Pane of Glass for Proactive Event Management and Instructor Empowerment",
     category: ["Data & Analytics", "Systems"],
     tags: ["PHP", "REST API", "WordPress", "JavaScript", "SQL"],
@@ -117,29 +123,30 @@ This project demonstrated how thoughtful automation and deep system integration 
     strategy: "Unified Events Hub with real-time data aggregation, custom REST API, predictive analytics, and role-scoped secure views",
     impact: "Prevented lost revenue, eliminated manual overhead, elevated instructor experience, fostered proactive culture",
     fullContent: {
-      challenge: `Our events and the instructors who lead them are the lifeblood of our business, yet they were operating with incomplete information. Critical data was siloed across multiple systems: enrollments lived in WooCommerce, student progress in LearnDash, and communication history in FluentCRM. This data fragmentation created significant operational friction. Event coordinators spent hours manually compiling spreadsheets to gauge the health of an upcoming course. Instructors struggled to prepare effectively, unable to see a simple breakdown of attendee needs. Most critically, we had no early warning system for under-enrolled events, forcing us into a reactive scramble of last-minute marketing pushes or costly cancellations, which damaged both revenue and brand reputation.`,
-      strategy: `My objective was to replace data chaos with clarity. I architected and built a unified, internal Events Hub that served as a single source of truth for all event-related operations. This wasn't just a reporting dashboard; it was an interactive command center designed for action.
+      challenge: `Our events and the instructors who lead them are the lifeblood of our business, yet we faced a critical business risk: our members had no way of knowing if it was actually delivering value. Their profile was a "black box." They couldn't see how many potential customers viewed their listing, clicked their website link, or found them through specific channels. This lack of tangible ROI data created a constant churn risk. At every renewal period, members were forced to ask, "Is this membership worth the cost?" Without a concrete, data-backed answer, we were vulnerable to losing them. We needed to stop telling them the directory was valuable and start showing them.`,
+      strategy: `My strategy was to transform the directory from a passive listing into an active, value-generating asset. I architected and built a custom, self-serve analytics dashboard that gave each provider a clear, undeniable view of their profile's performance.
 
-**Technical Architecture:**
+**Multi-Layered Technical Solution:**
 
-- **Backend Data Aggregation Engine:** Custom PHP with WordPress action hooks (woocommerce_order_status_completed) creating real-time aggregation. Optimized direct SQL queries for performance at scale, storing aggregated data in custom meta fields
-- **Custom REST API & Interactive Frontend:** Secure REST API endpoint with modern JavaScript/AJAX frontend for responsive single-page application experience
-- **Predictive Analytics:** "Enrollment Velocity Indicator" using PHP to calculate enrollment pace against historical models, with JavaScript charting for instant visual insights
-- **Secure, Role-Scoped Views:** Granular permissions using WordPress capabilities ensuring administrators see global view while instructors access only their assigned events`,
-      impact: `The Events Hub fundamentally changed how we manage our core business offering, yielding significant returns in efficiency, revenue, and experience.
+- **Automated Data Sync with GA4:** Backend process communicating directly with Google Analytics Data API. Robust PHP script on nightly WP Cron job securely authenticating, fetching key metrics (views, clicks, engagement), and retrieving top traffic sources
+- **Efficient Data Storage & Mapping:** Storing fetched analytics in WordPress database mapped to provider profiles in postmeta table, creating fast, scalable local data source
+- **Intuitive Frontend Visualization:** Custom dashboard with Chart.js transforming raw data into digestible line graphs, bar charts, and clear KPIs
+- **Strategic Benchmarking Engine:** Custom PHP/SQL query calculating average performance across all providers, displaying performance benchmarked against peers (e.g., "+18% more clicks than average")`,
+      impact: `The Spotlight dashboard became one of our most powerful tools for engagement and retention, fundamentally strengthening the entire membership program.
 
-- **Prevented Lost Revenue:** Enrollment velocity indicators saved courses from cancellation weeks in advance, protecting thousands of dollars per event
-- **Drastically Reduced Admin Overhead:** Time-to-insight shrank from half-day spreadsheet work to under one minute
-- **Elevated Instructor & Student Experience:** Fully prepared instructors lead smoother, more professional learning environments—a key differentiator for training quality
-- **Fostered Proactive Culture:** Shifted entire events team from reactive to proactive mindset, enabling smarter decisions on resources, marketing, and scheduling
+- **Dramatically Reduced Churn:** Concrete proof of ROI answered "Is this worth it?" with hard data, becoming cornerstone of renewal strategy
+- **Increased Member Engagement:** Visible results incentivized profile improvements. Benchmarking created powerful feedback loop driving better content
+- **Created Upsell Opportunities:** Data provided natural pathway for sales conversations about upgraded featured listings with evidence-backed benefits
+- **Empowered Members:** Actionable business intelligence showing effective traffic sources and campaign correlation made platform indispensable for growth
 
-This project showcases full-stack solution architecture within WordPress—from backend data engineering with PHP/SQL to secure REST API and responsive JavaScript frontend.`
+This project demonstrates ability to leverage third-party APIs (GA4), architect scalable backend processes (PHP, WP Cron, SQL), and build intuitive frontend experiences (JavaScript) to solve core business problems.`,
     },
     featured: true
   },
   {
     slug: "the-closer",
     title: "The Closer",
+    image: "/images/auto-generated/case-studies/the-closer.webp",
     tagline: "Engineering a Frictionless Sales Pipeline that Converts High-Value Quotes into Revenue with Pay-by-Link and Flexible Financing",
     category: ["Marketing Systems", "Automation"],
     tags: ["PHP", "Stripe API", "WooCommerce", "Gravity Forms", "ACF"],
@@ -153,7 +160,7 @@ This project showcases full-stack solution architecture within WordPress—from 
     impact: "Significant lift in close rates, unlocked new market segments, increased sales team efficiency, improved financial oversight",
     fullContent: {
       challenge: `Our sales team excelled at securing verbal commitments for high-value training bundles over the phone, but the final step—getting paid—was a point of major friction. The process was manual and disjointed. A sales rep would have to create an invoice, email it, and then coordinate with the customer to process a payment. This delay introduced a critical cooling-off period where customer intent could wane, leading to a leaky sales pipeline. Furthermore, the lack of accessible payment plans for our premium packages was a direct barrier to entry for many clients. We were leaving significant revenue on the table and burdening our sales team with administrative work instead of selling.`,
-      strategy: `The vision was to create a seamless, end-to-end system that would take a customer from a verbal "yes" to a completed order in minutes. I architected and executed a full-stack solution that deeply integrated our forms, e-commerce platform, and payment gateway.
+      strategy: `My vision was to create a seamless, end-to-end system that would take a customer from a verbal "yes" to a completed order in minutes. I architected and built a full-stack solution that deeply integrated our forms, e-commerce platform, and payment gateway.
 
 **Technical Architecture:**
 
@@ -168,13 +175,14 @@ This project showcases full-stack solution architecture within WordPress—from 
 - **Increased Sales Team Efficiency:** Automation liberated reps from administrative tasks to focus on relationships and lead generation
 - **Improved Financial Oversight:** Clear, real-time visibility in WooCommerce and Stripe dashboards simplified reconciliation and forecasting
 
-This project highlights full-stack development and process automation expertise—leveraging PHP, ACF, and Stripe API to solve sales bottlenecks and drive top-line revenue growth.`
+This project highlights full-stack development and process automation expertise—leveraging PHP, ACF, and Stripe API to solve sales bottlenecks and drive top-line revenue growth.`,
     },
     featured: true
   },
   {
     slug: "the-spotlight",
     title: "The Spotlight",
+    image: "/images/auto-generated/case-studies/the-spotlight.webp",
     tagline: "Proving Membership ROI and Driving Retention with a Data-Driven Analytics Dashboard",
     category: ["Data & Analytics"],
     tags: ["Google Analytics API", "PHP", "JavaScript", "Chart.js", "WP Cron"],
@@ -203,12 +211,14 @@ This project highlights full-stack development and process automation expertise�
 - **Created Upsell Opportunities:** Data provided natural pathway for sales conversations about upgraded featured listings with evidence-backed benefits
 - **Empowered Members:** Actionable business intelligence showing effective traffic sources and campaign correlation made platform indispensable for growth
 
-This project demonstrates ability to leverage third-party APIs (GA4), architect scalable backend processes (PHP, WP Cron, SQL), and build intuitive frontend experiences (JavaScript) to solve core business problems.`
-    }
+This project demonstrates ability to leverage third-party APIs (GA4), architect scalable backend processes (PHP, WP Cron, SQL), and build intuitive frontend experiences (JavaScript) to solve core business problems.`,
+    },
+    featured: true
   },
   {
     slug: "the-compass",
     title: "The Compass",
+    image: "/images/auto-generated/case-studies/the-compass.webp",
     tagline: "Forging a Foundation of Truth to Power Accurate, Data-Driven Marketing Decisions",
     category: ["Data & Analytics", "Marketing Systems"],
     tags: ["Google Tag Manager", "GA4", "PHP", "Data Layer", "Attribution"],
@@ -222,7 +232,7 @@ This project demonstrates ability to leverage third-party APIs (GA4), architect 
     impact: "Massive ROAS improvement, eliminated wasted spend, restored trust in data, enabled true performance marketing",
     fullContent: {
       challenge: `Our marketing analytics were fundamentally broken. We were making high-stakes budget decisions based on data we couldn't trust. The root of the problem was a chaotic Google Tag Manager (GTM) container riddled with legacy tags, inconsistent triggers, and a non-existent data layer schema. This technical debt created disastrous business consequences: our attribution models were fiction, ad platforms like Google and Meta were optimizing for noisy, inaccurate conversion signals, and we were hemorrhaging money on wasted ad spend. Without a reliable source of truth, we were flying blind, unable to discern which campaigns were truly driving growth and which were simply burning cash. This eroded leadership's confidence and handicapped our ability to scale effectively.`,
-      strategy: `My mission was to tear down the crumbling foundation and rebuild it with precision, reliability, and scalability in mind. This required a meticulous, full-funnel approach, from the server's backend to the ad platform's API.
+      strategy: `My objective was to tear down the crumbling foundation and rebuild it with precision, reliability, and scalability in mind. This required a meticulous, full-funnel approach, from the server's backend to the ad platform's API.
 
 **Comprehensive Rebuild Approach:**
 
@@ -237,12 +247,14 @@ This project demonstrates ability to leverage third-party APIs (GA4), architect 
 - **Restored Trust in Data:** Established single, unimpeachable source of truth giving leadership trustworthy dashboards for confident strategic decisions
 - **Enabled True Performance Marketing:** Accurate attribution and clear customer journey view enabled doubling down on what works, cutting what doesn't, and intelligent scaling
 
-This project showcases technical marketing architecture expertise, demonstrating robust data pipeline design using PHP, WordPress hooks, and GTM to drive marketing efficiency and profitability.`
-    }
+This project showcases technical marketing architecture expertise, demonstrating robust data pipeline design using PHP, WordPress hooks, and GTM to drive marketing efficiency and profitability.`,
+    },
+    featured: true
   },
   {
     slug: "the-pipeline",
     title: "The Pipeline",
+    image: "/images/auto-generated/case-studies/the-pipeline.webp",
     tagline: "Engineering a Flawless, Zero-Touch Student Journey from Purchase to Certification",
     category: ["Automation", "Systems"],
     tags: ["WooCommerce", "LearnDash", "WP Fusion", "Gravity Forms", "Workflow Automation"],
@@ -255,7 +267,7 @@ This project showcases technical marketing architecture expertise, demonstrating
     strategy: "End-to-end automation pipeline connecting WooCommerce, LearnDash, Gravity Forms, and FluentCRM with intelligent triggers",
     impact: "Eliminated delays/errors, massive support reduction, elevated brand perception, created scalable foundation",
     fullContent: {
-      challenge: `The journey for our students was fragmented and prone to manual error. The handoffs between their purchase in WooCommerce, their course enrollment in LearnDash, and their profile segmentation in our CRM were inconsistent and required manual intervention. These were digital fault lines where students could easily fall through the cracks. This created a poor user experience, characterized by frustrating delays in receiving course access or certificates. The result was a high volume of preventable support tickets ("Why can't I access my course?", "Where is my certificate?") that damaged our brand's reputation for professionalism and consumed valuable administrative time. We couldn't scale our offerings if the operational backend was held together by manual effort.`,
+      challenge: `Our student journey was fragmented and prone to manual error. The handoffs between their purchase in WooCommerce, their course enrollment in LearnDash, and their profile segmentation in our CRM were inconsistent and required manual intervention. These were digital fault lines where students could easily fall through the cracks. This created a poor user experience, characterized by frustrating delays in receiving course access or certificates. The result was a high volume of preventable support tickets ("Why can't I access my course?", "Where is my certificate?") that damaged our brand's reputation for professionalism and consumed valuable administrative time. We couldn't scale our offerings if the operational backend was held together by manual effort.`,
       strategy: `My goal was to weld these disparate platforms together into a single, intelligent, and fully automated pipeline. I designed a "lights-out" system where the student journey would flow from one stage to the next without any human intervention.
 
 **Automated Workflow Sequence:**
@@ -272,12 +284,14 @@ This project showcases technical marketing architecture expertise, demonstrating
 - **Elevated Brand Perception:** Seamless, professional, instant journey from purchase to certificate builds trust and reinforces premium quality
 - **Created Scalable Foundation:** Removed operational bottleneck limiting growth—can now scale student volume infinitely without increasing administrative headcount
 
-This project demonstrates process automation and deep platform integration expertise using WooCommerce, LearnDash, Gravity Forms, and WP Fusion stack.`
-    }
+This project demonstrates process automation and deep platform integration expertise using WooCommerce, LearnDash, Gravity Forms, and WP Fusion stack.`,
+    },
+    featured: true
   },
   {
     slug: "the-fortress",
     title: "The Fortress",
+    image: "/images/auto-generated/case-studies/the-fortress.webp",
     tagline: "Building a Digital Fortress at the Edge to Protect Revenue, Enhance Performance, and Neutralize Threats",
     category: ["Systems"],
     tags: ["Cloudflare", "WAF", "Security", "Performance", "Edge Computing"],
@@ -306,12 +320,14 @@ This project demonstrates process automation and deep platform integration exper
 - **Bulletproof Stability and Uptime:** Ensures business continuity even during coordinated attacks, protecting revenue and brand reputation 24/7
 - **Reduced Server Load and Costs:** Absorbing malicious traffic and serving cached content dramatically reduced CPU/bandwidth load, improving stability and lowering hosting costs
 
-This project demonstrates ability to architect enterprise-grade security and performance solution using Cloudflare, translating technical features into core business protections.`
-    }
+This project demonstrates ability to architect enterprise-grade security and performance solution using Cloudflare, translating technical features into core business protections.`,
+    },
+    featured: true
   },
   {
     slug: "the-safety-net",
     title: "The Safety Net",
+    image: "/images/auto-generated/case-studies/the-safety-net.webp",
     tagline: "Enabling Marketing Agility with an Automated, Zero-Risk Deployment Pipeline",
     category: ["Systems"],
     tags: ["CI/CD", "GitHub Actions", "DevOps", "WP-CLI", "Automation"],

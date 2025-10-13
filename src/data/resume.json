@@ -1,88 +1,165 @@
 {
   "name": "Jacob Darling",
-  "title": "Marketing Director | Strategic Growth Leader | System Architect",
-  "summary": "Dynamic Marketing Director and System Architect with 15+ years of progressive experience propelling brand growth, crafting impactful marketing strategies, and spearheading successful business development initiatives across healthcare, financial services, and legal industries. Expert in full-stack WordPress development, AI automation, and performance optimization, delivering measurable ROI through data-driven insights and innovative technical solutions.",
+  "title": "Marketing Strategist & Systems Architect",
+  "summary": "A dynamic and results-driven Marketing Director and Systems Architect with over 15 years of experience propelling brand growth by bridging the gap between creative strategy and full-stack technical execution. Proven expertise in designing and personally engineering scalable marketing ecosystems for global brands serving 30,000+ practitioners. Adept at leveraging data-driven insights and AI-powered automation to elevate brand visibility, optimize campaigns, and consistently deliver exceptional ROI.",
   "contact": {
-    "email": "jacob@jacobdarling.com",
+    "email": "hoosierdarling@gmail.com",
     "location": "Indianapolis, IN",
-    "website": "https://jacobdarling.com",
+    "website": "jacobdarling.com",
     "github": "https://github.com/JdarlingGT",
-    "linkedin": "https://linkedin.com/in/jacobdarling"
+    "linkedin": "linkedin.com/in/jacobdarling"
   },
   "experience": [
     {
-      "company": "Graston Technique",
-      "role": "Director of Marketing & Communications",
-      "dates": "2016 — Present",
+      "company": "Graston Technique®",
+      "image": "/images/auto-generated/graston-technique/placeholder.webp",
+      "role": "Marketing Director",
+      "dates": "Aug 2023 – Present",
       "location": "Indianapolis, IN",
-      "summary": "Architected Graston's digital transformation — from CRM automation to interactive training dashboards. Built 4 custom web applications and automated workflows reducing support volume by 70%. Manage $500K+ annual marketing budget.",
+      "summary": "Lead both marketing strategy and hands-on technical execution for a high-volume educational platform, managing a cross-functional team and engineering the core digital infrastructure for 30,000+ clinicians.",
       "achievements": [
-        "Orchestrated complete brand transformation including new visual identity, messaging framework, and digital ecosystem",
-        "Built and deployed 4 custom web applications using vanilla JavaScript (clinical decision support, pricing tools, ROI calculators)",
-        "Designed HubSpot CRM architecture with 15+ automated workflows managing 50,000+ contacts",
-        "Increased organic search traffic 300% through technical SEO and content strategy",
-        "Reduced marketing technology costs 40% while improving functionality through consolidation"
+        "Orchestrated a complete brand transformation, including a new visual identity, messaging framework, and digital ecosystem",
+        "Built and deployed 4+ custom web applications (e.g., clinical decision support, ROI calculators) using vanilla JavaScript",
+        "Engineered a unified data pipeline with over 400 automations connecting web, LMS, and CRM systems",
+        "Increased organic search traffic by over 300% through advanced technical SEO and content strategy",
+        "Reduced marketing technology costs by 40% while improving functionality through consolidation and custom builds",
+        "Streamlined customer support by deploying an integrated OpenAI-powered assistant, handling 70% of inquiries"
       ],
-      "technologies": ["HubSpot", "WordPress", "JavaScript", "Google Analytics", "ActiveCampaign", "Photoshop", "Canva"]
+      "technologies": ["LearnDash", "WooCommerce", "FluentCRM", "WordPress", "JavaScript", "Google Analytics", "ACF Pro", "FacetWP", "REST APIs", "Mapbox", "Cloudflare Workers", "WP Rocket", "LiteSpeed", "Cloudflare CDN"]
+    },
+    {
+      "company": "Ultimate Technologies Group",
+      "role": "Interim Director of Marketing",
+      "dates": "Mar 2023 – Jul 2023",
+      "location": "Fishers, IN",
+      "summary": "Directed multi-channel marketing strategy for a B2B technology integrator during a key leadership transition.",
+      "achievements": [
+        "Streamlined lead generation workflows and improved GTM tracking for precise campaign attribution",
+        "Reduced campaign production timelines by 40% through process optimization and clear project scoping"
+      ],
+      "technologies": ["Marketing Strategy", "Lead Generation", "Campaign Management"]
+    },
+    {
+      "company": "Riley Bennett Egloff, LLP",
+      "image": "/images/auto-generated/riley-bennett-egloff/placeholder.webp",
+      "role": "Marketing Manager (2022-2023) & Administrator (2015-2022)",
+      "dates": "Jun 2015 – Mar 2023",
+      "location": "Indianapolis, IN",
+      "summary": "Promoted to lead all marketing initiatives, successfully rebranding the firm and building its digital presence from the ground up.",
+      "achievements": [
+        "Led a complete digital rebrand and technical SEO overhaul, resulting in a 35% increase in qualified client inquiries",
+        "Designed, produced, and project-managed all marketing materials, including the quarterly RBE Magazine, establishing significant thought leadership in the legal community",
+        "Worked directly with attorneys to develop and execute practice-specific business development plans"
+      ],
+      "technologies": ["Digital Marketing", "SEO", "Content Strategy", "Project Management"]
+    },
+    {
+      "company": "Deerfield Financial Advisors",
+      "role": "Marketing Coordinator",
+      "dates": "Jun 2013 – Jun 2015",
+      "location": "Indianapolis, IN",
+      "summary": "Developed and executed marketing initiatives for a financial advisory firm, focusing on client events and compliant communications.",
+      "achievements": [
+        "Maintained and developed copy for the company website, email campaigns, and printed marketing materials",
+        "Researched and implemented new technology platforms that improved client services and overall company efficiency"
+      ],
+      "technologies": ["Content Development", "Email Marketing", "Technology Implementation"]
     },
     {
       "company": "Pike Medical Consultants",
-      "role": "Marketing Manager",
-      "dates": "2014 — 2016",
+      "image": "/images/auto-generated/pike-medical/placeholder.webp",
+      "role": "Marketing Coordinator",
+      "dates": "Sep 2009 – Jun 2013",
       "location": "Indianapolis, IN",
-      "summary": "Launched patient acquisition systems for PrimaryCare Indy and UrgentCare Indy. Unified brand, SEO, and design into measurable growth driving 10,000+ patient visits.",
+      "summary": "Directed all marketing activities, including budgeting, advertising, and brand awareness for two distinct healthcare divisions (UrgentCare Indy & PrimaryCare Indy).",
       "achievements": [
-        "Built and launched PrimaryCare Indy and UrgentCare Indy websites driving 10,000+ patient visits",
-        "Managed Google Ads campaigns with $100K+ annual budget across multiple client accounts",
-        "Designed print collateral, outdoor advertising, and seasonal email campaigns",
-        "Created brand identities and logo designs for healthcare clients"
+        "Delivered an average of 45% growth in patient visits over three years with a consistently positive ROI on all marketing initiatives",
+        "Led the development of two new websites, integrated online check-in systems, and ran targeted Google Ads campaigns to drive patient acquisition"
       ],
-      "technologies": ["WordPress", "Google Ads", "Email Marketing", "Adobe Creative Suite", "SEO"]
+      "technologies": ["Website Development", "Google Ads", "Online Check-in Systems", "Patient Acquisition"]
     },
     {
-      "company": "Early Career Marketing",
-      "role": "Marketing Coordinator",
-      "dates": "2012 — 2014",
+      "company": "OrthoIndy",
+      "role": "Marketing Intern",
+      "dates": "2006 – 2007",
       "location": "Indianapolis, IN",
-      "summary": "Launched marketing career learning to stretch budgets, design visuals, and prove ROI when few believed marketing was measurable. Built foundation in data-driven decision making.",
+      "summary": "Gained foundational experience in a professional healthcare marketing environment, assisting with content and event coordination.",
       "achievements": [
-        "Executed multi-channel campaigns with limited budgets, maximizing ROI through creativity and testing",
-        "Developed skills in graphic design, copywriting, and analytics",
-        "Built foundation in data-driven decision making and performance measurement"
+        "Assisted with content development and event coordination in a professional healthcare marketing environment"
       ],
-      "technologies": ["Basic CRM", "Email Platforms", "Social Media", "Design Tools"]
+      "technologies": ["Content Coordination", "Event Management"]
     }
   ],
   "skills": [
-    "Marketing Strategy & Automation",
-    "UX Strategy & Design Systems",
-    "Front-End Architecture (React/JS)",
-    "GSAP / Framer Motion",
-    "CRM Architecture & Workflows",
-    "SEO & Analytics Optimization",
-    "AI Integration & Automation",
-    "Brand Development & Visual Design"
+    "Strategic Marketing & Leadership",
+    "Brand Strategy & Transformation",
+    "Lifecycle & Email Marketing",
+    "Content Strategy & Technical SEO",
+    "Data Analytics & Attribution Modeling",
+    "Agile Project Management",
+    "Team Leadership & Cross-Functional Collaboration",
+    "Annual Budget Management ($500K+)",
+    "Full-Stack Web Development (WordPress, JavaScript, React)",
+    "CRM Architecture & Automation (HubSpot, FluentCRM, WP Fusion)",
+    "AI & GPT-Powered Tool Integration (OpenAI, REST APIs)",
+    "Performance & Security Optimization (Cloudflare, LiteSpeed, WP Rocket)",
+    "Custom Analytics Dashboards (GA4, GTM, Mapbox)",
+    "LMS & E-Commerce Integration (LearnDash, WooCommerce)",
+    "Serverless Development (Cloudflare Workers)"
   ],
   "tools": [
-    "React / Vite / Tailwind CSS",
-    "Node.js / Express",
-    "HubSpot / ActiveCampaign",
-    "Figma / Adobe Creative Suite",
-    "Google Analytics / Tag Manager",
-    "WordPress / Custom CMS",
-    "GSAP / Framer Motion",
-    "Photoshop / Canva"
+    "WordPress",
+    "JavaScript",
+    "React",
+    "HubSpot",
+    "FluentCRM",
+    "WP Fusion",
+    "LearnDash",
+    "WooCommerce",
+    "Google Analytics",
+    "Google Tag Manager",
+    "Mapbox",
+    "Cloudflare Workers",
+    "Cloudflare CDN",
+    "WP Rocket",
+    "LiteSpeed",
+    "ACF Pro",
+    "FacetWP",
+    "Figma",
+    "Adobe Creative Suite",
+    "Canva",
+    "Photoshop"
   ],
   "education": [
     {
-      "institution": "Indiana University",
-      "degree": "Bachelor of Science in Marketing",
-      "year": "2012",
-      "details": "Focus on Marketing Strategy and Consumer Behavior"
+      "institution": "Indiana University Bloomington",
+      "degree": "BS, Business Management",
+      "year": "2004 - 2008",
+      "details": "Won 2006 Target Marketing Competition"
+    }
+  ],
+  "communityLeadership": [
+    {
+      "organization": "School 80 Condominiums HOA",
+      "role": "President",
+      "dates": "2019 – Present",
+      "summary": "Lead board operations and community management."
+    },
+    {
+      "organization": "Primary Colours",
+      "role": "Board Member",
+      "dates": "2018 – 2019",
+      "summary": "Supported a non-profit for visual arts, leading marketing for events."
+    },
+    {
+      "organization": "SMART Anti-Bullying Program",
+      "role": "Business Mentor",
+      "dates": "2013",
+      "summary": "Guided students in creating a business and marketing plan."
     }
   ],
   "stats": {
-    "experience": "9+",
+    "experience": "15+",
     "practitioners": "30K+",
     "caseStudies": "14+",
     "customApps": "4+"

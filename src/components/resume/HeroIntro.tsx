@@ -18,7 +18,7 @@ export default function HeroIntro() {
   const { name, title, stats } = resumeData;
 
   return (
-    <div className="h-screen flex flex-col justify-center items-center bg-black text-white overflow-hidden relative">
+    <div className="min-h-screen flex flex-col justify-center items-center bg-black text-white relative">
       {/* Animated Background Grid */}
       <motion.div
         className="absolute inset-0 opacity-5"

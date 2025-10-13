@@ -3,7 +3,7 @@
     "showModelSelection": true,
     "rules": [
       {
-        "match": ["build", "setup", "environment", "optimize", "cinematic", "configuration", "infrastructure"],
+        "match": ["build", "setup", "environment", "optimize", "cinematic", "configuration", "infrastructure", "reason"],
         "model": "gpt-5 (high reasoning)",
         "description": "For full build, environment configuration, and multi-step reasoning prompts."
       },
@@ -18,7 +18,7 @@
         "description": "For short code generation, functions, and utilities."
       },
       {
-        "match": ["design", "visual", "ui", "ux", "color", "layout", "typography", "mockup", "palette", "aesthetic", "composition"],
+        "match": ["design", "visual", "ui", "ux", "color", "layout", "typography", "mockup", "palette", "aesthetic", "composition", "search", "find", "image", "photo"],
         "model": "gemini-2.5-pro",
         "description": "For design-related analysis, layout refinements, and creative direction."
       },
@@ -28,7 +28,7 @@
         "description": "For text writing, case study copy, or microcontent polishing."
       },
       {
-        "match": ["image", "photo", "visual asset", "illustration", "render", "generate hero", "create logo", "poster", "banner"],
+        "match": ["visual asset", "illustration", "render", "generate hero", "create logo", "poster", "banner", "generate", "compose", "create"],
         "model": "image-gen",
         "description": "For generating visual assets such as logos, hero backgrounds, or imagery."
       },

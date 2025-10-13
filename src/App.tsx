@@ -10,7 +10,8 @@ import BackToTop from "./components/utilities/BackToTop";
 // import BackgroundLogos from "./components/animations/BackgroundLogos"; // Removed: Uses old logo
 import PersonSchema from "./components/seo/PersonSchema";
 import lenis from "./utils/motion-sync"; // Import shared Lenis instance
-import "./styles/globals.css";
+import "lenis/dist/lenis.css"; // Import Lenis CSS for smooth scrolling
+// Removed: globals.css imported in main.tsx to avoid duplication
 
 const App: React.FC = () => {
   // Lenis initialization moved to motion-sync.ts to avoid duplication

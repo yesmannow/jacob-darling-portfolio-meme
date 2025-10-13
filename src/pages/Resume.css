@@ -13,7 +13,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  /* background-image: url('/images/site design assests/tech-18050.gif'); */
+  /* background-image: url('/images/site-design-assets/tech-18050.gif'); */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -30,7 +30,7 @@
   right: -10%;
   width: 600px;
   height: 600px;
-  /* background-image: url('/images/site design assests/geometric-5969508_1280.png'); */
+  /* background-image: url('/images/site-design-assets/geometric-5969508_1280.png'); */
   background-size: contain;
   background-repeat: no-repeat;
   opacity: 0.025;
@@ -691,4 +691,19 @@
   .contact-info {
     text-align: left;
   }
+}
+
+/* 🏆 Award Shine Animation */
+@keyframes shine {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.award-shine {
+  background: linear-gradient(110deg, rgba(255,255,255,0.2) 25%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0.2) 75%);
+  background-size: 200% 100%;
+  animation: shine 4s linear infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
