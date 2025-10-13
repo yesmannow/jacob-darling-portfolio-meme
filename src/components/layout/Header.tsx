@@ -43,6 +43,7 @@ const Header: React.FC = () => {
     { to: "/applications", label: "Playground" },
     { to: "/design", label: "Design" },
     { to: "/photography", label: "Photography" },
+    { to: "/inspiration", label: "Inspiration" },
     { to: "/toolbox", label: "Toolbox" },
     { to: "/resume", label: "Résumé" },
   ];
