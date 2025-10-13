@@ -21,6 +21,54 @@ export interface CaseStudy {
 
 export const caseStudies: CaseStudy[] = [
   {
+    slug: "healthcare-campaign",
+    title: "Healthcare Marketing Campaign",
+    tagline: "Comprehensive healthcare advertising design system that builds trust while remaining accessible",
+    category: ["Design", "Healthcare"],
+    tags: ["healthcare", "advertising", "campaign", "medical", "branding"],
+    metrics: [
+      { label: "Patient Engagement", value: "+40%" },
+      { label: "Brand Recognition", value: "+65%" },
+      { label: "Campaign ROI", value: "3.2x" }
+    ],
+    challenge: "Create comprehensive healthcare marketing that builds trust while remaining accessible to patients",
+    strategy: "Clean, medical-focused design system with calming colors, clear typography, and multiple touchpoints",
+    impact: "Increased patient engagement by 40% and improved brand recognition in the healthcare sector",
+    featured: true
+  },
+  {
+    slug: "promotional-campaigns",
+    title: "Seasonal Promotional Campaigns", 
+    tagline: "Dynamic promotional design system for retail marketing that adapts to seasons while driving conversions",
+    category: ["Design", "Marketing"],
+    tags: ["promotional", "seasonal", "retail", "marketing", "campaigns"],
+    metrics: [
+      { label: "Seasonal Sales", value: "+35%" },
+      { label: "Production Efficiency", value: "+50%" },
+      { label: "Brand Consistency", value: "95%" }
+    ],
+    challenge: "Create flexible promotional design system adaptable to different seasons while maintaining brand consistency",
+    strategy: "Modular design system with seasonal color palettes, dynamic typography, and flexible layouts",
+    impact: "Increased seasonal sales by 35% and reduced design production time by 50%",
+    featured: true
+  },
+  {
+    slug: "brand-identity-systems",
+    title: "Brand Identity Systems",
+    tagline: "Comprehensive brand identity development for diverse clients across multiple industries",
+    category: ["Design", "Branding"],
+    tags: ["branding", "identity", "logo", "systems", "visual-identity"],
+    metrics: [
+      { label: "Brand Launches", value: "12+" },
+      { label: "Client Satisfaction", value: "90%" },
+      { label: "Market Impact", value: "+45%" }
+    ],
+    challenge: "Develop unique brand identities for diverse clients across different industries with distinct personalities",
+    strategy: "Comprehensive brand identity systems including logos, color palettes, typography, and application guidelines",
+    impact: "Delivered 12+ successful brand launches with 90% client satisfaction and improved market positioning",
+    featured: true
+  },
+  {
     slug: "proactive-support-engine",
     title: "The Proactive Support Engine",
     tagline: "Transforming Customer Support from a Cost Center to a Strategic Asset with an Intelligent, CRM-Aware Assistant",

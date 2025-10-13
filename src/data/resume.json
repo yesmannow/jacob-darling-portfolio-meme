@@ -1,0 +1,90 @@
+{
+  "name": "Jacob Darling",
+  "title": "Marketing Director | Strategic Growth Leader | System Architect",
+  "summary": "Dynamic Marketing Director and System Architect with 15+ years of progressive experience propelling brand growth, crafting impactful marketing strategies, and spearheading successful business development initiatives across healthcare, financial services, and legal industries. Expert in full-stack WordPress development, AI automation, and performance optimization, delivering measurable ROI through data-driven insights and innovative technical solutions.",
+  "contact": {
+    "email": "jacob@jacobdarling.com",
+    "location": "Indianapolis, IN",
+    "website": "https://jacobdarling.com",
+    "github": "https://github.com/JdarlingGT",
+    "linkedin": "https://linkedin.com/in/jacobdarling"
+  },
+  "experience": [
+    {
+      "company": "Graston Technique",
+      "role": "Director of Marketing & Communications",
+      "dates": "2016 — Present",
+      "location": "Indianapolis, IN",
+      "summary": "Architected Graston's digital transformation — from CRM automation to interactive training dashboards. Built 4 custom web applications and automated workflows reducing support volume by 70%. Manage $500K+ annual marketing budget.",
+      "achievements": [
+        "Orchestrated complete brand transformation including new visual identity, messaging framework, and digital ecosystem",
+        "Built and deployed 4 custom web applications using vanilla JavaScript (clinical decision support, pricing tools, ROI calculators)",
+        "Designed HubSpot CRM architecture with 15+ automated workflows managing 50,000+ contacts",
+        "Increased organic search traffic 300% through technical SEO and content strategy",
+        "Reduced marketing technology costs 40% while improving functionality through consolidation"
+      ],
+      "technologies": ["HubSpot", "WordPress", "JavaScript", "Google Analytics", "ActiveCampaign", "Photoshop", "Canva"]
+    },
+    {
+      "company": "Pike Medical Consultants",
+      "role": "Marketing Manager",
+      "dates": "2014 — 2016",
+      "location": "Indianapolis, IN",
+      "summary": "Launched patient acquisition systems for PrimaryCare Indy and UrgentCare Indy. Unified brand, SEO, and design into measurable growth driving 10,000+ patient visits.",
+      "achievements": [
+        "Built and launched PrimaryCare Indy and UrgentCare Indy websites driving 10,000+ patient visits",
+        "Managed Google Ads campaigns with $100K+ annual budget across multiple client accounts",
+        "Designed print collateral, outdoor advertising, and seasonal email campaigns",
+        "Created brand identities and logo designs for healthcare clients"
+      ],
+      "technologies": ["WordPress", "Google Ads", "Email Marketing", "Adobe Creative Suite", "SEO"]
+    },
+    {
+      "company": "Early Career Marketing",
+      "role": "Marketing Coordinator",
+      "dates": "2012 — 2014",
+      "location": "Indianapolis, IN",
+      "summary": "Launched marketing career learning to stretch budgets, design visuals, and prove ROI when few believed marketing was measurable. Built foundation in data-driven decision making.",
+      "achievements": [
+        "Executed multi-channel campaigns with limited budgets, maximizing ROI through creativity and testing",
+        "Developed skills in graphic design, copywriting, and analytics",
+        "Built foundation in data-driven decision making and performance measurement"
+      ],
+      "technologies": ["Basic CRM", "Email Platforms", "Social Media", "Design Tools"]
+    }
+  ],
+  "skills": [
+    "Marketing Strategy & Automation",
+    "UX Strategy & Design Systems",
+    "Front-End Architecture (React/JS)",
+    "GSAP / Framer Motion",
+    "CRM Architecture & Workflows",
+    "SEO & Analytics Optimization",
+    "AI Integration & Automation",
+    "Brand Development & Visual Design"
+  ],
+  "tools": [
+    "React / Vite / Tailwind CSS",
+    "Node.js / Express",
+    "HubSpot / ActiveCampaign",
+    "Figma / Adobe Creative Suite",
+    "Google Analytics / Tag Manager",
+    "WordPress / Custom CMS",
+    "GSAP / Framer Motion",
+    "Photoshop / Canva"
+  ],
+  "education": [
+    {
+      "institution": "Indiana University",
+      "degree": "Bachelor of Science in Marketing",
+      "year": "2012",
+      "details": "Focus on Marketing Strategy and Consumer Behavior"
+    }
+  ],
+  "stats": {
+    "experience": "9+",
+    "practitioners": "30K+",
+    "caseStudies": "14+",
+    "customApps": "4+"
+  }
+}

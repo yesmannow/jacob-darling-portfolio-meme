@@ -6,8 +6,8 @@ import Footer from "./components/layout/Footer";
 // import CustomCursor from "./components/interactive/CustomCursor"; // Removed: Making human the hero
 import ScrollToTop from "./components/utils/ScrollToTop";
 import BackToTop from "./components/utilities/BackToTop";
-import LogoIntro from "./components/animations/LogoIntro";
-import BackgroundLogos from "./components/animations/BackgroundLogos";
+// import LogoIntro from "./components/animations/LogoIntro"; // Removed: Taco ninja logo
+// import BackgroundLogos from "./components/animations/BackgroundLogos"; // Removed: Uses old logo
 import PersonSchema from "./components/seo/PersonSchema";
 import lenis from "./utils/motion-sync"; // Import shared Lenis instance
 import "./styles/globals.css";
@@ -24,8 +24,8 @@ const App: React.FC = () => {
   return (
     <div className="app">
       <PersonSchema />
-      <LogoIntro />
-      <BackgroundLogos />
+      {/* <LogoIntro /> */}
+      {/* <BackgroundLogos /> */}
       {/* <CustomCursor /> */}
       <ScrollToTop />
       <BackToTop />

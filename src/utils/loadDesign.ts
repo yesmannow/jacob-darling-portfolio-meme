@@ -174,7 +174,7 @@ export function loadDesignImages(): DesignItem[] {
     'file_00000000c524623091018296ba5b34a3.png',
     'hot-sauce-dark.webp',
     'hot-sauce-playful.webp',
-    'logo-01.png'
+    'taco ninja logo.png'
   ];
 
   return imageFiles.map((filename, index) => {

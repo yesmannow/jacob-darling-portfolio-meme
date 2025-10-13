@@ -121,14 +121,14 @@
       "category": "Logo Design"
     },
     {
-      "src": "/images/design/logo-01.png",
-      "alt": "Professional logo design with modern typography",
-      "variant": "logo",
-      "tags": ["logo", "professional", "modern", "typography"],
+      "src": "/images/design/taco ninja logo.png",
+      "alt": "Taco ninja logo design (archived)",
+      "variant": "archived",
+      "tags": ["archived", "logo", "previous"],
       "size": "588KB",
       "featured": false,
-      "useIn": ["Gallery", "Branding"],
-      "category": "Logo Design"
+      "useIn": ["Archive"],
+      "category": "Archived"
     }
   ],
   "metadata": {

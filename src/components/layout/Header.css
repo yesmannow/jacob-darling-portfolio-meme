@@ -164,3 +164,17 @@
     text-align: center;
   }
 }
+
+/* Global Header Glow Styles */
+header {
+  transition: background 0.4s ease, box-shadow 0.4s ease;
+}
+
+.logo-nav {
+  filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.6));
+}
+
+.nav-active {
+  color: #3b82f6;
+  text-decoration: underline;
+}
