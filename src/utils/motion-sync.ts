@@ -18,59 +18,64 @@ export function initLenis(): Lenis | null {
   // Only initialize in browser environment
   if (typeof window === 'undefined') return null;
 
-  lenis = new Lenis({
-    lerp: 0.1,
-    smoothWheel: true,
-    wheelMultiplier: 1.2,
-    touchMultiplier: 2,
-    infinite: false,
-  });
-
-  // RAF loop for Lenis
-  function raf(time: number) {
-    lenis?.raf(time);
-    requestAnimationFrame(raf);
-  }
-  requestAnimationFrame(raf);
-
-  // Integrate with GSAP ticker for perfect sync
-  gsap.ticker.add(() => {
-    lenis?.raf(performance.now());
-    ScrollTrigger.update();
-  });
-
-  // ScrollTrigger proxy for Lenis
-  ScrollTrigger.scrollerProxy(document.body, {
-    scrollTop(value) {
-      if (lenis && value !== undefined) {
-        lenis.scrollTo(value, { immediate: true });
-      }
-      return lenis?.scroll || 0;
-    },
-    getBoundingClientRect() {
-      return {
-        top: 0,
-        left: 0,
-        width: window.innerWidth,
-        height: window.innerHeight,
-      };
-    },
-  });
-
-  // Sync Lenis scroll with ScrollTrigger
-  lenis.on("scroll", ScrollTrigger.update);
-  
-  // Refresh ScrollTrigger when it updates
-  ScrollTrigger.addEventListener("refresh", () => lenis?.raf(performance.now()));
-  
-  // Debug logging (can be removed in production)
-  if (process.env.NODE_ENV === 'development') {
-    lenis.on("scroll", ({ scroll }) => {
-      console.log("Lenis scroll position:", scroll);
+  try {
+    lenis = new Lenis({
+      lerp: 0.1,
+      smoothWheel: true,
+      wheelMultiplier: 1.2,
+      touchMultiplier: 2,
+      infinite: false,
     });
-  }
 
-  return lenis;
+    // RAF loop for Lenis
+    function raf(time: number) {
+      lenis?.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+    // Integrate with GSAP ticker for perfect sync
+    gsap.ticker.add(() => {
+      if (lenis) {
+        lenis.raf(performance.now());
+        ScrollTrigger.update();
+      }
+    });
+
+    // ScrollTrigger proxy for Lenis
+    ScrollTrigger.scrollerProxy(document.body, {
+      scrollTop(value) {
+        if (lenis && value !== undefined) {
+          lenis.scrollTo(value, { immediate: true });
+        }
+        return lenis?.scroll || 0;
+      },
+      getBoundingClientRect() {
+        return {
+          top: 0,
+          left: 0,
+          width: window.innerWidth,
+          height: window.innerHeight,
+        };
+      },
+    });
+
+    // Sync Lenis scroll with ScrollTrigger
+    lenis.on("scroll", ScrollTrigger.update);
+    
+    // Refresh ScrollTrigger when it updates
+    ScrollTrigger.addEventListener("refresh", () => lenis?.raf(performance.now()));
+    
+    console.log("✅ Lenis initialized successfully");
+
+    return lenis;
+  } catch (error) {
+    console.error("❌ Lenis initialization failed:", error);
+    // Ensure native scrolling works
+    document.documentElement.style.overflow = 'auto';
+    document.body.style.overflow = 'auto';
+    return null;
+  }
 }
 
 /**

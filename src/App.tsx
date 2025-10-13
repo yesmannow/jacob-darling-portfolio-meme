@@ -10,16 +10,29 @@ import "lenis/dist/lenis.css";
 
 const App: React.FC = () => {
   useEffect(() => {
-    // Initialize global Lenis instance
-    const lenis = initLenis();
-    
-    // Ensure native scrolling works as fallback
+    // Ensure native scrolling works immediately
     document.documentElement.style.overflow = 'auto';
     document.body.style.overflow = 'auto';
     
+    // Initialize global Lenis instance (with error handling)
+    try {
+      const lenis = initLenis();
+      if (lenis) {
+        console.log("✅ App: Lenis ready");
+      } else {
+        console.warn("⚠️ App: Lenis not initialized, using native scroll");
+      }
+    } catch (error) {
+      console.error("❌ App: Lenis initialization error:", error);
+    }
+    
     // Cleanup on unmount
     return () => {
-      destroyLenis();
+      try {
+        destroyLenis();
+      } catch (error) {
+        console.error("❌ App: Cleanup error:", error);
+      }
     };
   }, []);
 
