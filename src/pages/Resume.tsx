@@ -1,10 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import AnimatedSection from "../components/animations/AnimatedSection";
-import TextReveal from "../components/animations/TextReveal";
-import AnimatedCounter from "../components/animations/AnimatedCounter";
-import MagneticButton from "../components/interactive/MagneticButton";
-import { fadeInUp } from "../utils/animations";
+import { Link } from "react-router-dom";
+import { Download, Share2, Mail, ExternalLink } from "lucide-react";
 import "./Resume.css";
 
 interface Experience {
@@ -100,7 +97,6 @@ const Resume: React.FC = () => {
   };
 
   const handleDownload = () => {
-    // In production, this would trigger actual PDF download
     window.open("/resume/jacob-darling-resume.pdf", "_blank");
   };
 
@@ -112,7 +108,6 @@ const Resume: React.FC = () => {
         url: window.location.href
       });
     } else {
-      // Fallback: copy link
       navigator.clipboard.writeText(window.location.href);
       alert("Link copied to clipboard!");
     }
@@ -126,64 +121,127 @@ const Resume: React.FC = () => {
 
   return (
     <main className="resume-page">
-      <AnimatedSection>
+      {/* Header Section */}
+      <motion.section
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+      >
         <header className="resume-header">
-          <TextReveal text="Professional Resume" className="page-title" />
-          <motion.p className="page-subtitle" variants={fadeInUp}>
+          <motion.h1 
+            className="page-title"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.8 }}
+          >
+            Professional Resume
+          </motion.h1>
+          <motion.p 
+            className="page-subtitle"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, duration: 0.8 }}
+          >
             Marketing Strategist & Systems Architect
           </motion.p>
 
-          {/* Action Buttons */}
-          <motion.div className="resume-actions" variants={fadeInUp}>
-            <MagneticButton
+          <motion.div 
+            className="resume-actions"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6, duration: 0.8 }}
+          >
+            <motion.button
               className="action-btn primary"
               onClick={handleDownload}
-              strength={0.3}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
+              <Download size={20} />
               Download PDF
-            </MagneticButton>
-            <MagneticButton
+            </motion.button>
+            <motion.button
               className="action-btn secondary"
               onClick={handleShare}
-              strength={0.3}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
+              <Share2 size={20} />
               Share
-            </MagneticButton>
-            <MagneticButton
+            </motion.button>
+            <motion.button
               className="action-btn secondary"
               onClick={handleEmail}
-              strength={0.3}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
+              <Mail size={20} />
               Email
-            </MagneticButton>
+            </motion.button>
           </motion.div>
         </header>
-      </AnimatedSection>
+      </motion.section>
 
       {/* Stats Overview */}
-      <AnimatedSection delay={0.1}>
+      <motion.section
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.8, duration: 0.8 }}
+      >
         <div className="resume-stats">
           <div className="stat-card">
-            <AnimatedCounter to={9} suffix="+" className="stat-number" />
+            <motion.div 
+              className="stat-number"
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 1, duration: 0.6 }}
+            >
+              9+
+            </motion.div>
             <p className="stat-label">Years Experience</p>
           </div>
           <div className="stat-card">
-            <AnimatedCounter to={30} suffix="K+" className="stat-number" />
+            <motion.div 
+              className="stat-number"
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 1.1, duration: 0.6 }}
+            >
+              30K+
+            </motion.div>
             <p className="stat-label">Practitioners Served</p>
           </div>
           <div className="stat-card">
-            <AnimatedCounter to={14} suffix="+" className="stat-number" />
+            <motion.div 
+              className="stat-number"
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 1.2, duration: 0.6 }}
+            >
+              14+
+            </motion.div>
             <p className="stat-label">Case Studies</p>
           </div>
           <div className="stat-card">
-            <AnimatedCounter to={4} suffix="+" className="stat-number" />
+            <motion.div 
+              className="stat-number"
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 1.3, duration: 0.6 }}
+            >
+              4+
+            </motion.div>
             <p className="stat-label">Custom Apps Built</p>
           </div>
         </div>
-      </AnimatedSection>
+      </motion.section>
 
       {/* Section Navigation */}
-      <AnimatedSection delay={0.2}>
+      <motion.section
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1.4, duration: 0.6 }}
+      >
         <div className="section-nav">
           {["experience", "skills", "education"].map((section) => (
             <motion.button
@@ -197,12 +255,16 @@ const Resume: React.FC = () => {
             </motion.button>
           ))}
         </div>
-      </AnimatedSection>
+      </motion.section>
 
       {/* Experience Section */}
       {activeSection === "experience" && (
-        <AnimatedSection delay={0.3}>
-          <section className="experience-section">
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <div className="experience-section">
             <h2>Professional Experience</h2>
             {experience.map((job, index) => (
               <motion.div
@@ -246,14 +308,18 @@ const Resume: React.FC = () => {
                 )}
               </motion.div>
             ))}
-          </section>
-        </AnimatedSection>
+          </div>
+        </motion.section>
       )}
 
       {/* Skills Section */}
       {activeSection === "skills" && (
-        <AnimatedSection delay={0.3}>
-          <section className="skills-section">
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <div className="skills-section">
             <h2>Core Competencies</h2>
             <div className="skills-grid">
               {Object.entries(skills).map(([skill, level], index) => (
@@ -279,14 +345,18 @@ const Resume: React.FC = () => {
                 </motion.div>
               ))}
             </div>
-          </section>
-        </AnimatedSection>
+          </div>
+        </motion.section>
       )}
 
       {/* Education Section */}
       {activeSection === "education" && (
-        <AnimatedSection delay={0.3}>
-          <section className="education-section">
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <div className="education-section">
             <h2>Education</h2>
             {education.map((edu, index) => (
               <motion.div
@@ -302,33 +372,42 @@ const Resume: React.FC = () => {
                 {edu.details && <p className="edu-details">{edu.details}</p>}
               </motion.div>
             ))}
-          </section>
-        </AnimatedSection>
+          </div>
+        </motion.section>
       )}
 
       {/* Download CTA */}
-      <AnimatedSection delay={0.4}>
+      <motion.section
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.4, duration: 0.8 }}
+      >
         <div className="resume-cta">
           <h3>Interested in working together?</h3>
           <p>Download my full resume or get in touch to discuss opportunities.</p>
           <div className="cta-buttons">
-            <MagneticButton
+            <motion.button
               className="cta-btn primary"
               onClick={handleDownload}
-              strength={0.4}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
+              <Download size={20} />
               Download Full Resume
-            </MagneticButton>
-            <MagneticButton
-              className="cta-btn secondary"
-              onClick={() => window.location.href = "/contact"}
-              strength={0.3}
-            >
-              Contact Me
-            </MagneticButton>
+            </motion.button>
+            <Link to="/contact">
+              <motion.button
+                className="cta-btn secondary"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <ExternalLink size={20} />
+                Contact Me
+              </motion.button>
+            </Link>
           </div>
         </div>
-      </AnimatedSection>
+      </motion.section>
     </main>
   );
 };
