@@ -6,22 +6,38 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 // Enhanced Lenis configuration for cinematic scrolling
-const lenis = new Lenis({
-  duration: 1.2,
-  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-  smoothWheel: true,
-  syncTouch: false, // Disable smooth touch for better mobile compatibility
-  touchMultiplier: 2,
-  infinite: false,
-  wrapper: window,
-  content: document.documentElement,
-});
+let lenis: Lenis | null = null;
 
-// Handle scroll events for better compatibility
-lenis.on('scroll', (e) => {
-  // Sync with GSAP ScrollTrigger
-  ScrollTrigger.update();
-});
+// Initialize Lenis only when DOM is ready
+if (typeof window !== 'undefined') {
+  const initLenis = () => {
+    lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+      syncTouch: false,
+      touchMultiplier: 2,
+      infinite: false,
+      wrapper: window,
+      content: document.documentElement,
+    });
+    
+    // Handle scroll events for better compatibility
+    lenis.on('scroll', (e) => {
+      // Sync with GSAP ScrollTrigger
+      ScrollTrigger.update();
+    });
+    
+    // Start RAF loop after initialization
+    requestAnimationFrame(raf);
+  };
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initLenis);
+  } else {
+    initLenis();
+  }
+}
 
 // Refresh Lenis when content changes (for route changes)
 export function refreshLenis() {
@@ -127,15 +143,7 @@ function raf(time: number) {
   requestAnimationFrame(raf);
 }
 
-// Start the RAF loop
-requestAnimationFrame(raf);
-
-// Initialize Lenis after DOM is ready
-if (typeof window !== 'undefined') {
-  window.addEventListener('DOMContentLoaded', () => {
-    refreshLenis();
-  });
-}
+// Note: RAF loop is started in initLenis() function above
 
 // Cinematic scroll synchronization with enhanced effects
 export function useCinematicScrollSync() {

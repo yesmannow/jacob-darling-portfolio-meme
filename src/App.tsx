@@ -16,9 +16,15 @@ import "lenis/dist/lenis.css"; // Import Lenis CSS for smooth scrolling
 const App: React.FC = () => {
   // Lenis initialization moved to motion-sync.ts to avoid duplication
   useEffect(() => {
+    // Ensure scrolling works even if Lenis fails
+    document.documentElement.style.overflow = 'auto';
+    document.body.style.overflow = 'auto';
+    
     // Cleanup on unmount
     return () => {
-      lenis.destroy();
+      if (lenis) {
+        lenis.destroy();
+      }
     };
   }, []);
 
