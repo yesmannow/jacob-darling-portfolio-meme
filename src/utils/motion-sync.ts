@@ -1,7 +1,7 @@
 import Lenis from "lenis";
 import { gsap } from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
-import anime from "animejs/lib/anime.es.js";
+// import anime from "animejs/lib/anime.es.js"; // Temporarily disabled for deployment
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -115,20 +115,20 @@ export function useCinematicScrollSync() {
 export function createPageTransition(element: HTMLElement, direction: 'in' | 'out') {
   const isEntering = direction === 'in';
   
-  return anime({
-    targets: element,
-    opacity: isEntering ? [0, 1] : [1, 0],
-    translateY: isEntering ? [50, 0] : [0, -50],
-    scale: isEntering ? [0.95, 1] : [1, 1.05],
-    filter: isEntering ? ['blur(10px)', 'blur(0px)'] : ['blur(0px)', 'blur(10px)'],
-    duration: 800,
-    easing: 'easeOutQuart',
-    begin: () => {
+  // Temporarily using GSAP instead of anime.js for deployment
+  return gsap.to(element, {
+    opacity: isEntering ? 1 : 0,
+    y: isEntering ? 0 : -50,
+    scale: isEntering ? 1 : 1.05,
+    filter: isEntering ? 'blur(0px)' : 'blur(10px)',
+    duration: 0.8,
+    ease: 'power2.out',
+    onStart: () => {
       if (isEntering) {
         element.style.pointerEvents = 'none';
       }
     },
-    complete: () => {
+    onComplete: () => {
       element.style.pointerEvents = 'auto';
     }
   });
@@ -144,27 +144,25 @@ export function createHoverSync(element: HTMLElement, options: {
   const { scale = 1.05, y = -5, glow = true, duration = 300 } = options;
   
   const enterAnimation = () => {
-    const animeInstance = anime({
-      targets: element,
+    const gsapInstance = gsap.to(element, {
       scale: scale,
-      translateY: y,
+      y: y,
       filter: glow ? 'drop-shadow(0 10px 20px rgba(136, 171, 242, 0.3))' : 'none',
-      duration: duration,
-      easing: 'easeOutQuart'
+      duration: duration / 1000,
+      ease: 'power2.out'
     });
-    motionSync.registerAnime(animeInstance);
+    motionSync.registerGsap(gsapInstance);
   };
 
   const leaveAnimation = () => {
-    const animeInstance = anime({
-      targets: element,
+    const gsapInstance = gsap.to(element, {
       scale: 1,
-      translateY: 0,
+      y: 0,
       filter: 'drop-shadow(0 0 0px rgba(136, 171, 242, 0))',
-      duration: duration,
-      easing: 'easeOutQuart'
+      duration: duration / 1000,
+      ease: 'power2.out'
     });
-    motionSync.registerAnime(animeInstance);
+    motionSync.registerGsap(gsapInstance);
   };
 
   element.addEventListener('mouseenter', enterAnimation);

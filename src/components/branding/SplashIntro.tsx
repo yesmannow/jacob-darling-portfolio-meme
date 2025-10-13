@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import anime from "animejs";
+// import anime from "animejs"; // Temporarily disabled for deployment
 import AnimatedLogo from "./AnimatedLogo";
 import "./SplashIntro.css";
 
@@ -39,35 +39,35 @@ const SplashIntro: React.FC<SplashIntroProps> = ({
     return () => clearTimeout(timer);
   }, [duration, enableAudio, onComplete]);
 
-  // Text animation sequence
+  // Text animation sequence - simplified for deployment
   useEffect(() => {
     if (!logoAnimationComplete) return;
 
-    const timeline = anime.timeline({
-      easing: 'easeOutExpo'
-    });
-
-    timeline
-      .add({
-        targets: '.splash-tagline',
-        opacity: [0, 1],
-        translateY: [30, 0],
-        duration: 800,
-        delay: 200
-      })
-      .add({
-        targets: '.splash-subtitle',
-        opacity: [0, 1],
-        translateY: [20, 0],
-        duration: 600,
-        delay: 100
-      }, '-=400')
-      .add({
-        targets: '.splash-particles',
-        opacity: [0, 1],
-        scale: [0.8, 1],
-        duration: 1000
-      }, '-=600');
+    // Simple CSS-based animations
+    setTimeout(() => {
+      const tagline = document.querySelector('.splash-tagline') as HTMLElement;
+      const subtitle = document.querySelector('.splash-subtitle') as HTMLElement;
+      const particles = document.querySelector('.splash-particles') as HTMLElement;
+      
+      if (tagline) {
+        tagline.style.opacity = '1';
+        tagline.style.transform = 'translateY(0)';
+      }
+      
+      setTimeout(() => {
+        if (subtitle) {
+          subtitle.style.opacity = '1';
+          subtitle.style.transform = 'translateY(0)';
+        }
+      }, 200);
+      
+      setTimeout(() => {
+        if (particles) {
+          particles.style.opacity = '1';
+          particles.style.transform = 'scale(1)';
+        }
+      }, 400);
+    }, 200);
 
   }, [logoAnimationComplete]);
 

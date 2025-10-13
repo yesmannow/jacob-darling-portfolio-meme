@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import anime from "animejs";
+// import anime from "animejs"; // Temporarily disabled for deployment
 import "./AnimatedLogo.css";
 
 interface AnimatedLogoProps {
@@ -22,116 +22,42 @@ const AnimatedLogo: React.FC<AnimatedLogoProps> = ({
   useEffect(() => {
     if (!logoRef.current) return;
 
+    // Simplified animation using CSS for deployment
     const paths = logoRef.current.querySelectorAll(".logo-path");
     const hexagon = logoRef.current.querySelector(".logo-hexagon");
     const dot = logoRef.current.querySelector(".logo-dot");
 
-    // Set initial stroke-dasharray for path animation
-    paths.forEach(path => {
-      const length = (path as SVGPathElement).getTotalLength();
-      (path as SVGPathElement).style.strokeDasharray = length.toString();
-      (path as SVGPathElement).style.strokeDashoffset = length.toString();
-    });
-
-    // Main entrance animation sequence
-    const timeline = anime.timeline({
-      easing: 'easeInOutQuart',
-      complete: () => {
-        if (onAnimationComplete) onAnimationComplete();
+    // Simple fade-in animation
+    setTimeout(() => {
+      if (hexagon) (hexagon as HTMLElement).style.opacity = '1';
+      paths.forEach((path, i) => {
+        setTimeout(() => {
+          (path as HTMLElement).style.opacity = '1';
+        }, i * 200);
+      });
+      if (dot) {
+        setTimeout(() => {
+          (dot as HTMLElement).style.opacity = '1';
+          (dot as HTMLElement).style.transform = 'scale(1)';
+        }, 800);
       }
-    });
-
-    if (variant === "splash") {
-      // Cinematic splash intro sequence
-      timeline
-        .add({
-          targets: hexagon,
-          strokeDashoffset: [anime.setDashoffset, 0],
-          opacity: [0, 1],
-          scale: [0.8, 1],
-          duration: 2000,
-          easing: 'easeOutExpo'
-        })
-        .add({
-          targets: paths,
-          strokeDashoffset: [anime.setDashoffset, 0],
-          opacity: [0, 1],
-          duration: 1500,
-          delay: anime.stagger(300),
-          easing: 'easeInOutSine'
-        }, '-=1000')
-        .add({
-          targets: dot,
-          scale: [0, 1],
-          opacity: [0, 1],
-          duration: 600,
-          easing: 'easeOutBounce'
-        }, '-=500')
-        .add({
-          targets: logoRef.current,
-          filter: [
-            'drop-shadow(0 0 0px #88ABF2)',
-            'drop-shadow(0 0 20px #88ABF2) drop-shadow(0 0 40px #a8c5ff)'
-          ],
-          duration: 1000,
-          easing: 'easeInOutQuad'
-        }, '-=300');
-    } else {
-      // Standard header/footer animation
-      timeline
-        .add({
-          targets: hexagon,
-          strokeDashoffset: [anime.setDashoffset, 0],
-          opacity: [0, 1],
-          duration: 1200,
-          easing: 'easeOutQuart'
-        })
-        .add({
-          targets: paths,
-          strokeDashoffset: [anime.setDashoffset, 0],
-          opacity: [0, 1],
-          duration: 800,
-          delay: anime.stagger(150),
-          easing: 'easeInOutSine'
-        }, '-=600')
-        .add({
-          targets: dot,
-          scale: [0, 1],
-          opacity: [0, 1],
-          duration: 400,
-          easing: 'easeOutBack'
-        }, '-=200');
-    }
-
-    return () => {
-      timeline.pause();
-    };
+      if (onAnimationComplete) {
+        setTimeout(() => onAnimationComplete(), 1200);
+      }
+    }, 100);
   }, [variant, onAnimationComplete]);
 
-  // Hover animation effects
+  // Hover animation effects - simplified for deployment
   useEffect(() => {
-    if (!logoRef.current || !isHovered) return;
-
-    anime({
-      targets: logoRef.current,
-      filter: [
-        'drop-shadow(0 0 8px #88ABF280) drop-shadow(0 0 16px #a8c5ff60)',
-        'drop-shadow(0 0 12px #88ABF2) drop-shadow(0 0 24px #a8c5ff80)'
-      ],
-      scale: [1, 1.05],
-      duration: 400,
-      easing: 'easeOutQuart',
-      direction: 'alternate'
-    });
-
-    // Pulse the accent dot
-    anime({
-      targets: logoRef.current.querySelector('.logo-dot'),
-      scale: [1, 1.3, 1],
-      duration: 600,
-      easing: 'easeInOutSine'
-    });
-
+    if (!logoRef.current) return;
+    
+    if (isHovered) {
+      logoRef.current.style.filter = 'drop-shadow(0 0 12px #88ABF2) drop-shadow(0 0 24px #a8c5ff80)';
+      logoRef.current.style.transform = 'scale(1.05)';
+    } else {
+      logoRef.current.style.filter = 'drop-shadow(0 0 0px #88ABF2)';
+      logoRef.current.style.transform = 'scale(1)';
+    }
   }, [isHovered]);
 
   const logoVariants = {
