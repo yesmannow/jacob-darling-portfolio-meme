@@ -9,16 +9,12 @@ import Toolbox from "../components/home/Toolbox";
 import Awards from "../components/home/Awards";
 import CTA from "../components/home/CTA";
 import ScrollProgress from "../components/ui/ScrollProgress";
-import lenis from "../utils/motion-sync";
+import { refreshLenis } from "../utils/motion-sync";
 
 const HomePage: React.FC = () => {
   useEffect(() => {
-    // Initialize smooth scroll
-    lenis.start();
-    
-    return () => {
-      lenis.stop();
-    };
+    // Refresh Lenis for this page
+    refreshLenis();
   }, []);
 
   return (
