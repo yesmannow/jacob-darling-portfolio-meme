@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 import { motion } from "framer-motion";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -11,7 +11,22 @@ const CTA: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const glowRef = useRef<HTMLDivElement>(null);
 
+  const particleConfigs = useMemo(() => (
+    Array.from({ length: 15 }).map((_, i) => ({
+      left: `${Math.random() * 100}%`,
+      top: `${Math.random() * 100}%`,
+      delay: Math.random() * 3,
+      index: i
+    }))
+  ), []);
+
   useEffect(() => {
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    if (prefersReducedMotion.matches) {
+      return;
+    }
+
     const ctx = gsap.context(() => {
       // Gradient glow background animation
       gsap.to(glowRef.current, {
@@ -83,14 +98,14 @@ const CTA: React.FC = () => {
       
       {/* Floating Particles */}
       <div className="absolute inset-0">
-        {[...Array(15)].map((_, i) => (
+        {particleConfigs.map(({ left, top, delay, index }) => (
           <div
-            key={i}
+            key={index}
             className="cta-particle absolute w-1 h-1 bg-white rounded-full"
             style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 3}s`
+              left,
+              top,
+              animationDelay: `${delay}s`
             }}
           />
         ))}

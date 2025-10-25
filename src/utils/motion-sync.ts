@@ -167,24 +167,6 @@ class MotionSync {
 
 export const motionSync = new MotionSync();
 
-// Enhanced RAF loop with performance monitoring
-function raf(time: number) {
-  // Update Lenis
-  if (lenis) {
-    lenis.raf(time);
-  }
-  
-  // Update ScrollTrigger
-  ScrollTrigger.update();
-  
-  // Cleanup every 60 frames
-  if (Math.floor(time / 1000) % 1 === 0) {
-    motionSync.cleanup();
-  }
-  
-  requestAnimationFrame(raf);
-}
-
 // Note: RAF loop is started in initLenis() function above
 
 // Cinematic scroll synchronization with enhanced effects

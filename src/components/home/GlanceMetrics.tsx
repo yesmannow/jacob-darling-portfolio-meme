@@ -60,6 +60,12 @@ const GlanceMetrics: React.FC = () => {
   const [animatedValues, setAnimatedValues] = useState<Record<string, number>>({});
 
   useEffect(() => {
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    if (prefersReducedMotion.matches) {
+      return;
+    }
+
     const ctx = gsap.context(() => {
       // Animate metric cards
       gsap.fromTo(".metric-card",

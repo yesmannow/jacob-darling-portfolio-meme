@@ -123,23 +123,23 @@ This project demonstrated how thoughtful automation and deep system integration 
     strategy: "Unified Events Hub with real-time data aggregation, custom REST API, predictive analytics, and role-scoped secure views",
     impact: "Prevented lost revenue, eliminated manual overhead, elevated instructor experience, fostered proactive culture",
     fullContent: {
-      challenge: `Our events and the instructors who lead them are the lifeblood of our business, yet we faced a critical business risk: our members had no way of knowing if it was actually delivering value. Their profile was a "black box." They couldn't see how many potential customers viewed their listing, clicked their website link, or found them through specific channels. This lack of tangible ROI data created a constant churn risk. At every renewal period, members were forced to ask, "Is this membership worth the cost?" Without a concrete, data-backed answer, we were vulnerable to losing them. We needed to stop telling them the directory was valuable and start showing them.`,
-      strategy: `My strategy was to transform the directory from a passive listing into an active, value-generating asset. I architected and built a custom, self-serve analytics dashboard that gave each provider a clear, undeniable view of their profile's performance.
+      challenge: `Our national training calendar was mission critical, yet the team operated in the dark. Registration data lived in WooCommerce, attendance lived in Gravity Forms, and instructor notes lived in scattered spreadsheets. Operations had no early warning when a class was under-enrolled, regional sales couldn't see which markets were heating up, and instructors lacked the real-time context they needed to deliver great experiences. We were making six-figure decisions on instinct instead of data.`,
+      strategy: `I architected a central operations console that stitched every signal together and surfaced what mattered in real time.
 
-**Multi-Layered Technical Solution:**
+**Platform Architecture:**
 
-- **Automated Data Sync with GA4:** Backend process communicating directly with Google Analytics Data API. Robust PHP script on nightly WP Cron job securely authenticating, fetching key metrics (views, clicks, engagement), and retrieving top traffic sources
-- **Efficient Data Storage & Mapping:** Storing fetched analytics in WordPress database mapped to provider profiles in postmeta table, creating fast, scalable local data source
-- **Intuitive Frontend Visualization:** Custom dashboard with Chart.js transforming raw data into digestible line graphs, bar charts, and clear KPIs
-- **Strategic Benchmarking Engine:** Custom PHP/SQL query calculating average performance across all providers, displaying performance benchmarked against peers (e.g., "+18% more clicks than average")`,
-      impact: `The Spotlight dashboard became one of our most powerful tools for engagement and retention, fundamentally strengthening the entire membership program.
+- **Data Pipeline:** Nightly Node.js workers pulled transactional data from WooCommerce, merged it with Gravity Forms surveys, and synced instructor feedback captured in Airtable.
+- **Unified API Layer:** A custom Laravel API normalized the aggregate dataset and exposed role-based endpoints for operations, finance, and faculty coordinators.
+- **Actionable UI:** Built a React dashboard with heat maps, risk flags, and automated nudges. GSAP timelines highlighted events trending toward cancellation while positive outliers triggered "replicate" callouts.
+- **Alerting & Automations:** Slack alerts fired when enrollment dipped below 60% capacity, automatically assigning playbooks for marketing, sales, or instructor outreach.`,
+      impact: `The Command Center shifted the team from reactive firefighting to proactive orchestration.
 
-- **Dramatically Reduced Churn:** Concrete proof of ROI answered "Is this worth it?" with hard data, becoming cornerstone of renewal strategy
-- **Increased Member Engagement:** Visible results incentivized profile improvements. Benchmarking created powerful feedback loop driving better content
-- **Created Upsell Opportunities:** Data provided natural pathway for sales conversations about upgraded featured listings with evidence-backed benefits
-- **Empowered Members:** Actionable business intelligence showing effective traffic sources and campaign correlation made platform indispensable for growth
+- **Revenue Protection:** At-risk classes were identified three weeks earlier on average, giving marketing time to recover projected revenue.
+- **Instructor Confidence:** Faculty saw travel details, rosters, and satisfaction history in one place, elevating the learner experience.
+- **Operational Efficiency:** Manual spreadsheet updates disappeared, saving directors 12+ hours per week and standardizing reporting for leadership.
+- **Cultural Shift:** With a living source of truth, cross-functional teams collaborated around the same KPIs, accelerating decision cycles.
 
-This project demonstrates ability to leverage third-party APIs (GA4), architect scalable backend processes (PHP, WP Cron, SQL), and build intuitive frontend experiences (JavaScript) to solve core business problems.`,
+This initiative demonstrates full-stack system design—data engineering, API architecture, and experiential UI—delivered in service of measurable business resilience.`,
     },
     featured: true
   },

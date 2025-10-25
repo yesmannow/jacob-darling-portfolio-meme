@@ -52,7 +52,7 @@ export const applications: Application[] = [
     category: ["Sales Tools", "E-Commerce"],
     tags: ["JavaScript", "Interactive UI", "Quote Generation", "Sales Automation"],
     thumbnail: "/apps/gt9-pricing-thumbnail.png",
-    demoUrl: "/demos/gt9_pricing_sheet.html",
+    demoUrl: "https://jacob-darling-portfolio-meme.vercel.app/demos/gt9_pricing_sheet",
     overview: "A sophisticated sales enablement tool that transforms the complex Graston Technique product catalog into an intuitive, searchable interface with real-time quote building, customer segmentation, and professional quote generation capabilities.",
     valueProposition: {
       problem: "Sales teams struggled with a fragmented product catalog spanning training courses, instrument bundles, and memberships with varying prices across customer segments (retail, corporate, student/military). Manually creating quotes was time-consuming and error-prone.",
@@ -218,7 +218,7 @@ export const applications: Application[] = [
     category: ["Education Tools", "Compliance"],
     tags: ["JavaScript", "Data Visualization", "Regulatory Compliance", "Multi-State"],
     thumbnail: "/apps/license-requirements-thumbnail.png",
-    demoUrl: "/demos/Practitioner License Requirements - Tool for Website.htm",
+    demoUrl: "https://jacob-darling-portfolio-meme.vercel.app/demos/Practitioner%20License%20Requirements%20-%20Tool%20for%20Website.htm",
     overview: "A comprehensive, interactive tool providing instant access to continuing education (CE) requirements for Physical Therapists, Occupational Therapists, Chiropractors, Athletic Trainers, and Massage Therapists across all 50 states plus DC and Puerto Rico.",
     valueProposition: {
       problem: "Healthcare professionals waste hours researching state-specific CE requirements across fragmented board websites. Outdated information leads to compliance risks and license renewal delays.",
@@ -401,7 +401,7 @@ export const applications: Application[] = [
     category: ["Sales Tools", "Financial Planning"],
     tags: ["JavaScript", "ROI Modeling", "Interactive Forms", "Data Visualization"],
     thumbnail: "/apps/roi-calculator-thumbnail.png",
-    demoUrl: "/demos/ROI Calculator - Essential Training Large.htm",
+    demoUrl: "https://jacob-darling-portfolio-meme.vercel.app/demos/ROI%20Calculator%20-%20Essential%20Training%20Large.htm",
     overview: "A sophisticated financial planning tool that helps clinicians understand the business case for Graston Technique training by calculating projected revenue, break-even time, and return on investment based on their specific practice parameters.",
     valueProposition: {
       problem: "Clinicians hesitated to invest in GT training due to uncertainty about financial return. Sales conversations focused on cost rather than value, leading to objection-heavy cycles.",
@@ -581,7 +581,7 @@ export const applications: Application[] = [
     category: ["Clinical Tools", "Education"],
     tags: ["JavaScript", "Clinical Decision Support", "Protocol Generation", "Interactive Workflow"],
     thumbnail: "/apps/clinical-compass-thumbnail.png",
-    demoUrl: "/demos/Graston Clinical Compass -  clinical reasoning and treatment protocol.htm",
+    demoUrl: "https://jacob-darling-portfolio-meme.vercel.app/demos/Graston%20Clinical%20Compass%20-%20%20clinical%20reasoning%20and%20treatment%20protocol.htm",
     overview: "A sophisticated clinical decision support tool that guides practitioners through evidence-based treatment protocol development using a step-by-step questionnaire, integrating clinical reasoning, anatomical knowledge, and instrument selection into actionable treatment plans.",
     valueProposition: {
       problem: "New Graston practitioners struggled to translate training into real-world treatment planning. Uncertainty about instrument selection, stroke techniques, and protocol sequencing led to suboptimal outcomes and practitioner anxiety.",

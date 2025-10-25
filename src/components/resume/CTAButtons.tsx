@@ -2,11 +2,13 @@ import { motion } from "framer-motion";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import { ResumePDF } from "../../pdf/ResumePDF";
 import { Download, Share2, Mail, ExternalLink, Sparkles, FileText } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import resumeData from "../../data/resume.json";
 
 export default function CTAButtons() {
   const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
+  const [shareMessage, setShareMessage] = useState<string | null>(null);
+  const timeoutRef = useRef<number | null>(null);
   const { contact } = resumeData;
 
   const handlePDFGeneration = () => {
@@ -22,12 +24,19 @@ export default function CTAButtons() {
           text: "Check out Jacob Darling's professional resume - Marketing Director & System Architect",
           url: window.location.href
         });
-      } catch (error) {
-        console.log("Share cancelled");
+        setShareMessage("Thanks for sharing! Link sent.");
+      } catch (error: any) {
+        if (error?.name !== "AbortError") {
+          setShareMessage("Share failed. Copy the link manually.");
+        }
       }
     } else {
-      await navigator.clipboard.writeText(window.location.href);
-      // You could add a toast notification here
+      try {
+        await navigator.clipboard.writeText(window.location.href);
+        setShareMessage("Link copied to clipboard.");
+      } catch (error) {
+        setShareMessage("Copy failed. Try sharing manually.");
+      }
     }
   };
 
@@ -53,13 +62,35 @@ export default function CTAButtons() {
     }
   };
 
+  useEffect(() => {
+    if (!shareMessage) {
+      return;
+    }
+
+    if (timeoutRef.current) {
+      window.clearTimeout(timeoutRef.current);
+    }
+
+    timeoutRef.current = window.setTimeout(() => {
+      setShareMessage(null);
+      timeoutRef.current = null;
+    }, 3000);
+
+    return () => {
+      if (timeoutRef.current) {
+        window.clearTimeout(timeoutRef.current);
+        timeoutRef.current = null;
+      }
+    };
+  }, [shareMessage]);
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.8 }}
-      className="flex flex-wrap justify-center gap-4 mb-12"
+      className="flex flex-col items-center gap-4 mb-12"
     >
       {/* PDF Download Button */}
       <PDFDownloadLink 
@@ -103,6 +134,20 @@ export default function CTAButtons() {
         <span>Share Resume</span>
       </motion.button>
 
+      {/* Interview Toolkit */}
+      <motion.a
+        variants={buttonVariants}
+        whileHover="hover"
+        whileTap="tap"
+        href="/documents/Jacob-Darling-Interview-Toolkit.pdf"
+        target="_blank"
+        rel="noreferrer"
+        className="flex items-center gap-3 px-6 py-3 border-2 border-blue-400 text-blue-300 rounded-full font-semibold hover:bg-blue-400/10 transition-colors duration-300"
+      >
+        <FileText size={20} />
+        <span>Download Interview Toolkit</span>
+      </motion.a>
+
       {/* Email Resume Button */}
       <motion.button
         variants={buttonVariants}
@@ -126,6 +171,17 @@ export default function CTAButtons() {
         <ExternalLink size={20} />
         <span>Contact Me</span>
       </motion.button>
+
+      {shareMessage && (
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+          className="px-4 py-2 bg-white/10 border border-white/20 text-white text-sm rounded-full backdrop-blur-sm"
+        >
+          {shareMessage}
+        </motion.div>
+      )}
     </motion.div>
   );
 }

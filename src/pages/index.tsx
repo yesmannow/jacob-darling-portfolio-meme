@@ -5,6 +5,10 @@ import IntroStatement from "../components/home/IntroStatement";
 import GlanceMetrics from "../components/home/GlanceMetrics";
 import FeaturedWork from "../components/home/FeaturedWork";
 import AboutSnapshot from "../components/home/AboutSnapshot";
+import Services from "../components/home/Services";
+import Process from "../components/home/Process";
+import Testimonials from "../components/home/Testimonials";
+import LeadMagnet from "../components/home/LeadMagnet";
 import Toolbox from "../components/home/Toolbox";
 import Awards from "../components/home/Awards";
 import CTA from "../components/home/CTA";
@@ -41,6 +45,18 @@ const HomePage: React.FC = () => {
         
         {/* About Snapshot */}
         <AboutSnapshot />
+        
+        {/* Services Overview */}
+        <Services />
+        
+        {/* Engagement Process */}
+        <Process />
+        
+        {/* Testimonials */}
+        <Testimonials />
+        
+        {/* Lead Magnet */}
+        <LeadMagnet />
         
         {/* Creative Toolbox */}
         <Toolbox />

@@ -19,16 +19,16 @@ const Header: React.FC = () => {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  // scroll hide / reveal logic
+  // Enhanced scroll hide / reveal logic with better thresholds
   useEffect(() => {
     let lastY = window.scrollY;
     const onScroll = () => {
       const y = window.scrollY;
       const direction = y > lastY ? "down" : "up";
-      if (Math.abs(y - lastY) > 10) {
+      if (Math.abs(y - lastY) > 5) {
         setScrollDir(direction);
-        setVisible(direction === "up" || y < 100);
-        setGlow(direction === "up" && y > 150);
+        setVisible(direction === "up" || y < 50);
+        setGlow(direction === "up" && y > 100);
         lastY = y;
       }
     };

@@ -14,6 +14,7 @@ gsap.registerPlugin(ScrollTrigger);
 const Photography: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState("All");
   const [selectedPhoto, setSelectedPhoto] = useState<PhotoItem | null>(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
 
   // Load all photography images dynamically
   const photoGallery = useMemo(() => loadPhotographyImages(), []);
@@ -22,6 +23,51 @@ const Photography: React.FC = () => {
   const filteredPhotos = activeCategory === "All" 
     ? photoGallery 
     : photoGallery.filter(photo => photo.category === activeCategory);
+
+  const handlePhotoClick = (photo: PhotoItem) => {
+    const index = filteredPhotos.findIndex(item => item.id === photo.id);
+    setCurrentImageIndex(index);
+    setSelectedPhoto(photo);
+  };
+
+  const handlePrevious = () => {
+    const newIndex = currentImageIndex > 0 ? currentImageIndex - 1 : filteredPhotos.length - 1;
+    setCurrentImageIndex(newIndex);
+    setSelectedPhoto(filteredPhotos[newIndex]);
+  };
+
+  const handleNext = () => {
+    const newIndex = currentImageIndex < filteredPhotos.length - 1 ? currentImageIndex + 1 : 0;
+    setCurrentImageIndex(newIndex);
+    setSelectedPhoto(filteredPhotos[newIndex]);
+  };
+
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyPress = (e: KeyboardEvent) => {
+      if (!selectedPhoto) return;
+
+      switch (e.key) {
+        case 'ArrowLeft':
+          e.preventDefault();
+          handlePrevious();
+          break;
+        case 'ArrowRight':
+          e.preventDefault();
+          handleNext();
+          break;
+        case 'Escape':
+          e.preventDefault();
+          setSelectedPhoto(null);
+          break;
+      }
+    };
+
+    if (selectedPhoto) {
+      window.addEventListener('keydown', handleKeyPress);
+      return () => window.removeEventListener('keydown', handleKeyPress);
+    }
+  }, [selectedPhoto, currentImageIndex, filteredPhotos]);
 
   // Enhanced GSAP Cinematic Animations
   useEffect(() => {
@@ -179,7 +225,7 @@ const Photography: React.FC = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: index * 0.03, duration: 0.4 }}
                 whileHover={{ y: -8, scale: 1.02 }}
-                onClick={() => setSelectedPhoto(photo)}
+                onClick={() => handlePhotoClick(photo)}
               >
                 <div className="photo-card-inner">
                   <img src={photo.src} alt={photo.title} loading="lazy" />
@@ -254,13 +300,60 @@ const Photography: React.FC = () => {
             exit={{ opacity: 0 }}
             onClick={() => setSelectedPhoto(null)}
           >
-            <motion.div 
+            <motion.div
               className="lightbox-backdrop"
               initial={{ backdropFilter: "blur(0px)" }}
               animate={{ backdropFilter: "blur(20px)" }}
               exit={{ backdropFilter: "blur(0px)" }}
             />
-            <motion.button 
+
+            {/* Previous Button */}
+            <motion.button
+              onClick={(e) => {
+                e.stopPropagation();
+                handlePrevious();
+              }}
+              className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10 p-3 bg-black/50 backdrop-blur-sm rounded-full text-white hover:bg-white/20 transition-all duration-300"
+              whileHover={{ scale: 1.1, x: -2 }}
+              whileTap={{ scale: 0.9 }}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.3 }}
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M15 18l-6-6 6-6"/>
+              </svg>
+            </motion.button>
+
+            {/* Next Button */}
+            <motion.button
+              onClick={(e) => {
+                e.stopPropagation();
+                handleNext();
+              }}
+              className="absolute right-4 top-1/2 transform -translate-y-1/2 z-10 p-3 bg-black/50 backdrop-blur-sm rounded-full text-white hover:bg-white/20 transition-all duration-300"
+              whileHover={{ scale: 1.1, x: 2 }}
+              whileTap={{ scale: 0.9 }}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.3 }}
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M9 18l6-6-6-6"/>
+              </svg>
+            </motion.button>
+
+            {/* Image Counter */}
+            <motion.div
+              className="absolute top-4 left-1/2 transform -translate-x-1/2 z-10 px-4 py-2 bg-black/50 backdrop-blur-sm rounded-full text-white text-sm"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+            >
+              {currentImageIndex + 1} / {filteredPhotos.length}
+            </motion.div>
+
+            <motion.button
               className="lightbox-close"
               onClick={() => setSelectedPhoto(null)}
               whileHover={{ scale: 1.1, rotate: 90 }}
@@ -270,28 +363,37 @@ const Photography: React.FC = () => {
                 <path d="M18 6L6 18M6 6l12 12"/>
               </svg>
             </motion.button>
-            <motion.div 
+
+            <motion.div
               className="lightbox-image-container"
               initial={{ scale: 0.8, y: 50 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.8, y: 50 }}
               transition={{ type: "spring", damping: 25 }}
               onClick={(e) => e.stopPropagation()}
+              key={selectedPhoto.id} // Force re-mount for smooth transitions
             >
               <img src={selectedPhoto.src} alt={selectedPhoto.title} />
-              <motion.div 
+              <motion.div
                 className="lightbox-details"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
               >
                 <h2>{selectedPhoto.title}</h2>
-                <span 
+                <span
                   className="lightbox-category"
                   style={{ backgroundColor: categoryColors[selectedPhoto.category] }}
                 >
                   {selectedPhoto.category}
                 </span>
+
+                {/* Keyboard hints */}
+                <div className="mt-4 flex items-center justify-center gap-6 text-xs text-gray-400">
+                  <span>← Previous</span>
+                  <span>→ Next</span>
+                  <span>ESC Close</span>
+                </div>
               </motion.div>
             </motion.div>
           </motion.div>

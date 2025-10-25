@@ -283,12 +283,22 @@ const Applications: React.FC = () => {
                       <div className="app-card-actions">
                         <a
                           href={app.demoUrl}
-                          className="app-btn primary"
+                          className="app-btn primary group"
                           target="_blank"
                           rel="noopener noreferrer"
+                          onClick={(e) => {
+                            // Prevent default and handle external link safely
+                            try {
+                              window.open(app.demoUrl, '_blank', 'noopener,noreferrer,width=1200,height=800');
+                              e.preventDefault();
+                            } catch (error) {
+                              console.warn('Failed to open app demo:', error);
+                              // Fallback to default behavior
+                            }
+                          }}
                         >
-                          <span>Launch App</span>
-                          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                          <span>Launch Live App</span>
+                          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="group-hover:translate-x-0.5 transition-transform">
                             <path d="M6 3L11 8L6 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                           </svg>
                         </a>

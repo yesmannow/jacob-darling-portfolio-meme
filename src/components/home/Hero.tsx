@@ -19,6 +19,12 @@ const Hero: React.FC = () => {
   const brightness = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1.2, 0.8]);
 
   useEffect(() => {
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    if (prefersReducedMotion.matches) {
+      return;
+    }
+
     const ctx = gsap.context(() => {
       // Enhanced breathing gradient animation
       gsap.to(".gradient-bg", {
