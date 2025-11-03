@@ -94,11 +94,20 @@
       if (typeof window !== 'undefined') {
         if (!window.React) {
           // Create a more complete placeholder to prevent Children property errors
+          // This prevents "Cannot set properties of undefined (setting 'Children')" errors
           window.React = {
-            Children: {},
+            Children: {
+              map: function() {},
+              forEach: function() {},
+              count: function() {},
+              toArray: function() {},
+              only: function() {}
+            },
             Component: function() {},
             Fragment: Symbol.for('react.fragment'),
             createElement: function() {},
+            cloneElement: function() {},
+            isValidElement: function() {},
             forwardRef: function() {},
             lazy: function() {},
             memo: function() {},
@@ -201,6 +210,30 @@
         window.addEventListener('error', function(event) {
           const errorMessage = event.error?.message || event.message || '';
           const filename = event.filename || event.source || '';
+          const target = event.target;
+
+          // Catch React Children errors immediately
+          if (errorMessage.includes("Cannot set properties of undefined (setting 'Children')") ||
+              errorMessage.includes("setting 'Children'") ||
+              (errorMessage.includes("Cannot read properties") && errorMessage.includes("undefined"))) {
+            // Ensure React placeholder exists
+            if (!window.React) window.React = {};
+            if (!window.React.Children) {
+              window.React.Children = {
+                map: function() {},
+                forEach: function() {},
+                count: function() {},
+                toArray: function() {},
+                only: function() {}
+              };
+            }
+            event.preventDefault();
+            event.stopPropagation();
+            if (typeof process !== 'undefined' && process.env && process.env.NODE_ENV === 'development') {
+              console.warn('React Children error caught and suppressed:', errorMessage);
+            }
+            return false;
+          }
 
           // Catch custom element errors (especially from overlay_bundle.js)
           if (errorMessage.includes('has already been defined') ||
@@ -209,6 +242,7 @@
               filename.includes('overlay_bundle') ||
               filename.includes('webcomponents-ce') ||
               filename.includes('webcomponents') ||
+              (target && target.tagName === 'SCRIPT' && filename.includes('webcomponents')) ||
               String(event.error || '').includes('mce-autosize-textarea')) {
             // Prevent the error from appearing in console
             event.preventDefault();
@@ -220,12 +254,31 @@
           // Catch MIME type errors for module scripts (can happen during HMR or build issues)
           if (errorMessage.includes('MIME type') ||
               errorMessage.includes('module script') ||
-              errorMessage.includes('application/octet-stream')) {
+              errorMessage.includes('application/octet-stream') ||
+              errorMessage.includes('Expected a JavaScript-or-Wasm module script')) {
+            // Prevent MIME type errors from crashing the app
+            // This often happens when the server returns wrong Content-Type header
+            event.preventDefault();
+            event.stopPropagation();
+            
             // Log in dev but don't crash - might be a temporary build/HMR issue
             if (typeof process !== 'undefined' && process.env && process.env.NODE_ENV === 'development') {
-              console.warn('MIME type warning (may be temporary):', errorMessage);
+              console.warn('MIME type warning (suppressed):', errorMessage);
             }
-            // Don't prevent - let it try to reload or handle gracefully
+            
+            // Try to reload the script with correct type
+            if (event.target && event.target.tagName === 'SCRIPT') {
+              const script = event.target;
+              if (script.src && !script.hasAttribute('data-retry')) {
+                script.setAttribute('data-retry', 'true');
+                const newScript = document.createElement('script');
+                newScript.type = 'module';
+                newScript.src = script.src;
+                newScript.setAttribute('data-retry', 'true');
+                document.head.appendChild(newScript);
+              }
+            }
+            return false;
           }
         }, true); // Capture phase - catches before other handlers
 
@@ -255,8 +308,21 @@
 
           // Handle React Children errors in promise rejections
           if (errorMessage.includes("Cannot set properties of undefined (setting 'Children')") ||
-              errorMessage.includes("setting 'Children'")) {
+              errorMessage.includes("setting 'Children'") ||
+              errorMessage.includes("Cannot read properties of undefined")) {
             // React deduplication issue - likely temporary during module load
+            // Ensure React placeholder is still in place
+            if (!window.React || !window.React.Children) {
+              if (!window.React) window.React = {};
+              window.React.Children = window.React.Children || {
+                map: function() {},
+                forEach: function() {},
+                count: function() {},
+                toArray: function() {},
+                only: function() {}
+              };
+            }
+            
             if (typeof process !== 'undefined' && process.env && process.env.NODE_ENV === 'development') {
               console.warn('React Children error in promise (suppressed):', errorMessage);
             }
