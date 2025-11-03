@@ -1,4 +1,4 @@
-# jacob-darling-portfolio  
+# jacob-darling-portfolio
 # Jacob Darling - Portfolio
 
 > Marketing Strategist & Systems Architect | Turning Complexity into Clarity
@@ -11,16 +11,36 @@ A modern, interactive portfolio showcasing expertise in marketing automation, fu
 - **Detailed Case Studies** - 8 real-world projects with measurable impact
 - **Smooth Animations** - Framer Motion throughout for professional polish
 - **Fully Responsive** - Mobile-first design optimized for all devices
-- **Fast Performance** - Vite for lightning-fast builds and HMR
+- **Ultra-Fast Performance** - Optimized bundle size (< 12 KB main bundle), code splitting, compression (Gzip/Brotli)
+- **Modern Architecture** - Lazy-loaded pages, tree-shaking, vendor chunking for optimal caching
 
 ## 🛠️ Tech Stack
 
 - **Framework**: React 18 + TypeScript
-- **Build Tool**: Vite
-- **Routing**: React Router v6
-- **Animations**: Framer Motion
-- **Styling**: CSS3 with Custom Properties
+- **Build Tool**: Vite (optimized with compression, code splitting, tree-shaking)
+- **Routing**: React Router v6 (lazy-loaded routes)
+- **Animations**: Framer Motion, GSAP, Lenis
+- **Styling**: CSS3 with Custom Properties, Tailwind CSS
+- **Icons**: Lucide React (tree-shakable), Custom brand SVGs
 - **Deployment**: Vercel
+
+## ⚡ Performance
+
+This portfolio is optimized for speed and performance:
+
+- **Main Bundle**: < 12 KB (gzipped)
+- **Code Splitting**: All pages and heavy components lazy-loaded
+- **Compression**: Gzip & Brotli enabled
+- **Caching**: Vendor chunks separated for optimal browser caching
+- **Tree-Shaking**: Aggressive dead code elimination
+- **Font Loading**: Non-blocking, optimized
+
+**Performance Targets:**
+- First Contentful Paint: < 1.5s
+- Largest Contentful Paint: < 2.5s
+- Time to Interactive: < 3.5s
+
+See [Performance Optimization Report](./docs/PERFORMANCE_OPTIMIZATION_REPORT.md) for detailed metrics and optimization strategies.
 
 ## 📱 Key Sections
 

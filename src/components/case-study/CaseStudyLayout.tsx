@@ -1,20 +1,12 @@
 import React from "react";
+import "./CaseStudyLayout.css";
 
 interface CaseStudyLayoutProps {
   children: React.ReactNode;
 }
 
 const CaseStudyLayout: React.FC<CaseStudyLayoutProps> = ({ children }) => {
-  return (
-    <main
-      style={{
-        background: "var(--color-bg)",
-        color: "var(--color-text)",
-      }}
-    >
-      {children}
-    </main>
-  );
+  return <main className="case-study-layout">{children}</main>;
 };
 
 export default CaseStudyLayout;

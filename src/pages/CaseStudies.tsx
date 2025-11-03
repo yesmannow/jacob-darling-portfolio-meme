@@ -2,7 +2,7 @@ import React, { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { caseStudies, getCategories } from "../data/caseStudies";
-import SimpleIcon from "../components/icons/SimpleIcon";
+import BrandIcon from "../components/icons/BrandIcon";
 import "./CaseStudies.css";
 import "./CaseStudiesEnhanced.css";
 
@@ -269,7 +269,7 @@ const CaseStudies: React.FC = () => {
                       <div className="case-tech-tags">
                         {study.tags.slice(0, 3).map(tag => (
                           <span key={tag} className="tech-tag">
-                            <SimpleIcon name={tag} size={14} className="tech-tag-icon" />
+                            <BrandIcon name={tag} size={14} className="tech-tag-icon" />
                             <span>{tag}</span>
                           </span>
                         ))}

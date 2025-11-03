@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import SimpleIcon from "../icons/SimpleIcon";
+import { Linkedin, Github } from "lucide-react";
 import "./Footer.css";
 
 const Footer: React.FC = () => (
@@ -40,13 +40,13 @@ const Footer: React.FC = () => (
           <ul>
             <li>
               <a href="https://linkedin.com/in/jacobdarling" target="_blank" rel="noopener noreferrer" className="footer-link-with-icon">
-                <SimpleIcon name="LinkedIn" size={18} className="footer-icon" />
+                <Linkedin size={18} className="footer-icon" />
                 <span>LinkedIn</span>
               </a>
             </li>
             <li>
               <a href="https://github.com/JdarlingGT" target="_blank" rel="noopener noreferrer" className="footer-link-with-icon">
-                <SimpleIcon name="GitHub" size={18} className="footer-icon" />
+                <Github size={18} className="footer-icon" />
                 <span>GitHub</span>
               </a>
             </li>

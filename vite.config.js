@@ -3,13 +3,28 @@ import react from "@vitejs/plugin-react";
 import path from "path";
 import { createHtmlPlugin } from 'vite-plugin-html';
 import { visualizer } from 'rollup-plugin-visualizer';
+import viteCompression from 'vite-plugin-compression';
+import { viteStaticCopy } from 'vite-plugin-static-copy';
 
 export default defineConfig({
   plugins: [
     react(),
+    // Compression plugins - generate gzip and brotli versions
+    viteCompression({
+      algorithm: 'gzip',
+      ext: '.gz',
+      threshold: 1024, // Only compress files > 1KB
+      deleteOriginFile: false, // Keep original files
+    }),
+    viteCompression({
+      algorithm: 'brotliCompress',
+      ext: '.br',
+      threshold: 1024,
+      deleteOriginFile: false,
+    }),
     visualizer({
       open: false,
-      filename: 'dist/stats.html',
+      filename: 'public/stats.html',
       gzipSize: true,
       brotliSize: true,
     }),
@@ -61,6 +76,8 @@ export default defineConfig({
   },
   optimizeDeps: {
     include: ["react", "react-dom", "react/jsx-runtime", "lenis", "framer-motion", "gsap"],
+    // Exclude heavy libraries from pre-bundling to prevent them from landing in main chunk
+    exclude: ["@react-pdf/renderer"],
     esbuildOptions: {
       // Fix potential circular dependency issues
       keepNames: true,
@@ -68,6 +85,12 @@ export default defineConfig({
   },
   build: {
     rollupOptions: {
+      // Enable aggressive tree-shaking
+      treeshake: {
+        moduleSideEffects: false,
+        propertyReadSideEffects: false,
+        tryCatchDeoptimization: false,
+      },
       output: {
         // Prevent circular dependency warnings
         hoistTransitiveImports: false,
@@ -75,12 +98,12 @@ export default defineConfig({
         format: 'es',
         manualChunks: (id) => {
           // Core React libraries - MUST be separate and load first
-          // Include all React-related packages in react-core to prevent deduplication issues
+          // Include all React-related packages in vendor-react to prevent deduplication issues
           if (id.includes('node_modules/react/') ||
               id.includes('node_modules/react-dom/') ||
               id.includes('node_modules/react/jsx-runtime') ||
               id.includes('node_modules/react/jsx-dev-runtime')) {
-            return 'react-core';
+            return 'vendor-react';
           }
 
           // Three.js related (VERY LARGE - check EARLY before other vendors)
@@ -97,7 +120,6 @@ export default defineConfig({
           // Animation libraries (large, bundle together)
           if (id.includes('node_modules/framer-motion') ||
               id.includes('node_modules/gsap') ||
-              id.includes('node_modules/animejs') ||
               id.includes('node_modules/lenis')) {
             return 'animation-vendor';
           }
@@ -108,14 +130,11 @@ export default defineConfig({
           }
 
           // PDF libraries (large, lazy load these separately)
-          if (id.includes('node_modules/@react-pdf') || id.includes('node_modules/jspdf')) {
-            return 'pdf-vendor';
-          }
-
-          // Simple-icons (large icon library, separate chunk - lazy loaded)
-          // Force it into its own chunk to ensure it doesn't block initial load
-          if (id.includes('node_modules/simple-icons')) {
-            return 'simple-icons-lazy';
+          // Must be isolated into vendor-pdf chunk to prevent main bundle bloat
+          if (id.includes('node_modules/@react-pdf') ||
+              id.includes('node_modules/@react-pdf/') ||
+              id.includes('node_modules/jspdf')) {
+            return 'vendor-pdf';
           }
 
           // UI libraries
@@ -127,27 +146,21 @@ export default defineConfig({
             return 'ui-vendor';
           }
 
-          // Charting libraries (recharts - very large, must be isolated)
-          // MarketingCommandCenter uses recharts but may not be actively used
-          if (id.includes('node_modules/recharts') ||
-              id.includes('node_modules/recharts/')) {
-            return 'charts-vendor';
-          }
+          // Charting libraries (recharts - REMOVED)
+          // MarketingCommandCenter was removed, so recharts is no longer used
+          // if (id.includes('node_modules/recharts') ||
+          //     id.includes('node_modules/recharts/')) {
+          //   return 'charts-vendor';
+          // }
 
-          // Particle systems
-          if (id.includes('node_modules/tsparticles')) {
-            return 'particles-vendor';
-          }
+          // Particle systems (tsparticles - removed, not used)
+          // if (id.includes('node_modules/tsparticles')) {
+          //   return 'particles-vendor';
+          // }
 
           // Image processing libraries (large)
           if (id.includes('node_modules/jimp') || id.includes('node_modules/node-vibrant')) {
             return 'image-vendor';
-          }
-
-          // Other node_modules (split remaining vendors)
-          if (id.includes('node_modules')) {
-            // Prevent single huge vendor chunk
-            return 'vendor';
           }
 
           // Split large source files into logical chunks
@@ -155,10 +168,61 @@ export default defineConfig({
             return 'pdf-app';
           }
 
+          // Explicitly split pages into separate chunks for code splitting
+          // IMPORTANT: Check pages BEFORE node_modules to ensure proper splitting
+          // This ensures React.lazy() imports create individual chunks
           if (id.includes('/src/pages/')) {
-            // Pages are already lazy loaded via React.lazy
-            // This ensures page-related code is chunked properly
-            return undefined; // Let Vite handle page chunks automatically
+            // Case study detail pages (nested structure)
+            if (id.includes('/src/pages/case-studies/')) {
+              const caseStudyMatch = id.match(/\/src\/pages\/case-studies\/([^\/]+)\/index\.tsx?$/);
+              if (caseStudyMatch) {
+                return `page-case-study-${caseStudyMatch[1]}`;
+              }
+              // Handle any other case-study files
+              return 'page-case-study-shared';
+            }
+
+            // Side project detail pages
+            if (id.includes('/src/pages/side-projects/')) {
+              if (id.includes('SideProjectDetail')) {
+                return 'page-side-project-detail';
+              }
+              return 'page-side-project-shared';
+            }
+
+            // Main page files (top-level pages) - match without extension
+            const pageMatch = id.match(/\/src\/pages\/([^\/]+)(?:\.tsx?)?$/);
+            if (pageMatch) {
+              const pageName = pageMatch[1];
+              // Handle index.tsx as homepage
+              if (pageName === 'index') {
+                return 'page-home';
+              }
+              // All other top-level pages get their own chunk
+              return `page-${pageName.toLowerCase()}`;
+            }
+
+            // If still a page file but no match, put in shared chunk
+            return 'page-shared';
+          }
+
+          // Other node_modules (split remaining vendors by package)
+          // This must come AFTER pages to ensure pages are split first
+          if (id.includes('node_modules')) {
+            // Split vendors by package name for better caching and parallel loading
+            const match = id.match(/node_modules\/([^\/]+)/);
+            if (match) {
+              const pkg = match[1];
+              // Large packages get their own chunk
+              const largePackages = ['@react-pdf', 'three', 'framer-motion', 'gsap', 'lucide-react'];
+              if (largePackages.some(largePkg => pkg.startsWith(largePkg))) {
+                return `vendor-${pkg.replace('@', '').replace('/', '-')}`;
+              }
+              // Group smaller packages together
+              return 'vendor-misc';
+            }
+            // Fallback
+            return 'vendor';
           }
         },
         // Optimize chunk naming for better caching
@@ -207,24 +271,29 @@ export default defineConfig({
       compress: {
         drop_console: false, // Keep console.log for production debugging
         drop_debugger: true,
-        pure_funcs: ['console.debug'] // Only drop debug, keep log/warn/error
+        pure_funcs: ['console.debug'], // Only drop debug, keep log/warn/error
+        passes: 2, // Multiple passes for better compression
       },
       mangle: {
-        safari10: true
-      }
+        safari10: true,
+        properties: false, // Keep property names for better debugging if needed
+      },
+      format: {
+        comments: false, // Remove comments
+      },
     },
-    // Source maps for production debugging
+    // Source maps disabled for production (reduces build size significantly)
     sourcemap: false,
-    // Target modern browsers for better optimization
+    // Target modern browsers for better optimization (ES2020+)
     target: 'esnext',
-    // CSS code splitting
+    // CSS code splitting - each page gets its own CSS chunk
     cssCodeSplit: true,
     // Asset optimization
-    assetsInlineLimit: 4096, // 4kb inline limit
-    chunkSizeWarningLimit: 1000, // Warning at 1MB (chunks will still be built, but warned)
-    // Report compressed sizes
+    assetsInlineLimit: 4096, // 4kb inline limit (small assets inlined as data URLs)
+    chunkSizeWarningLimit: 500, // Warning at 500KB (more aggressive)
+    // Report compressed sizes for bundle analysis
     reportCompressedSize: true,
-    // Minify CSS
-    cssMinify: true,
+    // Minify CSS aggressively
+    cssMinify: true, // CSS minification enabled
   },
 });

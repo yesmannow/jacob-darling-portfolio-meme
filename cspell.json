@@ -18,7 +18,8 @@
     "hubspot",
     "yoyo",
     "FOUC",
-    "webcomponents"
+    "webcomponents",
+    "animejs"
   ],
   "ignoreWords": [],
   "import": [

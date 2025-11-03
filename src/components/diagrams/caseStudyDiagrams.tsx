@@ -140,79 +140,6 @@ export const ProactiveSupportDecisionFlow = () => {
   );
 };
 
-// Command Center Diagrams
-export const CommandCenterArchitecture = () => {
-  const nodes = [
-    {
-      id: "woo",
-      label: "WooCommerce",
-      sublabel: "Orders",
-      icon: "🛒",
-      x: 200,
-      y: 80
-    },
-    {
-      id: "learndash",
-      label: "LearnDash",
-      sublabel: "Progress",
-      icon: "📚",
-      x: 400,
-      y: 80
-    },
-    {
-      id: "crm",
-      label: "FluentCRM",
-      sublabel: "Engagement",
-      icon: "📊",
-      x: 600,
-      y: 80
-    },
-    {
-      id: "engine",
-      label: "Aggregation Engine",
-      sublabel: "Real-time PHP",
-      icon: "⚙️",
-      x: 400,
-      y: 220,
-      color: "rgba(184, 208, 217, 0.1)"
-    },
-    {
-      id: "api",
-      label: "REST API",
-      sublabel: "Secure Endpoint",
-      icon: "🔌",
-      x: 400,
-      y: 360
-    },
-    {
-      id: "ui",
-      label: "Events Hub UI",
-      sublabel: "Interactive Dashboard",
-      icon: "📱",
-      x: 400,
-      y: 500,
-      color: "rgba(139, 92, 246, 0.1)"
-    }
-  ];
-
-  const connections = [
-    { from: "woo", to: "engine", animated: true },
-    { from: "learndash", to: "engine", animated: true },
-    { from: "crm", to: "engine", animated: true },
-    { from: "engine", to: "api", label: "Real-time", animated: true },
-    { from: "api", to: "ui", label: "JSON", animated: true }
-  ];
-
-  return (
-    <SystemArchitecture
-      nodes={nodes}
-      connections={connections}
-      title="Data Flow Architecture"
-      description="Unified data aggregation from multiple sources into one command center"
-    />
-  );
-};
-
 // The Closer Diagrams
 export const TheCloserPipeline = () => {
   const nodes = [
@@ -308,7 +235,6 @@ export const TheCloserPipeline = () => {
 export const getCaseStudyDiagrams = (slug: string) => {
   const diagrams: { [key: string]: React.FC[] } = {
     "proactive-support-engine": [ProactiveSupportArchitecture, ProactiveSupportDecisionFlow],
-    "command-center": [CommandCenterArchitecture],
     "the-closer": [TheCloserPipeline]
   };
 

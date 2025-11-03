@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, lazy, Suspense } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import AnimatedSection from "../components/animations/AnimatedSection";
-import SkillsRadar from "../components/skills/SkillsRadar";
-import ToolboxEcosystem from "../components/diagrams/ToolboxEcosystem";
+
+// Lazy load heavy diagram/visualization components
+const SkillsRadar = lazy(() => import("../components/skills/SkillsRadar"));
+const ToolboxEcosystem = lazy(() => import("../components/diagrams/ToolboxEcosystem"));
 import {
   ZapIcon,
   ShieldIcon,
@@ -14,7 +16,7 @@ import {
   CreditCardIcon,
   ChevronDownIcon
 } from "../components/icons/TechIcons";
-import SimpleIcon from "../components/icons/SimpleIcon";
+import BrandIcon from "../components/icons/BrandIcon";
 import TechTooltip from "../components/tooltips/TechTooltip";
 import { fadeInUp, staggerContainer, staggerItem } from "../utils/animations";
 import { technicalCategories, technologyStacks } from "../data/toolbox";
@@ -58,9 +60,13 @@ const Toolbox: React.FC = () => {
         </section>
       </AnimatedSection>
 
-      <SkillsRadar />
+      <Suspense fallback={<div className="h-96 flex items-center justify-center"><div className="loading-spinner" /></div>}>
+        <SkillsRadar />
+      </Suspense>
 
-      <ToolboxEcosystem />
+      <Suspense fallback={<div className="h-96 flex items-center justify-center"><div className="loading-spinner" /></div>}>
+        <ToolboxEcosystem />
+      </Suspense>
 
       <AnimatedSection delay={0.2}>
         <section className="technical-categories">
@@ -169,7 +175,7 @@ const Toolbox: React.FC = () => {
                         onMouseEnter={() => setHoveredTech(`${stack.category}-${techIndex}`)}
                         onMouseLeave={() => setHoveredTech(null)}
                       >
-                        <SimpleIcon name={tech} size={18} className="tech-icon" />
+                        <BrandIcon name={tech} size={18} className="tech-icon" />
                         <span>{tech}</span>
                         {techInfo && (
                           <TechTooltip

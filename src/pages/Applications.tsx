@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { applications, getAllCategories } from "../data/applications";
 import { staggerContainer, staggerItem } from "../utils/animations";
 import AnimatedSection from "../components/animations/AnimatedSection";
-import SimpleIcon from "../components/icons/SimpleIcon";
+import BrandIcon from "../components/icons/BrandIcon";
 import "./Applications.css";
 
 
@@ -254,7 +254,7 @@ const Applications: React.FC = () => {
                       <div className="tech-stack">
                         {app.technicalDetails.techStack.slice(0, 3).map((tech, idx) => (
                           <span key={idx} className="tech-pill">
-                            <SimpleIcon name={tech} size={16} className="tech-pill-icon" />
+                            <BrandIcon name={tech} size={16} className="tech-pill-icon" />
                             <span>{tech}</span>
                           </span>
                         ))}

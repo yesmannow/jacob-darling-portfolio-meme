@@ -1,10 +1,11 @@
-import React, { Component, ErrorInfo, ReactNode, Suspense, lazy } from "react";
+import React, { Component, ErrorInfo, ReactNode, Suspense, lazy, useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { PDFDownloadLink } from "@react-pdf/renderer";
 import { Download, Sparkles } from "lucide-react";
 
-// Lazy load ResumePDF to avoid duplicate imports and reduce bundle size
-const ResumePDF = lazy(() => import("../../pdf/ResumePDF").then(module => ({ default: module.ResumePDF })));
+// Lazy load entire PDF functionality including @react-pdf/renderer
+// This prevents @react-pdf/renderer from being bundled in the main chunk
+// The wrapper component imports both @react-pdf/renderer and ResumePDF together
+const PDFDownloadWrapper = lazy(() => import("./PDFDownloadWrapper"));
 
 interface LazyPDFDownloadCTAProps {
   isGeneratingPDF: boolean;
@@ -38,12 +39,39 @@ class PDFErrorBoundary extends Component<
   }
 }
 
-// PDF Download Button with dynamic generation
-const PDFDownloadButton: React.FC<{
-  handlePDFGeneration: () => void;
-  buttonVariants: any;
-  isGeneratingPDF: boolean;
-}> = ({ handlePDFGeneration, buttonVariants, isGeneratingPDF }) => {
+
+const LazyPDFDownloadCTA: React.FC<LazyPDFDownloadCTAProps> = ({
+  isGeneratingPDF,
+  handlePDFGeneration,
+  buttonVariants
+}) => {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    // Only render PDF component after client-side hydration
+    // This prevents @react-pdf/renderer from executing during SSR/initial load
+    setIsClient(true);
+  }, []);
+
+  // Return static fallback during SSR/initial render
+  if (!isClient) {
+    return (
+      <motion.a
+        href="/resume/Resume JD draft.pdf"
+        download="Jacob-Darling-Resume.pdf"
+        variants={buttonVariants}
+        whileHover="hover"
+        whileTap="tap"
+        className="flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full font-semibold shadow-lg hover:shadow-xl transition-shadow duration-300"
+        onClick={handlePDFGeneration}
+      >
+        <Download size={20} />
+        Download PDF
+      </motion.a>
+    );
+  }
+
+  // Render PDF component only after client-side is ready
   const fallbackButton = (
     <motion.a
       href="/resume/Resume JD draft.pdf"
@@ -71,57 +99,13 @@ const PDFDownloadButton: React.FC<{
           Loading PDF Generator...
         </motion.button>
       }>
-        <PDFDownloadLink
-          document={<ResumePDF />}
-          fileName="Jacob-Darling-Resume.pdf"
-          className="group"
-          onClick={handlePDFGeneration}
-        >
-          {({ loading, error: pdfError }) => {
-            if (pdfError) {
-              console.error("PDF generation error:", pdfError);
-              return fallbackButton;
-            }
-
-            return (
-              <motion.button
-                variants={buttonVariants}
-                whileHover="hover"
-                whileTap="tap"
-                className="flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full font-semibold shadow-lg hover:shadow-xl transition-shadow duration-300"
-                disabled={loading || isGeneratingPDF}
-              >
-                {loading || isGeneratingPDF ? (
-                  <>
-                    <Sparkles size={20} className="animate-spin" />
-                    Generating PDF...
-                  </>
-                ) : (
-                  <>
-                    <Download size={20} />
-                    Download PDF
-                  </>
-                )}
-              </motion.button>
-            );
-          }}
-        </PDFDownloadLink>
+        <PDFDownloadWrapper
+          handlePDFGeneration={handlePDFGeneration}
+          buttonVariants={buttonVariants}
+          isGeneratingPDF={isGeneratingPDF}
+        />
       </Suspense>
     </PDFErrorBoundary>
-  );
-};
-
-const LazyPDFDownloadCTA: React.FC<LazyPDFDownloadCTAProps> = ({
-  isGeneratingPDF,
-  handlePDFGeneration,
-  buttonVariants
-}) => {
-  return (
-    <PDFDownloadButton
-      handlePDFGeneration={handlePDFGeneration}
-      buttonVariants={buttonVariants}
-      isGeneratingPDF={isGeneratingPDF}
-    />
   );
 };
 

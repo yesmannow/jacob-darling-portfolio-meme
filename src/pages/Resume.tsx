@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, lazy, Suspense } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Download, Share2, Mail, ExternalLink, Eye, FileText, Sparkles, Zap } from "lucide-react";
@@ -6,16 +6,18 @@ import resumeData from "../data/resume.json";
 import HeroIntro from "../components/resume/HeroIntro";
 import Section from "../components/resume/Section";
 import CTAButtons from "../components/resume/CTAButtons";
-import ExperienceTimeline from "../components/resume/ExperienceTimeline";
-import TimelineNavigation from "../components/resume/TimelineNavigation";
-import AwardShowcase from "../components/awards/AwardShowcase";
-import AwardsSection from "../components/resume/AwardsSection";
 import LazyPDFDownload from "../components/resume/LazyPDFDownload";
 import StickyNavigation from "../components/resume/StickyNavigation";
-import SkillsWithProgress from "../components/resume/SkillsWithProgress";
-import TestimonialsSection from "../components/resume/TestimonialsSection";
 import { trackPortfolioEngagement, createTimeTracker } from "../utils/analytics";
 import "./Resume.css";
+
+// Lazy load heavy components that appear below the fold or on user interaction
+const ExperienceTimeline = lazy(() => import("../components/resume/ExperienceTimeline"));
+const TimelineNavigation = lazy(() => import("../components/resume/TimelineNavigation"));
+const AwardShowcase = lazy(() => import("../components/awards/AwardShowcase"));
+const AwardsSection = lazy(() => import("../components/resume/AwardsSection"));
+const SkillsWithProgress = lazy(() => import("../components/resume/SkillsWithProgress"));
+const TestimonialsSection = lazy(() => import("../components/resume/TestimonialsSection"));
 
 const Resume: React.FC = () => {
   const [activeSection, setActiveSection] = useState<string>("experience");
@@ -151,22 +153,30 @@ const Resume: React.FC = () => {
           <CTAButtons />
 
           {/* Timeline Navigation */}
-          <TimelineNavigation />
+          <Suspense fallback={<div className="h-16" />}>
+            <TimelineNavigation />
+          </Suspense>
 
           {/* Cinematic Experience Timeline */}
           <div id="experience" className="scroll-mt-32" />
-          <ExperienceTimeline />
+          <Suspense fallback={<div className="h-96 flex items-center justify-center"><div className="loading-spinner" /></div>}>
+            <ExperienceTimeline />
+          </Suspense>
 
           {/* Awards & Recognition */}
           <div id="awards" className="scroll-mt-32">
-            <AwardShowcase />
+            <Suspense fallback={<div className="h-64 flex items-center justify-center"><div className="loading-spinner" /></div>}>
+              <AwardShowcase />
+            </Suspense>
           </div>
 
           {/* Skills & Tools Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <Section title="Core Skills" gradient="cyan" delay={0.3}>
               <div id="skills" className="scroll-mt-32" />
-              <SkillsWithProgress />
+              <Suspense fallback={<div className="h-64 flex items-center justify-center"><div className="loading-spinner" /></div>}>
+                <SkillsWithProgress />
+              </Suspense>
             </Section>
 
             <Section title="Technologies & Tools" gradient="pink" delay={0.4}>
@@ -236,10 +246,14 @@ const Resume: React.FC = () => {
           </Section>
 
           {/* 🏆 Gold Key Award Section */}
-          <AwardsSection />
+          <Suspense fallback={<div className="h-48 flex items-center justify-center"><div className="loading-spinner" /></div>}>
+            <AwardsSection />
+          </Suspense>
 
           {/* Testimonials Section */}
-          <TestimonialsSection />
+          <Suspense fallback={<div className="h-64 flex items-center justify-center"><div className="loading-spinner" /></div>}>
+            <TestimonialsSection />
+          </Suspense>
 
           {/* Final CTA */}
           <motion.div
