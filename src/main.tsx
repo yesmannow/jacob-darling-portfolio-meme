@@ -48,6 +48,15 @@ if (typeof window !== 'undefined') {
       window.customElements._defineProtected = true; // Flag to prevent double-wrapping
 
       window.customElements.define = function(name, constructor, options) {
+        // SPECIAL CASE: mce-autosize-textarea - extra protection (comes from Vite overlay)
+        // This element specifically comes from overlay_bundle.js and causes duplicate definition errors
+        if (name === 'mce-autosize-textarea') {
+          if (customElements.get('mce-autosize-textarea')) {
+            // Already defined - silently skip (prevents error from overlay_bundle.js)
+            return;
+          }
+        }
+
         // RECOMMENDED FIX: Check if element is already defined using !customElements.get()
         // This is the exact fix pattern suggested by the user
         if (!customElements.get(name)) {

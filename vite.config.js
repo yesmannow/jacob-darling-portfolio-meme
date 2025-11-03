@@ -42,7 +42,7 @@ export default defineConfig({
       strict: false
     },
     hmr: {
-      overlay: false, // Disable overlay to let our error handlers manage errors
+      overlay: false, // Disable overlay to prevent overlay_bundle.js from loading mce-autosize-textarea
       clientPort: 5173
     }
     // Removed incorrect global Content-Type header that was causing HTML to be served as JavaScript

@@ -9,7 +9,7 @@ const loadSimpleIcons = async (): Promise<any> => {
   if (simpleIconsCache) {
     return simpleIconsCache;
   }
-  
+
   if (iconsLoadingPromise) {
     return iconsLoadingPromise;
   }
@@ -27,19 +27,19 @@ const loadSimpleIcons = async (): Promise<any> => {
 const getSimpleIcon = async (slug: string): Promise<any> => {
   try {
     const simpleIcons = await loadSimpleIcons();
-    
+
     // Convert slug to camelCase with "si" prefix
     // e.g., "react" -> "siReact", "javascript" -> "siJavascript"
     const slugLower = slug.toLowerCase();
     const camelCase = slugLower
       .split('-')
-      .map((word, index) => 
+      .map((word, index) =>
         index === 0 ? word : word.charAt(0).toUpperCase() + word.slice(1)
       )
       .join('');
-    
+
     const iconKey = `si${camelCase.charAt(0).toUpperCase()}${camelCase.slice(1)}`;
-    
+
     // Method 1: Try exact match with si prefix
     if ((simpleIcons as any)[iconKey]) {
       return (simpleIcons as any)[iconKey];
@@ -52,7 +52,7 @@ const getSimpleIcon = async (slug: string): Promise<any> => {
 
     // Method 3: Try to find by iterating through exports
     for (const key in simpleIcons) {
-      if (key.toLowerCase().includes(slugLower) || 
+      if (key.toLowerCase().includes(slugLower) ||
           (simpleIcons as any)[key]?.slug === slugLower) {
         return (simpleIcons as any)[key];
       }
@@ -223,7 +223,7 @@ const SimpleIcon: React.FC<SimpleIconProps> = ({
 
   useEffect(() => {
     const slug = getIconSlug(name);
-    
+
     if (!slug) {
       setLoading(false);
       return;
