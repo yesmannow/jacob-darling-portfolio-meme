@@ -168,6 +168,7 @@
       },
       "tags": ["coffee", "artisanal", "logo design", "package design", "specialty food"],
       "featured": false,
+      "logoOnly": true,
       "images": [
         "/images/side-projects/Black Letter - Full Logo (1).png"
       ]
@@ -219,6 +220,7 @@
       },
       "tags": ["medical branding", "logo design", "aesthetics", "concierge care", "luxury"],
       "featured": true,
+      "logoOnly": true,
       "images": [
         "/images/side-projects/CA Logo - Primary (full color).jpg",
         "/images/design/CA.jpg"
@@ -437,11 +439,182 @@
       "featured": false,
       "website": "https://pikemedical.com",
       "images": []
+    },
+    {
+      "id": "installation-nation",
+      "title": "Installation Nation 2018 Event Logo & Branding",
+      "slug": "installation-nation",
+      "category": "Event Branding",
+      "client": "Primary Colours / Installation Nation",
+      "year": "2018",
+      "duration": "2 months",
+      "services": ["Logo Design", "Event Branding", "Sponsorship Materials"],
+      "challenge": "Create a distinctive visual identity for Installation Nation 2018, a 23-day outdoor art exhibition, that captures the intersection of art, nature, and community while appealing to sponsors and diverse audiences.",
+      "approach": "Developed a bold, distressed logo combining natural elements (tree silhouette) with industrial typography. The design balances rustic artistry with modern appeal, using a dark teal color palette that evokes both creativity and stability. Integrated the Primary Colours organizational identity seamlessly.",
+      "execution": "Designed main event logo with distressed texture for character, incorporated tree silhouette representing the ArtsPark location, created cohesive branding system for sponsor materials, and developed visual identity that worked across outdoor signage, print materials, and digital platforms.",
+      "results": "Established strong visual identity that enhanced event recognition, supported successful sponsorship acquisition, and created memorable brand presence for 10,000+ attendees across the 23-day exhibition.",
+      "takeaway": "Event branding must capture both artistic vision and practical marketing needs. Distressed textures and natural elements can effectively communicate authenticity and community connection in arts-focused events.",
+      "metrics": {
+        "eventDuration": "23 days",
+        "attendees": "10,000+",
+        "sponsorshipLevels": "Multi-tier program",
+        "artistParticipation": "13 artists/groups"
+      },
+      "tags": ["event branding", "logo design", "arts", "non-profit", "outdoor exhibition"],
+      "featured": true,
+      "logoOnly": true,
+      "images": [
+        "/images/side-projects/cropped-PC_LOGO1-1024x174.jpg"
+      ]
+    },
+    {
+      "id": "circle-city-kicks",
+      "title": "Circle City Kicks Logo & Brand Identity",
+      "slug": "circle-city-kicks",
+      "category": "Retail Branding",
+      "client": "Circle City Kicks",
+      "year": "2023",
+      "duration": "3 weeks",
+      "services": ["Logo Design", "Brand Identity"],
+      "challenge": "Design a bold, urban logo for a sneaker buy-sell-trade business that captures the energy of streetwear culture while establishing credibility in the competitive sneaker resale market.",
+      "approach": "Developed a dynamic logo featuring iconic high-top sneakers suspended in an urban setting. The design uses bold typography with angular placement to create movement and energy. Incorporated Indianapolis' 'Circle City' identity through the cityscape backdrop, connecting local pride with sneaker culture.",
+      "execution": "Created distinctive logo with custom sneaker illustration, integrated cityscape background for local connection, designed bold typography with dynamic angles, and developed color palette emphasizing energy (red) and urban authenticity (black/white/teal).",
+      "results": "Established memorable brand identity that resonated with sneaker culture enthusiasts, enhanced storefront and social media presence, and created foundation for successful business launch in competitive market.",
+      "takeaway": "Streetwear and sneaker culture branding requires authenticity and energy. Combining local identity with industry iconography creates connection that resonates with target demographics.",
+      "metrics": {
+        "brandRecognition": "Strong local presence",
+        "targetAudience": "Sneaker enthusiasts",
+        "launchSuccess": "Successful opening"
+      },
+      "tags": ["retail", "logo design", "streetwear", "sneakers", "urban branding"],
+      "featured": false,
+      "logoOnly": true,
+      "images": []
+    },
+    {
+      "id": "indianapolis-bicentennial",
+      "title": "Indianapolis 200 Years Bicentennial Logo",
+      "slug": "indianapolis-bicentennial",
+      "category": "Civic Branding",
+      "client": "City of Indianapolis",
+      "year": "2020",
+      "duration": "6 months",
+      "services": ["Logo Design", "Civic Branding", "Event Identity"],
+      "challenge": "Create a commemorative logo for Indianapolis' 200th anniversary (1820-2020) that honors the city's rich history while celebrating its iconic motorsports heritage and forward-looking vision.",
+      "approach": "Developed sophisticated design combining historical symbolism (classical statue representing liberty and progress) with iconic Indianapolis elements (checkered racing flags, circular track motifs in the '0's). The dual '0's cleverly incorporate racing imagery with civic pride stars, creating layers of meaning.",
+      "execution": "Designed comprehensive logo system with primary mark featuring '200' with integrated racing elements, incorporated classical statue symbolizing civic values, created patriotic color palette (red, white, blue), developed typography hierarchy emphasizing 'INDIANAPOLIS' prominence, and ensured versatility across official documents, merchandise, and digital platforms.",
+      "results": "Created iconic logo that became symbol of city's bicentennial celebration, used extensively across official materials and commemorative merchandise, and successfully captured both historical significance and cultural identity.",
+      "takeaway": "Civic branding requires balancing multiple stakeholders and cultural touchstones. Layered symbolism that honors tradition while celebrating distinctive local identity creates memorable commemorative design.",
+      "metrics": {
+        "anniversaryPeriod": "1820-2020",
+        "usageScope": "Citywide",
+        "culturalImpact": "Significant"
+      },
+      "tags": ["civic branding", "logo design", "commemorative", "motorsports", "city identity"],
+      "featured": true,
+      "logoOnly": true,
+      "images": []
+    },
+    {
+      "id": "be-free-home-life",
+      "title": "Be Free Home & Life Logo & Brand Identity",
+      "slug": "be-free-home-life",
+      "category": "Lifestyle Branding",
+      "client": "Be Free Home & Life",
+      "year": "2023",
+      "duration": "4 weeks",
+      "services": ["Logo Design", "Brand Identity"],
+      "challenge": "Design a modern, balanced logo for a lifestyle brand focused on home and life freedom that conveys simplicity, harmony, and approachable sophistication to diverse audiences.",
+      "approach": "Created geometric logo featuring monogram 'BF' within a divided square, using vibrant blue and golden yellow to represent balance and energy. The design emphasizes clarity and versatility, with clean typography that complements the graphic element.",
+      "execution": "Developed distinctive monogram logo with color-divided square frame, created harmonious color palette (bright blue, golden yellow, black), designed clean sans-serif typography system, and ensured logo works effectively in both full-color and monochrome applications.",
+      "results": "Established clean, memorable brand identity that communicates brand values effectively, enhanced brand recognition across platforms, and created versatile logo system adaptable to various applications.",
+      "takeaway": "Geometric logo design can effectively communicate balance and modernity. Strategic color division and clean typography create versatile brand marks that work across diverse touchpoints.",
+      "metrics": {
+        "brandClarity": "Enhanced",
+        "versatility": "High adaptability",
+        "targetAppeal": "Broad demographic"
+      },
+      "tags": ["lifestyle", "logo design", "geometric design", "brand identity", "home goods"],
+      "featured": false,
+      "logoOnly": true,
+      "images": []
+    },
+    {
+      "id": "herbs-rub",
+      "title": "Herb's Rub Logo & Product Branding",
+      "slug": "herbs-rub",
+      "category": "Food Product Branding",
+      "client": "Herb's Rub",
+      "year": "2023",
+      "duration": "3 weeks",
+      "services": ["Logo Design", "Product Branding"],
+      "challenge": "Create a distinctive, personality-driven logo for a specialty food product (spice rub) that conveys both the founder's personal story and the product's flavor profile, appealing to food enthusiasts seeking authentic, artisanal ingredients.",
+      "approach": "Developed playful, character-driven logo featuring founder's portrait in friendly cartoon style, integrated fiery elements suggesting spice and heat, and added 'Top Secret Confidential' stamp element creating intrigue and exclusivity. The design balances personal connection with product personality.",
+      "execution": "Designed custom portrait illustration in distinctive cartoon style, created bold distressed typography for 'HERB'S RUB' emphasizing rustic authenticity, incorporated flame graphics suggesting spice and heat, added playful 'confidential' stamp element, and developed color palette (green, orange, red) evoking freshness and flavor intensity.",
+      "results": "Established memorable brand identity that tells founder's story, enhanced product shelf appeal, created strong personality connection with customers, and supported successful product launch.",
+      "takeaway": "Food product branding benefits from personal storytelling. Character-driven design combined with product cues (flames for spice) creates emotional connection that drives purchase decisions in competitive specialty food markets.",
+      "metrics": {
+        "brandPersonality": "Strong character",
+        "shelfAppeal": "Enhanced",
+        "customerConnection": "Personal story"
+      },
+      "tags": ["food product", "logo design", "artisanal", "character branding", "spice rub"],
+      "featured": false,
+      "logoOnly": true,
+      "images": []
+    },
+    {
+      "id": "hoosier-boy-logo",
+      "title": "Hoosier Boy Barbershop Logo Design",
+      "slug": "hoosier-boy-logo",
+      "category": "Service Business",
+      "client": "Hoosier Boy Barbershop",
+      "year": "2023",
+      "duration": "2 weeks",
+      "services": ["Logo Design", "Brand Identity"],
+      "challenge": "Design a memorable logo for a barbershop that combines Indiana state pride (cardinal) with traditional barbershop iconography, creating a brand identity that appeals to diverse clientele while honoring local heritage.",
+      "approach": "Developed distinctive logo featuring Indiana state bird (cardinal) holding a classic barber pole, seamlessly blending regional identity with industry iconography. The design uses bold colors (red, white, blue) that evoke both patriotism and classic barbershop tradition.",
+      "execution": "Created custom illustration of cardinal with outstretched wings, integrated traditional barber pole with diagonal stripes, designed clean typography emphasizing 'HOOSIER BOY' in white on dark backgrounds, developed versatile color system (red cardinal, white/blue pole), and ensured logo works effectively for signage, business cards, and digital applications.",
+      "results": "Established strong local brand identity that resonates with Indianapolis community, enhanced storefront recognition, created memorable brand mark that communicates both location and service type, and supported successful business launch.",
+      "takeaway": "Local business branding thrives on authentic regional connections. Combining state symbols with industry iconography creates memorable brand identity that builds community connection and customer loyalty.",
+      "metrics": {
+        "localConnection": "Strong regional identity",
+        "brandRecognition": "Community recognition",
+        "versatility": "Multiple applications"
+      },
+      "tags": ["barbershop", "logo design", "local business", "state pride", "service industry"],
+      "featured": false,
+      "logoOnly": true,
+      "images": []
+    },
+    {
+      "id": "taconinja",
+      "title": "Taconinja Logo & Brand Identity",
+      "slug": "taconinja",
+      "category": "Food Branding",
+      "client": "Taconinja",
+      "year": "2024",
+      "duration": "3 weeks",
+      "services": ["Logo Design", "Brand Identity"],
+      "challenge": "Create a playful, memorable logo for a food brand that cleverly combines two distinct concepts (taco and ninja) into a cohesive, marketable brand identity that appeals to younger demographics and stands out in competitive food market.",
+      "approach": "Developed humorous logo featuring taco shell as ninja character with headband, using minimalist facial features to create friendly personality. The design balances playfulness with clean execution, ensuring versatility across food service applications.",
+      "execution": "Designed character-based logo with taco shell as primary shape, incorporated ninja headband as distinguishing element, created minimalist facial features for approachable personality, developed bold typography for 'TACONINJA' emphasizing clarity, and selected color palette (orange-yellow taco, golden-brown headband) evoking warmth and appetite appeal.",
+      "results": "Established memorable brand identity that generates social media engagement, enhanced brand recognition through unique concept, created versatile logo system for menu, packaging, and digital applications, and supported successful brand launch.",
+      "takeaway": "Conceptual combination in logo design can create memorable brand identity. Playful character-driven design appeals to younger demographics while maintaining professional execution ensures broad market appeal.",
+      "metrics": {
+        "brandMemorability": "High concept recognition",
+        "socialEngagement": "Strong",
+        "targetAppeal": "Younger demographics"
+      },
+      "tags": ["food branding", "logo design", "character design", "restaurant", "playful branding"],
+      "featured": false,
+      "logoOnly": true,
+      "images": []
     }
   ],
   "metadata": {
-    "totalProjects": 16,
-    "categories": ["Restaurant Branding", "Healthcare Branding", "Fitness Branding", "Brand Strategy", "Product Branding", "Coffee Branding", "Non-Profit Marketing", "Medical Branding", "Healthcare Digital", "Service Business", "E-commerce Branding", "Healthcare Education", "Legal Services", "Real Estate", "Healthcare Corporate"],
+    "totalProjects": 23,
+    "categories": ["Restaurant Branding", "Healthcare Branding", "Fitness Branding", "Brand Strategy", "Product Branding", "Coffee Branding", "Non-Profit Marketing", "Medical Branding", "Healthcare Digital", "Service Business", "E-commerce Branding", "Healthcare Education", "Legal Services", "Real Estate", "Healthcare Corporate", "Event Branding", "Retail Branding", "Civic Branding", "Lifestyle Branding", "Food Product Branding"],
     "services": ["Brand Identity", "Logo Design", "Marketing Materials", "Web Design", "Package Design", "Brand Strategy", "Event Marketing", "Sponsorship Strategy", "E-commerce Design", "Amazon Optimization", "SEO", "Digital Marketing"],
     "lastUpdated": "2025-11-03",
     "brandTone": "cinematic, confident, intelligent, warmly human"

@@ -3,17 +3,21 @@ import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import {
-  ArrowLeft,
-  ExternalLink,
-  Calendar,
-  Clock,
-  Target,
-  Lightbulb,
-  CheckCircle,
+import { 
+  ArrowLeft, 
+  ExternalLink, 
+  Calendar, 
+  Clock, 
+  Target, 
+  Lightbulb, 
+  CheckCircle, 
   TrendingUp,
   Eye,
-  Heart
+  Heart,
+  Palette,
+  Type,
+  Layers,
+  Sparkles
 } from "lucide-react";
 import sideProjectsData from "../../data/side-projects-structured.json";
 import Lightbox from "../../components/gallery/Lightbox";
@@ -194,8 +198,8 @@ const SideProjectDetail: React.FC = () => {
           {project.images && project.images.length > 0 && (
             <section className="content-section logo-section">
               <div className="logo-display-container">
-                <img 
-                  src={project.images[0]} 
+                <img
+                  src={project.images[0]}
                   alt={`${project.client} Logo`}
                   className="project-logo"
                   onClick={() => openLightbox(0)}
@@ -213,9 +217,9 @@ const SideProjectDetail: React.FC = () => {
                   <p className="website-showcase-description">
                     Explore the fully deployed website for {project.client}
                   </p>
-                  <a 
-                    href={project.website} 
-                    target="_blank" 
+                  <a
+                    href={project.website}
+                    target="_blank"
                     rel="noopener noreferrer"
                     className="website-cta-button"
                   >
@@ -224,9 +228,9 @@ const SideProjectDetail: React.FC = () => {
                   </a>
                   <div className="website-url">
                     <span className="website-url-label">URL:</span>
-                    <a 
-                      href={project.website} 
-                      target="_blank" 
+                    <a
+                      href={project.website}
+                      target="_blank"
                       rel="noopener noreferrer"
                       className="website-link"
                     >
@@ -240,7 +244,7 @@ const SideProjectDetail: React.FC = () => {
               </div>
             </section>
           )}
-          
+
           {/* Overview */}
           <section className="content-section overview-section">
             <div className="section-grid">
@@ -291,27 +295,101 @@ const SideProjectDetail: React.FC = () => {
             </div>
           </section>
 
-          {/* Approach */}
+          {/* Approach / Design Process - Enhanced for logo-only projects */}
           <section className="content-section approach-section">
             <div className="section-header">
               <Lightbulb size={32} />
-              <h2>Our Approach</h2>
+              <h2>{project.logoOnly ? "Design Process & Rationale" : "Our Approach"}</h2>
             </div>
             <div className="section-content">
               <p>{project.approach}</p>
+              {project.logoOnly && (
+                <div className="design-breakdown">
+                  <div className="design-element">
+                    <h4>Concept Development</h4>
+                    <p>The design process began with in-depth research into the client's industry, target audience, and competitive landscape. Through collaborative discovery sessions, we identified key brand values and emotional connections that the logo needed to communicate.</p>
+                  </div>
+                  <div className="design-element">
+                    <h4>Symbolism & Meaning</h4>
+                    <p>Every element was chosen with strategic intent—from color psychology to typography selection. The final design creates a visual language that resonates with the target audience while differentiating the brand in its marketplace.</p>
+                  </div>
+                  <div className="design-element">
+                    <h4>Versatility & Application</h4>
+                    <p>The logo was designed from the start to work across diverse applications, from digital platforms to print materials, ensuring consistent brand presence regardless of medium or scale.</p>
+                  </div>
+                </div>
+              )}
             </div>
           </section>
 
-          {/* Execution */}
+          {/* Color Palette & Typography - Logo-only projects */}
+          {project.logoOnly && (
+            <section className="content-section brand-elements-section">
+              <div className="section-header">
+                <Palette size={32} />
+                <h2>Color Palette & Typography</h2>
+              </div>
+              <div className="section-content">
+                <div className="brand-elements-grid">
+                  <div className="element-card">
+                    <div className="element-icon">
+                      <Palette size={24} />
+                    </div>
+                    <h4>Color Strategy</h4>
+                    <p>The color palette was carefully selected to evoke specific emotions and brand associations. Each color serves a strategic purpose in communicating the brand's personality and values, ensuring the logo resonates with the intended audience while maintaining visual appeal and readability across applications.</p>
+                  </div>
+                  <div className="element-card">
+                    <div className="element-icon">
+                      <Type size={24} />
+                    </div>
+                    <h4>Typography Selection</h4>
+                    <p>The typography choice reflects the brand's character and ensures optimal legibility across all sizes and contexts. Whether custom lettering or carefully selected typefaces, the typography enhances the overall brand message and creates a distinctive voice.</p>
+                  </div>
+                  <div className="element-card">
+                    <div className="element-icon">
+                      <Layers size={24} />
+                    </div>
+                    <h4>Visual Hierarchy</h4>
+                    <p>The logo's composition creates a clear visual hierarchy that guides the eye and communicates the most important information first. Strategic use of scale, spacing, and contrast ensures the logo remains effective and memorable across all applications.</p>
+                  </div>
+                </div>
+              </div>
+            </section>
+          )}
+
+          {/* Execution / Logo Variations - Enhanced for logo-only */}
           <section className="content-section execution-section">
             <div className="section-header">
               <CheckCircle size={32} />
-              <h2>Execution</h2>
+              <h2>{project.logoOnly ? "Logo Variations & Versatility" : "Execution"}</h2>
             </div>
             <div className="section-content">
               <p>{project.execution}</p>
+              {project.logoOnly && (
+                <div className="variations-info">
+                  <p><strong>Versatile Design System:</strong> The logo was developed with multiple applications in mind. From full-color versions to monochrome applications, the design maintains its integrity and recognition across all contexts—whether appearing on digital platforms, print materials, signage, or merchandise.</p>
+                  <p><strong>Adaptive Solutions:</strong> The logo system includes variations optimized for different use cases, ensuring brand consistency while accommodating diverse application requirements and technical constraints.</p>
+                </div>
+              )}
             </div>
           </section>
+
+          {/* Brand Story & Impact - Logo-only projects */}
+          {project.logoOnly && (
+            <section className="content-section brand-story-section">
+              <div className="section-header">
+                <Sparkles size={32} />
+                <h2>Brand Story & Impact</h2>
+              </div>
+              <div className="section-content">
+                <div className="brand-story-content">
+                  <p><strong>The Brand Transformation:</strong> This logo represents more than just a visual mark—it's the foundation of the brand's identity. The design captures the essence of the brand's story, values, and promise to its audience.</p>
+                  <p><strong>Strategic Impact:</strong> A well-designed logo serves as a powerful tool for brand recognition, emotional connection, and market differentiation. This identity establishes a memorable presence that supports marketing efforts and builds long-term brand equity.</p>
+                  <p><strong>Foundation for Growth:</strong> By creating a strong, versatile logo system, we've provided the client with a solid foundation for future brand expansion, ensuring consistency as the brand grows and evolves across new markets and applications.</p>
+                </div>
+              </div>
+            </section>
+          )}
 
           {/* Gallery */}
           {project.images.length > 1 && (
