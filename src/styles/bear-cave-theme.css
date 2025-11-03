@@ -1,0 +1,293 @@
+/* ===================================================================
+   BEAR CAVE MARKETING - BRAND THEME
+   Wilderness • Strength • Clarity • Growth
+   =================================================================== */
+
+/* Import Montserrat font for headings */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap');
+
+/* ===== BEAR CAVE BRAND TOKENS ===== */
+:root {
+  /* ===== CORE BRAND COLORS ===== */
+  --bear-cave-primary-dark: #1E1E1E;     /* Cave Shadow Black */
+  --bear-cave-accent-gold: #D49B41;      /* Bear Fur Gold */
+  --bear-cave-slate: #4A5A6A;            /* Secondary Slate */
+  --bear-cave-light: #F5F5F5;            /* Light Neutral */
+
+  /* ===== BRAND-CASED CSS VARIABLES ===== */
+  --color-primary: var(--bear-cave-primary-dark);
+  --color-accent: var(--bear-cave-accent-gold);
+  --color-bg: var(--bear-cave-primary-dark);
+  --color-text: var(--bear-cave-light);
+  --color-text-muted: #A1A1AA;
+
+  /* ===== TYPOGRAPHY - BEAR CAVE BRAND ===== */
+  --font-heading: 'Montserrat', system-ui, -apple-system, sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+
+  /* ===== BEAR CAVE GRADIENTS ===== */
+  --gradient-cave-dark: linear-gradient(135deg, #1E1E1E 0%, #2A2A2A 100%);
+  --gradient-cave-gold: linear-gradient(135deg, #D49B41 0%, #E5B65A 100%);
+  --gradient-cave-emergence: linear-gradient(135deg, #1E1E1E 0%, #4A5A6A 50%, #D49B41 100%);
+  --gradient-bear-strength: linear-gradient(135deg, #D49B41 0%, #B8860B 100%);
+
+  /* ===== GLOW EFFECTS ===== */
+  --glow-cave: 0 0 12px rgba(212, 155, 65, 0.3);
+  --glow-bear: 0 0 20px rgba(212, 155, 65, 0.4), 0 0 40px rgba(212, 155, 65, 0.2);
+  --glow-shadow: 0 4px 12px rgba(30, 30, 30, 0.8);
+
+  /* ===== BEAR CAVE SHADOWS ===== */
+  --shadow-cave: 0 8px 32px rgba(30, 30, 30, 0.6);
+  --shadow-bear: 0 12px 40px rgba(212, 155, 65, 0.25);
+  --shadow-stone: 0 4px 16px rgba(74, 90, 106, 0.3);
+
+  /* ===== BEAR CAVE GLASS EFFECTS ===== */
+  --glass-cave: rgba(30, 30, 30, 0.8);
+  --glass-cave-border: rgba(212, 155, 65, 0.2);
+  --glass-stone: rgba(74, 90, 106, 0.1);
+}
+
+/* ===== BEAR CAVE THEME OVERRIDES ===== */
+html[data-brand="bear-cave"] {
+  /* Core brand colors */
+  --color-primary: var(--bear-cave-primary-dark);
+  --color-accent: var(--bear-cave-accent-gold);
+  --color-bg: var(--bear-cave-primary-dark);
+  --color-text: var(--bear-cave-light);
+  --color-text-muted: #9CA3AF;
+
+  /* Typography */
+  --font-heading: 'Montserrat', system-ui, -apple-system, sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+
+  /* Brand gradients */
+  --gradient-brand: var(--gradient-cave-gold);
+  --gradient-brand-vertical: var(--gradient-cave-gold);
+  --gradient-brand-radial: radial-gradient(circle, #D49B41 0%, #B8860B 70%);
+  --gradient-dark: var(--gradient-cave-dark);
+
+  /* Enhanced shadows and glows */
+  --glow-brand: var(--glow-bear);
+  --shadow-brand: var(--shadow-bear);
+
+  /* Glass effects */
+  --glass-bg: var(--glass-cave);
+  --glass-border: var(--glass-cave-border);
+}
+
+/* ===== DARK THEME FOR BEAR CAVE ===== */
+html[data-brand="bear-cave"].dark {
+  --bg: #1E1E1E;
+  --card: rgba(30, 30, 30, 0.8);
+  --border: rgba(212, 155, 65, 0.2);
+  --text: #F5F5F5;
+  --muted: #9CA3AF;
+  --accent: #D49B41;
+  --ring: #D49B41;
+}
+
+/* ===== LIGHT THEME FOR BEAR CAVE ===== */
+html[data-brand="bear-cave"]:not(.dark) {
+  --bg: #F5F5F5;
+  --card: rgba(255, 255, 255, 0.9);
+  --border: rgba(74, 90, 106, 0.2);
+  --text: #1E1E1E;
+  --muted: #4A5A6A;
+  --accent: #D49B41;
+  --ring: #D49B41;
+}
+
+/* ===== BEAR CAVE COMPONENT CLASSES ===== */
+
+/* Hero Section Styles */
+.bear-cave-hero {
+  background: var(--gradient-cave-emergence);
+  position: relative;
+  overflow: hidden;
+}
+
+.bear-cave-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23D49B41' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  opacity: 0.5;
+}
+
+/* Value Bullets */
+.bear-cave-bullet {
+  background: linear-gradient(135deg, rgba(212, 155, 65, 0.1) 0%, rgba(74, 90, 106, 0.1) 100%);
+  border: 1px solid rgba(212, 155, 65, 0.2);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.bear-cave-bullet:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--glow-cave);
+  border-color: rgba(212, 155, 65, 0.4);
+}
+
+/* Metric Counters */
+.bear-cave-metric {
+  background: var(--glass-cave);
+  border: 1px solid var(--glass-cave-border);
+  backdrop-filter: blur(20px);
+}
+
+.bear-cave-metric-number {
+  background: var(--gradient-cave-gold);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: var(--glow-cave);
+}
+
+/* Logo Wall */
+.bear-cave-logo-wall {
+  background: var(--gradient-cave-dark);
+}
+
+.bear-cave-logo-item:hover .bear-cave-client-logo {
+  filter: grayscale(0%) brightness(1.2);
+  box-shadow: var(--glow-cave);
+}
+
+/* CTA Buttons */
+.bear-cave-btn-primary {
+  background: var(--gradient-cave-gold);
+  color: var(--bear-cave-primary-dark);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: var(--shadow-bear);
+  transition: all 0.3s ease;
+}
+
+.bear-cave-btn-primary:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: var(--glow-bear);
+  background: var(--gradient-bear-strength);
+}
+
+.bear-cave-btn-secondary {
+  background: transparent;
+  color: var(--bear-cave-accent-gold);
+  border: 2px solid var(--bear-cave-accent-gold);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+.bear-cave-btn-secondary:hover {
+  background: var(--bear-cave-accent-gold);
+  color: var(--bear-cave-primary-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--glow-cave);
+}
+
+/* Testimonial Blocks */
+.bear-cave-testimonial {
+  background: var(--glass-cave);
+  border: 1px solid var(--glass-cave-border);
+  backdrop-filter: blur(20px);
+  position: relative;
+}
+
+.bear-cave-testimonial::before {
+  content: '"';
+  position: absolute;
+  top: -10px;
+  left: 20px;
+  font-size: 4rem;
+  color: var(--bear-cave-accent-gold);
+  font-family: var(--font-heading);
+  line-height: 1;
+}
+
+/* Sticky CTA Mobile */
+.bear-cave-sticky-cta {
+  background: var(--gradient-cave-gold);
+  color: var(--bear-cave-primary-dark);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ===== RESPONSIVE BEAR CAVE ===== */
+@media (max-width: 768px) {
+  .bear-cave-hero {
+    padding: 2rem 1rem;
+  }
+
+  .bear-cave-bullet {
+    margin-bottom: 1rem;
+  }
+
+  .bear-cave-btn-primary,
+  .bear-cave-btn-secondary {
+    width: 100%;
+    text-align: center;
+    padding: 1rem;
+  }
+}
+
+/* ===== BEAR CAVE ANIMATIONS ===== */
+@keyframes bearCaveGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(212, 155, 65, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(212, 155, 65, 0.6);
+  }
+}
+
+.bear-cave-animate-glow {
+  animation: bearCaveGlow 3s ease-in-out infinite;
+}
+
+@keyframes emergeFromCave {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.bear-cave-emerge {
+  animation: emergeFromCave 0.8s ease-out forwards;
+}
+
+/* ===== UTILITY CLASSES ===== */
+.bear-cave-text-gradient {
+  background: var(--gradient-cave-gold);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.bear-cave-glow-text {
+  color: var(--bear-cave-accent-gold);
+  text-shadow: var(--glow-cave);
+}
+
+.bear-cave-stone-text {
+  color: var(--bear-cave-slate);
+}
+
+.bear-cave-shadow {
+  box-shadow: var(--shadow-cave);
+}
+
+.bear-cave-stone-bg {
+  background: var(--glass-stone);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(74, 90, 106, 0.2);
+}
