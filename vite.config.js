@@ -40,12 +40,9 @@ export default defineConfig({
   server: {
     fs: {
       strict: false
-    },
-    hmr: {
-      overlay: false, // Disable overlay to prevent overlay_bundle.js from loading mce-autosize-textarea
-      clientPort: 5173
     }
-    // Removed incorrect global Content-Type header that was causing HTML to be served as JavaScript
+    // HMR config removed entirely - relying on Vite defaults prevents overlay_bundle.js injection
+    // This prevents mce-autosize-textarea from being registered by the error overlay
   },
   resolve: {
     alias: {
