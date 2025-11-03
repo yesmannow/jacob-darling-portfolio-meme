@@ -29,56 +29,30 @@ if (typeof window !== 'undefined') {
 // This must run IMMEDIATELY before any other scripts to catch early registrations
 // Set up error suppression BEFORE any imports to catch early errors
 if (typeof window !== 'undefined') {
-  // Suppress custom element errors globally
-  window.addEventListener('error', (event) => {
-    if (event.error?.message?.includes('has already been defined') ||
-        event.error?.message?.includes('mce-autosize-textarea')) {
-      event.preventDefault();
-      event.stopPropagation();
-      return false;
-    }
-  }, true); // Use capture phase to catch early
+  // Note: Removed aggressive error suppression
+  // Vite 5.4.21 should have fixed HMR overlay issues
 
-  // Override customElements.define to prevent duplicates (if not already protected)
-  // This uses the recommended pattern: check !customElements.get() before defining
-  // Note: This is a backup protection in case index.html protection doesn't catch everything
-  if (window.customElements && !window.customElements._defineProtected) {
+  // Minimal backup protection (index.html should handle most cases)
+  // Vite 5.4.21 should have fixed HMR overlay issues, so this is just a safety net
+  if (window.customElements && !(window.customElements as any)._defineProtected) {
     const originalDefine = window.customElements.define;
     if (originalDefine) {
-      window.customElements._defineProtected = true; // Flag to prevent double-wrapping
+      (window.customElements as any)._defineProtected = true;
 
       window.customElements.define = function(name, constructor, options) {
-        // SPECIAL CASE: mce-autosize-textarea - extra protection (comes from Vite overlay)
-        // This element specifically comes from overlay_bundle.js and causes duplicate definition errors
-        if (name === 'mce-autosize-textarea') {
-          if (customElements.get('mce-autosize-textarea')) {
-            // Already defined - silently skip (prevents error from overlay_bundle.js)
-            return;
-          }
-        }
-
-        // RECOMMENDED FIX: Check if element is already defined using !customElements.get()
-        // This is the exact fix pattern suggested by the user
+        // Basic duplicate check
         if (!customElements.get(name)) {
-          // Element doesn't exist - safe to define
           try {
             return originalDefine.call(this, name, constructor, options);
-          } catch (error) {
-            // If definition fails (race condition), check again
-            const errorMsg = error && (error.message || String(error));
-            if (errorMsg && errorMsg.includes('has already been defined')) {
-              // Element was defined between our check and the actual define() call
-              // This is a race condition - silently ignore it (prevents error)
-              return;
+          } catch (error: unknown) {
+            const errorMsg = error ? ((error as Error).message || String(error)) : '';
+            if (typeof errorMsg === 'string' && errorMsg.includes('has already been defined')) {
+              return; // Race condition - skip duplicate
             }
-            // Re-throw non-duplicate errors
             throw error;
           }
-        } else {
-          // Element already exists - silently return (prevents "already been defined" error)
-          // This is the fix: check BEFORE defining
-          return;
         }
+        // Already exists - skip
       };
     }
   }
@@ -117,19 +91,8 @@ window.addEventListener('error', (event) => {
     return false;
   }
 
-  // Suppress TinyMCE and other custom element definition errors
-  // Also check filename to catch overlay_bundle.js errors
-  if ((event.error && event.error.message &&
-      (event.error.message.includes('has already been defined') ||
-       event.error.message.includes('custom element') ||
-       event.error.message.includes('define') ||
-       event.error.message.includes('mce-autosize-textarea'))) ||
-      filename.includes('overlay_bundle') ||
-      filename.includes('webcomponents-ce')) {
-    // Suppress custom element errors, especially from Vite overlay
-    event.preventDefault();
-    return false;
-  }
+  // Note: Removed aggressive custom element error suppression
+  // Vite 5.4.21 should have fixed HMR overlay issues
 });
 
 // Handle unhandled promise rejections for custom elements
@@ -145,29 +108,9 @@ window.addEventListener('unhandledrejection', (event) => {
     return;
   }
 
-  // Handle custom element errors
-  if (event.reason && event.reason.message &&
-      (event.reason.message.includes('has already been defined') ||
-       event.reason.message.includes('custom element') ||
-       event.reason.message.includes('mce-autosize-textarea'))) {
-    if (process.env.NODE_ENV === 'development') {
-      console.warn('Suppressed duplicate custom element definition:', event.reason.message);
-    }
-    event.preventDefault();
-    return;
-  }
-
-  // Handle string-based rejections
-  if (event.reason && typeof event.reason === 'string' &&
-      (event.reason.includes('has already been defined') ||
-       event.reason.includes('custom element') ||
-       event.reason.includes('mce-autosize-textarea'))) {
-    if (process.env.NODE_ENV === 'development') {
-      console.warn('Suppressed external script error:', event.reason);
-    }
-    event.preventDefault();
-    return;
-  }
+  // Note: Removed aggressive custom element rejection suppression
+  // Vite 5.4.21 should have fixed HMR overlay issues
+  // Basic duplicate prevention remains in customElements.define override above
 });
 
 // Set a timeout to show error if React doesn't mount within 10 seconds

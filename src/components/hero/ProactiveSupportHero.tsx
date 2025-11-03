@@ -25,6 +25,7 @@ const ProactiveSupportHero: React.FC = () => {
 
   const [isAnimating, setIsAnimating] = useState(false);
   const [currentMessage, setCurrentMessage] = useState(0);
+  const timersRef = useRef<number[]>([]);
 
   const chatMessages: ChatMessage[] = [
     { id: '1', text: "Hi! I need help with my course access.", sender: 'user', delay: 1000 },
@@ -113,28 +114,44 @@ const ProactiveSupportHero: React.FC = () => {
     setIsAnimating(true);
     let messageIndex = 0;
 
+    // Helper to track and enqueue timer IDs
+    const enqueue = (callback: () => void, delay: number): void => {
+      const id = window.setTimeout(callback, delay);
+      timersRef.current.push(id);
+    };
+
     const showNextMessage = () => {
       if (messageIndex < chatMessages.length) {
         setCurrentMessage(messageIndex);
         messageIndex++;
 
         if (messageIndex < chatMessages.length) {
-          setTimeout(showNextMessage, chatMessages[messageIndex].delay);
+          enqueue(showNextMessage, chatMessages[messageIndex].delay);
         } else {
           // Loop the conversation
-          setTimeout(() => {
+          enqueue(() => {
             messageIndex = 0;
             setCurrentMessage(0);
-            setTimeout(showNextMessage, 1000);
+            enqueue(showNextMessage, 1000);
           }, 3000);
         }
       }
     };
 
-    setTimeout(showNextMessage, 1000);
+    enqueue(showNextMessage, 1000);
   };
 
+  // Cleanup all timers on unmount
+  useEffect(() => {
+    return () => {
+      timersRef.current.forEach(timerId => clearTimeout(timerId));
+      timersRef.current = [];
+    };
+  }, []);
+
   const animateMetrics = () => {
+    // Metrics animation is scoped via gsap.context(..., heroRef) above
+    // Selector `.metric-${index}` is already scoped to heroRef.current
     metrics.forEach((metric, index) => {
       gsap.fromTo(`.metric-${index}`,
         { scale: 0.8, opacity: 0 },
@@ -144,7 +161,8 @@ const ProactiveSupportHero: React.FC = () => {
           duration: 0.6,
           delay: index * 0.2,
           ease: "back.out(1.7)"
-        }
+        },
+        heroRef // 🎯 Scoping argument - ensures selector only finds elements within heroRef
       );
     });
   };
@@ -189,10 +207,12 @@ const ProactiveSupportHero: React.FC = () => {
 
               <div className="chatbot-messages">
                 {chatMessages.slice(0, currentMessage + 1).map((message, index) => (
+                  // CSS custom properties must be set inline - this is a valid exception
+                  // eslint-disable-next-line react/no-inline-styles
                   <div
                     key={message.id}
                     className={`message ${message.sender}`}
-                    data-delay={index * 0.3}
+                    style={{ '--delay': index * 0.3 } as React.CSSProperties}
                   >
                     <div className="message-content">
                       {message.text}

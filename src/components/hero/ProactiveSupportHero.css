@@ -149,9 +149,7 @@
   animation-delay: calc(var(--delay, 0) * 1s);
 }
 
-.message[data-delay] {
-  --delay: attr(data-delay);
-}
+/* Delay is now set via inline style with CSS custom property --delay */
 
 .message.user {
   text-align: right;

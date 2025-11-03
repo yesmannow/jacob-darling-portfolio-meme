@@ -140,116 +140,65 @@
     </script>
     <!-- Suppress custom element errors - MUST be in head before any scripts -->
     <!-- This runs IMMEDIATELY to catch any early registrations -->
+    <!-- DEVELOPMENT ONLY: Gate aggressive error suppression to prevent masking production errors -->
     <script>
       (function() {
         'use strict';
 
-        // Override customElements.define IMMEDIATELY - don't wait for DOM
-        // This must run before ANY scripts that might define custom elements
-        function protectCustomElements() {
-          // Check if customElements API is available
-          if (typeof window === 'undefined' || !window.customElements) {
-            // Retry immediately if not available (should be available in modern browsers)
-            if (typeof window !== 'undefined') {
-              setTimeout(protectCustomElements, 0);
-            }
-            return;
-          }
+        // Only run aggressive error suppression in development mode
+        // Check for Vite dev mode indicators or localhost environment
+        const isDev = typeof window !== 'undefined' && (
+          window.location.hostname === 'localhost' ||
+          window.location.hostname === '127.0.0.1' ||
+          window.location.hostname.includes('.local') ||
+          (typeof process !== 'undefined' && process.env && process.env.NODE_ENV === 'development') ||
+          window.__vite_plugin_react_preamble_installed__ === true
+        );
 
+        if (!isDev) {
+          // In production, only keep minimal duplicate-prevention for custom elements
+          if (typeof window !== 'undefined' && window.customElements) {
+            const originalDefine = window.customElements.define;
+            if (originalDefine && !window.customElements['_defineProtected']) {
+              window.customElements['_defineProtected'] = true;
+              window.customElements.define = function(name, constructor, options) {
+                if (!customElements.get(name)) {
+                  return originalDefine.call(this, name, constructor, options);
+                }
+              };
+            }
+          }
+          return; // Exit early in production - no aggressive error suppression
+        }
+
+        // DEVELOPMENT ONLY: Aggressive error suppression for HMR and dev environment
+        // Override customElements.define IMMEDIATELY - don't wait for DOM
+        // Minimal customElements.define protection (Vite 5.4.21 should have fixed HMR bug)
+        // Keep only basic duplicate-prevention pattern for safety
+        if (typeof window !== 'undefined' && window.customElements) {
           const originalDefine = window.customElements.define;
 
-          // Override customElements.define with the recommended fix pattern
-          // Use a more robust check to prevent double-wrapping
-          if (originalDefine && !window.customElements._defineProtected) {
-            window.customElements._defineProtected = true; // Flag to prevent double-wrapping
+          if (originalDefine && !window.customElements['_defineProtected']) {
+            window.customElements['_defineProtected'] = true;
 
             window.customElements.define = function(name, constructor, options) {
-              // SPECIAL CASE: mce-autosize-textarea - extra protection
-              // This element specifically comes from Vite's overlay and causes issues
-              if (name === 'mce-autosize-textarea') {
-                if (customElements.get('mce-autosize-textarea')) {
-                  // Already defined - silently skip (prevents error)
-                  return;
-                }
-              }
-
-              // RECOMMENDED FIX: Check if element is already defined using !customElements.get()
-              // This is the exact pattern the user suggested
+              // Basic duplicate check - prevent "already been defined" errors
               if (!customElements.get(name)) {
-                // Element doesn't exist - safe to define
                 try {
                   return originalDefine.call(this, name, constructor, options);
                 } catch (error) {
-                  // If definition fails (race condition), check again
-                  if (error && (error.message || String(error)).includes('has already been defined')) {
-                    // Element was defined between our check and the actual define() call
-                    // This is a race condition - silently ignore it (prevents error)
-                    return;
+                  // If element was defined between check and call (race condition)
+                  const errorMsg = error && (error.message || String(error));
+                  if (errorMsg && errorMsg.includes('has already been defined')) {
+                    return; // Silently skip duplicate definitions
                   }
-                  // Re-throw non-duplicate errors
-                  throw error;
+                  throw error; // Re-throw other errors
                 }
-              } else {
-                // Element already exists - silently return (prevents "already been defined" error)
-                // This is the fix: check BEFORE defining
-                // Log in dev mode only for debugging
-                if (typeof process !== 'undefined' && process.env && process.env.NODE_ENV === 'development') {
-                  console.debug('[CustomElements] Element already defined, skipping:', name);
-                }
-                return;
               }
+              // Element already exists - skip (prevents duplicate error)
             };
           }
         }
-
-        // PROTECT IMMEDIATELY - run synchronously if possible
-        // Try multiple times to ensure we catch it before any scripts load
-        protectCustomElements();
-
-        // Also protect after a microtask (catches any that were defined during script parsing)
-        if (typeof Promise !== 'undefined' && Promise.resolve) {
-          Promise.resolve().then(protectCustomElements);
-        }
-
-        // And protect after DOM is ready (if DOM is already ready, this runs immediately)
-        if (document.readyState === 'loading') {
-          document.addEventListener('DOMContentLoaded', protectCustomElements);
-        } else {
-          protectCustomElements();
-        }
-
-        // Also catch any errors that slip through
-        window.addEventListener('error', function(event) {
-          const error = event.error;
-          const message = (error && error.message) || event.message || '';
-
-          // Catch "already been defined" errors
-          if (message.includes('has already been defined') ||
-              message.includes('mce-autosize-textarea') ||
-              (error && error.name === 'NotSupportedError' && message.includes('custom element'))) {
-            // Prevent the error from propagating
-            event.preventDefault();
-            event.stopPropagation();
-            event.stopImmediatePropagation();
-            return false;
-          }
-        }, true); // Use capture phase to catch early
-
-        // Also catch promise rejections
-        window.addEventListener('unhandledrejection', function(event) {
-          const reason = event.reason;
-          const message = (reason && reason.message) || String(reason || '');
-
-          if (message.includes('has already been defined') ||
-              message.includes('mce-autosize-textarea') ||
-              (reason && reason.name === 'NotSupportedError' && message.includes('custom element'))) {
-            event.preventDefault();
-            return;
-          }
-        });
-
-        // Final attempt after window load (catches late-loading scripts)
-        window.addEventListener('load', protectCustomElements);
 
         // Global error handler with capture phase to catch early
         // This MUST use capture phase and stopImmediatePropagation to catch before overlay
@@ -281,21 +230,9 @@
             return false;
           }
 
-          // Catch custom element errors (especially from overlay_bundle.js)
-          if (errorMessage.includes('has already been defined') ||
-              errorMessage.includes('mce-autosize-textarea') ||
-              errorMessage.includes('custom element') ||
-              filename.includes('overlay_bundle') ||
-              filename.includes('webcomponents-ce') ||
-              filename.includes('webcomponents') ||
-              (target && target.tagName === 'SCRIPT' && filename.includes('webcomponents')) ||
-              String(event.error || '').includes('mce-autosize-textarea')) {
-            // Prevent the error from appearing in console
-            event.preventDefault();
-            event.stopPropagation();
-            event.stopImmediatePropagation();
-            return false;
-          }
+          // Note: Removed aggressive custom element error suppression
+          // Vite 5.4.21 should have fixed HMR overlay issues
+          // Only basic duplicate prevention remains in customElements.define override above
 
           // Catch MIME type errors for module scripts (can happen during HMR or build issues)
           if (errorMessage.includes('MIME type') ||
@@ -365,16 +302,8 @@
             return false;
           }
 
-          const reason = event.reason;
-          const errorMessage = reason?.message || String(reason || '');
-          if (errorMessage.includes('has already been defined') ||
-              errorMessage.includes('mce-autosize-textarea') ||
-              errorMessage.includes('custom element') ||
-              String(reason || '').includes('mce-autosize-textarea')) {
-            event.preventDefault();
-            event.stopPropagation();
-            return false;
-          }
+          // Note: Removed aggressive custom element rejection suppression
+          // Vite 5.4.21 should have fixed HMR overlay issues
 
           // Handle React Children errors in promise rejections
           if (errorMessage.includes("Cannot set properties of undefined (setting 'Children')") ||

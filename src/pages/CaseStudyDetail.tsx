@@ -8,6 +8,68 @@ import { getCaseStudyDiagrams } from "../components/diagrams/caseStudyDiagrams";
 import { trackPortfolioEngagement, createTimeTracker } from "../utils/analytics";
 import "./CaseStudyDetail.css";
 
+// Helper to render structured content safely
+const renderRichSection = (content?: string | { paragraphs?: string[]; bullets?: string[] }) => {
+  // If content is structured data
+  if (content && typeof content === 'object' && ('paragraphs' in content || 'bullets' in content)) {
+    return (
+      <>
+        {content.paragraphs?.map((text, idx) => (
+          <p key={`p-${idx}`}>{text}</p>
+        ))}
+        {content.bullets && (
+          <ul>
+            {content.bullets.map((item, idx) => (
+              <li key={`li-${idx}`}>{item}</li>
+            ))}
+          </ul>
+        )}
+      </>
+    );
+  }
+
+  // If content is a string, parse it into structured format
+  if (typeof content === 'string') {
+    const paragraphs: string[] = [];
+    const bullets: string[] = [];
+    const lines = content.split('\n').filter(line => line.trim());
+
+    lines.forEach(line => {
+      const trimmed = line.trim();
+      // Check if it's a bullet point
+      if (trimmed.startsWith('- ') || trimmed.startsWith('* ')) {
+        // Remove markdown bold formatting
+        const bulletText = trimmed
+          .replace(/^[-*]\s*/, '')
+          .replace(/\*\*(.*?)\*\*/g, '$1');
+        bullets.push(bulletText);
+      } else {
+        // Regular paragraph
+        const paraText = trimmed.replace(/\*\*(.*?)\*\*/g, '$1');
+        if (paraText) paragraphs.push(paraText);
+      }
+    });
+
+    return (
+      <>
+        {paragraphs.map((text, idx) => (
+          <p key={`p-${idx}`}>{text}</p>
+        ))}
+        {bullets.length > 0 && (
+          <ul>
+            {bullets.map((item, idx) => (
+              <li key={`li-${idx}`}>{item}</li>
+            ))}
+          </ul>
+        )}
+      </>
+    );
+  }
+
+  // Fallback for undefined/null
+  return null;
+};
+
 const CaseStudyDetail: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const caseStudy = slug ? getCaseStudyBySlug(slug) : undefined;
@@ -134,9 +196,7 @@ const CaseStudyDetail: React.FC = () => {
             </h2>
             <div className="section-content">
               {caseStudy.fullContent?.challenge ? (
-                caseStudy.fullContent.challenge.split('\n\n').map((paragraph, idx) => (
-                  <p key={idx}>{paragraph}</p>
-                ))
+                renderRichSection(caseStudy.fullContent.challenge)
               ) : (
                 <p>{caseStudy.challenge}</p>
               )}
@@ -150,19 +210,9 @@ const CaseStudyDetail: React.FC = () => {
               <span className="section-icon">🎯</span>
               The Strategy & Solution
             </h2>
-            <div
-              className="section-content"
-              dangerouslySetInnerHTML={{
-                __html: caseStudy.fullContent?.strategy
-                  ? caseStudy.fullContent.strategy
-                      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-                      .replace(/- \*\*(.*?)\*\*/g, '<li><strong>$1</strong>')
-                      .replace(/^- (.*?)$/gm, '<li>$1</li>')
-                      .replace(/\n\n/g, '</p><p>')
-                      .replace(/^(.+)$/gm, '<p>$1</p>')
-                  : `<p>${caseStudy.strategy}</p>`
-              }}
-            />
+            <div className="section-content">
+              {renderRichSection(caseStudy.fullContent?.strategy)}
+            </div>
 
             {/* Visual Architecture Diagrams */}
             {diagrams.length > 0 && (
@@ -181,19 +231,9 @@ const CaseStudyDetail: React.FC = () => {
               <span className="section-icon">🚀</span>
               The Value & Impact
             </h2>
-            <div
-              className="section-content"
-              dangerouslySetInnerHTML={{
-                __html: caseStudy.fullContent?.impact
-                  ? caseStudy.fullContent.impact
-                      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-                      .replace(/- \*\*(.*?)\*\*/g, '<li><strong>$1</strong>')
-                      .replace(/^- (.*?)$/gm, '<li>$1</li>')
-                      .replace(/\n\n/g, '</p><p>')
-                      .replace(/^(.+)$/gm, '<p>$1</p>')
-                  : `<p>${caseStudy.impact}</p>`
-              }}
-            />
+            <div className="section-content">
+              {renderRichSection(caseStudy.fullContent?.impact)}
+            </div>
           </section>
         </AnimatedSection>
       </div>

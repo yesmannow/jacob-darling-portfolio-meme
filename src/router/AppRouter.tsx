@@ -2,7 +2,6 @@ import React, { Suspense } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import PageTransition from "../components/animations/PageTransition";
-import ScrollToTop from "../components/utils/ScrollToTop";
 import SEOHead from "../components/seo/SEOHead";
 import "./AppRouter.css";
 
@@ -25,9 +24,9 @@ const Resume = React.lazy(() => import("../pages/Resume"));
 const Contact = React.lazy(() => import("../pages/Contact"));
 const Inspiration = React.lazy(() => import("../pages/Inspiration"));
 
-// Loading component
+// Loading component - use unique class to avoid GSAP selector conflicts
 const PageLoader = () => (
-  <div className="hero page-loader">
+  <div className="route-loader-fallback initial-loader">
     <div className="loading-spinner"></div>
   </div>
 );
@@ -78,7 +77,6 @@ const AppRouter: React.FC = () => {
   return (
     <>
       <SEOHead {...seoData} />
-      <ScrollToTop />
       <AnimatePresence mode="wait">
         <Suspense fallback={<PageLoader />}>
           <Routes location={location} key={location.pathname}>

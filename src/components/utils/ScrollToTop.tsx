@@ -7,26 +7,21 @@ const ScrollToTop: React.FC = () => {
 
   useEffect(() => {
     const lenis = getLenis();
-    
+    const timers: number[] = [];
+
     // Scroll to top immediately
-    if (lenis) {
-      lenis.scrollTo(0, { immediate: true });
-    }
-    
-    // Also use native scroll as fallback
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: 'instant' as ScrollBehavior
+    lenis?.scrollTo(0, { immediate: true });
+    // Use 'auto' instead of invalid 'instant' for native scroll fallback
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+
+    // Store timeout IDs for cleanup
+    [100, 300, 600, 1000].forEach(delay => {
+      const id = window.setTimeout(refreshLenis, delay);
+      timers.push(id);
     });
-    
-    // Multiple refresh attempts to ensure Lenis detects new content
-    const refreshTimers = [100, 300, 600, 1000];
-    refreshTimers.forEach(delay => {
-      setTimeout(() => {
-        refreshLenis();
-      }, delay);
-    });
+
+    // Cleanup function to clear all timers
+    return () => timers.forEach(clearTimeout);
   }, [pathname]);
 
   return null;

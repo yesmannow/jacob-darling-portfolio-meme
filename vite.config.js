@@ -2,10 +2,17 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
 import { createHtmlPlugin } from 'vite-plugin-html';
+import { visualizer } from 'rollup-plugin-visualizer';
 
 export default defineConfig({
   plugins: [
     react(),
+    visualizer({
+      open: false,
+      filename: 'dist/stats.html',
+      gzipSize: true,
+      brotliSize: true,
+    }),
     createHtmlPlugin({
       minify: true,
       inject: {
@@ -120,8 +127,10 @@ export default defineConfig({
             return 'ui-vendor';
           }
 
-          // Charting libraries
-          if (id.includes('node_modules/recharts')) {
+          // Charting libraries (recharts - very large, must be isolated)
+          // MarketingCommandCenter uses recharts but may not be actively used
+          if (id.includes('node_modules/recharts') ||
+              id.includes('node_modules/recharts/')) {
             return 'charts-vendor';
           }
 

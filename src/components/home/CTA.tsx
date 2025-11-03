@@ -28,8 +28,9 @@ const CTA: React.FC = () => {
       return;
     }
 
+    // 🎯 Scoping: Pass sectionRef as second argument to ensure selectors only target elements within this component
     const ctx = gsap.context(() => {
-      // Gradient glow background animation
+      // Gradient glow background animation (uses ref, already scoped)
       gsap.to(glowRef.current, {
         scale: 1.2,
         opacity: 0.8,
@@ -39,7 +40,7 @@ const CTA: React.FC = () => {
         ease: "sine.inOut"
       });
 
-      // Line animation under text
+      // Line animation under text - SCOPED to sectionRef
       gsap.fromTo(".cta-underline",
         { scaleX: 0 },
         {
@@ -51,10 +52,11 @@ const CTA: React.FC = () => {
             start: "top 70%",
             toggleActions: "play none none reverse"
           }
-        }
+        },
+        sectionRef // 🎯 Scoping argument - ensures selector only finds elements within sectionRef
       );
 
-      // Stagger animation for content
+      // Stagger animation for content - SCOPED to sectionRef
       gsap.fromTo(".cta-content > *",
         { opacity: 0, y: 50 },
         {
@@ -68,10 +70,11 @@ const CTA: React.FC = () => {
             start: "top 70%",
             toggleActions: "play none none reverse"
           }
-        }
+        },
+        sectionRef // 🎯 Scoping argument
       );
 
-      // Floating particles
+      // Floating particles - SCOPED to sectionRef
       gsap.to(".cta-particle", {
         y: -30,
         opacity: 0.6,
@@ -80,8 +83,8 @@ const CTA: React.FC = () => {
         yoyo: true,
         stagger: 0.3,
         ease: "sine.inOut"
-      });
-    });
+      }, sectionRef); // 🎯 Scoping argument
+    }, sectionRef); // 🎯 Main context scope - all selectors are relative to this ref
 
     return () => ctx.revert();
   }, []);

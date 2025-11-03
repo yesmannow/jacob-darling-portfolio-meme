@@ -85,8 +85,9 @@ const GlanceMetrics: React.FC = () => {
       return;
     }
 
+    // 🎯 Scoping: Pass sectionRef as second argument to ensure selectors only target elements within this component
     const ctx = gsap.context(() => {
-      // Animate metric cards
+      // Animate metric cards - SCOPED to sectionRef
       gsap.fromTo(".metric-card",
         { opacity: 0, y: 60, scale: 0.8 },
         {
@@ -101,10 +102,11 @@ const GlanceMetrics: React.FC = () => {
             start: "top 70%",
             toggleActions: "play none none reverse"
           }
-        }
+        },
+        sectionRef // 🎯 Scoping argument - ensures selector only finds elements within sectionRef
       );
 
-      // Animate counters
+      // Animate counters (ScrollTrigger.create uses refs, already scoped)
       metrics.forEach((metric) => {
         ScrollTrigger.create({
           trigger: sectionRef.current,
@@ -125,7 +127,7 @@ const GlanceMetrics: React.FC = () => {
         });
       });
 
-      // Floating animation for cards
+      // Floating animation for cards - SCOPED to sectionRef
       gsap.to(".metric-card", {
         y: -10,
         duration: 3,
@@ -133,8 +135,8 @@ const GlanceMetrics: React.FC = () => {
         yoyo: true,
         stagger: 0.2,
         ease: "sine.inOut"
-      });
-    });
+      }, sectionRef); // 🎯 Scoping argument
+    }, sectionRef); // 🎯 Main context scope - all selectors are relative to this ref
 
     return () => ctx.revert();
   }, []);

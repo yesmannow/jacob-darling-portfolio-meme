@@ -21,11 +21,19 @@ const PerformanceMonitor: React.FC = () => {
     // Only run in production
     if (process.env.NODE_ENV !== 'production') return;
 
+    // Store all observers for cleanup
+    let lcpObserver: PerformanceObserver | null = null;
+    let fidObserver: PerformanceObserver | null = null;
+    let clsObserver: PerformanceObserver | null = null;
+    let fcpObserver: PerformanceObserver | null = null;
+    let timer: ReturnType<typeof setTimeout> | null = null;
+    let clsValue = 0;
+
     const measurePerformance = () => {
       // Measure Core Web Vitals
       if ('PerformanceObserver' in window) {
         // Largest Contentful Paint (LCP)
-        const lcpObserver = new PerformanceObserver((list) => {
+        lcpObserver = new PerformanceObserver((list) => {
           const entries = list.getEntries();
           const lastEntry = entries[entries.length - 1];
           setMetrics(prev => ({ ...prev, lcp: lastEntry.startTime }));
@@ -33,7 +41,7 @@ const PerformanceMonitor: React.FC = () => {
         lcpObserver.observe({ entryTypes: ['largest-contentful-paint'] });
 
         // First Input Delay (FID)
-        const fidObserver = new PerformanceObserver((list) => {
+        fidObserver = new PerformanceObserver((list) => {
           const entries = list.getEntries();
           entries.forEach((entry: any) => {
             setMetrics(prev => ({ ...prev, fid: entry.processingStart - entry.startTime }));
@@ -42,8 +50,7 @@ const PerformanceMonitor: React.FC = () => {
         fidObserver.observe({ entryTypes: ['first-input'] });
 
         // Cumulative Layout Shift (CLS)
-        let clsValue = 0;
-        const clsObserver = new PerformanceObserver((list) => {
+        clsObserver = new PerformanceObserver((list) => {
           const entries = list.getEntries();
           entries.forEach((entry: any) => {
             if (!entry.hadRecentInput) {
@@ -55,7 +62,7 @@ const PerformanceMonitor: React.FC = () => {
         clsObserver.observe({ entryTypes: ['layout-shift'] });
 
         // First Contentful Paint (FCP)
-        const fcpObserver = new PerformanceObserver((list) => {
+        fcpObserver = new PerformanceObserver((list) => {
           const entries = list.getEntries();
           entries.forEach((entry) => {
             setMetrics(prev => ({ ...prev, fcp: entry.startTime }));
@@ -63,7 +70,7 @@ const PerformanceMonitor: React.FC = () => {
         });
         fcpObserver.observe({ entryTypes: ['paint'] });
 
-        // Time to First Byte (TTFB)
+        // Time to First Byte (TTFB) - one-time measurement
         const navigation = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
         if (navigation) {
           setMetrics(prev => ({ ...prev, ttfb: navigation.responseStart - navigation.requestStart }));
@@ -78,25 +85,30 @@ const PerformanceMonitor: React.FC = () => {
       window.addEventListener('load', measurePerformance);
     }
 
-    // Log metrics to console for debugging
-    const logMetrics = () => {
-      console.log('📊 Performance Metrics:', {
-        LCP: metrics.lcp ? `${metrics.lcp.toFixed(2)}ms` : 'Not measured',
-        FID: metrics.fid ? `${metrics.fid.toFixed(2)}ms` : 'Not measured',
-        CLS: metrics.cls ? metrics.cls.toFixed(3) : 'Not measured',
-        FCP: metrics.fcp ? `${metrics.fcp.toFixed(2)}ms` : 'Not measured',
-        TTFB: metrics.ttfb ? `${metrics.ttfb.toFixed(2)}ms` : 'Not measured'
+    // Log metrics to console for debugging (use closure to access current metrics)
+    timer = setTimeout(() => {
+      setMetrics(currentMetrics => {
+        console.log('📊 Performance Metrics:', {
+          LCP: currentMetrics.lcp ? `${currentMetrics.lcp.toFixed(2)}ms` : 'Not measured',
+          FID: currentMetrics.fid ? `${currentMetrics.fid.toFixed(2)}ms` : 'Not measured',
+          CLS: currentMetrics.cls ? currentMetrics.cls.toFixed(3) : 'Not measured',
+          FCP: currentMetrics.fcp ? `${currentMetrics.fcp.toFixed(2)}ms` : 'Not measured',
+          TTFB: currentMetrics.ttfb ? `${currentMetrics.ttfb.toFixed(2)}ms` : 'Not measured'
+        });
+        return currentMetrics; // Return unchanged state
       });
-    };
+    }, 15000); // 15 seconds should be enough for initial load metrics
 
-    // Log metrics after a delay to allow all measurements
-    const timeoutId = setTimeout(logMetrics, 3000);
-
+    // CLEANUP FUNCTION: Disconnect all observers and clear timers
     return () => {
-      clearTimeout(timeoutId);
+      if (lcpObserver) lcpObserver.disconnect();
+      if (fidObserver) fidObserver.disconnect();
+      if (clsObserver) clsObserver.disconnect();
+      if (fcpObserver) fcpObserver.disconnect();
+      if (timer !== null) clearTimeout(timer);
       window.removeEventListener('load', measurePerformance);
     };
-  }, [metrics]);
+  }, []); // Empty dependency array - setup only once on mount
 
   // Send metrics to analytics (if configured)
   useEffect(() => {
