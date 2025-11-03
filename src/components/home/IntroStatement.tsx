@@ -59,12 +59,12 @@ const IntroStatement: React.FC = () => {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
         >
-          I develop{" "}
+          I combine{" "}
           <motion.span
             className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent font-semibold relative inline-block"
             whileHover={{ scale: 1.05 }}
           >
-            marketing automation systems
+            strategic marketing leadership
             <motion.span
               className="absolute -bottom-2 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400 origin-left block"
               initial={{ scaleX: 0 }}
@@ -73,18 +73,32 @@ const IntroStatement: React.FC = () => {
               transition={{ delay: 0.5, duration: 0.8 }}
             />
           </motion.span>
-          {" "}that drive{" "}
+          {" "}with{" "}
           <motion.span
             className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent font-semibold relative inline-block"
             whileHover={{ scale: 1.05 }}
           >
-            measurable ROI
+            technical systems architecture
             <motion.span
               className="absolute -bottom-2 left-0 right-0 h-0.5 bg-gradient-to-r from-purple-400 to-pink-400 origin-left block"
               initial={{ scaleX: 0 }}
               whileInView={{ scaleX: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 0.8, duration: 0.8 }}
+            />
+          </motion.span>
+          {" "}to deliver{" "}
+          <motion.span
+            className="bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent font-semibold relative inline-block"
+            whileHover={{ scale: 1.05 }}
+          >
+            measurable business results
+            <motion.span
+              className="absolute -bottom-2 left-0 right-0 h-0.5 bg-gradient-to-r from-green-400 to-emerald-400 origin-left block"
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 1.1, duration: 0.8 }}
             />
           </motion.span>
           .
