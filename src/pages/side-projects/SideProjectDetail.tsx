@@ -190,6 +190,20 @@ const SideProjectDetail: React.FC = () => {
       <div className="project-content" ref={contentRef}>
         <div className="container">
           
+          {/* Logo Display */}
+          {project.images && project.images.length > 0 && (
+            <section className="content-section logo-section">
+              <div className="logo-display-container">
+                <img 
+                  src={project.images[0]} 
+                  alt={`${project.client} Logo`}
+                  className="project-logo"
+                  onClick={() => openLightbox(0)}
+                />
+              </div>
+            </section>
+          )}
+          
           {/* Overview */}
           <section className="content-section overview-section">
             <div className="section-grid">

@@ -168,13 +168,156 @@
       "images": [
         "/images/side-projects/Black Letter - Full Logo (1).png"
       ]
+    },
+    {
+      "id": "primary-colours",
+      "title": "Primary Colours Arts Organization Leadership & Event Marketing",
+      "slug": "primary-colours",
+      "category": "Non-Profit Marketing",
+      "client": "Primary Colours",
+      "year": "2018-2019",
+      "duration": "Board Tenure",
+      "services": ["Event Marketing", "Website Development", "Sponsorship Strategy", "Brand Development"],
+      "challenge": "Lead marketing and strategic development for a non-profit arts organization to increase community engagement, artist participation, and fundraising for Installation Nation 2018—a major outdoor art exhibition.",
+      "approach": "Developed comprehensive marketing and sponsorship strategy for 23-day exhibition on 9.5-acre ArtsPark. Created multi-tier sponsorship program ($500-$5,000 levels), redesigned website for better artist connections, and executed integrated marketing campaigns.",
+      "execution": "Led marketing strategy for Installation Nation 2018 with 13 artists/artist groups creating site-specific installations. Developed professional sponsorship packages, redesigned primarycolours.org website, created social media campaigns, and built community partnerships with major arts institutions.",
+      "results": "Generated $46,000+ for local arts, exhibited work of 200+ locally based artists, reached combined audience of 10,000+ people, and created sustainable programming model for future events.",
+      "takeaway": "Non-profit leadership requires balancing artistic vision with strategic business development. Strong marketing and community partnerships are essential for sustainable arts programming.",
+      "metrics": {
+        "fundsRaised": "$46,000+",
+        "artistParticipation": "200+ artists",
+        "audienceReach": "10,000+ people",
+        "exhibitionDuration": "23 days"
+      },
+      "tags": ["non-profit", "arts", "event marketing", "sponsorship", "community engagement"],
+      "featured": true,
+      "images": [
+        "/images/side-projects/cropped-PC_LOGO1-1024x174.jpg"
+      ]
+    },
+    {
+      "id": "clean-aesthetic",
+      "title": "Clean Aesthetic Medical Branding & Logo Design",
+      "slug": "clean-aesthetic",
+      "category": "Medical Branding",
+      "client": "Ben Petty / Clean Aesthetic",
+      "year": "2023",
+      "duration": "4 weeks",
+      "services": ["Logo Design", "Brand Identity", "Marketing Materials"],
+      "challenge": "Create a sophisticated brand identity for concierge Botox and medical aesthetic services that balances professional medical credibility with luxury aesthetic appeal.",
+      "approach": "Developed sophisticated monogram combining letters 'C' and 'A' with overlapping circular element. Created clean typography with professional wordmark, sophisticated teal-green color strategy conveying trust and cleanliness, and modern sans-serif typography reflecting contemporary medical aesthetics.",
+      "execution": "Designed comprehensive brand guidelines including logo variations (horizontal, stacked, monogram-only), color palette and usage guidelines, typography specifications, business card and letterhead designs, and digital marketing template concepts.",
+      "results": "Established professional credibility through clean design, enhanced brand recognition with memorable monogram, created consistent visual identity across all touchpoints, and built foundation for marketing and business development.",
+      "takeaway": "Medical aesthetic branding must balance professionalism with luxury appeal. Sophisticated design and memorable brand elements can effectively position premium services in competitive market.",
+      "metrics": {
+        "brandRecognition": "Strong positioning",
+        "clientSatisfaction": "Highly satisfied",
+        "timeline": "4 weeks delivery"
+      },
+      "tags": ["medical branding", "logo design", "aesthetics", "concierge care", "luxury"],
+      "featured": true,
+      "images": [
+        "/images/side-projects/CA Logo - Primary (full color).jpg",
+        "/images/design/CA.jpg"
+      ]
+    },
+    {
+      "id": "urgentcare-indy",
+      "title": "UrgentCare Indy Healthcare Website Design & Digital Marketing",
+      "slug": "urgentcare-indy",
+      "category": "Healthcare Digital",
+      "client": "UrgentCare Indy / Pike Medical Consultants",
+      "year": "2023",
+      "duration": "6 months",
+      "services": ["Web Design", "Digital Marketing", "SEO", "Patient Portal Integration", "Online Check-in System"],
+      "challenge": "Create comprehensive digital presence for urgent care facility to streamline patient check-in, reduce wait times, clearly communicate services, integrate with medical systems, and provide mobile-responsive patient experience.",
+      "approach": "Developed patient-centered design focused on reducing friction and anxiety. Integrated Clockwise MD for real-time online check-in with wait time estimates, comprehensive insurance verification, clear service categorization, and telehealth integration options.",
+      "execution": "Built healthcare website with Clockwise MD integration, insurance verification system, service pages with detailed information, mobile optimization, patient portal access, telehealth integration, and comprehensive local SEO strategy for 'urgent care Indianapolis' searches.",
+      "results": "Significant reduction in front-desk check-in time, increased online appointment bookings, improved patient satisfaction scores, enhanced local search visibility, and streamlined patient onboarding process.",
+      "takeaway": "Healthcare digital strategy must prioritize patient experience and reduce anxiety. Seamless integration between online and in-person experiences significantly improves patient satisfaction and operational efficiency.",
+      "metrics": {
+        "checkinTimeReduction": "Significant improvement",
+        "onlineBookings": "Increased",
+        "patientSatisfaction": "Improved scores",
+        "searchVisibility": "Enhanced"
+      },
+      "tags": ["healthcare", "web design", "digital marketing", "patient experience", "seo"],
+      "featured": true,
+      "images": [
+        "/images/side-projects/Urgent Care Indy Logo - 22.png",
+        "/images/side-projects/dot-physicals-header.jpg",
+        "/images/side-projects/occ-health-header.jpg",
+        "/images/side-projects/sports-physical-header (1).jpg",
+        "/images/side-projects/what-we-treat-1.jpg",
+        "/images/side-projects/UCI Hours COVID.jpg"
+      ]
+    },
+    {
+      "id": "russell-painting",
+      "title": "Russell Painting Company Website Redesign & Trust Building",
+      "slug": "russell-painting",
+      "category": "Service Business",
+      "client": "Russell Painting Company",
+      "year": "2022",
+      "duration": "3 months",
+      "services": ["Website Redesign", "UX Research", "Trust Optimization", "Local SEO", "Conversion Strategy"],
+      "challenge": "Modernize outdated website for established painting contractor (43+ years) to leverage experience and credibility, compete with larger contractors online, improve lead generation, and showcase quality credentials.",
+      "approach": "Developed comprehensive trust-building strategy featuring HomeAdvisor Seal (4.9/5 rating), Angie's List 'A' Grade, 43+ years experience narrative, customer testimonials, and clear service categorization for exterior, interior, residential, and commercial work.",
+      "execution": "Redesigned website with modern design, clear service categorization, high-quality before/after project galleries, multiple contact methods, mobile optimization, local SEO for Indianapolis market, and compelling content including multi-generational family business story.",
+      "results": "Increased online lead generation and quote requests, improved search engine rankings for local painting searches, enhanced professional credibility and trust perception, better mobile user experience, and streamlined customer decision-making process.",
+      "takeaway": "Trust indicators are critical for service businesses. Combining long-term credibility with modern digital presence effectively converts visitors to leads in competitive local markets.",
+      "metrics": {
+        "homeadvisorRating": "4.9/5",
+        "angiesListGrade": "A",
+        "yearsExperience": "43+",
+        "leadGeneration": "Increased"
+      },
+      "tags": ["home services", "website redesign", "trust building", "local seo", "conversion"],
+      "featured": true,
+      "images": [
+        "/images/projects/Russell painting/New-Logo-Transparent-1.png",
+        "/images/projects/Russell painting/Screenshot of Power Washing _ Russell Painting Company, Inc.jpg",
+        "/images/side-projects/painting_illustration_01.png",
+        "/images/side-projects/Interior_sl.jpg",
+        "/images/side-projects/interior_w3.jpg"
+      ]
+    },
+    {
+      "id": "behr-pet-essentials",
+      "title": "Behr Pet Essentials E-commerce Brand Development & Multi-Channel Marketing",
+      "slug": "behr-pet-essentials",
+      "category": "E-commerce Branding",
+      "client": "Behr Pet Essentials",
+      "year": "2023",
+      "duration": "8 months",
+      "services": ["Brand Development", "E-commerce Design", "Amazon Optimization", "Product Photography", "Multi-Channel Marketing"],
+      "challenge": "Launch organic pet skin care products in competitive market by establishing credibility with veterinarians and pet owners, creating multi-channel sales strategy (direct + Amazon), and building customer trust through testimonials and results.",
+      "approach": "Created comprehensive brand identity focused on organic, safe pet care positioning: 'Finally An All-Natural, Organic Skin Care For Pets That Actually Works!' Developed professional product photography, educational content about pet skin conditions, and veterinarian endorsement messaging.",
+      "execution": "Developed direct-to-consumer e-commerce platform, optimized Amazon marketplace listings with keyword-rich descriptions, created product variations for dogs/cats/horses, managed customer reviews (maintained 4+ star ratings), integrated inventory management across channels, and executed social media, email, and paid advertising campaigns.",
+      "results": "Successful product launch with immediate market acceptance, maintained 4+ star ratings across Amazon and direct sales, growing customer base with high repeat purchase rates, veterinarian recommendations and professional endorsements, and optimized multi-channel revenue streams.",
+      "takeaway": "Multi-channel e-commerce requires consistent brand messaging across platforms. Organic product positioning and veterinarian trust are essential for pet care market success. Customer testimonials with dramatic results drive conversions.",
+      "metrics": {
+        "amazonRatings": "4+ stars",
+        "veterinarianRecommended": "Yes",
+        "repeatPurchaseRate": "High",
+        "multiChannelRevenue": "Optimized"
+      },
+      "tags": ["e-commerce", "pet care", "amazon", "brand development", "multi-channel"],
+      "featured": true,
+      "images": [
+        "/images/side-projects/CBD-for-Pets-and-Pet-Skin-Care.png",
+        "/images/side-projects/CBD-Oil-for-Pets.png",
+        "/images/side-projects/Skincare-for-Dogs-and-Cats.jpg",
+        "/images/side-projects/dog-dry-skin-remedy.jpg",
+        "/images/side-projects/Complete Solution Dogs.png"
+      ]
     }
   ],
   "metadata": {
-    "totalProjects": 6,
-    "categories": ["Restaurant Branding", "Healthcare Branding", "Fitness Branding", "Brand Strategy", "Product Branding", "Coffee Branding"],
-    "services": ["Brand Identity", "Logo Design", "Marketing Materials", "Web Design", "Package Design", "Brand Strategy"],
-    "lastUpdated": "2025-10-12",
+    "totalProjects": 11,
+    "categories": ["Restaurant Branding", "Healthcare Branding", "Fitness Branding", "Brand Strategy", "Product Branding", "Coffee Branding", "Non-Profit Marketing", "Medical Branding", "Healthcare Digital", "Service Business", "E-commerce Branding"],
+    "services": ["Brand Identity", "Logo Design", "Marketing Materials", "Web Design", "Package Design", "Brand Strategy", "Event Marketing", "Sponsorship Strategy", "E-commerce Design", "Amazon Optimization", "SEO", "Digital Marketing"],
+    "lastUpdated": "2025-11-03",
     "brandTone": "cinematic, confident, intelligent, warmly human"
   }
 }
