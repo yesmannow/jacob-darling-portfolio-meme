@@ -25,99 +25,109 @@ const styles = StyleSheet.create({
   page: {
     backgroundColor: "#ffffff",
     color: "#1f2937",
-    padding: 40,
+    padding: 35,
     fontSize: 10,
     fontFamily: 'Inter',
-    lineHeight: 1.5
+    lineHeight: 1.6
   },
 
   // Header Section
   header: {
-    marginBottom: 20,
-    paddingBottom: 15,
-    borderBottom: "2px solid #3B82F6"
+    marginBottom: 22,
+    paddingBottom: 16,
+    borderBottom: "3px solid #3B82F6"
   },
   name: {
-    fontSize: 24,
+    fontSize: 28,
     fontWeight: "bold",
     color: "#111827",
-    marginBottom: 4,
-    letterSpacing: 0.5
+    marginBottom: 5,
+    letterSpacing: 0.8
   },
   title: {
-    fontSize: 12,
+    fontSize: 13,
     color: "#3B82F6",
     fontWeight: 600,
-    marginBottom: 8,
-    letterSpacing: 0.3
+    marginBottom: 10,
+    letterSpacing: 0.5,
+    textTransform: "uppercase"
   },
   contactRow: {
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "flex-start",
     flexWrap: "wrap",
     fontSize: 9,
     color: "#6b7280",
-    marginTop: 4
+    marginTop: 6,
+    gap: 8
   },
   contactItem: {
-    marginRight: 12,
-    marginBottom: 2
+    marginRight: 14,
+    marginBottom: 3
   },
 
   // Professional Summary
   summarySection: {
-    marginBottom: 18,
-    padding: 12,
+    marginBottom: 20,
+    padding: 14,
     backgroundColor: "#f8fafc",
-    borderRadius: 4,
-    borderLeft: "3px solid #3B82F6"
+    borderRadius: 6,
+    borderLeft: "4px solid #3B82F6",
+    borderTop: "1px solid #e5e7eb",
+    borderRight: "1px solid #e5e7eb",
+    borderBottom: "1px solid #e5e7eb"
   },
   sectionTitle: {
     fontSize: 12,
     fontWeight: "bold",
     color: "#111827",
-    marginBottom: 8,
+    marginBottom: 10,
     textTransform: "uppercase",
-    letterSpacing: 0.5,
-    borderBottom: "1px solid #e5e7eb",
-    paddingBottom: 4
+    letterSpacing: 1,
+    borderBottom: "2px solid #3B82F6",
+    paddingBottom: 5,
+    marginTop: 4
   },
   summaryText: {
-    fontSize: 10,
+    fontSize: 10.5,
     color: "#374151",
-    lineHeight: 1.6,
+    lineHeight: 1.7,
     textAlign: "justify"
   },
 
   // Experience Section
   experienceSection: {
-    marginBottom: 18
+    marginBottom: 20
   },
   jobEntry: {
-    marginBottom: 14,
-    paddingBottom: 12,
-    borderBottom: "1px solid #f3f4f6"
+    marginBottom: 16,
+    paddingBottom: 14,
+    paddingTop: 8,
+    borderBottom: "1px solid #e5e7eb",
+    borderLeft: "2px solid transparent",
+    paddingLeft: 6
   },
   jobHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "flex-start",
-    marginBottom: 6
+    marginBottom: 8
   },
   jobTitleCompany: {
     flex: 1
   },
   jobTitle: {
-    fontSize: 11,
+    fontSize: 12,
     fontWeight: "bold",
     color: "#111827",
-    marginBottom: 2
+    marginBottom: 3,
+    letterSpacing: 0.2
   },
   companyName: {
-    fontSize: 10,
+    fontSize: 11,
     color: "#3B82F6",
     fontWeight: 600,
-    marginBottom: 2
+    marginBottom: 3
   },
   jobMeta: {
     textAlign: "right",
@@ -134,61 +144,69 @@ const styles = StyleSheet.create({
     color: "#9ca3af"
   },
   jobSummary: {
-    fontSize: 9,
+    fontSize: 9.5,
     color: "#4b5563",
-    marginBottom: 6,
-    lineHeight: 1.5,
-    fontStyle: "italic"
-  },
-  achievementsTitle: {
-    fontSize: 9,
-    fontWeight: 600,
-    color: "#374151",
-    marginBottom: 4,
-    marginTop: 4
-  },
-  achievementItem: {
-    fontSize: 9,
-    color: "#4b5563",
-    marginBottom: 3,
-    marginLeft: 8,
-    lineHeight: 1.4,
+    marginBottom: 8,
+    lineHeight: 1.6,
+    fontStyle: "italic",
     paddingLeft: 4
   },
+  achievementsTitle: {
+    fontSize: 9.5,
+    fontWeight: 600,
+    color: "#111827",
+    marginBottom: 6,
+    marginTop: 6,
+    textTransform: "uppercase",
+    letterSpacing: 0.5,
+    fontSize: 8.5
+  },
+  achievementItem: {
+    fontSize: 9.5,
+    color: "#374151",
+    marginBottom: 4,
+    marginLeft: 10,
+    lineHeight: 1.5,
+    paddingLeft: 6
+  },
   achievementBullet: {
-    fontSize: 8,
+    fontSize: 10,
     color: "#3B82F6",
-    marginRight: 4
+    marginRight: 6,
+    fontWeight: "bold"
   },
 
   // Skills & Technologies
   skillsSection: {
-    marginBottom: 18
+    marginBottom: 16
   },
   skillsGrid: {
     flexDirection: "row",
     flexWrap: "wrap",
-    gap: 4
+    gap: 5,
+    marginTop: 6
   },
   skillBadge: {
     backgroundColor: "#eff6ff",
     color: "#1e40af",
-    padding: "4 8",
-    borderRadius: 3,
-    fontSize: 8,
-    marginBottom: 4,
-    marginRight: 4,
-    border: "0.5px solid #bfdbfe"
+    padding: "5 10",
+    borderRadius: 4,
+    fontSize: 8.5,
+    marginBottom: 5,
+    marginRight: 5,
+    border: "1px solid #bfdbfe",
+    fontWeight: 600
   },
   techBadge: {
     backgroundColor: "#f0fdf4",
     color: "#166534",
-    padding: "4 8",
-    borderRadius: 3,
-    fontSize: 8,
-    marginBottom: 4,
-    marginRight: 4,
-    border: "0.5px solid #bbf7d0"
+    padding: "5 10",
+    borderRadius: 4,
+    fontSize: 8.5,
+    marginBottom: 5,
+    marginRight: 5,
+    border: "1px solid #bbf7d0",
+    fontWeight: 600
   },
 
   // Education
@@ -251,26 +269,28 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     backgroundColor: "#f8fafc",
-    padding: 10,
-    borderRadius: 4,
-    marginBottom: 18,
-    border: "1px solid #e5e7eb"
+    padding: 12,
+    borderRadius: 6,
+    marginBottom: 20,
+    border: "2px solid #e5e7eb",
+    borderTop: "3px solid #3B82F6"
   },
   metricItem: {
     textAlign: "center",
     flex: 1
   },
   metricNumber: {
-    fontSize: 14,
+    fontSize: 16,
     fontWeight: "bold",
     color: "#3B82F6",
-    marginBottom: 2
+    marginBottom: 4
   },
   metricLabel: {
-    fontSize: 8,
+    fontSize: 8.5,
     color: "#6b7280",
     textTransform: "uppercase",
-    letterSpacing: 0.5
+    letterSpacing: 0.8,
+    fontWeight: 600
   }
 });
 
