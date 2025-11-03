@@ -19,7 +19,8 @@
     "yoyo",
     "FOUC",
     "webcomponents",
-    "animejs"
+    "animejs",
+    "Contentful"
   ],
   "ignoreWords": [],
   "import": [

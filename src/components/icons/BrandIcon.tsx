@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import "./BrandIcon.css";
 
 // Brand icon mapping - maps technology names to their SVG file slugs
 // Only icons with existing SVG files should be in this map
@@ -47,6 +48,23 @@ const BrandIcon: React.FC<BrandIconProps> = ({
 }) => {
   const [iconUrl, setIconUrl] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const imageRef = useRef<HTMLImageElement>(null);
+
+  // Set CSS custom property for dynamic size
+  useEffect(() => {
+    if (containerRef.current) {
+      containerRef.current.style.setProperty('--brand-icon-size', `${size}px`);
+    }
+    if (imageRef.current) {
+      imageRef.current.style.setProperty('--brand-icon-size', `${size}px`);
+      if (color) {
+        imageRef.current.style.filter = `brightness(0) saturate(100%) ${color}`;
+      } else {
+        imageRef.current.style.filter = '';
+      }
+    }
+  }, [size, color]);
 
   useEffect(() => {
     // Find the matching icon slug
@@ -74,8 +92,8 @@ const BrandIcon: React.FC<BrandIconProps> = ({
   if (loading) {
     return (
       <div
-        className={`inline-flex items-center justify-center ${className}`}
-        style={{ width: size, height: size }}
+        ref={containerRef}
+        className={`brand-icon-loading ${className}`}
       >
         <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin opacity-50" />
       </div>
@@ -87,13 +105,8 @@ const BrandIcon: React.FC<BrandIconProps> = ({
     const initial = name.charAt(0).toUpperCase();
     return (
       <div
-        className={`inline-flex items-center justify-center rounded bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 font-semibold text-xs ${className}`}
-        style={{
-          width: size,
-          height: size,
-          minWidth: size,
-          minHeight: size
-        }}
+        ref={containerRef}
+        className={`brand-icon-fallback ${className}`}
         title={name}
       >
         {initial}
@@ -103,12 +116,12 @@ const BrandIcon: React.FC<BrandIconProps> = ({
 
   return (
     <img
+      ref={imageRef}
       src={iconUrl}
       alt={`${name} icon`}
       width={size}
       height={size}
-      className={className}
-      style={color ? { filter: `brightness(0) saturate(100%) ${color}` } : undefined}
+      className={`brand-icon-image ${className}`}
       loading="lazy"
     />
   );

@@ -40,8 +40,6 @@ This portfolio is optimized for speed and performance:
 - Largest Contentful Paint: < 2.5s
 - Time to Interactive: < 3.5s
 
-See [Performance Optimization Report](./docs/PERFORMANCE_OPTIMIZATION_REPORT.md) for detailed metrics and optimization strategies.
-
 ## 📱 Key Sections
 
 ### The Playground
