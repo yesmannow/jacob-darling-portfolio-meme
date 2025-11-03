@@ -24,14 +24,14 @@ for (const tool of tools) {
     const output = execSync(`node ${tool.script}`, { encoding: 'utf-8', stdio: 'pipe' });
     const result = JSON.parse(output);
     results[tool.name] = result;
-    
+
     // For asset-checker, missing dist is OK before first build
-    if (tool.name === 'asset-checker' && result.errors && 
+    if (tool.name === 'asset-checker' && result.errors &&
         result.errors.some(e => e.includes('directory not found'))) {
       console.log(`⚠️  ${tool.name}: Build output not found (expected before first build)\n`);
       continue;
     }
-    
+
     if (result.status === 'OK') {
       console.log(`✅ ${tool.name}: ${result.message}\n`);
     } else {

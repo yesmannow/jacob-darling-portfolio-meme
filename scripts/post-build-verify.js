@@ -18,7 +18,7 @@ try {
   console.log('Running asset-checker...');
   const output = execSync('node ./mcp-tools/asset-checker.js', { encoding: 'utf-8', stdio: 'pipe' });
   const result = JSON.parse(output);
-  
+
   if (result.status === 'OK') {
     console.log(`✅ Asset checker: ${result.message}`);
   } else {
@@ -44,14 +44,14 @@ try {
   const files = await readdir(distAssets);
   const jsFiles = files.filter(f => f.endsWith('.js'));
   const cssFiles = files.filter(f => f.endsWith('.css'));
-  const invalidFiles = files.filter(f => 
+  const invalidFiles = files.filter(f =>
     (f.endsWith('.tsx') || f.endsWith('.jsx') || (f.endsWith('.ts') && !f.endsWith('.d.ts')))
   );
 
   console.log(`\n📦 Build output summary:`);
   console.log(`   - JavaScript files: ${jsFiles.length}`);
   console.log(`   - CSS files: ${cssFiles.length}`);
-  
+
   if (invalidFiles.length > 0) {
     console.error(`\n❌ Invalid files in build output:`);
     invalidFiles.forEach(file => console.error(`   - ${file}`));

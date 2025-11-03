@@ -9,6 +9,7 @@
     "postbuild": "node scripts/post-build-verify.js",
     "build:analyze": "npm run build && node scripts/analyze-bundle.js",
     "build:clean": "rm -rf dist node_modules/.vite && npm run build",
+    "verify:deploy": "node scripts/verify-deployment.js",
     "preview": "vite preview",
     "generate:moodboards": "node scripts/generate-moodboards.js",
     "generate:enhanced-moodboards": "node scripts/generate-enhanced-moodboards.js",

@@ -24,7 +24,7 @@ async function findInvalidFiles(dir, basePath = '') {
         results.push(...subResults);
       } else if (entry.isFile()) {
         // Check for invalid extensions (but allow .d.ts declaration files)
-        const hasInvalidExt = INVALID_EXTENSIONS.some(ext => 
+        const hasInvalidExt = INVALID_EXTENSIONS.some(ext =>
           entry.name.endsWith(ext) && !entry.name.endsWith('.d.ts')
         );
         if (hasInvalidExt) {

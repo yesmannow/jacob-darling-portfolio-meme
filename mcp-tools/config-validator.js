@@ -116,17 +116,17 @@ function validateDeployConfig(filePath, type) {
         file.issues.push('No publish directory specified (should be dist)');
         report.issues.push(`netlify.toml: Should specify publish = "dist"`);
       }
-      
+
       // Check for SPA redirect (/* → /index.html)
-      const hasSpaRedirect = content.includes('[[redirects]]') && 
+      const hasSpaRedirect = content.includes('[[redirects]]') &&
         (content.includes('from = "/*"') || content.includes('from = \'/*\'')) &&
         (content.includes('to = "/index.html"') || content.includes('to = \'/index.html\''));
-      
+
       if (!hasSpaRedirect) {
         file.issues.push('Missing SPA redirect: /* → /index.html');
         report.issues.push(`netlify.toml: Should include SPA redirect for client-side routing`);
       }
-      
+
       // Check for Content-Type header for .js files
       if (!content.includes('Content-Type') || !content.includes('text/javascript')) {
         file.issues.push('Missing Content-Type: text/javascript header for .js files');
@@ -141,25 +141,25 @@ function validateDeployConfig(filePath, type) {
       if (config.buildCommand !== 'npm run build' && !config.buildCommand) {
         file.issues.push('buildCommand should be "npm run build"');
       }
-      
+
       // Check for SPA rewrites
-      const hasSpaRewrite = config.rewrites && 
+      const hasSpaRewrite = config.rewrites &&
         config.rewrites.some(r => r.source === '/(.*)' && r.destination === '/index.html');
-      
+
       if (!hasSpaRewrite) {
         file.issues.push('Missing SPA rewrite: /* → /index.html');
         report.issues.push(`vercel.json: Should include SPA rewrite for client-side routing`);
       }
-      
+
       // Check for Content-Type headers
-      const hasJsContentType = config.headers && 
-        config.headers.some(h => 
-          h.source && h.source.includes('.js') && 
-          h.headers && h.headers.some(header => 
+      const hasJsContentType = config.headers &&
+        config.headers.some(h =>
+          h.source && h.source.includes('.js') &&
+          h.headers && h.headers.some(header =>
             header.key === 'Content-Type' && header.value === 'text/javascript'
           )
         );
-      
+
       if (!hasJsContentType) {
         file.issues.push('Missing Content-Type: text/javascript header for .js files');
         report.issues.push(`vercel.json: Should set Content-Type: text/javascript for .js files`);
