@@ -85,11 +85,6 @@ export const techDescriptions: Record<string, TechDescription> = {
     description: "Next-generation analytics platform with event-based tracking and advanced machine learning insights.",
     usage: "Tracking user journeys across marketing campaigns, measuring conversion funnels, and analyzing customer behavior. I set up custom events for form submissions, course enrollments, and e-commerce transactions to measure marketing ROI."
   },
-  "Google Tag Manager": {
-    name: "Google Tag Manager",
-    description: "Tag management system that allows you to manage marketing tags without editing code.",
-    usage: "Managing all tracking pixels, conversion tags, and analytics scripts from one central dashboard. I use GTM to deploy tracking for Google Ads, Meta Ads, LinkedIn Ads, and custom events without touching site code—crucial for rapid campaign launches."
-  },
   "Google Analytics 4": {
     name: "Google Analytics 4",
     description: "Next-generation analytics platform with event-based tracking and advanced machine learning insights.",
@@ -474,11 +469,6 @@ export const techDescriptions: Record<string, TechDescription> = {
   },
 
   // SEO & Content
-  "Yoast SEO": {
-    name: "Yoast SEO",
-    description: "WordPress SEO plugin providing on-page optimization, XML sitemaps, and schema markup.",
-    usage: "Optimizing every page and post for search engines. I configure Yoast for proper meta descriptions, Open Graph tags for social sharing, and schema markup to help sites rank better in search results."
-  },
   "Rank Math": {
     name: "Rank Math",
     description: "All-in-one SEO plugin for WordPress with advanced schema markup and optimization tools.",

@@ -124,7 +124,6 @@ export const getIconSlug = (name: string): string | null => {
     "OptinMonster": "optinmonster",
     "Easy Digital Downloads": "wordpress",
     "MemberPress": "wordpress",
-    "WP Fusion": "wpfusion",
   };
 
   // Direct lookup
