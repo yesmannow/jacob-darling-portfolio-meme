@@ -3,6 +3,7 @@ import { Share2, Mail, ExternalLink, FileText } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import resumeData from "../../data/resume.json";
 import LazyPDFDownloadCTA from "./LazyPDFDownloadCTA";
+import { trackPortfolioEngagement } from "../../utils/analytics";
 
 export default function CTAButtons() {
   const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
@@ -12,6 +13,7 @@ export default function CTAButtons() {
 
   const handlePDFGeneration = () => {
     setIsGeneratingPDF(true);
+    trackPortfolioEngagement.resumeDownload('pdf');
     setTimeout(() => setIsGeneratingPDF(false), 2000);
   };
 

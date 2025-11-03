@@ -7,6 +7,7 @@ import { refreshLenis } from "../utils/motion-sync";
 // Lazy load heavy components for better performance
 const IntroStatement = lazy(() => import("../components/home/IntroStatement"));
 const GlanceMetrics = lazy(() => import("../components/home/GlanceMetrics"));
+const SkillsShowcase = lazy(() => import("../components/home/SkillsShowcase"));
 const MarketingCommandCenter = lazy(() => import("../components/dashboard/MarketingCommandCenter"));
 const RedesignedFeaturedWork = lazy(() => import("../components/home/RedesignedFeaturedWork"));
 const ProcessSection = lazy(() => import("../components/home/ProcessSection"));
@@ -44,6 +45,9 @@ const HomePage: React.FC = () => {
 
         {/* Impact Metrics Dashboard */}
         <GlanceMetrics />
+
+        {/* Skills Showcase */}
+        <SkillsShowcase />
 
         {/* Marketing Command Center */}
         <MarketingCommandCenter />

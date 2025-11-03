@@ -1,16 +1,29 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams, Link, Navigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { getCaseStudyBySlug } from "../data/caseStudies";
 import { fadeInUp, staggerContainer, staggerItem } from "../utils/animations";
 import AnimatedSection from "../components/animations/AnimatedSection";
 import { getCaseStudyDiagrams } from "../components/diagrams/caseStudyDiagrams";
+import { trackPortfolioEngagement, createTimeTracker } from "../utils/analytics";
 import "./CaseStudyDetail.css";
 
 const CaseStudyDetail: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const caseStudy = slug ? getCaseStudyBySlug(slug) : undefined;
   const diagrams = slug ? getCaseStudyDiagrams(slug) : [];
+
+  // Track case study view
+  useEffect(() => {
+    if (caseStudy && slug) {
+      trackPortfolioEngagement.caseStudyView(slug, caseStudy.title);
+      const timeTracker = createTimeTracker(`/case-studies/${slug}`);
+
+      return () => {
+        timeTracker.stop();
+      };
+    }
+  }, [caseStudy, slug]);
 
   if (!caseStudy) {
     return <Navigate to="/case-studies" replace />;

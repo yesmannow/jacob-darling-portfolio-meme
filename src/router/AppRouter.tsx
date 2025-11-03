@@ -3,6 +3,7 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import PageTransition from "../components/animations/PageTransition";
 import ScrollToTop from "../components/utils/ScrollToTop";
+import SEOHead from "../components/seo/SEOHead";
 import "./AppRouter.css";
 
 // Lazy load pages for code splitting with better chunking
@@ -34,8 +35,49 @@ const PageLoader = () => (
 const AppRouter: React.FC = () => {
   const location = useLocation();
 
+  // Dynamic SEO based on route
+  const getSEOData = () => {
+    const path = location.pathname;
+
+    if (path === '/') {
+      return {
+        title: "Jacob Darling — Marketing Strategist & Systems Architect",
+        description: "Results-driven marketing professional specializing in digital marketing strategies, campaign automation, CRM integration, SEO/SEM, and analytics-driven strategy.",
+        keywords: "marketing strategist, marketing technologist, marketing automation, CRM campaigns"
+      };
+    } else if (path === '/resume') {
+      return {
+        title: "Resume | Jacob Darling",
+        description: "Professional resume and experience of Jacob Darling - Marketing Strategist & Systems Architect with 15+ years experience",
+        keywords: "resume, CV, marketing director, systems architect, marketing automation"
+      };
+    } else if (path === '/case-studies') {
+      return {
+        title: "Case Studies | Jacob Darling",
+        description: "Detailed case studies showing problem-solving approach and measurable results in marketing automation and systems architecture",
+        keywords: "marketing case studies, project portfolio, marketing automation examples"
+      };
+    } else if (path.startsWith('/case-studies/')) {
+      return {
+        title: "Case Study | Jacob Darling",
+        description: "Detailed case study showing problem-solving approach and measurable results"
+      };
+    } else if (path === '/contact') {
+      return {
+        title: "Contact | Jacob Darling",
+        description: "Get in touch with Jacob Darling for job opportunities, collaborations, or consulting inquiries",
+        keywords: "contact, hire, job opportunity, marketing consultant"
+      };
+    }
+
+    return {};
+  };
+
+  const seoData = getSEOData();
+
   return (
     <>
+      <SEOHead {...seoData} />
       <ScrollToTop />
       <AnimatePresence mode="wait">
         <Suspense fallback={<PageLoader />}>

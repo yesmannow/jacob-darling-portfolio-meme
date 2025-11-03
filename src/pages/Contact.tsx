@@ -12,18 +12,38 @@ interface FormData {
   email: string;
   message: string;
   reason: string;
+  company?: string;
+  phone?: string;
 }
+
+const CONTACT_REASONS = [
+  { value: "job-opportunity", label: "Job Opportunity", description: "Interested in hiring me" },
+  { value: "collaboration", label: "Collaboration", description: "Want to work together" },
+  { value: "consulting", label: "Consulting Inquiry", description: "Need marketing expertise" },
+  { value: "interview", label: "Interview Request", description: "Would like to interview" },
+  { value: "question", label: "General Question", description: "Have a question" },
+  { value: "other", label: "Other", description: "Something else" }
+];
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
     message: "",
-    reason: ""
+    reason: "",
+    company: "",
+    phone: ""
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  // Track form interactions
+  React.useEffect(() => {
+    import("../utils/analytics").then(({ trackPortfolioEngagement }) => {
+      trackPortfolioEngagement.contactFormStart();
+    });
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -58,9 +78,17 @@ const Contact: React.FC = () => {
 
       if (result.success) {
         setSubmitted(true);
-        setFormData({ name: "", email: "", message: "", reason: "" });
+        setFormData({ name: "", email: "", message: "", reason: "", company: "", phone: "" });
+
+        // Track successful submission
+        import("../utils/analytics").then(({ trackPortfolioEngagement }) => {
+          trackPortfolioEngagement.contactFormSubmit(formData.reason || "general");
+        });
       } else {
         setError("Failed to send message. Please try again.");
+        import("../utils/analytics").then(({ trackPortfolioEngagement }) => {
+          trackPortfolioEngagement.contactFormError(result.message || "Unknown error");
+        });
       }
     } catch (err) {
       setError("An error occurred. Please try emailing directly.");
@@ -129,19 +157,45 @@ const Contact: React.FC = () => {
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor="reason">Reason for Contact</label>
+                    <label htmlFor="reason">Reason for Contact *</label>
                     <select
                       id="reason"
                       name="reason"
                       value={formData.reason}
                       onChange={handleChange}
+                      required
                     >
                       <option value="">Select a reason...</option>
-                      <option value="project">Project Inquiry</option>
-                      <option value="collaboration">Collaboration</option>
-                      <option value="consultation">Consultation</option>
-                      <option value="general">General Question</option>
+                      {CONTACT_REASONS.map((reason) => (
+                        <option key={reason.value} value={reason.value}>
+                          {reason.label} - {reason.description}
+                        </option>
+                      ))}
                     </select>
+                  </div>
+
+                  <div className="form-group">
+                    <label htmlFor="company">Company/Organization</label>
+                    <input
+                      type="text"
+                      id="company"
+                      name="company"
+                      value={formData.company}
+                      onChange={handleChange}
+                      placeholder="Your company (optional)"
+                    />
+                  </div>
+
+                  <div className="form-group">
+                    <label htmlFor="phone">Phone</label>
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      placeholder="Your phone (optional)"
+                    />
                   </div>
 
                   <div className="form-group">

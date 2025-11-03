@@ -6,6 +6,25 @@ import { Users, Zap, TrendingUp, Award } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
+// Component to handle metric glow with CSS variable
+const MetricGlow = ({ glowColor }: { glowColor: string }) => {
+  const glowRef = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    if (glowRef.current) {
+      glowRef.current.style.setProperty('--glow-color', glowColor);
+      glowRef.current.style.setProperty('box-shadow', `inset 0 0 20px ${glowColor}`);
+    }
+  }, [glowColor]);
+
+  return (
+    <div
+      ref={glowRef}
+      className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+    />
+  );
+};
+
 interface Metric {
   id: string;
   icon: React.ReactNode;
@@ -18,38 +37,38 @@ interface Metric {
 
 const metrics: Metric[] = [
   {
-    id: "users",
-    icon: <Users className="w-6 h-6" />,
-    value: 30000,
-    suffix: "+",
-    label: "Users Reached",
-    color: "from-blue-400 to-cyan-400",
-    glowColor: "rgba(59, 130, 246, 0.3)"
+    id: "ticket-reduction",
+    icon: <TrendingUp className="w-6 h-6" />,
+    value: 70,
+    suffix: "%",
+    label: "Support Ticket Reduction",
+    color: "from-green-400 to-emerald-400",
+    glowColor: "rgba(34, 197, 94, 0.3)"
+  },
+  {
+    id: "conversion-increase",
+    icon: <Zap className="w-6 h-6" />,
+    value: 40,
+    suffix: "%",
+    label: "Conversion Rate Increase",
+    color: "from-purple-400 to-pink-400",
+    glowColor: "rgba(147, 51, 234, 0.3)"
   },
   {
     id: "automations",
     icon: <Zap className="w-6 h-6" />,
     value: 400,
     suffix: "+",
-    label: "Automations Built",
-    color: "from-purple-400 to-pink-400",
-    glowColor: "rgba(147, 51, 234, 0.3)"
+    label: "Marketing Automations",
+    color: "from-blue-400 to-cyan-400",
+    glowColor: "rgba(59, 130, 246, 0.3)"
   },
   {
-    id: "growth",
-    icon: <TrendingUp className="w-6 h-6" />,
-    value: 300,
-    suffix: "%",
-    label: "SEO Growth",
-    color: "from-green-400 to-emerald-400",
-    glowColor: "rgba(34, 197, 94, 0.3)"
-  },
-  {
-    id: "experience",
-    icon: <Award className="w-6 h-6" />,
-    value: 15,
-    suffix: "+",
-    label: "Years Experience",
+    id: "users",
+    icon: <Users className="w-6 h-6" />,
+    value: 30,
+    suffix: "K+",
+    label: "Users Served Globally",
     color: "from-orange-400 to-yellow-400",
     glowColor: "rgba(249, 115, 22, 0.3)"
   }
@@ -121,7 +140,7 @@ const GlanceMetrics: React.FC = () => {
   }, []);
 
   return (
-    <section 
+    <section
       ref={sectionRef}
       className="py-20 bg-gradient-to-b from-black via-gray-900/20 to-black relative overflow-hidden"
     >
@@ -132,9 +151,9 @@ const GlanceMetrics: React.FC = () => {
       </div>
 
       <div className="relative z-10 max-w-6xl mx-auto px-6">
-        
+
         {/* Section Header */}
-        <motion.div 
+        <motion.div
           className="text-center mb-12"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -157,7 +176,7 @@ const GlanceMetrics: React.FC = () => {
             <motion.div
               key={metric.id}
               className="metric-card group relative"
-              whileHover={{ 
+              whileHover={{
                 scale: 1.05,
                 rotateY: 5,
                 boxShadow: `0 20px 40px ${metric.glowColor}`
@@ -166,10 +185,10 @@ const GlanceMetrics: React.FC = () => {
             >
               {/* Card Background */}
               <div className="relative bg-gray-900/50 backdrop-blur-sm border border-white/10 rounded-2xl p-6 overflow-hidden group-hover:border-white/20 transition-all duration-300">
-                
+
                 {/* Gradient Overlay */}
                 <div className={`absolute inset-0 bg-gradient-to-br ${metric.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300`} />
-                
+
                 {/* Icon */}
                 <div className={`inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br ${metric.color} rounded-xl mb-4 shadow-lg`}>
                   <div className="text-white">
@@ -190,13 +209,8 @@ const GlanceMetrics: React.FC = () => {
                   {metric.label}
                 </p>
 
-                {/* Hover Glow */}
-                <div 
-                  className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-                  style={{
-                    boxShadow: `inset 0 0 20px ${metric.glowColor}`
-                  }}
-                />
+                {/* Hover Glow - using CSS variable set via ref */}
+                <MetricGlow glowColor={metric.glowColor} />
 
                 {/* Corner Accent */}
                 <div className={`absolute top-2 right-2 w-2 h-2 bg-gradient-to-br ${metric.color} rounded-full opacity-60`} />

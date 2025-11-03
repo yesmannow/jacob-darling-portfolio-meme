@@ -27,7 +27,7 @@ const ThemeToggle: React.FC = () => {
           return (
             <button
               key={t}
-              aria-pressed={active}
+              {...(active ? { 'aria-pressed': 'true' } : { 'aria-pressed': 'false' })}
               onClick={() => setTheme(t)}
               className={`relative flex items-center gap-1.5 px-3 py-2 text-sm font-medium transition-colors ${
                 active
@@ -60,7 +60,7 @@ const ThemeToggle: React.FC = () => {
           return (
             <button
               key={b}
-              aria-pressed={active}
+              {...(active ? { 'aria-pressed': 'true' } : { 'aria-pressed': 'false' })}
               onClick={() => setBrand(b)}
               className={`relative flex items-center gap-1.5 px-3 py-2 text-sm font-medium transition-colors ${
                 active

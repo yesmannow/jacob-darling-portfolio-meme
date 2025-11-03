@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Download, Share2, Mail, ExternalLink, Eye, FileText, Sparkles, Zap } from "lucide-react";
@@ -11,6 +11,7 @@ import TimelineNavigation from "../components/resume/TimelineNavigation";
 import AwardShowcase from "../components/awards/AwardShowcase";
 import AwardsSection from "../components/resume/AwardsSection";
 import LazyPDFDownload from "../components/resume/LazyPDFDownload";
+import { trackPortfolioEngagement, createTimeTracker } from "../utils/analytics";
 import "./Resume.css";
 
 const Resume: React.FC = () => {
@@ -19,6 +20,21 @@ const Resume: React.FC = () => {
   const [cinematicMode, setCinematicMode] = useState(true);
 
   const { name, title, summary, contact, experience, skills, tools, education, communityLeadership, stats } = resumeData;
+
+  // Track resume page view and time spent
+  useEffect(() => {
+    trackPortfolioEngagement.resumeView();
+    const timeTracker = createTimeTracker('/resume');
+
+    return () => {
+      timeTracker.stop();
+    };
+  }, []);
+
+  // Track section views
+  useEffect(() => {
+    trackPortfolioEngagement.resumeSectionView(activeSection);
+  }, [activeSection]);
 
   const handlePDFGeneration = () => {
     setIsGeneratingPDF(true);

@@ -1,5 +1,6 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import OptimizedImage from "../components/common/OptimizedImage";
 import "./Inspiration.css";
 
 /**
@@ -117,9 +118,14 @@ const INSPIRATION = [
 ];
 
 // ------------------------------
-// PALETTE SWATCH — color preview component
+// TYPES
 // ------------------------------
-function PaletteSwatch({ hex }: { hex: string }) {
+type InspirationItem = typeof INSPIRATION[0];
+
+// ------------------------------
+// PALETTE SWATCH — color preview component (memoized)
+// ------------------------------
+const PaletteSwatch = React.memo(({ hex }: { hex: string }) => {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -133,11 +139,14 @@ function PaletteSwatch({ hex }: { hex: string }) {
       <div
         ref={ref}
         className="palette-swatch w-16 h-16 rounded-lg border-2 border-neutral-200 dark:border-neutral-700 shadow-md"
+        aria-label={`Color swatch: ${hex}`}
       />
       <span className="text-xs text-neutral-600 dark:text-neutral-400 font-mono">{hex}</span>
     </div>
   );
-}
+});
+
+PaletteSwatch.displayName = "PaletteSwatch";
 
 // ------------------------------
 // HERO with parallax + motion gradient
@@ -178,52 +187,42 @@ function Hero() {
 }
 
 // ------------------------------
-// HOVER CARD — with animated ROI overlay
+// HOVER CARD — with animated ROI overlay (optimized)
 // ------------------------------
-function InspirationCard({ item, onOpen }: { item: typeof INSPIRATION[0]; onOpen: (item: typeof INSPIRATION[0]) => void }) {
-  const [imageError, setImageError] = useState(false);
-  const [imageLoading, setImageLoading] = useState(true);
+const InspirationCard = React.memo(({ item, onOpen }: { item: InspirationItem; onOpen: (item: InspirationItem) => void }) => {
+  const handleClick = useCallback(() => {
+    onOpen(item);
+  }, [item, onOpen]);
+
+  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      onOpen(item);
+    }
+  }, [item, onOpen]);
 
   return (
     <motion.div
-      onClick={() => onOpen(item)}
+      onClick={handleClick}
       whileHover={{ scale: 1.02 }}
       className="group relative w-full rounded-3xl overflow-hidden border border-neutral-200 dark:border-neutral-700 bg-white/70 dark:bg-neutral-800/70 shadow-sm cursor-pointer"
       role="button"
       tabIndex={0}
-      onKeyDown={(e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          onOpen(item);
-        }
-      }}
+      onKeyDown={handleKeyDown}
       aria-label={`View ${item.title} inspiration`}
     >
       <div className="relative aspect-[4/3] overflow-hidden">
-        {imageLoading && (
-          <div className="absolute inset-0 bg-neutral-200 dark:bg-neutral-700 animate-pulse" />
-        )}
-        {!imageError ? (
-          <img
-            src={item.img}
-            alt={item.title}
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-            loading="lazy"
-            onLoad={() => setImageLoading(false)}
-            onError={() => {
-              setImageError(true);
-              setImageLoading(false);
-            }}
-          />
-        ) : (
-          <div className="w-full h-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center">
-            <span className="text-white text-sm font-medium">{item.title}</span>
-          </div>
-        )}
+        <OptimizedImage
+          src={item.img}
+          alt={item.title}
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+          loading="lazy"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        />
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileHover={{ opacity: 1, y: 0 }}
-          className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex flex-col justify-end p-6"
+          className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex flex-col justify-end p-6 pointer-events-none"
         >
           <h3 className="text-white font-bold text-xl mb-2">{item.title}</h3>
           <p className="text-neutral-200 text-sm">{item.roi}</p>
@@ -231,33 +230,61 @@ function InspirationCard({ item, onOpen }: { item: typeof INSPIRATION[0]; onOpen
       </div>
     </motion.div>
   );
-}
+}, (prevProps, nextProps) => {
+  // Custom comparison function for memoization
+  return prevProps.item.id === nextProps.item.id;
+});
+
+InspirationCard.displayName = "InspirationCard";
 
 // ------------------------------
-// MASONRY WRAPPER
+// MASONRY WRAPPER (memoized)
 // ------------------------------
-function Masonry({ items, onOpen }: { items: typeof INSPIRATION; onOpen: (item: typeof INSPIRATION[0]) => void }) {
+const Masonry = React.memo(({ items, onOpen }: { items: typeof INSPIRATION; onOpen: (item: InspirationItem) => void }) => {
+  const handleOpen = useCallback((item: InspirationItem) => {
+    onOpen(item);
+  }, [onOpen]);
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-6 py-12 max-w-7xl mx-auto">
       {items.map((item) => (
-        <InspirationCard key={item.id} item={item} onOpen={onOpen} />
+        <InspirationCard key={item.id} item={item} onOpen={handleOpen} />
       ))}
     </div>
   );
-}
+});
+
+Masonry.displayName = "Masonry";
 
 // ------------------------------
-// LIGHTBOX — enhanced aesthetic
+// LIGHTBOX — enhanced aesthetic (optimized)
 // ------------------------------
-function Lightbox({ open, onClose, card }: { open: boolean; onClose: () => void; card: typeof INSPIRATION[0] | null }) {
+const Lightbox = React.memo(({ open, onClose, card }: { open: boolean; onClose: () => void; card: InspirationItem | null }) => {
+  const handleEscape = useCallback((e: KeyboardEvent) => {
+    if (e.key === "Escape") onClose();
+  }, [onClose]);
+
   useEffect(() => {
     if (!open) return;
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    };
     window.addEventListener("keydown", handleEscape);
     return () => window.removeEventListener("keydown", handleEscape);
-  }, [open, onClose]);
+  }, [open, handleEscape]);
+
+  // Prevent body scroll when lightbox is open
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [open]);
+
+  const categoriesString = useMemo(() => {
+    return card?.categories.join(" • ") || "";
+  }, [card?.categories]);
 
   if (!open || !card) return null;
   return (
@@ -279,10 +306,17 @@ function Lightbox({ open, onClose, card }: { open: boolean; onClose: () => void;
           aria-modal="true"
           aria-labelledby="lightbox-title"
         >
-          <img src={card.img} alt={card.title} className="w-full h-96 object-cover" loading="eager" />
+          <OptimizedImage
+            src={card.img}
+            alt={card.title}
+            className="w-full h-96 object-cover"
+            loading="eager"
+            priority
+            sizes="(max-width: 768px) 100vw, 896px"
+          />
           <div className="p-8">
             <h2 id="lightbox-title" className="text-3xl font-bold mb-2">{card.title}</h2>
-            <p className="text-neutral-500 mb-4">{card.categories.join(" • ")}</p>
+            <p className="text-neutral-500 mb-4">{categoriesString}</p>
             <p className="text-neutral-700 dark:text-neutral-300 mb-6">{card.notes}</p>
             <div className="flex gap-3 mb-6">
               {card.palette.map((hex) => (
@@ -302,10 +336,12 @@ function Lightbox({ open, onClose, card }: { open: boolean; onClose: () => void;
       </motion.div>
     </AnimatePresence>
   );
-}
+});
+
+Lightbox.displayName = "Lightbox";
 
 // ------------------------------
-// PLAYGROUND — try a palette on UI components
+// PLAYGROUND — try a palette on UI components (optimized)
 // ------------------------------
 function Playground({ palette }: { palette: string[] | undefined }) {
   const [primary, setPrimary] = useState(palette?.[1] || "#2563EB");
@@ -315,27 +351,25 @@ function Playground({ palette }: { palette: string[] | undefined }) {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const metricRefs = useRef<(HTMLDivElement | null)[]>([]);
 
+  // Memoize palette key to prevent unnecessary updates
+  const paletteKey = useMemo(() => palette?.join(","), [palette]);
+
   useEffect(() => {
     if (!palette) return;
     setPrimary(palette[1] || primary);
     setBg(palette[3] || bg);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [palette?.join(",")]);
+  }, [paletteKey]);
 
+  // Combine CSS variable updates into fewer effects
   useEffect(() => {
     if (previewCardRef.current) {
       previewCardRef.current.style.setProperty("--playground-bg", bg);
       previewCardRef.current.style.setProperty("--playground-text", text);
     }
-  }, [bg, text]);
-
-  useEffect(() => {
     if (buttonRef.current) {
       buttonRef.current.style.setProperty("--playground-primary", primary);
     }
-  }, [primary]);
-
-  useEffect(() => {
     const primaryWithOpacity = primary + "33";
     metricRefs.current.forEach((ref) => {
       if (ref) {
@@ -343,7 +377,28 @@ function Playground({ palette }: { palette: string[] | undefined }) {
         ref.style.setProperty("--playground-text", text);
       }
     });
-  }, [primary, text]);
+  }, [bg, text, primary]);
+
+  // Memoize handlers to prevent re-renders
+  const handlePrimaryChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setPrimary(e.target.value);
+  }, []);
+
+  const handleBgChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setBg(e.target.value);
+  }, []);
+
+  const handleTextChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setText(e.target.value);
+  }, []);
+
+  // Memoize random metrics to prevent recalculation on every render
+  const metrics = useMemo(() => {
+    return [1, 2, 3].map((n) => ({
+      id: n,
+      value: Math.round(Math.random() * 100)
+    }));
+  }, []);
 
   return (
     <section className="py-16 px-6 bg-neutral-50 dark:bg-neutral-900">
@@ -361,7 +416,7 @@ function Playground({ palette }: { palette: string[] | undefined }) {
                 <input
                   type="color"
                   value={primary}
-                  onChange={(e) => setPrimary(e.target.value)}
+                  onChange={handlePrimaryChange}
                   className="w-full h-10 rounded-md"
                   aria-label="Primary color"
                 />
@@ -371,7 +426,7 @@ function Playground({ palette }: { palette: string[] | undefined }) {
                 <input
                   type="color"
                   value={bg}
-                  onChange={(e) => setBg(e.target.value)}
+                  onChange={handleBgChange}
                   className="w-full h-10 rounded-md"
                   aria-label="Background color"
                 />
@@ -381,7 +436,7 @@ function Playground({ palette }: { palette: string[] | undefined }) {
                 <input
                   type="color"
                   value={text}
-                  onChange={(e) => setText(e.target.value)}
+                  onChange={handleTextChange}
                   className="w-full h-10 rounded-md"
                   aria-label="Text color"
                 />
@@ -405,14 +460,14 @@ function Playground({ palette }: { palette: string[] | undefined }) {
               Preview headings, body text, and button contrast in real-time. Ship palettes that look good and meet WCAG contrast.
             </p>
             <div className="grid grid-cols-3 gap-4 mt-6">
-              {[1, 2, 3].map((n, index) => (
+              {metrics.map((metric, index) => (
                 <div
-                  key={n}
+                  key={metric.id}
                   ref={(el) => { metricRefs.current[index] = el; }}
                   className="playground-metric-card p-4 rounded-lg text-center"
                 >
-                  <div className="text-2xl font-bold">Metric {n}</div>
-                  <div className="text-sm">{Math.round(Math.random() * 100)}%</div>
+                  <div className="text-2xl font-bold">Metric {metric.id}</div>
+                  <div className="text-sm">{metric.value}%</div>
                 </div>
               ))}
             </div>
@@ -424,10 +479,10 @@ function Playground({ palette }: { palette: string[] | undefined }) {
 }
 
 // ------------------------------
-// TYPOGRAPHY SAMPLER — variable font feel
+// TYPOGRAPHY SAMPLER — variable font feel (optimized)
 // ------------------------------
 function TypeSampler() {
-  const [brand, setBrand] = useState("cmo");
+  const [brand, setBrand] = useState<"cmo" | "dev">("cmo");
   const [weight, setWeight] = useState(700);
   const samplerRef = useRef<HTMLDivElement>(null);
 
@@ -436,6 +491,14 @@ function TypeSampler() {
       samplerRef.current.style.setProperty("--typography-weight", String(weight));
     }
   }, [weight]);
+
+  const handleBrandChange = useCallback((b: "cmo" | "dev") => {
+    setBrand(b);
+  }, []);
+
+  const handleWeightChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setWeight(parseInt(e.target.value));
+  }, []);
 
   return (
     <section className="py-16 px-6 bg-white dark:bg-neutral-800">
@@ -446,7 +509,7 @@ function TypeSampler() {
             {(["cmo", "dev"] as const).map((b) => (
               <button
                 key={b}
-                onClick={() => setBrand(b)}
+                onClick={() => handleBrandChange(b)}
                 className={`px-3 py-1.5 text-sm rounded-lg transition-colors ${
                   brand === b
                     ? "bg-neutral-900 text-white dark:bg-white dark:text-neutral-900"
@@ -468,7 +531,7 @@ function TypeSampler() {
               max="900"
               step="100"
               value={weight}
-              onChange={(e) => setWeight(parseInt(e.target.value))}
+              onChange={handleWeightChange}
               className="w-full"
               aria-label="Font weight slider"
             />
@@ -502,11 +565,21 @@ function TypeSampler() {
 }
 
 // ------------------------------
-// ROOT PAGE
+// ROOT PAGE (optimized)
 // ------------------------------
 export default function InspirationPage() {
-  const [lightbox, setLightbox] = useState<{ open: boolean; card: typeof INSPIRATION[0] | null }>({ open: false, card: null });
+  const [lightbox, setLightbox] = useState<{ open: boolean; card: InspirationItem | null }>({ open: false, card: null });
 
+  // Memoize handlers to prevent re-renders
+  const handleOpenLightbox = useCallback((card: InspirationItem) => {
+    setLightbox({ open: true, card });
+  }, []);
+
+  const handleCloseLightbox = useCallback(() => {
+    setLightbox({ open: false, card: null });
+  }, []);
+
+  // Analytics tracking
   useEffect(() => {
     if (typeof window !== 'undefined' && (window as any).dataLayer) {
       (window as any).dataLayer = (window as any).dataLayer || [];
@@ -514,23 +587,29 @@ export default function InspirationPage() {
     }
   }, []);
 
+  // Memoize current palette to prevent unnecessary Playground re-renders
+  const currentPalette = useMemo(() => lightbox.card?.palette, [lightbox.card?.palette]);
+
+  // Memoize current year to prevent recalculation
+  const currentYear = useMemo(() => new Date().getFullYear(), []);
+
   return (
     <div className="min-h-screen bg-white dark:bg-neutral-900">
       <Hero />
-      <Masonry items={INSPIRATION} onOpen={(card) => setLightbox({ open: true, card })} />
-      <AnimatePresence>
+      <Masonry items={INSPIRATION} onOpen={handleOpenLightbox} />
+      <AnimatePresence mode="wait">
         {lightbox.open && lightbox.card && (
           <Lightbox
             open={lightbox.open}
-            onClose={() => setLightbox({ open: false, card: null })}
+            onClose={handleCloseLightbox}
             card={lightbox.card}
           />
         )}
       </AnimatePresence>
-      <Playground palette={lightbox.card?.palette} />
+      <Playground palette={currentPalette} />
       <TypeSampler />
       <footer className="py-8 text-center text-neutral-500">
-        © {new Date().getFullYear()} Creative Universe by Jacob Darling
+        © {currentYear} Creative Universe by Jacob Darling
       </footer>
     </div>
   );

@@ -13,9 +13,20 @@
           const brand = localStorage.getItem('brand') || 'cmo'; // default: cmo
           const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
           const theme = ls === 'system' || !ls ? (prefersDark ? 'dark' : 'light') : ls;
+          const isDark = theme === 'dark';
 
-          document.documentElement.classList.toggle('dark', theme === 'dark');
+          document.documentElement.classList.toggle('dark', isDark);
           document.documentElement.setAttribute('data-brand', brand);
+
+          // Update theme-color meta tag immediately (for Chrome/Edge/Safari)
+          // Firefox and Opera ignore this tag - we use CSS color-scheme for them instead
+          const themeColorMeta = document.querySelector('meta[name="theme-color"]');
+          if (themeColorMeta) {
+            themeColorMeta.setAttribute('content', isDark ? '#0b0b0c' : '#ffffff');
+          }
+
+          // Set CSS color-scheme for Firefox/Opera support
+          document.documentElement.style.colorScheme = isDark ? 'dark' : 'light';
         } catch(e) {
           // Silently fail if localStorage is unavailable
         }
@@ -31,11 +42,11 @@
     <meta name="robots" content="index, follow" />
 
     <!-- Theme Color -->
-    <!-- Note: This meta tag is a progressive enhancement supported by Chrome/Edge and Safari.
-          Firefox and Opera will ignore this tag gracefully - this is expected behavior.
-          For broader compatibility, we also include the msapplication-TileColor for Windows tiles. -->
-    <meta name="theme-color" content="#88ABF2" />
-    <meta name="msapplication-TileColor" content="#88ABF2" />
+    <!-- Note: theme-color is supported by Chrome/Edge and Safari for browser chrome theming.
+          Firefox and Opera ignore this tag - we use CSS color-scheme property for those browsers.
+          The value is dynamically updated by ThemeProvider based on the current theme. -->
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="msapplication-TileColor" content="#0b0b0c" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />

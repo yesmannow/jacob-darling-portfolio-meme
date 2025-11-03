@@ -159,6 +159,9 @@
   --font-brand: "Inter", system-ui, sans-serif;
   --font-ui: "Inter", system-ui, sans-serif;
   --radius: 1.25rem; /* default rounded-2xl */
+
+  /* CSS color-scheme for Firefox/Opera support (theme-color meta tag is ignored by those browsers) */
+  color-scheme: light;
 }
 
 /* Dark Mode */
@@ -170,6 +173,9 @@ html.dark {
   --muted: #9aa1ab;
   --accent: #60a5fa; /* lighter blue */
   --ring: #60a5fa;
+
+  /* CSS color-scheme for Firefox/Opera support */
+  color-scheme: dark;
 }
 
 /* Brand Modes (stack on top of light/dark via data-brand attr) */

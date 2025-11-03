@@ -51,12 +51,33 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     return () => mediaQuery.removeEventListener('change', handleChange);
   }, [theme, brand]);
 
+  function updateThemeColor(isDark: boolean) {
+    // Update theme-color meta tag for browsers that support it (Chrome, Edge, Safari)
+    // Firefox and Opera ignore this tag, which is expected behavior
+    const themeColorMeta = document.querySelector('meta[name="theme-color"]');
+    if (themeColorMeta) {
+      // Use background color that matches the theme
+      // Light: white background, Dark: dark background
+      themeColorMeta.setAttribute('content', isDark ? '#0b0b0c' : '#ffffff');
+    } else {
+      // Create it if it doesn't exist (shouldn't happen but safety check)
+      const meta = document.createElement('meta');
+      meta.name = 'theme-color';
+      meta.content = isDark ? '#0b0b0c' : '#ffffff';
+      document.head.appendChild(meta);
+    }
+
+    // Set CSS color-scheme for Firefox/Opera support
+    document.documentElement.style.colorScheme = isDark ? 'dark' : 'light';
+  }
+
   function apply(t: Theme, b: Brand) {
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     const isDark = t === 'dark' || (t === 'system' && prefersDark);
 
     document.documentElement.classList.toggle('dark', isDark);
     document.documentElement.setAttribute('data-brand', b);
+    updateThemeColor(isDark);
   }
 
   const setTheme = (t: Theme) => {

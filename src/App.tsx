@@ -9,10 +9,14 @@ import PerformanceMonitor from "./components/utils/PerformanceMonitor";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./components/theme/ThemeProvider";
 import { initLenis, destroyLenis } from "./utils/motion-sync";
+import { initAnalytics } from "./utils/analytics";
 import "lenis/dist/lenis.css";
 
 const App: React.FC = () => {
   useEffect(() => {
+    // Initialize analytics
+    initAnalytics();
+
     // Ensure native scrolling works immediately
     document.documentElement.style.overflow = 'auto';
     document.body.style.overflow = 'auto';

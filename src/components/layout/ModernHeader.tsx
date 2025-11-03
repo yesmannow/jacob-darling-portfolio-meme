@@ -243,84 +243,102 @@ const ModernHeader: React.FC = () => {
 
         {/* DESKTOP NAVIGATION */}
         {!isMobile && (
-          <div className="hidden lg:flex items-center gap-8" ref={dropdownRef}>
-            {navigationGroups.map((group) => (
-              <div
-                key={group.label}
-                className="relative"
-                onMouseEnter={() => handleDropdownEnter(group.label)}
-                onMouseLeave={handleDropdownLeave}
-              >
-                <button className="flex items-center gap-2 text-white hover:text-blue-400 transition-colors group">
-                  {group.icon}
-                  <span className="font-medium">{group.label}</span>
-                  <ChevronDown className={`w-4 h-4 transition-transform ${activeDropdown === group.label ? 'rotate-180' : ''}`} />
-                </button>
-
-                {/* DROPDOWN MENU */}
-                <AnimatePresence>
-                  {activeDropdown === group.label && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                      animate={{ opacity: 1, y: 0, scale: 1 }}
-                      exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                      transition={{ duration: 0.2 }}
-                      className="absolute top-full left-0 mt-2 w-80 bg-black/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl overflow-hidden z-50"
-                    >
-                      <div className="p-2">
-                        {group.items.map((item, index) => (
-                          <motion.div
-                            key={item.to}
-                            initial={{ opacity: 0, x: -20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: index * 0.05 }}
-                          >
-                            <Link
-                              to={item.to}
-                              className="flex items-center gap-3 p-3 rounded-xl hover:bg-white/5 transition-colors group"
-                            >
-                              <div className="w-10 h-10 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-lg flex items-center justify-center">
-                                {item.icon}
-                              </div>
-                              <div className="flex-1">
-                                <div className="text-white font-medium group-hover:text-blue-400 transition-colors">
-                                  {item.label}
-                                </div>
-                                {item.description && (
-                                  <div className="text-sm text-gray-400">
-                                    {item.description}
-                                  </div>
-                                )}
-                              </div>
-                              <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-blue-400 group-hover:translate-x-1 transition-all" />
-                            </Link>
-                          </motion.div>
-                        ))}
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            ))}
-
-            {/* RESUME DOWNLOAD CTA BUTTON */}
-            <button
-              onClick={handleResumeDownload}
-              className="flex items-center gap-2 px-5 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full font-medium hover:scale-105 transition-all shadow-lg hover:shadow-purple-500/25"
-              aria-label="Download Resume"
-            >
-              <Download className="w-4 h-4" />
-              <span className="hidden xl:inline">Download Resume</span>
-              <span className="xl:hidden">Resume</span>
-            </button>
-
-            {/* LET'S CONNECT BUTTON */}
+          <div className="hidden lg:flex items-center gap-6" ref={dropdownRef}>
+            {/* Resume CTA - Prominent */}
             <Link
-              to="/contact"
-              className="ml-2 px-6 py-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-full font-medium hover:scale-105 transition-all shadow-lg hover:shadow-blue-500/25"
+              to="/resume"
+              className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg font-medium hover:from-blue-600 hover:to-purple-700 transition-all shadow-lg hover:shadow-xl"
+              onClick={() => {
+                if ((window as any).dataLayer) {
+                  (window as any).dataLayer.push({ event: 'header_resume_click' });
+                }
+              }}
             >
-              Let's Connect
+              <FileText className="w-4 h-4" />
+              <span>Resume</span>
             </Link>
+
+            <div className="w-px h-8 bg-white/10" />
+
+            <div className="flex items-center gap-8">
+              {navigationGroups.map((group) => (
+                <div
+                  key={group.label}
+                  className="relative"
+                  onMouseEnter={() => handleDropdownEnter(group.label)}
+                  onMouseLeave={handleDropdownLeave}
+                >
+                  <button className="flex items-center gap-2 text-white hover:text-blue-400 transition-colors group">
+                    {group.icon}
+                    <span className="font-medium">{group.label}</span>
+                    <ChevronDown className={`w-4 h-4 transition-transform ${activeDropdown === group.label ? 'rotate-180' : ''}`} />
+                  </button>
+
+                  {/* DROPDOWN MENU */}
+                  <AnimatePresence>
+                    {activeDropdown === group.label && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                        transition={{ duration: 0.2 }}
+                        className="absolute top-full left-0 mt-2 w-80 bg-black/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl overflow-hidden z-50"
+                      >
+                        <div className="p-2">
+                          {group.items.map((item, index) => (
+                            <motion.div
+                              key={item.to}
+                              initial={{ opacity: 0, x: -20 }}
+                              animate={{ opacity: 1, x: 0 }}
+                              transition={{ delay: index * 0.05 }}
+                            >
+                              <Link
+                                to={item.to}
+                                className="flex items-center gap-3 p-3 rounded-xl hover:bg-white/5 transition-colors group"
+                              >
+                                <div className="w-10 h-10 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-lg flex items-center justify-center">
+                                  {item.icon}
+                                </div>
+                                <div className="flex-1">
+                                  <div className="text-white font-medium group-hover:text-blue-400 transition-colors">
+                                    {item.label}
+                                  </div>
+                                  {item.description && (
+                                    <div className="text-sm text-gray-400">
+                                      {item.description}
+                                    </div>
+                                  )}
+                                </div>
+                                <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-blue-400 group-hover:translate-x-1 transition-all" />
+                              </Link>
+                            </motion.div>
+                          ))}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              ))}
+
+              {/* RESUME DOWNLOAD CTA BUTTON */}
+              <button
+                onClick={handleResumeDownload}
+                className="flex items-center gap-2 px-5 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full font-medium hover:scale-105 transition-all shadow-lg hover:shadow-purple-500/25"
+                aria-label="Download Resume"
+              >
+                <Download className="w-4 h-4" />
+                <span className="hidden xl:inline">Download Resume</span>
+                <span className="xl:hidden">Resume</span>
+              </button>
+
+              {/* LET'S CONNECT BUTTON */}
+              <Link
+                to="/contact"
+                className="ml-2 px-6 py-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-full font-medium hover:scale-105 transition-all shadow-lg hover:shadow-blue-500/25"
+              >
+                Let's Connect
+              </Link>
+            </div>
           </div>
         )}
 
