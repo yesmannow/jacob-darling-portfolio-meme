@@ -1,7 +1,7 @@
 import React from "react";
 import NavLink from "./NavLink";
 import { NAV_ITEMS, CTA_PRIMARY } from "../../config/nav";
-import "./header.css";
+import "@/styles/header.css";
 
 const NavDesktop: React.FC = () => {
   return (

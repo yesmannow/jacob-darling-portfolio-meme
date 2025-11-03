@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import NavLink from "./NavLink";
 import { NAV_ITEMS, CTA_PRIMARY } from "../../config/nav";
-import "./header.css";
+import "@/styles/header.css";
 
 type NavMobileProps = {
   open: boolean;
