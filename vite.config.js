@@ -69,6 +69,8 @@ export default defineConfig({
       output: {
         // Prevent circular dependency warnings
         hoistTransitiveImports: false,
+        // Ensure proper chunk loading in production
+        format: 'es',
         manualChunks: (id) => {
           // Core React libraries - MUST be separate and load first
           // Include all React-related packages in react-core to prevent deduplication issues
@@ -146,9 +148,9 @@ export default defineConfig({
     minify: 'terser',
     terserOptions: {
       compress: {
-        drop_console: true,
+        drop_console: false, // Keep console.log for production debugging
         drop_debugger: true,
-        pure_funcs: ['console.log', 'console.info', 'console.debug', 'console.warn']
+        pure_funcs: ['console.debug'] // Only drop debug, keep log/warn/error
       },
       mangle: {
         safari10: true

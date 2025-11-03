@@ -293,7 +293,7 @@
             event.preventDefault();
             event.stopPropagation();
             event.stopImmediatePropagation();
-            
+
             // Only log in development, and make it a brief warning
             if (typeof process !== 'undefined' && process.env && process.env.NODE_ENV === 'development') {
               // Use a debounce to avoid console spam

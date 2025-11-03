@@ -161,20 +161,65 @@ window.addEventListener('unhandledrejection', (event) => {
 // Set a timeout to show error if React doesn't mount within 10 seconds
 const mountTimeout = setTimeout(() => {
   const rootElement = document.getElementById('root');
-  if (rootElement && rootElement.children.length > 0) {
-    const firstChild = rootElement.children[0];
+  if (rootElement) {
+    const firstChild = rootElement.children.length > 0 ? rootElement.children[0] : null;
     // Check if we're still showing the loading spinner
-    if (firstChild.classList.contains('initial-loader')) {
+    if (firstChild && firstChild.classList && firstChild.classList.contains('initial-loader')) {
       console.error('React app failed to mount within timeout');
-      rootElement.innerHTML = `
+      const errorStyles = `
+        <style>
+          .error-boundary-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: #0A0A0A;
+            color: #FFFFFF;
+            padding: 2rem;
+          }
+          .error-boundary-content {
+            text-align: center;
+            max-width: 600px;
+          }
+          .error-boundary-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #3B82F6;
+          }
+          .error-boundary-message {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+          }
+          .error-boundary-details {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            margin-top: 1rem;
+          }
+          .error-boundary-button {
+            margin-top: 2rem;
+            padding: 0.75rem 2rem;
+            background: #3B82F6;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+          }
+          .error-boundary-button:hover {
+            background: #2563EB;
+          }
+        </style>
+      `;
+      rootElement.innerHTML = errorStyles + `
         <div class="error-boundary-container">
           <div class="error-boundary-content">
             <h2 class="error-boundary-title">Loading Timeout</h2>
             <p class="error-boundary-message">
               The application is taking longer than expected to load. This might be due to a network issue or a JavaScript error.
             </p>
-            <p class="error-boundary-details" style={{ marginTop: '1rem' } as React.CSSProperties}>
-              Please check your browser console for errors and try refreshing the page.
+            <p class="error-boundary-details">
+              Please check your browser console (F12) for errors and try refreshing the page.
             </p>
             <button
               onclick="window.location.reload()"
@@ -216,11 +261,18 @@ if (!React || !ReactDOM) {
       console.error('Root element not found');
       clearTimeout(mountTimeout);
     } else {
-      if (process.env.NODE_ENV === 'development') {
-        console.log('Initializing React app...');
-        console.log('React version:', React.version);
-        console.log('ReactDOM available:', !!ReactDOM);
-      }
+      // Always log initialization in production for debugging
+      console.log('Initializing React app...');
+      console.log('React version:', React.version);
+      console.log('ReactDOM available:', !!ReactDOM);
+      console.log('Environment:', process.env.NODE_ENV || 'unknown');
+      
+      // Log script loading status
+      const scripts = document.querySelectorAll('script[type="module"]');
+      console.log('Module scripts found:', scripts.length);
+      scripts.forEach((script, i) => {
+        console.log(`Script ${i}:`, (script as HTMLScriptElement).src || 'inline');
+      });
 
       const root = ReactDOM.createRoot(rootElement);
 
@@ -270,7 +322,57 @@ if (!React || !ReactDOM) {
     // Show error in the UI
     const rootElement = document.getElementById('root');
     if (rootElement) {
-      rootElement.innerHTML = `
+      const errorStyles = `
+        <style>
+          .error-boundary-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: #0A0A0A;
+            color: #FFFFFF;
+            padding: 2rem;
+          }
+          .error-boundary-content {
+            text-align: center;
+            max-width: 600px;
+          }
+          .error-boundary-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #EF4444;
+          }
+          .error-boundary-message {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+          }
+          .error-boundary-details {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            margin-top: 1rem;
+            font-family: monospace;
+            background: rgba(255,255,255,0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            word-break: break-all;
+          }
+          .error-boundary-button {
+            margin-top: 2rem;
+            padding: 0.75rem 2rem;
+            background: #3B82F6;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+          }
+          .error-boundary-button:hover {
+            background: #2563EB;
+          }
+        </style>
+      `;
+      rootElement.innerHTML = errorStyles + `
         <div class="error-boundary-container">
           <div class="error-boundary-content">
             <h2 class="error-boundary-title">Application Error</h2>
