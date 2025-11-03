@@ -14,8 +14,16 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --header-height: 80px;
+}
+
 * {
   box-sizing: border-box;
+}
+
+html {
+  background-color: #0A0A0A; /* Prevent white flash before theme applies */
 }
 
 body {
@@ -27,24 +35,14 @@ body {
   color: var(--color-text);
   line-height: var(--leading-normal);
   overflow-x: hidden;
-  padding-top: 80px; /* Account for fixed header */
-}
-
-/* Smooth scrolling for better navigation UX */
-html {
-  scroll-behavior: smooth;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
+  padding-top: var(--header-height);
 }
 
 #root {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background-color: var(--color-bg);
 }
 
 .app {
@@ -73,7 +71,7 @@ main {
   flex: 1;
   position: relative;
   z-index: 1;
-  margin-top: 80px; /* Ensure content starts below fixed header */
+  margin-top: var(--header-height); /* Ensure content starts below fixed header */
 }
 
 /* Utility class for pages that need extra top spacing */
@@ -83,18 +81,23 @@ main {
 
 /* Ensure hero sections account for header */
 .hero-section {
-  margin-top: -80px; /* Negative margin to account for header */
-  padding-top: 100px; /* Extra padding to compensate */
+  margin-top: calc(var(--header-height) * -1); /* Negative margin to account for header */
+  padding-top: calc(var(--header-height) + 20px); /* Extra padding to compensate */
 }
 
 a {
   color: var(--color-primary);
   text-decoration: none;
   transition: color var(--duration-fast) ease;
-}
 
-a:hover {
-  color: var(--color-accent);
+  &:hover {
+    color: var(--color-accent);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+  }
 }
 
 /* ===== BRAND BUTTON STYLES ===== */
@@ -114,12 +117,17 @@ a:hover {
   cursor: pointer;
   transition: all var(--duration-normal) ease;
   box-shadow: var(--shadow-brand);
-}
 
-.btn-primary:hover {
-  transform: scale(1.05);
-  box-shadow: var(--glow-brand);
-  color: white;
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: var(--glow-brand);
+    color: white;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 4px;
+  }
 }
 
 .btn-secondary {
@@ -137,13 +145,18 @@ a:hover {
   text-decoration: none;
   cursor: pointer;
   transition: all var(--duration-normal) ease;
-}
 
-.btn-secondary:hover {
-  background: var(--gradient-brand);
-  color: white;
-  transform: scale(1.05);
-  box-shadow: var(--glow-brand);
+  &:hover {
+    background: var(--gradient-brand);
+    color: white;
+    transform: scale(1.05);
+    box-shadow: var(--glow-brand);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 4px;
+  }
 }
 
 p {
@@ -153,6 +166,11 @@ p {
 button {
   cursor: pointer;
   font-family: inherit;
+
+  &:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+  }
 }
 
 input, textarea, select {

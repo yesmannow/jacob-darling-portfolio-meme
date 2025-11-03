@@ -32,86 +32,50 @@ if (typeof window !== 'undefined') {
   // Note: Removed aggressive error suppression
   // Vite 5.4.21 should have fixed HMR overlay issues
 
-  // Minimal backup protection (index.html should handle most cases)
-  // Vite 5.4.21 should have fixed HMR overlay issues, so this is just a safety net
-  if (window.customElements && !(window.customElements as any)._defineProtected) {
+  // Backup protection layer (index.html has primary protection)
+  // This ensures protection even if index.html script runs late or fails
+  // Vite 5.4.21 should have fixed HMR overlay issues, but this is a safety net
+  if (window.customElements && !(window.customElements as any)._defineBackupInstalled) {
     const originalDefine = window.customElements.define;
     if (originalDefine) {
-      (window.customElements as any)._defineProtected = true;
+      (window.customElements as any)._defineBackupInstalled = true;
 
-      window.customElements.define = function(name, constructor, options) {
-        // Basic duplicate check
-        if (!customElements.get(name)) {
-          try {
-            return originalDefine.call(this, name, constructor, options);
-          } catch (error: unknown) {
-            const errorMsg = error ? ((error as Error).message || String(error)) : '';
-            if (typeof errorMsg === 'string' && errorMsg.includes('has already been defined')) {
-              return; // Race condition - skip duplicate
+      // Check if already wrapped by index.html script
+      const isAlreadyWrapped = originalDefine.toString().includes('__defineGuardInstalled') ||
+                                (window.customElements as any).__defineGuardInstalled;
+
+      if (!isAlreadyWrapped) {
+        window.customElements.define = function(name, constructor, options) {
+          // Recommended pattern: Check if element is NOT already defined
+          if (!customElements.get(name)) {
+            try {
+              // Element doesn't exist - safe to define
+              return originalDefine.call(this, name, constructor, options);
+            } catch (error: unknown) {
+              // Handle race conditions where element might be defined between check and call
+              const errorMsg = error ? ((error as Error).message || String(error)) : '';
+              if (typeof errorMsg === 'string' &&
+                  (errorMsg.includes('has already been used') ||
+                   errorMsg.includes('has already been defined'))) {
+                // Race condition - element was defined by another script between check and call
+                if (process.env.NODE_ENV === 'development') {
+                  console.warn(`[main.tsx] Custom element "${name}" was defined during registration. Skipping.`);
+                }
+                return; // Silently skip duplicate definitions
+              }
+              // Re-throw other errors (not duplicate registration errors)
+              throw error;
             }
-            throw error;
           }
-        }
-        // Already exists - skip
-      };
+          // Element already exists - skip registration
+          if (process.env.NODE_ENV === 'development') {
+            console.warn(`[main.tsx] Custom element "${name}" is already registered. Skipping.`);
+          }
+        };
+      }
     }
   }
 }
-
-// Comprehensive error handler for all custom element conflicts
-// Also handle undefined errors and React forwardRef errors
-window.addEventListener('error', (event) => {
-  const filename = event.filename || '';
-  const errorMessage = event.error?.message || event.message || '';
-
-  // Handle React forwardRef errors (chunk loading before React is ready)
-  if (errorMessage.includes("Cannot read properties of undefined (reading 'forwardRef')") ||
-      errorMessage.includes('forwardRef') && errorMessage.includes('undefined')) {
-    if (process.env.NODE_ENV === 'development') {
-      console.warn('React forwardRef accessed before React loaded - chunk timing issue:', {
-        filename,
-        message: errorMessage
-      });
-    }
-    event.preventDefault();
-    return false;
-  }
-
-  // Handle cases where error object is undefined
-  if (!event.error && event.message && event.message.includes('undefined')) {
-    if (process.env.NODE_ENV === 'development') {
-      console.warn('Caught undefined error - preventing crash:', {
-        message: event.message,
-        filename,
-        lineno: event.lineno,
-        colno: event.colno
-      });
-    }
-    event.preventDefault();
-    return false;
-  }
-
-  // Note: Removed aggressive custom element error suppression
-  // Vite 5.4.21 should have fixed HMR overlay issues
-});
-
-// Handle unhandled promise rejections for custom elements
-// Also catch undefined rejections to prevent "Uncaught undefined" errors
-window.addEventListener('unhandledrejection', (event) => {
-  // Handle undefined rejections (common cause of "Uncaught undefined")
-  if (event.reason === undefined || event.reason === null) {
-    // Log for debugging but prevent console error (dev only)
-    if (process.env.NODE_ENV === 'development') {
-      console.warn('Caught undefined promise rejection - likely from external library');
-    }
-    event.preventDefault();
-    return;
-  }
-
-  // Note: Removed aggressive custom element rejection suppression
-  // Vite 5.4.21 should have fixed HMR overlay issues
-  // Basic duplicate prevention remains in customElements.define override above
-});
 
 // Set a timeout to show error if React doesn't mount within 10 seconds
 const mountTimeout = setTimeout(() => {

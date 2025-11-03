@@ -85,10 +85,16 @@ const GlanceMetrics: React.FC = () => {
       return;
     }
 
-    // 🎯 Scoping: Pass sectionRef as second argument to ensure selectors only target elements within this component
+    const section = sectionRef.current;
+    if (!section) return;
+
     const ctx = gsap.context(() => {
-      // Animate metric cards - SCOPED to sectionRef
-      gsap.fromTo(".metric-card",
+      const q = gsap.utils.selector(section);
+      const cards = q(".metric-card");
+
+      // Entry animation for cards
+      gsap.fromTo(
+        cards,
         { opacity: 0, y: 60, scale: 0.8 },
         {
           opacity: 1,
@@ -98,28 +104,32 @@ const GlanceMetrics: React.FC = () => {
           stagger: 0.1,
           ease: "back.out(1.7)",
           scrollTrigger: {
-            trigger: sectionRef.current,
+            trigger: section,
             start: "top 70%",
             toggleActions: "play none none reverse"
           }
-        },
-        sectionRef // 🎯 Scoping argument - ensures selector only finds elements within sectionRef
+        }
       );
 
-      // Animate counters (ScrollTrigger.create uses refs, already scoped)
-      metrics.forEach((metric) => {
+      // Animate counters when section enters viewport
+      metrics.forEach((metric, index) => {
+        const card = cards[index];
+        if (!card) return;
+
+        const counter = { value: 0 };
         ScrollTrigger.create({
-          trigger: sectionRef.current,
+          trigger: section,
           start: "top 70%",
+          once: false,
           onEnter: () => {
-            gsap.to({ value: 0 }, {
+            gsap.to(counter, {
               value: metric.value,
               duration: 2,
               ease: "power2.out",
-              onUpdate: function() {
+              onUpdate: () => {
                 setAnimatedValues(prev => ({
                   ...prev,
-                  [metric.id]: Math.floor(this.targets()[0].value)
+                  [metric.id]: Math.floor(counter.value)
                 }));
               }
             });
@@ -127,16 +137,16 @@ const GlanceMetrics: React.FC = () => {
         });
       });
 
-      // Floating animation for cards - SCOPED to sectionRef
-      gsap.to(".metric-card", {
+      // Gentle floating motion for cards
+      gsap.to(cards, {
         y: -10,
         duration: 3,
         repeat: -1,
         yoyo: true,
         stagger: 0.2,
         ease: "sine.inOut"
-      }, sectionRef); // 🎯 Scoping argument
-    }, sectionRef); // 🎯 Main context scope - all selectors are relative to this ref
+      });
+    }, section);
 
     return () => ctx.revert();
   }, []);
