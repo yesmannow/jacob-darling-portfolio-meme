@@ -43,39 +43,63 @@ export default defineConfig({
     },
   },
   optimizeDeps: {
-    include: ["lenis", "react", "react-dom", "framer-motion", "gsap"],
+    include: ["react", "react-dom", "react/jsx-runtime", "lenis", "framer-motion", "gsap"],
   },
   build: {
     rollupOptions: {
       output: {
         manualChunks: (id) => {
-          // Core React libraries
-          if (id.includes('node_modules/react') || id.includes('node_modules/react-dom')) {
-            return 'react-vendor';
+          // Core React libraries - MUST be separate and load first
+          if (id.includes('node_modules/react/') || id.includes('node_modules/react-dom/')) {
+            return 'react-core';
+          }
+
+          // React runtime (jsx-runtime)
+          if (id.includes('node_modules/react/jsx-runtime') || id.includes('node_modules/react/jsx-dev-runtime')) {
+            return 'react-core';
           }
 
           // Animation libraries
-          if (id.includes('node_modules/framer-motion') || id.includes('node_modules/gsap')) {
+          if (id.includes('node_modules/framer-motion')) {
             return 'animation-vendor';
           }
 
-          // UI libraries
-          if (id.includes('node_modules/lucide-react') || id.includes('node_modules/@radix-ui')) {
-            return 'ui-vendor';
+          if (id.includes('node_modules/gsap')) {
+            return 'animation-vendor';
           }
 
-          // PDF libraries (large)
-          if (id.includes('node_modules/@react-pdf') || id.includes('node_modules/jspdf')) {
-            return 'pdf-vendor';
-          }
-
-          // Router libraries
+          // Router libraries (depends on React)
           if (id.includes('node_modules/react-router')) {
             return 'router-vendor';
           }
 
-          // Other node_modules
+          // PDF libraries (large, lazy load these)
+          if (id.includes('node_modules/@react-pdf') || id.includes('node_modules/jspdf')) {
+            return 'pdf-vendor';
+          }
+
+          // Three.js related (large)
+          if (id.includes('node_modules/three') || id.includes('node_modules/@react-three')) {
+            return 'three-vendor';
+          }
+
+          // UI libraries
+          if (id.includes('node_modules/lucide-react')) {
+            return 'ui-vendor';
+          }
+
+          if (id.includes('node_modules/@radix-ui')) {
+            return 'ui-vendor';
+          }
+
+          // Other large libraries
+          if (id.includes('node_modules/recharts')) {
+            return 'charts-vendor';
+          }
+
+          // Other node_modules (split more aggressively)
           if (id.includes('node_modules')) {
+            // Prevent single huge vendor chunk
             return 'vendor';
           }
         },

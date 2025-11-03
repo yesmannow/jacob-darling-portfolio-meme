@@ -1,8 +1,19 @@
+// Ensure React loads first and is available globally
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import "./styles/globals.css";
+
+// Verify React is loaded before proceeding
+if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
+  throw new Error('React or ReactDOM failed to load. Check your build configuration.');
+}
+
+// Make React available globally for any code that needs it (for third-party libs)
+if (typeof window !== 'undefined') {
+  (window as any).React = React;
+}
 
 // Enhanced error suppression for TinyMCE and external script conflicts
 const originalDefine = window.customElements?.define;
