@@ -64,7 +64,7 @@ if (typeof window !== 'undefined') {
                       error.message?.includes('custom element') ||
                       name?.includes('mce-'))) {
           // Silently ignore duplicate registrations, especially TinyMCE elements
-          return;
+          return undefined;
         }
         throw error;
       }
@@ -81,22 +81,26 @@ window.addEventListener('error', (event) => {
   // Handle React forwardRef errors (chunk loading before React is ready)
   if (errorMessage.includes("Cannot read properties of undefined (reading 'forwardRef')") ||
       errorMessage.includes('forwardRef') && errorMessage.includes('undefined')) {
-    console.warn('React forwardRef accessed before React loaded - chunk timing issue:', {
-      filename,
-      message: errorMessage
-    });
+    if (process.env.NODE_ENV === 'development') {
+      console.warn('React forwardRef accessed before React loaded - chunk timing issue:', {
+        filename,
+        message: errorMessage
+      });
+    }
     event.preventDefault();
     return false;
   }
 
   // Handle cases where error object is undefined
   if (!event.error && event.message && event.message.includes('undefined')) {
-    console.warn('Caught undefined error - preventing crash:', {
-      message: event.message,
-      filename,
-      lineno: event.lineno,
-      colno: event.colno
-    });
+    if (process.env.NODE_ENV === 'development') {
+      console.warn('Caught undefined error - preventing crash:', {
+        message: event.message,
+        filename,
+        lineno: event.lineno,
+        colno: event.colno
+      });
+    }
     event.preventDefault();
     return false;
   }
@@ -121,8 +125,10 @@ window.addEventListener('error', (event) => {
 window.addEventListener('unhandledrejection', (event) => {
   // Handle undefined rejections (common cause of "Uncaught undefined")
   if (event.reason === undefined || event.reason === null) {
-    // Log for debugging but prevent console error
-    console.warn('Caught undefined promise rejection - likely from external library');
+    // Log for debugging but prevent console error (dev only)
+    if (process.env.NODE_ENV === 'development') {
+      console.warn('Caught undefined promise rejection - likely from external library');
+    }
     event.preventDefault();
     return;
   }
@@ -132,7 +138,9 @@ window.addEventListener('unhandledrejection', (event) => {
       (event.reason.message.includes('has already been defined') ||
        event.reason.message.includes('custom element') ||
        event.reason.message.includes('mce-autosize-textarea'))) {
-    console.warn('Suppressed duplicate custom element definition:', event.reason.message);
+    if (process.env.NODE_ENV === 'development') {
+      console.warn('Suppressed duplicate custom element definition:', event.reason.message);
+    }
     event.preventDefault();
     return;
   }
@@ -142,7 +150,9 @@ window.addEventListener('unhandledrejection', (event) => {
       (event.reason.includes('has already been defined') ||
        event.reason.includes('custom element') ||
        event.reason.includes('mce-autosize-textarea'))) {
-    console.warn('Suppressed external script error:', event.reason);
+    if (process.env.NODE_ENV === 'development') {
+      console.warn('Suppressed external script error:', event.reason);
+    }
     event.preventDefault();
     return;
   }
@@ -206,9 +216,11 @@ if (!React || !ReactDOM) {
       console.error('Root element not found');
       clearTimeout(mountTimeout);
     } else {
-      console.log('Initializing React app...');
-      console.log('React version:', React.version);
-      console.log('ReactDOM available:', !!ReactDOM);
+      if (process.env.NODE_ENV === 'development') {
+        console.log('Initializing React app...');
+        console.log('React version:', React.version);
+        console.log('ReactDOM available:', !!ReactDOM);
+      }
 
       const root = ReactDOM.createRoot(rootElement);
 
@@ -235,7 +247,9 @@ if (!React || !ReactDOM) {
       // Clear timeout once React mounts
       setTimeout(() => {
         clearTimeout(mountTimeout);
-        console.log('React app initialized successfully');
+        if (process.env.NODE_ENV === 'development') {
+          console.log('React app initialized successfully');
+        }
       }, 100);
     }
   } catch (error) {

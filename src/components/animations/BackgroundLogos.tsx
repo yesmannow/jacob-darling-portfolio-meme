@@ -5,13 +5,13 @@ import "./BackgroundLogos.css";
 const BackgroundLogos: React.FC = () => {
   // Create multiple logo instances with different positions and animations
   const logos = [
-    { id: 1, x: "10%", y: "15%", delay: 0, duration: 25, scale: 0.8 },
-    { id: 2, x: "75%", y: "10%", delay: 3, duration: 30, scale: 0.6 },
-    { id: 3, x: "20%", y: "70%", delay: 6, duration: 28, scale: 0.7 },
-    { id: 4, x: "85%", y: "65%", delay: 9, duration: 32, scale: 0.9 },
-    { id: 5, x: "50%", y: "40%", delay: 12, duration: 26, scale: 0.5 },
-    { id: 6, x: "15%", y: "90%", delay: 15, duration: 29, scale: 0.65 },
-    { id: 7, x: "90%", y: "85%", delay: 18, duration: 27, scale: 0.75 }
+    { id: 1, x: "10%", y: "15%", delay: 0, duration: 50, scale: 0.8 },
+    { id: 2, x: "75%", y: "10%", delay: 3, duration: 60, scale: 0.6 },
+    { id: 3, x: "20%", y: "70%", delay: 6, duration: 56, scale: 0.7 },
+    { id: 4, x: "85%", y: "65%", delay: 9, duration: 64, scale: 0.9 },
+    { id: 5, x: "50%", y: "40%", delay: 12, duration: 52, scale: 0.5 },
+    { id: 6, x: "15%", y: "90%", delay: 15, duration: 58, scale: 0.65 },
+    { id: 7, x: "90%", y: "85%", delay: 18, duration: 54, scale: 0.75 }
   ];
 
   return (
@@ -25,7 +25,7 @@ const BackgroundLogos: React.FC = () => {
             top: logo.y,
             scale: logo.scale
           }}
-          initial={{ 
+          initial={{
             opacity: 0,
             rotate: 0,
             y: 0
@@ -51,7 +51,7 @@ const BackgroundLogos: React.FC = () => {
           />
         </motion.div>
       ))}
-      
+
       {/* Additional floating logos with different movement patterns */}
       <motion.div
         className="bg-logo bg-logo-drift"
@@ -63,7 +63,7 @@ const BackgroundLogos: React.FC = () => {
           rotate: [0, 180, 360]
         }}
         transition={{
-          duration: 35,
+          duration: 70,
           repeat: Infinity,
           ease: "linear"
         }}
@@ -86,7 +86,7 @@ const BackgroundLogos: React.FC = () => {
           rotate: [360, 180, 0]
         }}
         transition={{
-          duration: 40,
+          duration: 80,
           repeat: Infinity,
           ease: "linear",
           delay: 5

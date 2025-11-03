@@ -46,7 +46,9 @@ export function initLenis(): Lenis | null {
     }
 
     // Only log on actual initialization (first call)
-    console.log("✅ Lenis initialized successfully", lenis);
+      if (process.env.NODE_ENV === 'development') {
+        console.log("✅ Lenis initialized successfully", lenis);
+      }
 
     return lenis;
   } catch (error) {
@@ -77,7 +79,9 @@ export function destroyLenis(): void {
         lenis.destroy();
       }
       lenis = null;
-      console.log("🔄 Lenis destroyed (cleanup)");
+      if (process.env.NODE_ENV === 'development') {
+        console.log("🔄 Lenis destroyed (cleanup)");
+      }
     } catch (error) {
       console.error("Error destroying Lenis:", error);
       lenis = null;
@@ -106,10 +110,13 @@ export function refreshLenis() {
 
 // Debug function to check if scrolling is working
 export function debugScrolling() {
-  console.log('Lenis instance:', lenis);
-  console.log('Document height:', document.documentElement.scrollHeight);
-  console.log('Window height:', window.innerHeight);
-  console.log('Can scroll:', document.documentElement.scrollHeight > window.innerHeight);
+  // Debug logging (only in development)
+  if (process.env.NODE_ENV === 'development') {
+    console.log('Lenis instance:', lenis);
+    console.log('Document height:', document.documentElement.scrollHeight);
+    console.log('Window height:', window.innerHeight);
+    console.log('Can scroll:', document.documentElement.scrollHeight > window.innerHeight);
+  }
 }
 
 // Global animation state management

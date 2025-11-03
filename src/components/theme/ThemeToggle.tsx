@@ -24,11 +24,10 @@ const ThemeToggle: React.FC = () => {
         {(['light', 'system', 'dark'] as const).map((t) => {
           const active = theme === t;
           const Icon = themeIcons[t];
-          const ariaPressed = active ? 'true' : 'false';
           return (
             <button
               key={t}
-              aria-pressed={ariaPressed}
+              aria-pressed={active}
               onClick={() => setTheme(t)}
               className={`relative flex items-center gap-1.5 px-3 py-2 text-sm font-medium transition-colors ${
                 active
@@ -58,11 +57,10 @@ const ThemeToggle: React.FC = () => {
         {(['cmo', 'dev'] as const).map((b) => {
           const active = brand === b;
           const Icon = brandIcons[b];
-          const ariaPressed = active ? 'true' : 'false';
           return (
             <button
               key={b}
-              aria-pressed={ariaPressed}
+              aria-pressed={active}
               onClick={() => setBrand(b)}
               className={`relative flex items-center gap-1.5 px-3 py-2 text-sm font-medium transition-colors ${
                 active

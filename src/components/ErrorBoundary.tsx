@@ -27,7 +27,7 @@ export class ErrorBoundary extends React.Component<Props, State> {
     return { hasError: true, error: errorObj };
   }
 
-  componentDidCatch(error: Error | unknown, info: any) {
+  componentDidCatch(error: Error | unknown, info: React.ErrorInfo) {
     // Ensure we always log a proper error object
     const errorObj = error instanceof Error
       ? error

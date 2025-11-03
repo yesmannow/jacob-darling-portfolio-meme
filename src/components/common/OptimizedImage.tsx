@@ -80,8 +80,8 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
   const handleLoad = () => {
     setIsLoaded(true);
 
-    // Performance monitoring
-    if (typeof window !== 'undefined' && 'performance' in window) {
+    // Performance monitoring (dev only)
+    if (process.env.NODE_ENV === 'development' && typeof window !== 'undefined' && 'performance' in window) {
       const loadTime = performance.now();
       console.log(`🖼️ Image loaded: ${src} (${loadTime.toFixed(2)}ms)`);
     }
@@ -90,7 +90,9 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
   const handleError = () => {
     setHasError(true);
     setIsLoaded(true);
-    console.warn(`❌ Image failed to load: ${src}`);
+    if (process.env.NODE_ENV === 'development') {
+      console.warn(`❌ Image failed to load: ${src}`);
+    }
   };
 
   return (

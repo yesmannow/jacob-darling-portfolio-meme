@@ -23,9 +23,13 @@ const App: React.FC = () => {
       const lenis = initLenis();
       if (lenis) {
         // Only log once per actual initialization (guard prevents duplicate logs)
-        console.log("✅ App: Lenis ready");
+        if (process.env.NODE_ENV === 'development') {
+          console.log("✅ App: Lenis ready");
+        }
       } else {
-        console.warn("⚠️ App: Lenis not initialized, using native scroll");
+        if (process.env.NODE_ENV === 'development') {
+          console.warn("⚠️ App: Lenis not initialized, using native scroll");
+        }
       }
     } catch (error) {
       console.error("❌ App: Lenis initialization error:", error);

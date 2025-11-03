@@ -30,11 +30,11 @@ const FloatingElements: React.FC = () => {
   });
 
   const elements = [
-    { delay: 0, duration: 25, size: 100, blur: 40, color: "rgba(136, 171, 242, 0.05)" },
-    { delay: 5, duration: 30, size: 150, blur: 50, color: "rgba(168, 197, 255, 0.04)" },
-    { delay: 10, duration: 35, size: 80, blur: 30, color: "rgba(136, 171, 242, 0.06)" },
-    { delay: 15, duration: 28, size: 120, blur: 45, color: "rgba(89, 89, 89, 0.03)" },
-    { delay: 20, duration: 32, size: 90, blur: 35, color: "rgba(136, 171, 242, 0.05)" },
+    { delay: 0, duration: 50, size: 100, blur: 40, color: "rgba(136, 171, 242, 0.05)" },
+    { delay: 5, duration: 60, size: 150, blur: 50, color: "rgba(168, 197, 255, 0.04)" },
+    { delay: 10, duration: 70, size: 80, blur: 30, color: "rgba(136, 171, 242, 0.06)" },
+    { delay: 15, duration: 56, size: 120, blur: 45, color: "rgba(89, 89, 89, 0.03)" },
+    { delay: 20, duration: 64, size: 90, blur: 35, color: "rgba(136, 171, 242, 0.05)" },
   ];
 
   return (

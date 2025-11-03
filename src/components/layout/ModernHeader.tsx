@@ -16,7 +16,6 @@ import {
   Download
 } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
-import ThemeToggle from "../theme/ThemeToggle";
 import "./ModernHeader.css";
 
 interface DropdownItem {
@@ -304,11 +303,6 @@ const ModernHeader: React.FC = () => {
               </div>
             ))}
 
-            {/* THEME TOGGLE */}
-            <div className="hidden lg:flex items-center">
-              <ThemeToggle />
-            </div>
-
             {/* RESUME DOWNLOAD CTA BUTTON */}
             <button
               onClick={handleResumeDownload}
@@ -385,11 +379,6 @@ const ModernHeader: React.FC = () => {
                   </div>
                 </div>
               ))}
-
-              {/* MOBILE THEME TOGGLE */}
-              <div className="pt-4 border-t border-white/10 pb-3">
-                <ThemeToggle />
-              </div>
 
               {/* MOBILE RESUME & CONTACT BUTTONS */}
               <div className="pt-4 border-t border-white/10 space-y-3">

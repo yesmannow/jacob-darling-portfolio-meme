@@ -412,3 +412,42 @@
     border-width: 2px;
   }
 }
+
+/* Palette Color Swatch */
+.palette-swatch {
+  background-color: var(--palette-color, transparent);
+}
+
+/* Playground Preview Styles */
+.playground-preview-card {
+  background-color: var(--playground-bg, #F3F4F6);
+  color: var(--playground-text, #0F172A);
+}
+
+.playground-button {
+  background-color: var(--playground-primary, #2563EB);
+  color: white;
+}
+
+.playground-metric-card {
+  background-color: var(--playground-metric-bg, transparent);
+  color: var(--playground-text, #0F172A);
+}
+
+/* Typography Sampler Styles */
+.typography-sampler {
+  font-family: var(--typography-font-family, inherit);
+}
+
+.typography-heading {
+  font-weight: var(--typography-weight, 700);
+}
+
+/* Font family options */
+.typography-sampler.cmo-theme {
+  --typography-font-family: "Newsreader", serif;
+}
+
+.typography-sampler.dev-theme {
+  --typography-font-family: ui-monospace, monospace;
+}
