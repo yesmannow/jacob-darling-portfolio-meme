@@ -2,11 +2,22 @@ import React, { useEffect } from "react";
 import { useParams, Link, Navigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { getCaseStudyBySlug } from "../data/caseStudies";
-import { fadeInUp, staggerContainer, staggerItem } from "../utils/animations";
+import { staggerContainer, staggerItem } from "../utils/animations";
 import AnimatedSection from "../components/animations/AnimatedSection";
 import { getCaseStudyDiagrams } from "../components/diagrams/caseStudyDiagrams";
 import { trackPortfolioEngagement, createTimeTracker } from "../utils/analytics";
 import "./CaseStudyDetail.css";
+
+const renderInlineText = (text: string, keyPrefix: string) => {
+  const fragments = text.split(/(\*\*[^*]+\*\*)/g).filter(Boolean);
+  return fragments.map((fragment, index) => {
+    if (fragment.startsWith("**") && fragment.endsWith("**")) {
+      const value = fragment.slice(2, -2);
+      return <strong key={`${keyPrefix}-strong-${index}`}>{value}</strong>;
+    }
+    return <React.Fragment key={`${keyPrefix}-text-${index}`}>{fragment}</React.Fragment>;
+  });
+};
 
 // Helper to render structured content safely
 const renderRichSection = (content?: string | { paragraphs?: string[]; bullets?: string[] }) => {
@@ -15,12 +26,12 @@ const renderRichSection = (content?: string | { paragraphs?: string[]; bullets?:
     return (
       <>
         {content.paragraphs?.map((text, idx) => (
-          <p key={`p-${idx}`}>{text}</p>
+          <p key={`p-${idx}`}>{renderInlineText(text, `structured-p-${idx}`)}</p>
         ))}
         {content.bullets && (
           <ul>
             {content.bullets.map((item, idx) => (
-              <li key={`li-${idx}`}>{item}</li>
+              <li key={`li-${idx}`}>{renderInlineText(item, `structured-li-${idx}`)}</li>
             ))}
           </ul>
         )}
@@ -53,12 +64,12 @@ const renderRichSection = (content?: string | { paragraphs?: string[]; bullets?:
     return (
       <>
         {paragraphs.map((text, idx) => (
-          <p key={`p-${idx}`}>{text}</p>
+          <p key={`p-${idx}`}>{renderInlineText(text, `parsed-p-${idx}`)}</p>
         ))}
         {bullets.length > 0 && (
           <ul>
             {bullets.map((item, idx) => (
-              <li key={`li-${idx}`}>{item}</li>
+              <li key={`li-${idx}`}>{renderInlineText(item, `parsed-li-${idx}`)}</li>
             ))}
           </ul>
         )}
@@ -195,11 +206,7 @@ const CaseStudyDetail: React.FC = () => {
               The Challenge
             </h2>
             <div className="section-content">
-              {caseStudy.fullContent?.challenge ? (
-                renderRichSection(caseStudy.fullContent.challenge)
-              ) : (
-                <p>{caseStudy.challenge}</p>
-              )}
+              {renderRichSection(caseStudy.fullContent?.challenge ?? caseStudy.challenge)}
             </div>
           </section>
         </AnimatedSection>
@@ -211,7 +218,7 @@ const CaseStudyDetail: React.FC = () => {
               The Strategy & Solution
             </h2>
             <div className="section-content">
-              {renderRichSection(caseStudy.fullContent?.strategy)}
+              {renderRichSection(caseStudy.fullContent?.strategy ?? caseStudy.strategy)}
             </div>
 
             {/* Visual Architecture Diagrams */}
@@ -232,7 +239,7 @@ const CaseStudyDetail: React.FC = () => {
               The Value & Impact
             </h2>
             <div className="section-content">
-              {renderRichSection(caseStudy.fullContent?.impact)}
+              {renderRichSection(caseStudy.fullContent?.impact ?? caseStudy.impact)}
             </div>
           </section>
         </AnimatedSection>

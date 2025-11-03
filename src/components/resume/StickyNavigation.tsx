@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { User, Briefcase, GraduationCap, Award, Users, Code, FileText, ArrowUp } from 'lucide-react';
+import { scrollToPosition, scrollToTop } from '../../utils/scroll';
 
 interface NavItem {
   id: string;
@@ -71,18 +72,8 @@ const StickyNavigation: React.FC = () => {
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - offset;
 
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
+      scrollToPosition(offsetPosition);
     }
-  };
-
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
   };
 
   if (!isVisible) return null;

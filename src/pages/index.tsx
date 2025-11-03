@@ -35,26 +35,26 @@ const HomePage: React.FC = () => {
           <div className="w-8 h-8 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
         </div>
       }>
+        {/* About Snapshot - Personal Introduction - MOVED TO FIRST */}
+        <AboutSnapshot />
+
+        {/* Career Journey - Experience Timeline - MOVED TO SECOND */}
+        <InteractiveTimeline />
+
+        {/* Where Strategy Meets Technical Execution - MOVED TO THIRD */}
+        <RedesignedFeaturedWork />
+
         {/* Value Proposition Statement */}
         <IntroStatement />
 
         {/* Impact Metrics Dashboard - Quantifiable Results */}
         <GlanceMetrics />
 
-        {/* Featured Case Studies - Proof of Capability */}
-        <RedesignedFeaturedWork />
-
         {/* Resume Download - Prominent CTA for Hiring Managers */}
         <ResumeDownload />
 
         {/* Core Competencies - Skills Overview */}
         <SkillsShowcase />
-
-        {/* About Snapshot - Personal Introduction */}
-        <AboutSnapshot />
-
-        {/* Career Journey - Experience Timeline */}
-        <InteractiveTimeline />
 
         {/* Awards & Recognition - Credibility */}
         <Awards />

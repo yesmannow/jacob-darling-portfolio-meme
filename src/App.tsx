@@ -1,10 +1,9 @@
-import React, { useEffect } from "react";
+import React, { lazy, Suspense, useEffect } from "react";
 import AppRouter from "./router/AppRouter";
 import ModernHeader from "./components/layout/ModernHeader";
 import Footer from "./components/layout/Footer";
 import ScrollToTop from "./components/utils/ScrollToTop";
 import BackToTop from "./components/utilities/BackToTop";
-import FloatingActionButtons from "./components/utils/FloatingActionButtons";
 import PersonSchema from "./components/seo/PersonSchema";
 import PerformanceMonitor from "./components/utils/PerformanceMonitor";
 import ErrorBoundary from "./components/ErrorBoundary";
@@ -12,6 +11,8 @@ import { ThemeProvider } from "./components/theme/ThemeProvider";
 import { initLenis, destroyLenis } from "./utils/motion-sync";
 import { initAnalytics } from "./utils/analytics";
 import "lenis/dist/lenis.css";
+
+const FloatingActionButtons = lazy(() => import("./components/utils/FloatingActionButtons"));
 
 const App: React.FC = () => {
   useEffect(() => {
@@ -62,13 +63,12 @@ const App: React.FC = () => {
         <div className="app bg-bg text-text font-ui">
           <PersonSchema />
           <PerformanceMonitor />
-          {/* <LogoIntro /> */}
-          {/* <BackgroundLogos /> */}
-          {/* <CustomCursor /> */}
           <ScrollToTop />
           <BackToTop />
           <ModernHeader />
-          <FloatingActionButtons />
+          <Suspense fallback={null}>
+            <FloatingActionButtons />
+          </Suspense>
           <AppRouter />
           <Footer />
         </div>

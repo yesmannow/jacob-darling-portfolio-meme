@@ -8,11 +8,11 @@
 
 /* Hero Section */
 .detail-hero {
-  --hero-bg-color: #88ABF2;
+  --hero-bg-color: #3B82F6;
   position: relative;
   padding: 8rem 2rem 4rem;
-  background: linear-gradient(135deg, rgba(136, 171, 242, 0.1) 0%, rgba(13, 13, 13, 0.9) 50%);
-  border-bottom: 1px solid rgba(136, 171, 242, 0.2);
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(13, 13, 13, 0.95) 50%, rgba(236, 72, 153, 0.05) 100%);
+  border-bottom: 1px solid rgba(59, 130, 246, 0.2);
   margin-bottom: 4rem;
 }
 
@@ -33,7 +33,7 @@
 }
 
 .back-link:hover {
-  color: #88ABF2;
+  color: #3B82F6;
   transform: translateX(-4px);
 }
 
@@ -46,15 +46,15 @@
 }
 
 .hero-icon-large {
-  --icon-bg-color: #88ABF2;
+  --icon-bg-color: #3B82F6;
   margin-bottom: 2rem;
 }
 
 .icon-large {
-  --icon-shadow-color: #88ABF2;
+  --icon-shadow-color: #3B82F6;
   font-size: 4rem;
   display: inline-block;
-  filter: drop-shadow(0 4px 20px rgba(136, 171, 242, 0.3));
+  filter: drop-shadow(0 4px 20px rgba(59, 130, 246, 0.3));
 }
 
 .detail-title {
@@ -62,7 +62,7 @@
   font-weight: 800;
   line-height: 1.1;
   margin-bottom: 1rem;
-  background: linear-gradient(135deg, #ffffff 0%, rgba(136, 171, 242, 0.9) 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #3B82F6 50%, #EC4899 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -90,14 +90,14 @@
 }
 
 .meta-category {
-  --category-color: #88ABF2;
+  --category-color: #3B82F6;
   padding: 0.5rem 1rem;
-  background: rgba(136, 171, 242, 0.15);
-  border: 1px solid rgba(136, 171, 242, 0.3);
+  background: rgba(59, 130, 246, 0.15);
+  border: 1px solid rgba(59, 130, 246, 0.3);
   border-radius: 50px;
   font-size: 0.875rem;
   font-weight: 600;
-  color: #88ABF2;
+  color: #3B82F6;
   backdrop-filter: blur(10px);
 }
 
@@ -141,24 +141,27 @@
 }
 
 .metric-modern-card:hover {
-  border-color: rgba(136, 171, 242, 0.5);
-  box-shadow: 0 8px 32px rgba(136, 171, 242, 0.2);
+  border-color: rgba(59, 130, 246, 0.5);
+  box-shadow: 0 8px 32px rgba(59, 130, 246, 0.2);
 }
 
 .metric-accent {
-  --metric-color: #88ABF2;
+  --metric-color: #3B82F6;
   position: absolute;
   top: 0;
   left: 0;
   width: 4px;
   height: 100%;
-  background: var(--metric-color, #88ABF2);
+  background: linear-gradient(135deg, var(--metric-color, #3B82F6) 0%, #EC4899 100%);
 }
 
 .metric-modern-value {
   font-size: 2.5rem;
   font-weight: 800;
-  color: #88ABF2;
+  background: linear-gradient(135deg, #3B82F6 0%, #EC4899 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   line-height: 1;
   margin-bottom: 0.5rem;
 }
@@ -195,7 +198,7 @@
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(90deg, #88ABF2, #8B5CF6, #EC4899);
+  background: linear-gradient(90deg, #3B82F6, #8B5CF6, #EC4899);
 }
 
 .content-section h2 {
@@ -222,7 +225,7 @@
 
 .section-icon {
   font-size: 2rem;
-  filter: drop-shadow(0 2px 8px rgba(136, 171, 242, 0.3));
+  filter: drop-shadow(0 2px 8px rgba(59, 130, 246, 0.3));
 }
 
 .section-content {
@@ -253,14 +256,14 @@
 }
 
 .section-content li::marker {
-  color: #88ABF2;
+  color: #3B82F6;
 }
 
 .section-content li::before {
   content: '▸';
   position: absolute;
   left: -1.5rem;
-  color: #88ABF2;
+  color: #3B82F6;
   font-weight: bold;
 }
 
@@ -270,14 +273,14 @@
 }
 
 .section-content a {
-  color: #88ABF2;
+  color: #3B82F6;
   text-decoration: underline;
   text-underline-offset: 4px;
   transition: color 0.3s ease;
 }
 
 .section-content a:hover {
-  color: #A7C7E7;
+  color: #60A5FA;
 }
 
 /* Architecture Diagrams */
@@ -286,7 +289,7 @@
   padding: 2rem;
   background: rgba(0, 0, 0, 0.3);
   border-radius: 12px;
-  border: 1px solid rgba(136, 171, 242, 0.2);
+  border: 1px solid rgba(59, 130, 246, 0.2);
 }
 
 /* CTA Section */
@@ -300,16 +303,17 @@
   text-align: center;
   padding: 4rem 3rem;
   background: rgba(13, 13, 13, 0.8);
-  border: 2px solid rgba(136, 171, 242, 0.3);
+  border: 2px solid rgba(59, 130, 246, 0.3);
   border-radius: 24px;
   backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
 .cta-content h3 {
   font-size: clamp(1.75rem, 3vw, 2.5rem);
   font-weight: 700;
   margin-bottom: 1rem;
-  background: linear-gradient(135deg, #ffffff 0%, #88ABF2 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #3B82F6 50%, #EC4899 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -338,7 +342,7 @@
 }
 
 .cta-btn.primary {
-  background: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%);
+  background: linear-gradient(135deg, #3B82F6 0%, #EC4899 100%);
   color: #ffffff;
   box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
 }

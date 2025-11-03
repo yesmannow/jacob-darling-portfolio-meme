@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import "./ModernHeader.css";
+import { scrollToTop } from "../../utils/scroll";
 
 interface DropdownItem {
   label: string;
@@ -153,7 +154,7 @@ const ModernHeader: React.FC = () => {
   const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (pathname === "/") {
       e.preventDefault();
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      scrollToTop();
     }
   };
 

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FileText, Mail, ChevronUp } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
-import { getLenis } from "../../utils/motion-sync";
+import { scrollToTop } from "../../utils/scroll";
 
 const FloatingActionButtons: React.FC = () => {
   const [showButtons, setShowButtons] = useState(false);
@@ -17,6 +17,7 @@ const FloatingActionButtons: React.FC = () => {
     };
 
     window.addEventListener("scroll", handleScroll);
+    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -26,17 +27,6 @@ const FloatingActionButtons: React.FC = () => {
     link.href = resumePath;
     link.download = "Jacob-Darling-Resume.pdf";
     link.click();
-  };
-
-  const scrollToTop = () => {
-    const lenis = getLenis();
-    // Use Lenis smooth scroll if available
-    if (lenis) {
-      lenis.scrollTo(0, { duration: 0.8, easing: (t: number) => 1 - (1 - t) ** 2 });
-    } else {
-      // Fall back to native smooth scroll
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
   };
 
   // Hide on certain pages or mobile menu open
@@ -95,7 +85,7 @@ const FloatingActionButtons: React.FC = () => {
             exit={{ opacity: 0, scale: 0.8 }}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            onClick={scrollToTop}
+            onClick={() => scrollToTop()}
             className="w-12 h-12 bg-gray-800/80 backdrop-blur-sm border border-white/10 text-white rounded-full flex items-center justify-center shadow-lg hover:bg-gray-700/80 transition-colors"
             aria-label="Scroll to top"
           >

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronUp, Building2, Award, User, GraduationCap, Eye, EyeOff } from 'lucide-react';
 import { scrollToSection, companyThemes } from '../../utils/narrativeMotion';
+import { scrollToTop } from '../../utils/scroll';
 import resumeData from '../../data/resume.json';
 import './TimelineNavigation.css';
 
@@ -67,10 +68,6 @@ const TimelineNavigation: React.FC<TimelineNavigationProps> = ({ className = '' 
   const handleNavClick = (sectionId: string, index: number) => {
     setActiveSection(index);
     scrollToSection(sectionId);
-  };
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const toggleVisibility = () => {

@@ -1,6 +1,5 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { motion as motionTokens } from "../../styles/motion-tokens.js";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "./Hero.css";
@@ -23,20 +22,36 @@ const Hero: React.FC<HeroProps> = ({ title, subtitle, backgroundImage }) => {
   }, [backgroundImage]);
 
   React.useEffect(() => {
+    if (!heroRef.current) return;
+
     const ctx = gsap.context(() => {
-      gsap.timeline({
+      const section = heroRef.current;
+      if (!section) return;
+
+      const timeline = gsap.timeline({
         scrollTrigger: {
-          trigger: ".hero",
+          trigger: section,
           start: "top top",
           end: "bottom top",
           scrub: true,
           pin: true,
-          pinSpacing: false,
-        },
-      })
-      .fromTo(".hero-title", { opacity: 0, y: 50 }, { opacity: 1, y: 0, stagger: 0.1 })
-      .fromTo(".hero-subtitle", { opacity: 0 }, { opacity: 1, delay: 0.4 }, "-=0.5");
-    });
+          pinSpacing: false
+        }
+      });
+
+      timeline
+        .fromTo(
+          section.querySelector(".hero-title"),
+          { opacity: 0, y: 50 },
+          { opacity: 1, y: 0, stagger: 0.1 }
+        )
+        .fromTo(
+          section.querySelector(".hero-subtitle"),
+          { opacity: 0 },
+          { opacity: 1, delay: 0.4 },
+          "-=0.5"
+        );
+    }, heroRef);
 
     return () => ctx.revert();
   }, []);

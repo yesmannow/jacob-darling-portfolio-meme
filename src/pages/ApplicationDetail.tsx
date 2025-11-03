@@ -4,11 +4,13 @@ import { motion } from "framer-motion";
 import { getApplicationById } from "../data/applications";
 import { fadeInUp, staggerContainer, staggerItem } from "../utils/animations";
 import AnimatedSection from "../components/animations/AnimatedSection";
+import AppDemoModal from "../components/modals/AppDemoModal";
 import "./ApplicationDetail.css";
 
 const ApplicationDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [activeTab, setActiveTab] = useState<'overview' | 'technical' | 'demo'>('overview');
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const app = id ? getApplicationById(id) : undefined;
 
   if (!app) {
@@ -47,9 +49,12 @@ const ApplicationDetail: React.FC = () => {
           </motion.div>
 
           <motion.div className="header-actions" variants={fadeInUp}>
-            <a href={app.demoUrl} className="cta-btn primary" target="_blank" rel="noopener noreferrer">
+            <button
+              className="cta-btn primary"
+              onClick={() => setIsModalOpen(true)}
+            >
               🚀 Launch Live Demo
-            </a>
+            </button>
             {app.githubUrl && (
               <a href={app.githubUrl} className="cta-btn secondary" target="_blank" rel="noopener noreferrer">
                 <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor">
@@ -247,8 +252,19 @@ const ApplicationDetail: React.FC = () => {
                     />
                   </div>
                   <div className="demo-actions">
-                    <a href={app.demoUrl} className="cta-btn primary" target="_blank" rel="noopener noreferrer">
-                      Open in New Window
+                    <button
+                      className="cta-btn primary"
+                      onClick={() => setIsModalOpen(true)}
+                    >
+                      Launch Interactive Demo
+                    </button>
+                    <a
+                      href={app.demoUrl}
+                      className="cta-btn secondary"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Open in New Tab
                     </a>
                   </div>
                 </section>
@@ -274,6 +290,14 @@ const ApplicationDetail: React.FC = () => {
           </div>
         </section>
       </AnimatedSection>
+
+      {/* App Demo Modal */}
+      <AppDemoModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        appTitle={app.title}
+        appUrl={app.demoUrl}
+      />
     </main>
   );
 };

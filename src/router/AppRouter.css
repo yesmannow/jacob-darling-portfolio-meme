@@ -10,7 +10,8 @@
 }
 
 /* Legacy support */
-.page-loader {
+.page-loader,
+.route-loader-fallback {
   min-height: 100vh;
   display: flex;
   align-items: center;

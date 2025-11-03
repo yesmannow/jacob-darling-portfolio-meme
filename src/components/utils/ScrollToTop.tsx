@@ -1,18 +1,16 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { getLenis, refreshLenis } from '../../utils/motion-sync';
+import { refreshLenis } from '../../utils/motion-sync';
+import { scrollToTop } from '../../utils/scroll';
 
 const ScrollToTop: React.FC = () => {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    const lenis = getLenis();
     const timers: number[] = [];
 
-    // Scroll to top immediately
-    lenis?.scrollTo(0, { immediate: true });
-    // Use 'auto' instead of invalid 'instant' for native scroll fallback
-    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+    // Scroll to the very top immediately (Lenis preferred, native fallback)
+    scrollToTop({ immediate: true });
 
     // Store timeout IDs for cleanup
     [100, 300, 600, 1000].forEach(delay => {
