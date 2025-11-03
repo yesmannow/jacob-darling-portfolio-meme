@@ -76,6 +76,17 @@ export default defineConfig({
             return 'react-core';
           }
 
+          // Three.js related (VERY LARGE - check EARLY before other vendors)
+          // Must be isolated to prevent it from bloating the main index.mjs chunk
+          // Check for all Three.js packages and dependencies
+          if (id.includes('node_modules/three/') ||
+              id.includes('node_modules/@react-three/') ||
+              id.includes('node_modules/three/src/') ||
+              id.includes('node_modules/three/build/')) {
+            // Force Three.js into its own clean, separate chunk
+            return 'three-vendor';
+          }
+
           // Animation libraries (large, bundle together)
           if (id.includes('node_modules/framer-motion') ||
               id.includes('node_modules/gsap') ||
@@ -92,11 +103,6 @@ export default defineConfig({
           // PDF libraries (large, lazy load these separately)
           if (id.includes('node_modules/@react-pdf') || id.includes('node_modules/jspdf')) {
             return 'pdf-vendor';
-          }
-
-          // Three.js related (very large, separate chunk)
-          if (id.includes('node_modules/three') || id.includes('node_modules/@react-three')) {
-            return 'three-vendor';
           }
 
           // Simple-icons (large icon library, separate chunk - lazy loaded)
