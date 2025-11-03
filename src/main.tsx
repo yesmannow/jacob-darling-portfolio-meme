@@ -71,7 +71,7 @@ const mountTimeout = setTimeout(() => {
             <p class="error-boundary-message">
               The application is taking longer than expected to load. This might be due to a network issue or a JavaScript error.
             </p>
-            <p class="error-boundary-details" style="margin-top: 1rem;">
+            <p class="error-boundary-details" style={{ marginTop: '1rem' } as React.CSSProperties}>
               Please check your browser console for errors and try refreshing the page.
             </p>
             <button
@@ -94,7 +94,7 @@ try {
   } else {
     console.log('Initializing React app...');
     const root = ReactDOM.createRoot(rootElement);
-    
+
     // Wrap in error boundary at the root level
     root.render(
       React.createElement(React.StrictMode, null,
@@ -103,7 +103,7 @@ try {
         )
       )
     );
-    
+
     // Clear timeout once React mounts
     setTimeout(() => {
       clearTimeout(mountTimeout);
