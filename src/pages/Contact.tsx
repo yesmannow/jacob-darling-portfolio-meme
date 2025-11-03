@@ -1,7 +1,22 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Mail, Linkedin, Github, Send, MessageSquare, User, Building2, Phone, FileText } from "lucide-react";
+import { Mail, Linkedin, Github, Send, MessageSquare, User, Building2, Phone, FileText, Globe, Facebook, Youtube } from "lucide-react";
+
+// Simple TikTok icon component since lucide-react doesn't have it
+const TikTokIcon = ({ size = 24 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+  </svg>
+);
+
+// SoundCloud icon component
+const SoundCloudIcon = ({ size = 24 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <path d="M1.175 13.5c.352 0 .638-.143.857-.43.219-.286.38-.635.38-1.045 0-.352-.143-.638-.43-.857-.286-.219-.635-.38-1.045-.38-.41 0-.76.161-1.046.38-.287.219-.429.505-.429.857 0 .41.161.76.38 1.046.22.287.505.429.857.429zm2.343 0c.287 0 .524-.1.711-.3.188-.2.327-.457.327-.771s-.139-.571-.327-.771c-.187-.2-.424-.3-.711-.3-.287 0-.524.1-.711.3-.188.2-.327.457-.327.771s.139.571.327.771c.187.2.424.3.711.3zm1.715 0c.286 0 .524-.1.71-.3.188-.2.327-.457.327-.771s-.139-.571-.327-.771c-.186-.2-.424-.3-.71-.3-.287 0-.524.1-.711.3-.188.2-.327.457-.327.771s.139.571.327.771c.187.2.424.3.711.3zm1.715 0c.287 0 .524-.1.711-.3.188-.2.327-.457.327-.771s-.139-.571-.327-.771c-.187-.2-.424-.3-.711-.3-.287 0-.524.1-.711.3-.188.2-.327.457-.327.771s.139.571.327.771c.187.2.424.3.711.3zm1.715 0c.287 0 .524-.1.711-.3.188-.2.327-.457.327-.771s-.139-.571-.327-.771c-.187-.2-.424-.3-.711-.3-.287 0-.524.1-.711.3-.188.2-.327.457-.327.771s.139.571.327.771c.187.2.424.3.711.3zm1.714 0c.287 0 .524-.1.711-.3.188-.2.327-.457.327-.771s-.139-.571-.327-.771c-.187-.2-.424-.3-.711-.3-.287 0-.524.1-.711.3-.188.2-.327.457-.327.771s.139.571.327.771c.187.2.424.3.711.3zm1.715 0c.287 0 .524-.1.711-.3.188-.2.327-.457.327-.771s-.139-.571-.327-.771c-.187-.2-.424-.3-.711-.3-.287 0-.524.1-.711.3-.188.2-.327.457-.327.771s.139.571.327.771c.187.2.424.3.711.3zm2.43 0c.352 0 .638-.143.857-.43.219-.286.38-.635.38-1.045 0-.352-.143-.638-.43-.857-.286-.219-.635-.38-1.045-.38-.41 0-.76.161-1.046.38-.287.219-.429.505-.429.857 0 .41.161.76.38 1.046.22.287.505.429.857.429z"/>
+    <path d="M21.165 12.333c-.697 0-1.263.215-1.697.645-.434.43-.651.995-.651 1.697v3.569c0 .697.217 1.263.651 1.697.434.434.999.651 1.697.651.697 0 1.263-.217 1.697-.651.434-.434.651-.999.651-1.697v-3.569c0-.702-.217-1.268-.651-1.697-.434-.43-1-.645-1.697-.645z"/>
+  </svg>
+);
 import AnimatedSection from "../components/animations/AnimatedSection";
 import MagneticButton from "../components/interactive/MagneticButton";
 // SimpleIcon removed - using Lucide icons for UI elements
@@ -105,11 +120,10 @@ const Contact: React.FC = () => {
           <motion.h1 variants={fadeInUp}>Let's Create What Doesn't Exist Yet.</motion.h1>
           <motion.p className="lead" variants={fadeInUp}>
             I'm currently open to new opportunities in marketing leadership and tech integration.
-            Feel free to reach out for interviews, collaborations, or any questions—I'd love to connect!
             <br /><br />
-            Have a challenge that needs solving? A system that needs building? An idea that needs shaping?
+            Have a challenge that needs solving? A system that needs building? A campaign that needs optimizing?
             <br /><br />
-            Let's talk.
+            Let's discuss how I can drive marketing ROI for your team.
           </motion.p>
         </section>
       </AnimatedSection>
@@ -254,7 +268,7 @@ const Contact: React.FC = () => {
 
                 <div className="contact-methods">
                   <motion.a
-                    href="mailto:jacob@jacobdarling.com"
+                    href="mailto:hoosierdarling@gmail.com"
                     className="contact-method"
                     whileHover={{ scale: 1.02, x: 5 }}
                     transition={{ duration: 0.2 }}
@@ -264,7 +278,22 @@ const Contact: React.FC = () => {
                     </span>
                     <div>
                       <strong>Email</strong>
-                      <p>jacob@jacobdarling.com</p>
+                      <p>hoosierdarling@gmail.com</p>
+                    </div>
+                  </motion.a>
+
+                  <motion.a
+                    href="tel:317-443-8091"
+                    className="contact-method"
+                    whileHover={{ scale: 1.02, x: 5 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <span className="icon">
+                      <Phone size={24} />
+                    </span>
+                    <div>
+                      <strong>Phone</strong>
+                      <p>317-443-8091</p>
                     </div>
                   </motion.a>
 
@@ -286,7 +315,7 @@ const Contact: React.FC = () => {
                   </motion.a>
 
                   <motion.a
-                    href="https://github.com/JdarlingGT"
+                    href="https://github.com/yesmannow"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="contact-method"
@@ -301,6 +330,91 @@ const Contact: React.FC = () => {
                       <p>View my code</p>
                     </div>
                   </motion.a>
+
+                  <motion.a
+                    href="https://bearcavemarketing.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="contact-method"
+                    whileHover={{ scale: 1.02, x: 5 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <span className="icon">
+                      <Globe size={24} />
+                    </span>
+                    <div>
+                      <strong>Website</strong>
+                      <p>bearcavemarketing.com</p>
+                    </div>
+                  </motion.a>
+
+                  <motion.a
+                    href="https://www.facebook.com/jacob.darling.44227/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="contact-method"
+                    whileHover={{ scale: 1.02, x: 5 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <span className="icon">
+                      <Facebook size={24} />
+                    </span>
+                    <div>
+                      <strong>Facebook</strong>
+                      <p>Connect on Facebook</p>
+                    </div>
+                  </motion.a>
+
+                  <motion.a
+                    href="https://www.tiktok.com/@jadarlin?_r=1&_t=ZT-915gl9DL6wX"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="contact-method"
+                    whileHover={{ scale: 1.02, x: 5 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <span className="icon">
+                      <TikTokIcon size={24} />
+                    </span>
+                    <div>
+                      <strong>TikTok</strong>
+                      <p>@jadarlin</p>
+                    </div>
+                  </motion.a>
+
+                  <motion.a
+                    href="https://soundcloud.com/ottodarling"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="contact-method"
+                    whileHover={{ scale: 1.02, x: 5 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <span className="icon">
+                      <SoundCloudIcon size={24} />
+                    </span>
+                    <div>
+                      <strong>SoundCloud</strong>
+                      <p>ottodarling</p>
+                    </div>
+                  </motion.a>
+
+                  <motion.a
+                    href="https://www.youtube.com/@jacobthedarling"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="contact-method"
+                    whileHover={{ scale: 1.02, x: 5 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <span className="icon">
+                      <Youtube size={24} />
+                    </span>
+                    <div>
+                      <strong>YouTube</strong>
+                      <p>@jacobthedarling</p>
+                    </div>
+                  </motion.a>
                 </div>
               </div>
 
@@ -312,9 +426,9 @@ const Contact: React.FC = () => {
 
               <div className="cta-card">
                 <h3>Want to see my work?</h3>
-                <p>Explore my case studies to see how I solve real business challenges.</p>
+                <p>Explore my case studies to see measurable business impact and ROI-driven results.</p>
                 <Link to="/case-studies" className="btn-secondary">
-                  View Case Studies →
+                  See Case Studies with Measurable Business Impact →
                 </Link>
               </div>
             </div>

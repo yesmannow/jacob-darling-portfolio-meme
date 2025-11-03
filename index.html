@@ -85,9 +85,9 @@
     <meta name="robots" content="index, follow" />
 
     <!-- Theme Color -->
-    <!-- Note: theme-color is supported by Chrome/Edge and Safari for browser chrome theming.
-          Firefox and Opera do not support this meta tag - we use CSS color-scheme property for those browsers.
-          The value is dynamically updated by ThemeProvider based on the current theme. -->
+    <!-- Note: theme-color meta tag is supported by Chrome/Edge and Safari for browser chrome theming.
+          Firefox and Opera do not support this meta tag - we use CSS color-scheme property (in critical CSS below)
+          for Firefox/Opera support. The value is dynamically updated by Theme Init script (lines 50-77) based on the current theme. -->
     <meta name="theme-color" content="#ffffff" />
     <meta name="msapplication-TileColor" content="#0b0b0c" />
 
@@ -143,8 +143,15 @@
       },
       "sameAs": [
         "https://linkedin.com/in/jacobdarling",
-        "https://github.com/JdarlingGT"
+        "https://github.com/yesmannow",
+        "https://bearcavemarketing.com",
+        "https://www.facebook.com/jacob.darling.44227/",
+        "https://www.tiktok.com/@jadarlin",
+        "https://soundcloud.com/ottodarling",
+        "https://www.youtube.com/@jacobthedarling"
       ],
+      "email": "hoosierdarling@gmail.com",
+      "telephone": "317-443-8091",
       "description": "Results-driven marketing professional specializing in digital marketing strategies, campaign automation, CRM integration, and analytics-driven strategy with proven ROI.",
       "knowsAbout": [
         "Marketing Automation",
@@ -176,6 +183,11 @@
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+      }
+      html {
+        /* Cross-browser theme support: color-scheme works in Firefox/Opera */
+        /* theme-color meta tag (line 91) handles Chrome/Edge/Safari */
+        color-scheme: dark light;
       }
       #root {
         min-height: 100vh;

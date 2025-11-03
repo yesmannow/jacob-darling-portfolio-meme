@@ -11,8 +11,15 @@ const PersonSchema: React.FC = () => {
     "url": "https://jacobdarling.com",
     "sameAs": [
       "https://linkedin.com/in/jacobdarling",
-      "https://github.com/JdarlingGT"
+      "https://github.com/yesmannow",
+      "https://bearcavemarketing.com",
+      "https://www.facebook.com/jacob.darling.44227/",
+      "https://www.tiktok.com/@jadarlin",
+      "https://soundcloud.com/ottodarling",
+      "https://www.youtube.com/@jacobthedarling"
     ],
+    "email": "hoosierdarling@gmail.com",
+    "telephone": "317-443-8091",
     "knowsAbout": [
       "Marketing Strategy",
       "Marketing Automation",

@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Share2, Mail, ExternalLink, FileText } from "lucide-react";
+import { Share2, Mail, ExternalLink } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import resumeData from "../../data/resume.json";
 import LazyPDFDownloadCTA from "./LazyPDFDownloadCTA";
@@ -111,20 +111,6 @@ export default function CTAButtons() {
         <Share2 size={20} />
         <span>Share Resume</span>
       </motion.button>
-
-      {/* Interview Toolkit */}
-      <motion.a
-        variants={buttonVariants}
-        whileHover="hover"
-        whileTap="tap"
-        href="/documents/Jacob-Darling-Interview-Toolkit.pdf"
-        target="_blank"
-        rel="noreferrer"
-        className="flex items-center gap-3 px-6 py-3 border-2 border-blue-400 text-blue-300 rounded-full font-semibold hover:bg-blue-400/10 transition-colors duration-300"
-      >
-        <FileText size={20} />
-        <span>Download Interview Toolkit</span>
-      </motion.a>
 
       {/* Email Resume Button */}
       <motion.button

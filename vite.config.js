@@ -52,7 +52,12 @@ export default defineConfig({
             "image": "/images/bio/bio-photo.jpg",
             "sameAs": [
               "https://linkedin.com/in/jacobdarling",
-              "https://github.com/JdarlingGT"
+              "https://github.com/yesmannow",
+              "https://bearcavemarketing.com",
+              "https://www.facebook.com/jacob.darling.44227/",
+              "https://www.tiktok.com/@jadarlin",
+              "https://soundcloud.com/ottodarling",
+              "https://www.youtube.com/@jacobthedarling"
             ]
           })
         }

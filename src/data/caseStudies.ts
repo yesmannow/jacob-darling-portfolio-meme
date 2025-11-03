@@ -22,6 +22,20 @@ export interface CaseStudy {
     impact: string;
   };
   featured?: boolean;
+  // Business context enhancements
+  companyProfile?: {
+    industry: string;
+    companySize: string;
+    annualRevenue: string;
+    marketingChallenges: string[];
+  };
+  roiImpact?: {
+    beforeMetrics: string[];
+    afterMetrics: string[];
+    costSavings: string;
+    revenueImpact: string;
+    timeSavings: string;
+  };
 }
 
 export const caseStudies: CaseStudy[] = [

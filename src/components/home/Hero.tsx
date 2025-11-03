@@ -28,8 +28,8 @@ const Hero: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          Where Complexity Becomes{" "}
-          <span className="gradient-text">Clarity</span>.
+          I Increase Marketing ROI Through{" "}
+          <span className="gradient-text">Automation & Analytics</span>.
         </motion.h1>
 
         <motion.p
@@ -38,8 +38,8 @@ const Hero: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
         >
-          I craft systems where design and technology move as one.
-          Turning curiosity into conversion. Chaos into clarity.
+          Marketing Technologist delivering measurable results: 40% conversion increases,
+          70% efficiency gains, 400+ automated workflows serving 30,000+ users.
         </motion.p>
 
         <motion.div
@@ -49,10 +49,10 @@ const Hero: React.FC = () => {
           transition={{ duration: 0.8, delay: 0.6 }}
         >
           <Link to="/contact" className="cta primary">
-            Start a Conversation
+            Discuss How I Can Drive Marketing ROI for Your Team
           </Link>
           <Link to="/case-studies" className="cta secondary">
-            View My Work
+            See Case Studies with Measurable Business Impact
           </Link>
         </motion.div>
 

@@ -93,8 +93,8 @@ const LeadMagnet: React.FC = () => {
               <p className="text-xs text-gray-500">
                 Need a tailored walkthrough for your team? Email
                 {" "}
-                <a href="mailto:jacob@jacobdarling.com" className="text-blue-300 hover:text-blue-200">
-                  jacob@jacobdarling.com
+                <a href="mailto:hoosierdarling@gmail.com" className="text-blue-300 hover:text-blue-200">
+                  hoosierdarling@gmail.com
                 </a>
                 {" "}with your role and focus areas—I'm happy to curate a custom briefing deck.
               </p>

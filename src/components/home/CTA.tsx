@@ -187,7 +187,7 @@ const CTA: React.FC = () => {
 
                 <div className="relative flex items-center gap-3">
                   <Mail className="w-6 h-6" />
-                  <span>Contact Me</span>
+                  <span>Schedule Marketing Strategy Consultation</span>
                   <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform duration-300" />
                 </div>
               </motion.button>
@@ -202,7 +202,7 @@ const CTA: React.FC = () => {
             >
               <div className="flex items-center gap-3">
                 <MessageCircle className="w-6 h-6" />
-                <span>Schedule a Call</span>
+                <span>See ROI Results I Delivered</span>
               </div>
             </motion.button>
           </motion.div>
@@ -214,10 +214,10 @@ const CTA: React.FC = () => {
             <p className="text-gray-400">
               Or reach out directly at{" "}
               <a
-                href="mailto:jacob@jacobdarling.com"
+                href="mailto:hoosierdarling@gmail.com"
                 className="text-blue-400 hover:text-blue-300 transition-colors duration-300 font-medium"
               >
-                jacob@jacobdarling.com
+                hoosierdarling@gmail.com
               </a>
             </p>
 
