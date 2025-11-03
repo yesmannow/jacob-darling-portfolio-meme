@@ -169,9 +169,6 @@
       ]
     }
     </script>
-    <!-- Preload React for faster initialization -->
-    <link rel="modulepreload" href="/src/main.tsx" />
-
     <!-- Critical CSS for initial render -->
     <style>
       * { box-sizing: border-box; }
@@ -336,55 +333,6 @@
         console.error('Unhandled promise rejection:', e.reason);
       });
 
-      // Timeout to detect if nothing loads after 15 seconds
-      setTimeout(function() {
-        const root = document.getElementById('root');
-        if (root && root.querySelector('.initial-loader')) {
-          console.error('Application failed to load after 15 seconds');
-          root.innerHTML = `
-            <style>
-              .timeout-container {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                min-height: 100vh;
-                background: #0A0A0A;
-                color: #FFFFFF;
-                padding: 2rem;
-                text-align: center;
-              }
-              .timeout-title {
-                font-size: 1.5rem;
-                margin-bottom: 1rem;
-                color: #F59E0B;
-              }
-              .timeout-button {
-                margin-top: 1rem;
-                padding: 0.75rem 2rem;
-                background: #3B82F6;
-                color: white;
-                border: none;
-                border-radius: 8px;
-                cursor: pointer;
-              }
-            </style>
-            <div class="timeout-container">
-              <div>
-                <h2 class="timeout-title">Loading Timeout</h2>
-                <p style="opacity: 0.8; margin-bottom: 1rem;">
-                  The application is taking longer than expected to load.
-                </p>
-                <p style="opacity: 0.6; font-size: 0.9rem; margin-bottom: 1rem;">
-                  Please check the browser console (F12) for errors.
-                </p>
-                <button class="timeout-button" onclick="window.location.reload()">
-                  Reload Page
-                </button>
-              </div>
-            </div>
-          `;
-        }
-      }, 15000);
     </script>
   </body>
 </html>
