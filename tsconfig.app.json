@@ -18,6 +18,11 @@
       "node",
       "vite/client"
     ],
+    "typeRoots": [
+      "./node_modules/@types",
+      "./node_modules/vite/types",
+      "./node_modules"
+    ],
     "baseUrl": "./",
     "paths": {
       "@/*": ["src/*"]
