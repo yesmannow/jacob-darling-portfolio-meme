@@ -5,6 +5,7 @@
     { "path": "./tsconfig.app.json" }
   ],
   "compilerOptions": {
+    "jsx": "react-jsx",
     "strict": true,
     "forceConsistentCasingInFileNames": true
   }
