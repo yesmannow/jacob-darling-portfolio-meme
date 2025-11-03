@@ -102,9 +102,10 @@ export default defineConfig({
             return 'three-vendor';
           }
 
-          // Simple-icons (large icon library, separate chunk)
+          // Simple-icons (large icon library, separate chunk - lazy loaded)
+          // Force it into its own chunk to ensure it doesn't block initial load
           if (id.includes('node_modules/simple-icons')) {
-            return 'icons-vendor';
+            return 'simple-icons-lazy';
           }
 
           // UI libraries

@@ -1,23 +1,45 @@
-import React from "react";
-// simple-icons v15+ uses named exports with "si" prefix
-import * as simpleIcons from "simple-icons";
+import React, { useState, useEffect } from "react";
+
+// Cache for lazy-loaded simple-icons to avoid multiple imports
+let simpleIconsCache: any = null;
+let iconsLoadingPromise: Promise<any> | null = null;
+
+// Helper to lazily load simple-icons (5MB+ library - only load when needed)
+const loadSimpleIcons = async (): Promise<any> => {
+  if (simpleIconsCache) {
+    return simpleIconsCache;
+  }
+  
+  if (iconsLoadingPromise) {
+    return iconsLoadingPromise;
+  }
+
+  iconsLoadingPromise = import("simple-icons").then((icons) => {
+    simpleIconsCache = icons;
+    return icons;
+  });
+
+  return iconsLoadingPromise;
+};
 
 // Helper to safely get an icon from simple-icons
 // Note: simple-icons v15+ uses named exports with "si" prefix (e.g., siReact, siJavascript)
-const getSimpleIcon = (slug: string): any => {
+const getSimpleIcon = async (slug: string): Promise<any> => {
   try {
+    const simpleIcons = await loadSimpleIcons();
+    
     // Convert slug to camelCase with "si" prefix
     // e.g., "react" -> "siReact", "javascript" -> "siJavascript"
     const slugLower = slug.toLowerCase();
     const camelCase = slugLower
       .split('-')
-      .map((word, index) =>
+      .map((word, index) => 
         index === 0 ? word : word.charAt(0).toUpperCase() + word.slice(1)
       )
       .join('');
-
+    
     const iconKey = `si${camelCase.charAt(0).toUpperCase()}${camelCase.slice(1)}`;
-
+    
     // Method 1: Try exact match with si prefix
     if ((simpleIcons as any)[iconKey]) {
       return (simpleIcons as any)[iconKey];
@@ -30,7 +52,7 @@ const getSimpleIcon = (slug: string): any => {
 
     // Method 3: Try to find by iterating through exports
     for (const key in simpleIcons) {
-      if (key.toLowerCase().includes(slugLower) ||
+      if (key.toLowerCase().includes(slugLower) || 
           (simpleIcons as any)[key]?.slug === slugLower) {
         return (simpleIcons as any)[key];
       }
@@ -181,15 +203,14 @@ export const getIconSlug = (name: string): string | null => {
     }
   }
 
-  // Try to find by slug directly (e.g., if name is already a slug)
-  const icon = getSimpleIcon(name.toLowerCase());
-  if (icon) return name.toLowerCase();
-
-  return null;
+  // Return slug directly if name looks like a slug
+  // (Don't call getSimpleIcon here as it's async - just return the slug)
+  return name.toLowerCase();
 };
 
 /**
  * SimpleIcon component that renders icons from simple-icons
+ * Uses lazy loading to avoid blocking initial page load
  */
 const SimpleIcon: React.FC<SimpleIconProps> = ({
   name,
@@ -197,38 +218,50 @@ const SimpleIcon: React.FC<SimpleIconProps> = ({
   color,
   className = ""
 }) => {
-  const slug = getIconSlug(name);
+  const [icon, setIcon] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
 
-  if (!slug) {
-    // Fallback: return null or a placeholder
+  useEffect(() => {
+    const slug = getIconSlug(name);
+    
+    if (!slug) {
+      setLoading(false);
+      return;
+    }
+
+    // Load icon asynchronously
+    getSimpleIcon(slug)
+      .then((loadedIcon) => {
+        setIcon(loadedIcon);
+        setLoading(false);
+      })
+      .catch(() => {
+        setLoading(false);
+      });
+  }, [name]);
+
+  if (loading || !icon) {
+    // Return a placeholder while loading or if icon not found
     return null;
   }
 
-  try {
-    const icon = getSimpleIcon(slug);
-    if (!icon) return null;
+  const iconColor = color || `#${icon.hex}`;
+  const svgPath = icon.path;
 
-    const iconColor = color || `#${icon.hex}`;
-    const svgPath = icon.path;
-
-    return (
-      <svg
-        role="img"
-        viewBox="0 0 24 24"
-        width={size}
-        height={size}
-        className={className}
-        fill={iconColor}
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <title>{icon.title}</title>
-        <path d={svgPath} />
-      </svg>
-    );
-  } catch (error) {
-    console.warn(`Icon not found for: ${name} (slug: ${slug})`);
-    return null;
-  }
+  return (
+    <svg
+      role="img"
+      viewBox="0 0 24 24"
+      width={size}
+      height={size}
+      className={className}
+      fill={iconColor}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <title>{icon.title}</title>
+      <path d={svgPath} />
+    </svg>
+  );
 };
 
 export default SimpleIcon;
