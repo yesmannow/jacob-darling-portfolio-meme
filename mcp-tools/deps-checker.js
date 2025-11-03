@@ -4,7 +4,7 @@ import { readFileSync, existsSync } from 'fs';
 const report = {
   timestamp: new Date().toISOString(),
   dependencies: {
-    required: ['react', 'react-dom', '@types/react', '@types/react-dom'],
+    required: ['react', 'react-dom', '@types/react', '@types/react-dom', 'react-router-dom'],
     missing: [],
     present: []
   },
@@ -14,7 +14,7 @@ const report = {
 
 function main() {
   const packageJsonPath = 'package.json';
-  
+
   if (!existsSync(packageJsonPath)) {
     report.status = 'ERROR';
     report.issues.push('package.json not found');

@@ -24,3 +24,5 @@ npm-debug.log*
 *.tmp
 .cache/
 .vercel
+node_modules/.vite/
+*.timestamp-*.mjs
