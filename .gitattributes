@@ -1,0 +1,24 @@
+﻿* text=auto eol=lf
+
+# Keep images/fonts as binary (no line ending changes)
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.svg binary
+*.ico binary
+*.ttf binary
+*.otf binary
+*.woff binary
+*.woff2 binary
+
+# Don't normalize archives
+*.zip binary
+*.gz binary
+*.bz2 binary
+
+# Optional: keep Windows scripts with CRLF if you like
+*.bat eol=crlf
+*.cmd eol=crlf
+*.ps1 eol=crlf
