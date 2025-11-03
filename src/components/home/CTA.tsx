@@ -165,8 +165,8 @@ const CTA: React.FC = () => {
           <motion.p
             className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed"
           >
-            Ready to scale your marketing operations with automation that delivers measurable ROI? Let's discuss how
-            marketing automation, CRM integration, and analytics-driven strategy can drive growth for your business.
+            Looking for a marketing leader who bridges strategy and execution? Let's discuss how my experience in marketing automation,
+            systems architecture, and data-driven campaigns can contribute to your team's success.
           </motion.p>
 
           {/* CTA Buttons */}
