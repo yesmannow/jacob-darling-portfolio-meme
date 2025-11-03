@@ -159,7 +159,7 @@ const ModernHeader: React.FC = () => {
 
   // Handle resume download
   const handleResumeDownload = () => {
-    const resumePath = "/resume/jacob-darling-resume.pdf";
+    const resumePath = "/resume/Resume JD draft.pdf";
     const link = document.createElement("a");
     link.href = resumePath;
     link.download = "Jacob-Darling-Resume.pdf";

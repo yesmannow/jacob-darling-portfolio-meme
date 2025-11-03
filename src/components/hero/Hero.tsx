@@ -49,7 +49,8 @@ const Hero: React.FC = () => {
           <motion.div whileHover={motionTokens.buttonHover} whileTap={{ scale: 0.95 }}>
             <a 
               className="btn-secondary" 
-              href="/resume/jacob-darling-resume.pdf" 
+              href="/resume/Resume JD draft.pdf" 
+              download="Jacob-Darling-Resume.pdf"
               target="_blank" 
               rel="noopener noreferrer"
             >

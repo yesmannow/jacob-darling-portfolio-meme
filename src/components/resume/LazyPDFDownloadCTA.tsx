@@ -44,7 +44,7 @@ const PDFDownloadButton: React.FC<{
 }> = ({ handlePDFGeneration, buttonVariants, isGeneratingPDF }) => {
   const fallbackButton = (
     <motion.a
-      href="/resume/jacob-darling-resume.pdf"
+      href="/resume/Resume JD draft.pdf"
       download="Jacob-Darling-Resume.pdf"
       variants={buttonVariants}
       whileHover="hover"

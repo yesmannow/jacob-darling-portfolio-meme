@@ -43,7 +43,7 @@ const Resume: React.FC = () => {
 
   const handleDownload = () => {
     // Legacy PDF download - will be replaced by dynamic PDF generation
-    const legacyPDF = "/resume/jacob-darling-resume.pdf";
+    const legacyPDF = "/resume/Resume JD draft.pdf";
     window.open(legacyPDF, "_blank");
   };
 

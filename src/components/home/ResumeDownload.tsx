@@ -54,7 +54,7 @@ const ResumeDownload: React.FC = () => {
         >
           {/* Decorative Gradient Overlay */}
           <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-pink-500/10 opacity-50" />
-          
+
           {/* Animated Border */}
           <div className="absolute inset-0 rounded-3xl">
             <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 opacity-20 blur-xl" />
@@ -73,13 +73,13 @@ const ResumeDownload: React.FC = () => {
                 <Sparkles className="w-4 h-4" />
                 <span>Hiring Manager Resource</span>
               </div>
-              
+
               <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
                 <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
                   Download My Resume
                 </span>
               </h2>
-              
+
               <p className="text-lg text-gray-400 max-w-2xl mx-auto">
                 Get a complete overview of my experience, skills, and achievements in a single, ATS-friendly document.
               </p>
@@ -100,7 +100,7 @@ const ResumeDownload: React.FC = () => {
                   <div className="text-gray-400 text-xs">Experience</div>
                 </div>
               </div>
-              
+
               <div className="flex items-center gap-3 p-4 bg-white/5 rounded-xl border border-white/10">
                 <CheckCircle className="w-5 h-5 text-blue-400 flex-shrink-0" />
                 <div>
@@ -108,7 +108,7 @@ const ResumeDownload: React.FC = () => {
                   <div className="text-gray-400 text-xs">Format</div>
                 </div>
               </div>
-              
+
               <div className="flex items-center gap-3 p-4 bg-white/5 rounded-xl border border-white/10">
                 <CheckCircle className="w-5 h-5 text-purple-400 flex-shrink-0" />
                 <div>
@@ -137,8 +137,8 @@ const ResumeDownload: React.FC = () => {
               </Link>
 
               <a
-                href="/resume/jacob-darling-resume.pdf"
-                download
+                href="/resume/Resume JD draft.pdf"
+                download="Jacob-Darling-Resume.pdf"
                 className="group flex items-center justify-center gap-3 px-8 py-4 bg-gray-800/50 border border-white/10 text-white font-semibold rounded-xl hover:bg-gray-700/50 hover:border-white/20 transition-all duration-300 w-full sm:w-auto"
               >
                 <FileText className="w-5 h-5" />
