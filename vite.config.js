@@ -128,12 +128,33 @@ export default defineConfig({
         // Optimize chunk naming for better caching
         chunkFileNames: (chunkInfo) => {
           const facadeModuleId = chunkInfo.facadeModuleId ? chunkInfo.facadeModuleId.split('/').pop() : 'chunk';
-          return `assets/${facadeModuleId}-[hash].js`;
+          // Remove .tsx/.ts extension and ensure .js extension
+          const baseName = facadeModuleId.replace(/\.(tsx|ts)$/, '');
+          return `assets/${baseName}-[hash].js`;
         },
-        entryFileNames: 'assets/[name]-[hash].js',
+        entryFileNames: (chunkInfo) => {
+          // Ensure entry files always use .js extension, never .tsx
+          let name = chunkInfo.name || 'index';
+          // Remove any .tsx or .ts extension that might be in the name
+          name = name.replace(/\.(tsx|ts)$/, '');
+          // If no name or name is empty, use 'index'
+          if (!name || name === 'main') {
+            name = 'index';
+          }
+          return `assets/${name}-[hash].js`;
+        },
         assetFileNames: (assetInfo) => {
           const info = assetInfo.name.split('.');
           const ext = info[info.length - 1];
+          
+          // Prevent .tsx/.ts files from being copied as assets
+          if (/\.(tsx|ts)$/.test(assetInfo.name)) {
+            // These shouldn't be assets - they should be chunks
+            // Return a JS extension to force proper handling
+            const baseName = assetInfo.name.replace(/\.(tsx|ts)$/, '');
+            return `assets/${baseName}-[hash].js`;
+          }
+          
           if (/\.(css)$/.test(assetInfo.name)) {
             return `assets/[name]-[hash].${ext}`;
           }

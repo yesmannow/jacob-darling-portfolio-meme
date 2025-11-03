@@ -266,7 +266,7 @@ if (!React || !ReactDOM) {
       console.log('React version:', React.version);
       console.log('ReactDOM available:', !!ReactDOM);
       console.log('Environment:', process.env.NODE_ENV || 'unknown');
-      
+
       // Log script loading status
       const scripts = document.querySelectorAll('script[type="module"]');
       console.log('Module scripts found:', scripts.length);
