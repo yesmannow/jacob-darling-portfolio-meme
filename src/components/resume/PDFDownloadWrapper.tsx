@@ -10,11 +10,11 @@ interface PDFDownloadWrapperProps {
   isGeneratingPDF: boolean;
 }
 
-const PDFDownloadWrapper: React.FC<PDFDownloadWrapperProps> = ({
+const PDFDownloadWrapper = ({
   handlePDFGeneration,
   buttonVariants,
   isGeneratingPDF
-}) => {
+}: PDFDownloadWrapperProps) => {
   const fallbackButton = (
     <motion.a
       href="/resume/Resume JD draft.pdf"
@@ -70,4 +70,5 @@ const PDFDownloadWrapper: React.FC<PDFDownloadWrapperProps> = ({
 };
 
 export default PDFDownloadWrapper;
+
 

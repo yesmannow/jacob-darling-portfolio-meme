@@ -1,35 +1,27 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
-interface SEOHeadProps {
-  title?: string;
-  description?: string;
-  keywords?: string;
-  ogImage?: string;
-  canonical?: string;
-}
+type SEOHeadProps = { title?: string; description?: string; ogImage?: string; canonical?: string; };
 
 /**
  * Dynamic SEO Head Component
  * Updates meta tags, Open Graph, and Twitter Card data for each page
  */
-const SEOHead: React.FC<SEOHeadProps> = ({
-  title,
-  description,
-  keywords,
+const SEOHead = ({
+  title = "Jacob Darling — Marketing Strategist & Systems Architect",
+  description = "Results-driven marketing professional specializing in digital marketing strategies, campaign automation, CRM integration, and analytics-driven strategy with proven ROI.",
   ogImage = "https://jacobdarling.com/og-image.jpg",
   canonical
-}) => {
+}: SEOHeadProps) => {
   const location = useLocation();
 
   useEffect(() => {
     const baseTitle = "Jacob Darling — Marketing Strategist & Systems Architect";
-    const baseDescription = "Results-driven marketing professional specializing in digital marketing strategies, campaign automation, CRM integration, SEO/SEM, and analytics-driven strategy. Proven results: 400+ marketing automations, 70% ticket reduction, 40% conversion increase.";
     const baseKeywords = "marketing strategist, marketing technologist, marketing automation, CRM campaigns, SEO SEM, digital marketing, campaign automation, marketing ROI, Google Ads, Meta Ads, LinkedIn Ads, analytics-driven strategy, cross-functional project management, marketing manager, marketing systems architect";
 
-    const finalTitle = title ? `${title} | ${baseTitle}` : baseTitle;
-    const finalDescription = description || baseDescription;
-    const finalKeywords = keywords || baseKeywords;
+    const finalTitle = title !== baseTitle ? `${title} | ${baseTitle}` : title;
+    const finalDescription = description;
+    const finalKeywords = baseKeywords;
     const finalCanonical = canonical || `https://jacobdarling.com${location.pathname}`;
 
     // Update document title
@@ -78,9 +70,10 @@ const SEOHead: React.FC<SEOHeadProps> = ({
       document.head.appendChild(canonicalLink);
     }
     canonicalLink.setAttribute("href", finalCanonical);
-  }, [title, description, keywords, ogImage, canonical, location.pathname]);
+  }, [title, description, ogImage, canonical, location.pathname]);
 
   return null; // This component doesn't render anything
 };
 
 export default SEOHead;
+

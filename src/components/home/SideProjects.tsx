@@ -50,7 +50,7 @@ const sideProjects = [
   }
 ];
 
-const SideProjects: React.FC = () => {
+const SideProjects = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const carouselRef = useRef<HTMLDivElement>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -304,3 +304,4 @@ const SideProjects: React.FC = () => {
 };
 
 export default SideProjects;
+

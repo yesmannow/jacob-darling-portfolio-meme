@@ -9,7 +9,7 @@ interface OverviewProps {
   summary: string;
 }
 
-const Overview: React.FC<OverviewProps> = ({ role, tools, duration, summary }) => {
+const Overview = ({ role, tools, duration, summary }: OverviewProps) => {
   return (
     <motion.section
       className="overview-section"
@@ -37,3 +37,4 @@ const Overview: React.FC<OverviewProps> = ({ role, tools, duration, summary }) =
 };
 
 export default Overview;
+

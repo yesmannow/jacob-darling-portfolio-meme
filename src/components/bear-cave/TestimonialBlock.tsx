@@ -10,12 +10,12 @@ interface TestimonialBlockProps {
   maxItems?: number;
 }
 
-const TestimonialBlock: React.FC<TestimonialBlockProps> = ({
+const TestimonialBlock = ({
   testimonials,
   className = '',
   layout = 'grid',
   maxItems
-}) => {
+}: TestimonialBlockProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const displayTestimonials = maxItems ? testimonials.slice(0, maxItems) : testimonials;

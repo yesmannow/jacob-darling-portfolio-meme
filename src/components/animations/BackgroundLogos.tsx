@@ -2,7 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import "./BackgroundLogos.css";
 
-const BackgroundLogos: React.FC = () => {
+const BackgroundLogos = () => {
   // Create multiple logo instances with different positions and animations
   const logos = [
     { id: 1, x: "10%", y: "15%", delay: 0, duration: 50, scale: 0.8 },
@@ -104,3 +104,4 @@ const BackgroundLogos: React.FC = () => {
 };
 
 export default BackgroundLogos;
+

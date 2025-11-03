@@ -9,7 +9,7 @@ import "./SideProjects.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const SideProjects: React.FC = () => {
+const SideProjects = () => {
   const heroRef = useRef<HTMLDivElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
   const [activeFilter, setActiveFilter] = useState<string>("All");
@@ -294,3 +294,4 @@ const SideProjects: React.FC = () => {
 };
 
 export default SideProjects;
+

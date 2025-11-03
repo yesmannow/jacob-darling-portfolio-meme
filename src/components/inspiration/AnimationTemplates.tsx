@@ -6,10 +6,11 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 // Particle System Animation
-export const ParticleSystem: React.FC<{ count?: number; className?: string }> = ({
+type ParticleSystemProps = { count?: number; className?: string };
+export const ParticleSystem = ({
   count = 50,
   className = ""
-}) => {
+}: ParticleSystemProps): JSX.Element => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -52,7 +53,8 @@ export const ParticleSystem: React.FC<{ count?: number; className?: string }> = 
 };
 
 // Morphing Shapes Animation
-export const MorphingShapes: React.FC<{ className?: string }> = ({ className = "" }) => {
+type MorphingShapesProps = { className?: string };
+export const MorphingShapes = ({ className = "" }: MorphingShapesProps): JSX.Element => {
   const shapesRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -84,7 +86,10 @@ export const MorphingShapes: React.FC<{ className?: string }> = ({ className = "
 };
 
 // Floating Elements Animation
-export const FloatingElements: React.FC<{
+export const FloatingElements = ({
+  elements,
+  className = ""
+}: {
   elements: Array<{
     content: React.ReactNode;
     delay?: number;
@@ -92,7 +97,7 @@ export const FloatingElements: React.FC<{
     className?: string;
   }>;
   className?: string;
-}> = ({ elements, className = "" }) => {
+}) => {
   return (
     <div className={`absolute inset-0 ${className}`}>
       {elements.map((element, index) => (
@@ -120,19 +125,21 @@ export const FloatingElements: React.FC<{
 };
 
 // Scroll Reveal Animation
-export const ScrollReveal: React.FC<{
+type Dir = "left" | "right" | "up" | "down";
+type ScrollRevealProps = {
   children: React.ReactNode;
-  direction?: 'up' | 'down' | 'left' | 'right';
+  direction?: Dir;
   delay?: number;
   duration?: number;
   className?: string;
-}> = ({
+};
+export const ScrollReveal = ({
   children,
   direction = 'up',
   delay = 0,
   duration = 0.8,
   className = ""
-}) => {
+}: ScrollRevealProps): JSX.Element => {
   const ref = useRef<HTMLDivElement>(null);
   const controls = useAnimation();
 
@@ -194,11 +201,12 @@ export const ScrollReveal: React.FC<{
 };
 
 // Stagger Animation
-export const StaggerContainer: React.FC<{
+type StaggerContainerProps = {
   children: React.ReactNode;
   staggerDelay?: number;
   className?: string;
-}> = ({ children, staggerDelay = 0.1, className = "" }) => {
+};
+export const StaggerContainer = ({ children, staggerDelay = 0.1, className = "" }: StaggerContainerProps): JSX.Element => {
   return (
     <motion.div
       className={className}
@@ -221,10 +229,11 @@ export const StaggerContainer: React.FC<{
 };
 
 // Stagger Item
-export const StaggerItem: React.FC<{
+type StaggerItemProps = {
   children: React.ReactNode;
   className?: string;
-}> = ({ children, className = "" }) => {
+};
+export const StaggerItem = ({ children, className = "" }: StaggerItemProps): JSX.Element => {
   return (
     <motion.div
       className={className}
@@ -246,11 +255,12 @@ export const StaggerItem: React.FC<{
 };
 
 // Magnetic Hover Effect
-export const MagneticHover: React.FC<{
+type MagneticHoverProps = {
   children: React.ReactNode;
   strength?: number;
   className?: string;
-}> = ({ children, strength = 0.3, className = "" }) => {
+};
+export const MagneticHover = ({ children, strength = 0.3, className = "" }: MagneticHoverProps): JSX.Element => {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -296,11 +306,12 @@ export const MagneticHover: React.FC<{
 };
 
 // Parallax Scroll Effect
-export const ParallaxScroll: React.FC<{
+type ParallaxScrollProps = {
   children: React.ReactNode;
   speed?: number;
   className?: string;
-}> = ({ children, speed = 0.5, className = "" }) => {
+};
+export const ParallaxScroll = ({ children, speed = 0.5, className = "" }: ParallaxScrollProps): JSX.Element => {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -326,16 +337,17 @@ export const ParallaxScroll: React.FC<{
 };
 
 // Text Reveal Animation
-export const TextReveal: React.FC<{
+type TextRevealProps = {
   text: string;
   className?: string;
   delay?: number;
-}> = ({ text, className = "", delay = 0 }) => {
+};
+export const TextReveal = ({ text, className = "", delay = 0 }: TextRevealProps): JSX.Element => {
   const words = text.split(' ');
 
   return (
     <div className={className}>
-      {words.map((word, index) => (
+      {words.map((word: string, index: number) => (
         <motion.span
           key={index}
           className="inline-block mr-2"
@@ -356,28 +368,12 @@ export const TextReveal: React.FC<{
 };
 
 // Loading Spinner with Custom Animation
-export const LoadingSpinner: React.FC<{
-  size?: 'sm' | 'md' | 'lg';
-  className?: string;
-}> = ({ size = 'md', className = "" }) => {
-  const sizeClasses = {
-    sm: 'w-4 h-4',
-    md: 'w-8 h-8',
-    lg: 'w-12 h-12'
-  };
-
-  return (
-    <motion.div
-      className={`${sizeClasses[size]} border-2 border-purple-400 border-t-transparent rounded-full ${className}`}
-      animate={{ rotate: 360 }}
-      transition={{
-        duration: 1,
-        repeat: Infinity,
-        ease: "linear"
-      }}
-    />
-  );
-};
+const sizes = { sm: "h-4 w-4", md: "h-6 w-6", lg: "h-8 w-8" } as const;
+type Size = keyof typeof sizes;
+type LoadingSpinnerProps = { size?: Size; className?: string };
+export const LoadingSpinner = ({ size = "md", className }: LoadingSpinnerProps): JSX.Element => (
+  <div className={`${sizes[size]} ${className || ""}`} />
+);
 
 export default {
   ParticleSystem,
@@ -391,3 +387,4 @@ export default {
   TextReveal,
   LoadingSpinner
 };
+

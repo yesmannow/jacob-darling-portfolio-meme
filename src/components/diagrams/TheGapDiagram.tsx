@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import './TheGapDiagram.css';
 
-const TheGapDiagram: React.FC = () => {
+const TheGapDiagram = () => {
   const [hoveredSide, setHoveredSide] = useState<'left' | 'right' | 'bridge' | null>(null);
 
   return (
@@ -180,3 +180,4 @@ const TheGapDiagram: React.FC = () => {
 };
 
 export default TheGapDiagram;
+

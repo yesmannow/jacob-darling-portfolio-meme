@@ -39,11 +39,11 @@ interface AdvancedFilterSystemProps {
   availableTags: string[];
 }
 
-const AdvancedFilterSystem: React.FC<AdvancedFilterSystemProps> = ({
+const AdvancedFilterSystem = ({
   onFilterChange,
   totalItems,
   availableTags
-}) => {
+}: AdvancedFilterSystemProps) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState("All");
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
@@ -302,3 +302,4 @@ const AdvancedFilterSystem: React.FC<AdvancedFilterSystemProps> = ({
 };
 
 export default AdvancedFilterSystem;
+

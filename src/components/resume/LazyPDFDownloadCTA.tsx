@@ -40,11 +40,11 @@ class PDFErrorBoundary extends Component<
 }
 
 
-const LazyPDFDownloadCTA: React.FC<LazyPDFDownloadCTAProps> = ({
+const LazyPDFDownloadCTA = ({
   isGeneratingPDF,
   handlePDFGeneration,
   buttonVariants
-}) => {
+}: LazyPDFDownloadCTAProps) => {
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
@@ -110,3 +110,4 @@ const LazyPDFDownloadCTA: React.FC<LazyPDFDownloadCTAProps> = ({
 };
 
 export default LazyPDFDownloadCTA;
+

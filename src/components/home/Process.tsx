@@ -58,7 +58,7 @@ const timelineVariants = {
   })
 };
 
-const Process: React.FC = () => {
+const Process = () => {
   return (
     <section id="process" className="py-32 bg-gradient-to-b from-black via-gray-950 to-black relative">
       <div className="absolute inset-0 pointer-events-none">
@@ -119,3 +119,4 @@ const Process: React.FC = () => {
 };
 
 export default Process;
+

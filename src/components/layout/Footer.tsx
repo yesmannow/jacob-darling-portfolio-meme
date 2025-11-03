@@ -18,7 +18,7 @@ const SoundCloudIcon = ({ size = 18 }: { size?: number }) => (
   </svg>
 );
 
-const Footer: React.FC = () => (
+const Footer = () => (
   <footer className="main-footer">
     <div className="footer-content">
       <div className="footer-brand">

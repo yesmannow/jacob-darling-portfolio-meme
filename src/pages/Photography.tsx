@@ -11,7 +11,7 @@ import "./Photography.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const Photography: React.FC = () => {
+const Photography = () => {
   const [activeCategory, setActiveCategory] = useState("All");
   const [selectedPhoto, setSelectedPhoto] = useState<PhotoItem | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
@@ -402,3 +402,4 @@ const Photography: React.FC = () => {
 };
 
 export default Photography;
+

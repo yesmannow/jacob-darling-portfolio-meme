@@ -10,14 +10,14 @@ interface AnimatedCounterProps {
   className?: string;
 }
 
-const AnimatedCounter: React.FC<AnimatedCounterProps> = ({
+const AnimatedCounter = ({
   from = 0,
   to,
   duration = 2,
   suffix = "",
   prefix = "",
   className = ""
-}) => {
+}: AnimatedCounterProps) => {
   const ref = useRef<HTMLSpanElement>(null);
   const motionValue = useMotionValue(from);
   const springValue = useSpring(motionValue, {
@@ -47,3 +47,4 @@ const AnimatedCounter: React.FC<AnimatedCounterProps> = ({
 };
 
 export default AnimatedCounter;
+

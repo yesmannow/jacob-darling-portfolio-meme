@@ -39,11 +39,11 @@ interface ModernInspirationGridProps {
   onItemClick?: (item: InspirationItem, index: number) => void;
 }
 
-const ModernInspirationGrid: React.FC<ModernInspirationGridProps> = ({
+const ModernInspirationGrid = ({
   items,
   viewMode,
   onItemClick
-}) => {
+}: ModernInspirationGridProps) => {
   const [selectedItem, setSelectedItem] = useState<{ item: InspirationItem; index: number } | null>(null);
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
   const gridRef = useRef<HTMLDivElement>(null);
@@ -454,3 +454,4 @@ const ModernInspirationGrid: React.FC<ModernInspirationGridProps> = ({
 };
 
 export default ModernInspirationGrid;
+

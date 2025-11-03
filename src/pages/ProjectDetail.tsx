@@ -3,7 +3,7 @@ import { useParams, Link, Navigate } from "react-router-dom";
 import { projects } from "../data/projects";
 import "./ProjectDetail.css";
 
-const ProjectDetail: React.FC = () => {
+const ProjectDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const project = projects.find((p) => p.slug === slug);
 

@@ -15,7 +15,7 @@ const clientLogos = [
   { name: "Heart Logo", src: "/images/logos/HEart Logo.png" },
 ];
 
-const ClientLogos: React.FC = () => {
+const ClientLogos = () => {
   return (
     <section className="client-logos-section">
       <motion.h2
@@ -52,3 +52,4 @@ const ClientLogos: React.FC = () => {
 };
 
 export default ClientLogos;
+

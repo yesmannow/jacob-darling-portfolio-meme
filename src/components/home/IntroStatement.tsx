@@ -5,7 +5,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const IntroStatement: React.FC = () => {
+const IntroStatement = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const textRef = useRef<HTMLParagraphElement>(null);
 
@@ -135,3 +135,4 @@ const IntroStatement: React.FC = () => {
 };
 
 export default IntroStatement;
+

@@ -10,7 +10,7 @@ interface TimelineNavigationProps {
   className?: string;
 }
 
-const TimelineNavigation: React.FC<TimelineNavigationProps> = ({ className = '' }) => {
+const TimelineNavigation = ({ className = '' }: TimelineNavigationProps) => {
   const [activeSection, setActiveSection] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
@@ -201,3 +201,4 @@ const TimelineNavigation: React.FC<TimelineNavigationProps> = ({ className = '' 
 };
 
 export default TimelineNavigation;
+

@@ -10,12 +10,12 @@ interface AnimatedSectionProps {
   delay?: number;
 }
 
-const AnimatedSection: React.FC<AnimatedSectionProps> = ({ 
+const AnimatedSection = ({ 
   children, 
   variants, 
   className = "",
   delay = 0 
-}) => {
+}: AnimatedSectionProps) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 

@@ -8,7 +8,7 @@ import { getFeaturedCaseStudies } from "../../data/caseStudies";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const RedesignedFeaturedWork: React.FC = () => {
+const RedesignedFeaturedWork = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const featuredCaseStudies = getFeaturedCaseStudies().slice(0, 3);
 
@@ -245,3 +245,4 @@ const RedesignedFeaturedWork: React.FC = () => {
 };
 
 export default RedesignedFeaturedWork;
+

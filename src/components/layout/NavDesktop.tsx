@@ -3,7 +3,7 @@ import NavLink from "./NavLink";
 import { NAV_ITEMS, CTA_PRIMARY } from "../../config/nav";
 import "@/styles/header.css";
 
-const NavDesktop: React.FC = () => {
+const NavDesktop = () => {
   return (
     <nav className="bc-nav-desktop" aria-label="Primary navigation">
       <ul className="bc-nav-list" role="menubar">
@@ -67,3 +67,4 @@ const NavDesktop: React.FC = () => {
 };
 
 export default NavDesktop;
+

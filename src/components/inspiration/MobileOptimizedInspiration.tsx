@@ -23,12 +23,12 @@ interface MobileOptimizedInspirationProps {
   availableTags: string[];
 }
 
-const MobileOptimizedInspiration: React.FC<MobileOptimizedInspirationProps> = ({
+const MobileOptimizedInspiration = ({
   items,
   onItemClick,
   onFilterChange,
   availableTags
-}) => {
+}: MobileOptimizedInspirationProps) => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -386,3 +386,4 @@ const MobileOptimizedInspiration: React.FC<MobileOptimizedInspirationProps> = ({
 };
 
 export default MobileOptimizedInspiration;
+

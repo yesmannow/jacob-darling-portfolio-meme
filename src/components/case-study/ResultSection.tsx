@@ -8,7 +8,7 @@ interface ResultSectionProps {
   afterImage: string;
 }
 
-const ResultSection: React.FC<ResultSectionProps> = ({ results, beforeImage, afterImage }) => {
+const ResultSection = ({ results, beforeImage, afterImage }: ResultSectionProps) => {
   return (
     <motion.section
       className="result-section"
@@ -36,3 +36,4 @@ const ResultSection: React.FC<ResultSectionProps> = ({ results, beforeImage, aft
 };
 
 export default ResultSection;
+

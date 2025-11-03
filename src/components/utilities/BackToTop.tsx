@@ -4,7 +4,7 @@ import { ChevronUp } from "lucide-react";
 import { scrollToTop } from "../../utils/scroll";
 import "./BackToTop.css";
 
-const BackToTop: React.FC = () => {
+const BackToTop = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -41,3 +41,4 @@ const BackToTop: React.FC = () => {
 };
 
 export default BackToTop;
+

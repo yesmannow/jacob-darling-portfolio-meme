@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { motion as motionTokens, stagger } from "../../styles/motion-tokens.js";
 import "./Hero.css";
 
-const Hero: React.FC = () => {
+const Hero = () => {
   const [activeWord, setActiveWord] = useState(0);
   const words = ["Strategy", "Automation", "Systems", "Storytelling"];
 

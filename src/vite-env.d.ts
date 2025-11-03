@@ -1,3 +1,3 @@
 /// <reference types="vite/client" />
-
-/// <reference path="./types/custom-modules.d.ts" />
+interface ImportMetaEnv { readonly VITE_API_URL?: string; readonly VITE_SITE_URL?: string; }
+interface ImportMeta { readonly env: ImportMetaEnv; }

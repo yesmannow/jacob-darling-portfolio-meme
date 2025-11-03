@@ -25,7 +25,7 @@ import "./SideProjectDetail.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const SideProjectDetail: React.FC = () => {
+const SideProjectDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const [project, setProject] = useState<any>(null);
   const [lightboxOpen, setLightboxOpen] = useState(false);
@@ -477,3 +477,4 @@ const SideProjectDetail: React.FC = () => {
 };
 
 export default SideProjectDetail;
+

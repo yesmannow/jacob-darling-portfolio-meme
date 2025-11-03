@@ -11,12 +11,12 @@ interface CaseStudyCardProps {
   layout?: 'grid' | 'list';
 }
 
-const CaseStudyCard: React.FC<CaseStudyCardProps> = ({
+const CaseStudyCard = ({
   caseStudy,
   className = '',
   featured = false,
   layout = 'grid'
-}) => {
+}: CaseStudyCardProps) => {
   // Extract primary metric for display
   const primaryMetric = caseStudy.metrics[0];
   const secondaryMetrics = caseStudy.metrics.slice(1, 3);
@@ -184,13 +184,13 @@ interface CaseStudyGridProps {
   featuredFirst?: boolean;
 }
 
-const CaseStudyGrid: React.FC<CaseStudyGridProps> = ({
+const CaseStudyGrid = ({
   caseStudies,
   className = '',
   layout = 'grid',
   maxItems,
   featuredFirst = true
-}) => {
+}: CaseStudyGridProps) => {
   const displayStudies = maxItems ? caseStudies.slice(0, maxItems) : caseStudies;
 
   // Sort featured studies first if requested

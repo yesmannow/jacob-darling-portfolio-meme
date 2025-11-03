@@ -2,7 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import "./FloatingElements.css";
 
-const FloatingElements: React.FC = () => {
+const FloatingElements = () => {
   const createFloatingAnimation = (delay: number, duration: number) => ({
     y: ["0%", "-100%", "0%"],
     x: ["-10%", "10%", "-10%"],
@@ -58,3 +58,4 @@ const FloatingElements: React.FC = () => {
 };
 
 export default FloatingElements;
+

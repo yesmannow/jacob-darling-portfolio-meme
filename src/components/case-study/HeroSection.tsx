@@ -1,13 +1,13 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { motion as motionTokens } from "../../styles/motion-tokens.js";
+import { motion as motionTokens } from "@/styles/motion-tokens.js";
 
 interface HeroSectionProps {
   title: string;
   backgroundImage: string;
 }
 
-const HeroSection: React.FC<HeroSectionProps> = ({ title, backgroundImage }) => {
+const HeroSection = ({ title, backgroundImage }: HeroSectionProps) => {
   return (
     <motion.section
       className="hero-section"
@@ -30,7 +30,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ title, backgroundImage }) => 
           fontSize: 'clamp(2rem, 6vw, 5rem)',
           fontWeight: 800,
           textAlign: 'center'
-        }}
+        } as React.CSSProperties}
       >
         {title}
       </motion.h1>
@@ -39,3 +39,4 @@ const HeroSection: React.FC<HeroSectionProps> = ({ title, backgroundImage }) => 
 };
 
 export default HeroSection;
+

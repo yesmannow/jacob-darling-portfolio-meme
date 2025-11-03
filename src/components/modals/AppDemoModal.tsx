@@ -9,12 +9,12 @@ interface AppDemoModalProps {
   appUrl: string;
 }
 
-const AppDemoModal: React.FC<AppDemoModalProps> = ({
+const AppDemoModal = ({
   isOpen,
   onClose,
   appTitle,
   appUrl
-}) => {
+}: AppDemoModalProps) => {
   // Prevent body scroll when modal is open
   useEffect(() => {
     if (isOpen) {
@@ -112,4 +112,5 @@ const AppDemoModal: React.FC<AppDemoModalProps> = ({
 };
 
 export default AppDemoModal;
+
 

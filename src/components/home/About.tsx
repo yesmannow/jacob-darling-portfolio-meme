@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { motion as motionTokens } from "../../styles/motion-tokens.js";
 import { Link } from "react-router-dom";
 
-const About: React.FC = () => {
+const About = () => {
   return (
     <motion.section
       className="about-section"
@@ -33,3 +33,4 @@ const About: React.FC = () => {
 };
 
 export default About;
+

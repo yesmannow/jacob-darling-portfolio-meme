@@ -10,11 +10,11 @@ interface SplashIntroProps {
   enableAudio?: boolean;
 }
 
-const SplashIntro: React.FC<SplashIntroProps> = ({ 
+const SplashIntro = ({ 
   onComplete, 
   duration = 3000,
   enableAudio = false 
-}) => {
+}: SplashIntroProps) => {
   const [showIntro, setShowIntro] = useState(true);
   const [logoAnimationComplete, setLogoAnimationComplete] = useState(false);
 
@@ -215,3 +215,4 @@ const SplashIntro: React.FC<SplashIntroProps> = ({
 };
 
 export default SplashIntro;
+

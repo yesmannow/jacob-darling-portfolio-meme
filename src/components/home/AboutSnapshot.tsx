@@ -7,7 +7,7 @@ import { ArrowRight, MapPin, Briefcase } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const AboutSnapshot: React.FC = () => {
+const AboutSnapshot = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -210,3 +210,4 @@ const AboutSnapshot: React.FC = () => {
 };
 
 export default AboutSnapshot;
+

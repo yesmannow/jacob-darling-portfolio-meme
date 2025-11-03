@@ -8,12 +8,12 @@ interface NewLogoProps {
   animated?: boolean;
 }
 
-const NewLogo: React.FC<NewLogoProps> = ({ 
+const NewLogo = ({ 
   className = "", 
   size = 48, 
   variant = "header",
   animated = true 
-}) => {
+}: NewLogoProps) => {
   const logoVariants = {
     initial: { opacity: 0, scale: 0.8 },
     animate: { 
@@ -122,3 +122,4 @@ const NewLogo: React.FC<NewLogoProps> = ({
 };
 
 export default NewLogo;
+

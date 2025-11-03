@@ -10,7 +10,7 @@ interface ProcessTimelineProps {
   phases: string[];
 }
 
-const ProcessTimeline: React.FC<ProcessTimelineProps> = ({ phases }) => {
+const ProcessTimeline = ({ phases }: ProcessTimelineProps) => {
   return (
     <motion.section
       className="process-timeline"
@@ -42,3 +42,4 @@ const ProcessTimeline: React.FC<ProcessTimelineProps> = ({ phases }) => {
 };
 
 export default ProcessTimeline;
+

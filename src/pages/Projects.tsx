@@ -90,7 +90,7 @@ const projects: Project[] = [
   }
 ];
 
-const Projects: React.FC = () => {
+const Projects = () => {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   return (

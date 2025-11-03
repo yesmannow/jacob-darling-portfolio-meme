@@ -163,7 +163,7 @@ const tools: Tool[] = [
 
 const categories = ["All", "Design", "Frontend", "Backend", "Marketing", "Automation", "CMS", "Development", "Animation"];
 
-const Toolbox: React.FC = () => {
+const Toolbox = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const [selectedCategory, setSelectedCategory] = React.useState("All");
 
@@ -423,3 +423,4 @@ const Toolbox: React.FC = () => {
 };
 
 export default Toolbox;
+

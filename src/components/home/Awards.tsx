@@ -6,7 +6,7 @@ import { Award, Star, Calendar } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const Awards: React.FC = () => {
+const Awards = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const awardRef = useRef<HTMLDivElement>(null);
 
@@ -252,3 +252,4 @@ const Awards: React.FC = () => {
 };
 
 export default Awards;
+

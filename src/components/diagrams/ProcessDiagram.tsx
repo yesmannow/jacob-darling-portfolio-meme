@@ -118,7 +118,7 @@ const steps: ProcessStep[] = [
   }
 ];
 
-const ProcessDiagram: React.FC = () => {
+const ProcessDiagram = () => {
   const [activeStep, setActiveStep] = useState<string | null>(null);
 
   return (
@@ -230,3 +230,4 @@ const ProcessDiagram: React.FC = () => {
 };
 
 export default ProcessDiagram;
+

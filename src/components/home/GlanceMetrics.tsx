@@ -74,7 +74,7 @@ const metrics: Metric[] = [
   }
 ];
 
-const GlanceMetrics: React.FC = () => {
+const GlanceMetrics = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const [animatedValues, setAnimatedValues] = useState<Record<string, number>>({});
 
@@ -249,3 +249,4 @@ const GlanceMetrics: React.FC = () => {
 };
 
 export default GlanceMetrics;
+

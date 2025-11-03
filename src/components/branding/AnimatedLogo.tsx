@@ -10,12 +10,12 @@ interface AnimatedLogoProps {
   onAnimationComplete?: () => void;
 }
 
-const AnimatedLogo: React.FC<AnimatedLogoProps> = ({ 
+const AnimatedLogo = ({ 
   className = "", 
   size = 48, 
   variant = "header",
   onAnimationComplete 
-}) => {
+}: AnimatedLogoProps) => {
   const logoRef = useRef<SVGSVGElement>(null);
   const [isHovered, setIsHovered] = useState(false);
 
@@ -159,3 +159,4 @@ const AnimatedLogo: React.FC<AnimatedLogoProps> = ({
 };
 
 export default AnimatedLogo;
+

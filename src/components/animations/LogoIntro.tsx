@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import "./LogoIntro.css";
 
-const LogoIntro: React.FC = () => {
+const LogoIntro = () => {
   const [showIntro, setShowIntro] = useState(false);
 
   useEffect(() => {
@@ -122,3 +122,4 @@ const LogoIntro: React.FC = () => {
 };
 
 export default LogoIntro;
+

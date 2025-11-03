@@ -68,11 +68,11 @@ interface ValueBulletsProps {
   maxItems?: number;
 }
 
-const ValueBullets: React.FC<ValueBulletsProps> = ({
+const ValueBullets = ({
   className = '',
   layout = 'grid',
   maxItems
-}) => {
+}: ValueBulletsProps) => {
   const displayBullets = maxItems ? valueBullets.slice(0, maxItems) : valueBullets;
 
   const gridClasses = layout === 'grid'

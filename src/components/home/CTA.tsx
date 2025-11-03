@@ -8,7 +8,7 @@ import "./CTA.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const CTA: React.FC = () => {
+const CTA = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const glowRef = useRef<HTMLDivElement>(null);
 
@@ -139,7 +139,7 @@ const CTA: React.FC = () => {
             whileHover={{
               scale: 1.1,
               rotate: 360,
-              boxShadow: "0 0 40px rgba(59, 130, 246, 0.6)"
+              filter: "drop-shadow(0 0 40px rgba(59, 130, 246, 0.6))"
             }}
             transition={{ duration: 0.8 }}
           >
@@ -178,7 +178,7 @@ const CTA: React.FC = () => {
                 className="group relative px-10 py-5 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold text-lg rounded-full shadow-lg overflow-hidden glow-pulse ripple-effect soft-glint"
                 whileHover={{
                   scale: 1.05,
-                  boxShadow: "0 20px 40px rgba(59, 130, 246, 0.4)"
+                  filter: "drop-shadow(0 20px 40px rgba(59, 130, 246, 0.4))"
                 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -239,3 +239,4 @@ const CTA: React.FC = () => {
 };
 
 export default CTA;
+

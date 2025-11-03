@@ -23,7 +23,7 @@ import { technicalCategories, technologyStacks } from "../data/toolbox";
 import { getTechDescription } from "../data/techDescriptions";
 import "./Toolbox.css";
 
-const Toolbox: React.FC = () => {
+const Toolbox = () => {
   const [expandedCategory, setExpandedCategory] = useState<number | null>(null);
   const [hoveredTech, setHoveredTech] = useState<string | null>(null);
 

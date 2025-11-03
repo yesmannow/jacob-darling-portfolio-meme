@@ -8,7 +8,7 @@ import { getFeaturedCaseStudies } from "../../data/caseStudies";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const FeaturedWork: React.FC = () => {
+const FeaturedWork = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const featuredCaseStudies = getFeaturedCaseStudies().slice(0, 3); // Get top 3 featured
 
@@ -186,3 +186,4 @@ const FeaturedWork: React.FC = () => {
 };
 
 export default FeaturedWork;
+

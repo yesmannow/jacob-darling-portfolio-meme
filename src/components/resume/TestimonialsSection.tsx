@@ -4,7 +4,7 @@ import { Quote, ChevronLeft, ChevronRight, Star, Linkedin } from 'lucide-react';
 import testimonialsData from '../../data/testimonials.json';
 import './TestimonialsSection.css';
 
-const TestimonialsSection: React.FC = () => {
+const TestimonialsSection = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const testimonials = testimonialsData.testimonials;
 
@@ -156,4 +156,5 @@ const TestimonialsSection: React.FC = () => {
 };
 
 export default TestimonialsSection;
+
 

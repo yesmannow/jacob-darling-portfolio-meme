@@ -60,7 +60,7 @@ const skillCategories: SkillCategory[] = [
   }
 ];
 
-const SkillsShowcase: React.FC = () => {
+const SkillsShowcase = () => {
   return (
     <section className="py-20 bg-gradient-to-b from-black via-gray-900/30 to-black relative overflow-hidden">
       {/* Background Elements */}
@@ -162,3 +162,4 @@ const SkillsShowcase: React.FC = () => {
 };
 
 export default SkillsShowcase;
+

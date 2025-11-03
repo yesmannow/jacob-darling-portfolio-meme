@@ -9,7 +9,7 @@ import ResultSection from "../../../components/case-study/ResultSection";
 import CTASection from "../../../components/case-study/CTASection";
 import data from "./data.json";
 
-const BrandingReel: React.FC = () => {
+const BrandingReel = () => {
   return (
     <CaseStudyLayout>
       <HeroSection title={data.title} backgroundImage="./cover.webp" />
@@ -33,3 +33,4 @@ const BrandingReel: React.FC = () => {
 };
 
 export default BrandingReel;
+

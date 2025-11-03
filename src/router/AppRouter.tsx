@@ -32,7 +32,7 @@ const PageLoader = () => (
   </div>
 );
 
-const AppRouter: React.FC = () => {
+const AppRouter = () => {
   const location = useLocation();
 
   // Dynamic SEO based on route

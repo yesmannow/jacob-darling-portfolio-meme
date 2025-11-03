@@ -16,14 +16,14 @@ interface ResponsiveInspirationWrapperProps {
   filters: any;
 }
 
-const ResponsiveInspirationWrapper: React.FC<ResponsiveInspirationWrapperProps> = ({
+const ResponsiveInspirationWrapper = ({
   items,
   onItemClick,
   onFilterChange,
   availableTags,
   selectedImage,
   filters
-}) => {
+}: ResponsiveInspirationWrapperProps) => {
   const isMobile = useMediaQuery('(max-width: 768px)');
   const isTablet = useMediaQuery('(max-width: 1024px)');
   const [isLoading, setIsLoading] = useState(true);
@@ -140,3 +140,4 @@ const ResponsiveInspirationWrapper: React.FC<ResponsiveInspirationWrapperProps> 
 };
 
 export default ResponsiveInspirationWrapper;
+

@@ -11,13 +11,13 @@ interface TechTooltipProps {
   position?: "top" | "bottom" | "left" | "right";
 }
 
-const TechTooltip: React.FC<TechTooltipProps> = ({
+const TechTooltip = ({
   tech,
   description,
   usage,
   show,
   position = "top"
-}) => {
+}: TechTooltipProps) => {
   if (!show) return null;
 
   const positionClasses = {
@@ -72,4 +72,5 @@ const TechTooltip: React.FC<TechTooltipProps> = ({
 };
 
 export default TechTooltip;
+
 

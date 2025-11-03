@@ -11,7 +11,7 @@ import "./Design.css";
 gsap.registerPlugin(ScrollTrigger);
 
 
-const Design: React.FC = () => {
+const Design = () => {
   const [activeCategory, setActiveCategory] = useState("All");
   const [selectedDesign, setSelectedDesign] = useState<DesignItem | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
@@ -446,3 +446,4 @@ const Design: React.FC = () => {
 };
 
 export default Design;
+

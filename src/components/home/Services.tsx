@@ -53,7 +53,7 @@ const services = [
   }
 ];
 
-const Services: React.FC = () => {
+const Services = () => {
   return (
     <section id="services" className="py-32 bg-black relative overflow-hidden">
       <div className="absolute inset-0">
@@ -118,3 +118,4 @@ const Services: React.FC = () => {
 };
 
 export default Services;
+

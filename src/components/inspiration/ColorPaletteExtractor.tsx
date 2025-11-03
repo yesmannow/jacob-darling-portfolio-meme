@@ -29,10 +29,10 @@ interface ColorPaletteExtractorProps {
   onColorsExtracted?: (colors: ColorData[]) => void;
 }
 
-const ColorPaletteExtractor: React.FC<ColorPaletteExtractorProps> = ({
+const ColorPaletteExtractor = ({
   imageUrl,
   onColorsExtracted
-}) => {
+}: ColorPaletteExtractorProps) => {
   const [colors, setColors] = useState<ColorData[]>([]);
   const [isExtracting, setIsExtracting] = useState(false);
   const [copiedColor, setCopiedColor] = useState<string | null>(null);
@@ -307,3 +307,4 @@ const ColorPaletteExtractor: React.FC<ColorPaletteExtractorProps> = ({
 };
 
 export default ColorPaletteExtractor;
+

@@ -23,7 +23,7 @@ interface AwardCardProps {
   index?: number;
 }
 
-const AwardCard: React.FC<AwardCardProps> = ({ award, index = 0 }) => {
+const AwardCard = ({ award, index = 0 }: AwardCardProps) => {
   return (
     <motion.div
       className="relative group"
@@ -160,3 +160,4 @@ const AwardCard: React.FC<AwardCardProps> = ({ award, index = 0 }) => {
 };
 
 export default AwardCard;
+

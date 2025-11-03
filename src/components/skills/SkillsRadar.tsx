@@ -78,7 +78,7 @@ const skillsData: SkillCategory[] = [
   }
 ];
 
-const SkillsRadar: React.FC = () => {
+const SkillsRadar = () => {
   return (
     <section className="skills-radar-section">
       <div className="skills-radar-content">
@@ -224,3 +224,4 @@ const SkillsRadar: React.FC = () => {
 };
 
 export default SkillsRadar;
+

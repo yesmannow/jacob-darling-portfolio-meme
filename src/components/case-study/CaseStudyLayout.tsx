@@ -5,8 +5,9 @@ interface CaseStudyLayoutProps {
   children: React.ReactNode;
 }
 
-const CaseStudyLayout: React.FC<CaseStudyLayoutProps> = ({ children }) => {
+const CaseStudyLayout = ({ children }: CaseStudyLayoutProps) => {
   return <main className="case-study-layout">{children}</main>;
 };
 
 export default CaseStudyLayout;
+

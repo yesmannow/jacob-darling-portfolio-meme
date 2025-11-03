@@ -4,7 +4,7 @@ import { FileText, Mail, ChevronUp } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { scrollToTop } from "../../utils/scroll";
 
-const FloatingActionButtons: React.FC = () => {
+const FloatingActionButtons = () => {
   const [showButtons, setShowButtons] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const location = useLocation();
@@ -98,4 +98,5 @@ const FloatingActionButtons: React.FC = () => {
 };
 
 export default FloatingActionButtons;
+
 

@@ -240,3 +240,4 @@ export const getCaseStudyDiagrams = (slug: string) => {
 
   return diagrams[slug] || [];
 };
+

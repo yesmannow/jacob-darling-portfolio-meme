@@ -8,7 +8,7 @@ interface PerformanceMetrics {
   ttfb: number | null;
 }
 
-const PerformanceMonitor: React.FC = () => {
+const PerformanceMonitor = () => {
   const [metrics, setMetrics] = useState<PerformanceMetrics>({
     lcp: null,
     fid: null,
@@ -133,3 +133,4 @@ const PerformanceMonitor: React.FC = () => {
 };
 
 export default PerformanceMonitor;
+

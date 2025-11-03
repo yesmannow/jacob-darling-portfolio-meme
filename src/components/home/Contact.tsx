@@ -4,7 +4,7 @@ import { motion as motionTokens } from "../../styles/motion-tokens.js";
 import { Link } from "react-router-dom";
 import "./Contact.css";
 
-const Contact: React.FC = () => {
+const Contact = () => {
   return (
     <motion.section
       className="contact-section"
@@ -17,3 +17,4 @@ const Contact: React.FC = () => {
 };
 
 export default Contact;
+

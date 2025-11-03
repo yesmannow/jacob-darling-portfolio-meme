@@ -5,7 +5,7 @@ import { applications } from "../../data/applications";
 import { staggerContainer, staggerItem, cardHover } from "../../utils/animations";
 import "./PlaygroundPreview.css";
 
-const PlaygroundPreview: React.FC = () => {
+const PlaygroundPreview = () => {
   const [hoveredApp, setHoveredApp] = useState<string | null>(null);
   const featuredApps = applications.slice(0, 4);
 

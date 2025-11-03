@@ -2,33 +2,24 @@ import React, { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import "./OptimizedImage.css";
 
-interface OptimizedImageProps {
+type OptimizedImageProps = {
   src: string;
   alt: string;
   className?: string;
-  style?: React.CSSProperties;
-  loading?: "lazy" | "eager";
   onClick?: () => void;
-  sizes?: string;
-  priority?: boolean;
-  quality?: number;
-  placeholder?: "blur" | "empty";
   blurDataURL?: string;
-}
+  loading?: "lazy" | "eager";
+  [key: string]: any;
+};
 
-const OptimizedImage: React.FC<OptimizedImageProps> = ({
+export const OptimizedImage = ({
   src,
   alt,
-  className = "",
-  style = {},
-  loading = "lazy",
   onClick,
-  sizes = "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw",
-  priority = false,
-  quality = 85,
-  placeholder = "empty",
-  blurDataURL
-}) => {
+  blurDataURL,
+  loading = "lazy",
+  ...rest
+}: OptimizedImageProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isInView, setIsInView] = useState(false);
   const [hasError, setHasError] = useState(false);
@@ -51,7 +42,7 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
 
   // Intersection Observer for lazy loading
   useEffect(() => {
-    if (loading === "eager" || priority) {
+    if (loading === "eager" || rest.priority) {
       setIsInView(true);
       return;
     }
@@ -76,7 +67,7 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
     return () => {
       observerRef.current?.disconnect();
     };
-  }, [loading, priority]);
+  }, [loading, rest.priority]);
 
   const handleLoad = () => {
     setIsLoaded(true);
@@ -99,8 +90,8 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
   return (
     <div
       ref={imgRef}
-      className={`optimized-image-container ${className}`}
-      style={style}
+      className={`optimized-image-container ${rest.className || ""}`}
+      style={rest.style}
       onClick={onClick}
     >
       {/* Loading placeholder */}
@@ -131,14 +122,14 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
           <source
             srcSet={sources.avif}
             type="image/avif"
-            sizes={sizes}
+            sizes={rest.sizes || "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"}
           />
 
           {/* WebP source for wider compatibility */}
           <source
             srcSet={sources.webp}
             type="image/webp"
-            sizes={sizes}
+            sizes={rest.sizes || "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"}
           />
 
           {/* Fallback to original format */}
@@ -148,8 +139,9 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
             loading={loading}
             onLoad={handleLoad}
             onError={handleError}
+            onClick={onClick}
             className={`optimized-image${hasError ? " optimized-image--error" : ""}`}
-            sizes={sizes}
+            {...rest}
           />
         </motion.picture>
       )}
@@ -180,7 +172,7 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
           background: "linear-gradient(135deg, rgba(59,130,246,0.1) 0%, rgba(236,72,153,0.1) 100%)",
           opacity: 0,
           pointerEvents: "none"
-        }}
+        } as React.CSSProperties}
         whileHover={{ opacity: 1 }}
         transition={{ duration: 0.3 }}
       />
@@ -189,3 +181,4 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
 };
 
 export default OptimizedImage;
+

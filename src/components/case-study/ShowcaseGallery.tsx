@@ -7,7 +7,7 @@ interface ShowcaseGalleryProps {
   videos?: string[];
 }
 
-const ShowcaseGallery: React.FC<ShowcaseGalleryProps> = ({ images, videos }) => {
+const ShowcaseGallery = ({ images, videos }: ShowcaseGalleryProps) => {
   return (
     <motion.section
       className="showcase-gallery"
@@ -51,3 +51,4 @@ const ShowcaseGallery: React.FC<ShowcaseGalleryProps> = ({ images, videos }) => 
 };
 
 export default ShowcaseGallery;
+

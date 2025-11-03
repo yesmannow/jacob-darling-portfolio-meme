@@ -7,7 +7,7 @@ export const ROICalculator = lazy(() => import('../business/ROICalculator'));
 export const MobileStickyCTA = lazy(() => import('../business/MobileStickyCTA'));
 
 // Loading component for business sections
-export const BusinessSectionLoader: React.FC<{ className?: string }> = ({
+export const BusinessSectionLoader: { className?: string } = ({
   className = "min-h-[400px] flex items-center justify-center"
 }) => (
   <div className={className}>
@@ -19,10 +19,10 @@ export const BusinessSectionLoader: React.FC<{ className?: string }> = ({
 );
 
 // Wrapper component that handles lazy loading with error boundaries
-export const LazyBusinessWrapper: React.FC<{
+export const LazyBusinessWrapper: {
   children: React.ReactNode;
   className?: string;
-}> = ({ children, className }) => {
+} = ({ children, className }) => {
   return (
     <div className={className}>
       <Suspense fallback={<BusinessSectionLoader className={className} />}>

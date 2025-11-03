@@ -8,12 +8,12 @@ interface MagneticButtonProps {
   strength?: number;
 }
 
-const MagneticButton: React.FC<MagneticButtonProps> = ({ 
+const MagneticButton = ({ 
   children, 
   className = "",
   onClick,
   strength = 0.3 
-}) => {
+}: MagneticButtonProps) => {
   const ref = useRef<HTMLButtonElement>(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
 
@@ -47,3 +47,4 @@ const MagneticButton: React.FC<MagneticButtonProps> = ({
 };
 
 export default MagneticButton;
+

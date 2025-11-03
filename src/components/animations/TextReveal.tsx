@@ -8,12 +8,12 @@ interface TextRevealProps {
   duration?: number;
 }
 
-const TextReveal: React.FC<TextRevealProps> = ({ 
+const TextReveal = ({ 
   text, 
   className = "", 
   delay = 0,
   duration = 0.8 
-}) => {
+}: TextRevealProps) => {
   const words = text.split(" ");
   
   const container = {
@@ -64,3 +64,4 @@ const TextReveal: React.FC<TextRevealProps> = ({
 };
 
 export default TextReveal;
+

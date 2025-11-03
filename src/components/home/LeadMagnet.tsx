@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Download, ExternalLink, Sparkles, CheckCircle } from "lucide-react";
 
-const LeadMagnet: React.FC = () => {
+const LeadMagnet = () => {
   return (
     <section id="lead-magnet" className="py-32 bg-gradient-to-b from-black via-gray-950 to-black relative overflow-hidden">
       <div className="absolute inset-0">
@@ -107,3 +107,4 @@ const LeadMagnet: React.FC = () => {
 };
 
 export default LeadMagnet;
+

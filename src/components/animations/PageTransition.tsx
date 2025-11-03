@@ -6,7 +6,7 @@ interface PageTransitionProps {
   children: ReactNode;
 }
 
-const PageTransition: React.FC<PageTransitionProps> = ({ children }) => {
+const PageTransition = ({ children }: PageTransitionProps) => {
   const location = useLocation();
 
   return (

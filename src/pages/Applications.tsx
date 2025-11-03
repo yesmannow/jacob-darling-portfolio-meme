@@ -8,7 +8,7 @@ import BrandIcon from "../components/icons/BrandIcon";
 import "./Applications.css";
 
 
-const Applications: React.FC = () => {
+const Applications = () => {
   const [activeFilter, setActiveFilter] = useState<string>("All");
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [sortBy, setSortBy] = useState<"default" | "name" | "recent">("default");

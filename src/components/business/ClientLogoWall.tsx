@@ -52,7 +52,7 @@ const clientLogos: ClientLogo[] = [
   }
 ];
 
-const ClientLogoWall: React.FC = () => {
+const ClientLogoWall = () => {
   return (
     <section className="client-logo-wall bear-cave-logo-wall py-20 bg-gradient-to-br from-bear-cave-primary-dark/95 to-bear-cave-slate/20">
       <div className="max-w-7xl mx-auto px-6">

@@ -12,7 +12,7 @@ interface HeroProps {
   backgroundImage: string;
 }
 
-const Hero: React.FC<HeroProps> = ({ title, subtitle, backgroundImage }) => {
+const Hero = ({ title, subtitle, backgroundImage }: HeroProps) => {
   const heroRef = React.useRef<HTMLElement>(null);
 
   React.useEffect(() => {
@@ -67,3 +67,4 @@ const Hero: React.FC<HeroProps> = ({ title, subtitle, backgroundImage }) => {
 };
 
 export default Hero;
+

@@ -6,7 +6,7 @@ import { Sparkles, Palette, Camera, Code, Zap, Brain, Layers, Grid3X3 } from "lu
 
 gsap.registerPlugin(ScrollTrigger);
 
-const ModernInspirationHero: React.FC = () => {
+const ModernInspirationHero = () => {
   const heroRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
@@ -238,3 +238,4 @@ const ModernInspirationHero: React.FC = () => {
 };
 
 export default ModernInspirationHero;
+

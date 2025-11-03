@@ -6,7 +6,7 @@ import BrandIcon from "../components/icons/BrandIcon";
 import "./CaseStudies.css";
 import "./CaseStudiesEnhanced.css";
 
-const CaseStudies: React.FC = () => {
+const CaseStudies = () => {
   const [activeFilter, setActiveFilter] = useState<string>("All");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [searchTerm, setSearchTerm] = useState<string>("");
@@ -319,3 +319,4 @@ const CaseStudies: React.FC = () => {
 };
 
 export default CaseStudies;
+

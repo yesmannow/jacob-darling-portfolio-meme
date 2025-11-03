@@ -42,7 +42,7 @@ const CONTACT_REASONS = [
   { value: "other", label: "Other", description: "Something else" }
 ];
 
-const Contact: React.FC = () => {
+const Contact = () => {
   const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
@@ -435,3 +435,4 @@ const Contact: React.FC = () => {
 };
 
 export default Contact;
+

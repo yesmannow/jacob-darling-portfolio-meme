@@ -7,7 +7,7 @@ import AnimatedSection from "../components/animations/AnimatedSection";
 import AppDemoModal from "../components/modals/AppDemoModal";
 import "./ApplicationDetail.css";
 
-const ApplicationDetail: React.FC = () => {
+const ApplicationDetail = () => {
   const { id } = useParams<{ id: string }>();
   const [activeTab, setActiveTab] = useState<'overview' | 'technical' | 'demo'>('overview');
   const [isModalOpen, setIsModalOpen] = useState(false);

@@ -40,12 +40,12 @@ interface BrandIconProps {
  * BrandIcon component that dynamically loads brand/technology icons as SVGs
  * Icons are lazy-loaded to reduce initial bundle size
  */
-const BrandIcon: React.FC<BrandIconProps> = ({
+const BrandIcon = ({
   name,
   size = 24,
   color,
   className = ""
-}) => {
+}: BrandIconProps) => {
   const [iconUrl, setIconUrl] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -128,4 +128,5 @@ const BrandIcon: React.FC<BrandIconProps> = ({
 };
 
 export default BrandIcon;
+
 

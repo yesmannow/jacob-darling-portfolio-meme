@@ -41,7 +41,7 @@ interface SkillsWithProgressProps {
   className?: string;
 }
 
-const SkillsWithProgress: React.FC<SkillsWithProgressProps> = ({ className = '' }) => {
+const SkillsWithProgress = ({ className = '' }: SkillsWithProgressProps) => {
   const categories = Array.from(new Set(skillsWithProgress.map(s => s.category || 'Other')));
 
   return (
@@ -99,4 +99,5 @@ const SkillsWithProgress: React.FC<SkillsWithProgressProps> = ({ className = '' 
 };
 
 export default SkillsWithProgress;
+
 

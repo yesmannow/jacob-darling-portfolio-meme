@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import "../hero/Hero.css";
 
-const Hero: React.FC = () => {
+const Hero = () => {
   const [activeWord, setActiveWord] = useState(0);
   const words = ["Strategy", "Automation", "Systems", "Storytelling"];
 
@@ -115,3 +115,4 @@ const Hero: React.FC = () => {
 };
 
 export default Hero;
+

@@ -7,11 +7,11 @@ interface TiltCardProps {
   tiltAmount?: number;
 }
 
-const TiltCard: React.FC<TiltCardProps> = ({ 
+const TiltCard = ({ 
   children, 
   className = "",
   tiltAmount = 15
-}) => {
+}: TiltCardProps) => {
   const ref = useRef<HTMLDivElement>(null);
 
   const x = useMotionValue(0);
@@ -65,3 +65,4 @@ const TiltCard: React.FC<TiltCardProps> = ({
 };
 
 export default TiltCard;
+

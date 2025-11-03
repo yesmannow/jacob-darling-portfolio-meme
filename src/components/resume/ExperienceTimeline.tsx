@@ -9,7 +9,7 @@ interface ExperienceTimelineProps {
   className?: string;
 }
 
-const ExperienceTimeline: React.FC<ExperienceTimelineProps> = ({ className = '' }) => {
+const ExperienceTimeline = ({ className = '' }: ExperienceTimelineProps) => {
   const timelineRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -286,3 +286,4 @@ const ExperienceTimeline: React.FC<ExperienceTimelineProps> = ({ className = '' 
 };
 
 export default ExperienceTimeline;
+

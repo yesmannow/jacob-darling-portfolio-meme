@@ -6,7 +6,7 @@ interface ChallengeSectionProps {
   challenge: string;
 }
 
-const ChallengeSection: React.FC<ChallengeSectionProps> = ({ challenge }) => {
+const ChallengeSection = ({ challenge }: ChallengeSectionProps) => {
   return (
     <motion.section
       className="challenge-section"
@@ -24,3 +24,4 @@ const ChallengeSection: React.FC<ChallengeSectionProps> = ({ challenge }) => {
 };
 
 export default ChallengeSection;
+

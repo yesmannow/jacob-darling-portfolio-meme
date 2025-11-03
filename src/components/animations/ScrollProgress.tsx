@@ -2,7 +2,7 @@ import React from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
 import "./ScrollProgress.css";
 
-const ScrollProgress: React.FC = () => {
+const ScrollProgress = () => {
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -19,3 +19,4 @@ const ScrollProgress: React.FC = () => {
 };
 
 export default ScrollProgress;
+

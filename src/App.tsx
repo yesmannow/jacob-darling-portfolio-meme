@@ -14,7 +14,7 @@ import "lenis/dist/lenis.css";
 
 const FloatingActionButtons = lazy(() => import("./components/utils/FloatingActionButtons"));
 
-const App: React.FC = () => {
+const App = () => {
   useEffect(() => {
     // Initialize analytics
     initAnalytics();
@@ -78,3 +78,4 @@ const App: React.FC = () => {
 };
 
 export default App;
+

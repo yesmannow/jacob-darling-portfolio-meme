@@ -6,7 +6,7 @@ interface HeroSectionProps {
   className?: string;
 }
 
-const HeroSection: React.FC<HeroSectionProps> = ({ className = '' }) => {
+const HeroSection = ({ className = '' }: HeroSectionProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,

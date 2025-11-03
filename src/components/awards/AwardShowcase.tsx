@@ -5,7 +5,7 @@ import AwardCard from './AwardCard';
 import { motionVariants } from '../../utils/narrativeMotion';
 import awardsData from '../../data/awards.json';
 
-const AwardShowcase: React.FC = () => {
+const AwardShowcase = () => {
   return (
     <section className="relative py-20 bg-black text-white overflow-hidden">
       {/* Background Effects */}
@@ -149,3 +149,4 @@ const AwardShowcase: React.FC = () => {
 };
 
 export default AwardShowcase;
+

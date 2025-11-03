@@ -9,7 +9,7 @@ import ResultSection from "../../../components/case-study/ResultSection";
 import CTASection from "../../../components/case-study/CTASection";
 import data from "./data.json";
 
-const CinematicPortfolio: React.FC = () => {
+const CinematicPortfolio = () => {
   return (
     <CaseStudyLayout>
       <HeroSection title={data.title} backgroundImage="./cover.webp" />
@@ -33,3 +33,4 @@ const CinematicPortfolio: React.FC = () => {
 };
 
 export default CinematicPortfolio;
+

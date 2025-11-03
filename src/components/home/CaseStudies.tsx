@@ -10,7 +10,7 @@ const caseStudies = [
   { slug: "branding-reel", title: "Branding Reel", cover: "./case-studies/branding-reel/cover.webp" },
 ];
 
-const CaseStudies: React.FC = () => {
+const CaseStudies = () => {
   const navigate = useNavigate();
 
   return (
@@ -38,3 +38,4 @@ const CaseStudies: React.FC = () => {
 };
 
 export default CaseStudies;
+

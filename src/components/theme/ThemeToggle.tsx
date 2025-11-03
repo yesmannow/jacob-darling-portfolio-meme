@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Sun, Moon, Monitor, Briefcase, Code } from 'lucide-react';
 import { useTheme } from './ThemeProvider';
 
-const ThemeToggle: React.FC = () => {
+const ThemeToggle = () => {
   const { theme, brand, setTheme, setBrand } = useTheme();
 
   const themeIcons = {
@@ -87,4 +87,5 @@ const ThemeToggle: React.FC = () => {
 };
 
 export default ThemeToggle;
+
 

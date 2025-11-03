@@ -450,3 +450,4 @@ export const ResumePDF = () => {
     </Document>
   );
 };
+

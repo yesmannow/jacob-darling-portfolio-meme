@@ -19,7 +19,7 @@ interface ROIResults {
   paybackPeriod: number;
 }
 
-const ROICalculator: React.FC = () => {
+const ROICalculator = () => {
   const [inputs, setInputs] = useState<ROIInputs>({
     monthlyRevenue: 50000,
     marketingSpend: 10000,

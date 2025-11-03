@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Play, Pause, Volume2, VolumeX } from 'lucide-react';
 import AnimatedSection from '../animations/AnimatedSection';
 
-const VideoIntroduction: React.FC = () => {
+const VideoIntroduction = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [hasStarted, setHasStarted] = useState(false);

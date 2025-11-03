@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { MessageCircle, X, Phone, Mail } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-const MobileStickyCTA: React.FC = () => {
+const MobileStickyCTA = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
 

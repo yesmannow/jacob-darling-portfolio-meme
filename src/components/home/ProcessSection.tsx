@@ -6,7 +6,7 @@ import { Search, Lightbulb, Code, Rocket, ArrowRight } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const ProcessSection: React.FC = () => {
+const ProcessSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
 
   const processSteps = [
@@ -289,3 +289,4 @@ const ProcessSection: React.FC = () => {
 };
 
 export default ProcessSection;
+

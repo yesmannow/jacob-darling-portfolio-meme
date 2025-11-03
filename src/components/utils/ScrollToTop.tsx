@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { refreshLenis } from '../../utils/motion-sync';
 import { scrollToTop } from '../../utils/scroll';
 
-const ScrollToTop: React.FC = () => {
+const ScrollToTop = () => {
   const { pathname } = useLocation();
 
   useEffect(() => {
@@ -26,3 +26,4 @@ const ScrollToTop: React.FC = () => {
 };
 
 export default ScrollToTop;
+

@@ -7,7 +7,7 @@ import { Download, FileText, Sparkles, ArrowRight, CheckCircle } from "lucide-re
 
 gsap.registerPlugin(ScrollTrigger);
 
-const ResumeDownload: React.FC = () => {
+const ResumeDownload = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
 
@@ -173,4 +173,5 @@ const ResumeDownload: React.FC = () => {
 };
 
 export default ResumeDownload;
+
 

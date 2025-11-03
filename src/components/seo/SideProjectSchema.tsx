@@ -16,7 +16,7 @@ interface SideProjectSchemaProps {
   };
 }
 
-const SideProjectSchema: React.FC<SideProjectSchemaProps> = ({ project }) => {
+const SideProjectSchema = ({ project }: SideProjectSchemaProps) => {
   const baseUrl = "https://jacobdarling.com";
   const projectUrl = `${baseUrl}/side-projects/${project.slug}`;
   const imageUrl = `${baseUrl}${project.images[0]}`;
@@ -130,3 +130,4 @@ const SideProjectSchema: React.FC<SideProjectSchemaProps> = ({ project }) => {
 };
 
 export default SideProjectSchema;
+

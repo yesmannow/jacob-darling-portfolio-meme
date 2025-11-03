@@ -51,7 +51,7 @@ const tools: ToolNode[] = [
   }
 ];
 
-const ToolboxEcosystem: React.FC = () => {
+const ToolboxEcosystem = () => {
   const [activeNode, setActiveNode] = useState<string | null>(null);
   const [hoveredNode, setHoveredNode] = useState<string | null>(null);
 
@@ -309,3 +309,4 @@ const ToolboxEcosystem: React.FC = () => {
 };
 
 export default ToolboxEcosystem;
+

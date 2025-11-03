@@ -74,7 +74,7 @@ const bioImages = [
   }
 ];
 
-const About: React.FC = () => {
+const About = () => {
   const [expandedNode, setExpandedNode] = useState<string | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 

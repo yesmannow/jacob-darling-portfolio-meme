@@ -7,11 +7,11 @@ interface ParallaxSectionProps {
   className?: string;
 }
 
-const ParallaxSection: React.FC<ParallaxSectionProps> = ({ 
+const ParallaxSection = ({ 
   children, 
   speed = 0.5,
   className = "" 
-}) => {
+}: ParallaxSectionProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -30,3 +30,4 @@ const ParallaxSection: React.FC<ParallaxSectionProps> = ({
 };
 
 export default ParallaxSection;
+

@@ -10,7 +10,7 @@ interface LazyPDFDownloadProps {
   setIsGeneratingPDF: (value: boolean) => void;
 }
 
-const LazyPDFDownload: React.FC<LazyPDFDownloadProps> = ({ isGeneratingPDF, setIsGeneratingPDF }) => {
+const LazyPDFDownload = ({ isGeneratingPDF, setIsGeneratingPDF }: LazyPDFDownloadProps) => {
   return (
     <Suspense
       fallback={
@@ -35,3 +35,4 @@ const LazyPDFDownload: React.FC<LazyPDFDownloadProps> = ({ isGeneratingPDF, setI
 };
 
 export default LazyPDFDownload;
+

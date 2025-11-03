@@ -23,7 +23,7 @@ const testimonials = [
   }
 ];
 
-const Testimonials: React.FC = () => {
+const Testimonials = () => {
   return (
     <section id="testimonials" className="py-32 bg-black relative overflow-hidden">
       <div className="absolute inset-0">
@@ -78,3 +78,4 @@ const Testimonials: React.FC = () => {
 };
 
 export default Testimonials;
+

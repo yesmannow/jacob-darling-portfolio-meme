@@ -9,11 +9,11 @@ interface LogoFullProps {
   showTagline?: boolean;
 }
 
-const LogoFull: React.FC<LogoFullProps> = ({ 
+const LogoFull = ({ 
   className = "", 
   animated = false,
   showTagline = false 
-}) => {
+}: LogoFullProps) => {
   const textVariants = {
     hidden: { opacity: 0, y: 10 },
     visible: {
@@ -56,3 +56,4 @@ const LogoFull: React.FC<LogoFullProps> = ({
 };
 
 export default LogoFull;
+

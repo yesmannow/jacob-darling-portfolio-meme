@@ -7,11 +7,11 @@ interface StaggerGridProps {
   staggerDelay?: number;
 }
 
-const StaggerGrid: React.FC<StaggerGridProps> = ({ 
+const StaggerGrid = ({ 
   children, 
   className = "",
   staggerDelay = 0.1 
-}) => {
+}: StaggerGridProps) => {
   const container = {
     hidden: { opacity: 0 },
     show: {
@@ -58,3 +58,4 @@ const StaggerGrid: React.FC<StaggerGridProps> = ({
 };
 
 export default StaggerGrid;
+

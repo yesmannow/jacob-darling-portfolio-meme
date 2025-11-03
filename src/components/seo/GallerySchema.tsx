@@ -15,12 +15,12 @@ interface GallerySchemaProps {
   galleryDescription: string;
 }
 
-const GallerySchema: React.FC<GallerySchemaProps> = ({
+const GallerySchema = ({
   type,
   images,
   galleryTitle,
   galleryDescription
-}) => {
+}: GallerySchemaProps) => {
   const baseUrl = "https://jacobdarling.com";
 
   // Create ImageGallery structured data
@@ -160,3 +160,4 @@ const GallerySchema: React.FC<GallerySchemaProps> = ({
 };
 
 export default GallerySchema;
+

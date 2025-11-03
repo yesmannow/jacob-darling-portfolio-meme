@@ -4,15 +4,10 @@
     "module": "ESNext",
     "moduleResolution": "node",
     "jsx": "react-jsx",
-
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
-
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
-    "isolatedModules": true,
-
     "types": ["vite/client", "node"],
     "typeRoots": ["node_modules/@types", "node_modules"],
     "baseUrl": ".",

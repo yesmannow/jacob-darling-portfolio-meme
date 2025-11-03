@@ -2,13 +2,19 @@ import React, { useEffect, useState, useCallback, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 // Virtual Scrolling for Large Lists
-export const VirtualScroll: React.FC<{
+export const VirtualScroll = ({
+  items,
+  itemHeight,
+  containerHeight,
+  renderItem,
+  className = ""
+}: {
   items: any[];
   itemHeight: number;
   containerHeight: number;
   renderItem: (item: any, index: number) => React.ReactNode;
   className?: string;
-}> = ({ items, itemHeight, containerHeight, renderItem, className = "" }) => {
+}) => {
   const [scrollTop, setScrollTop] = useState(0);
   const [containerRef, setContainerRef] = useState<HTMLDivElement | null>(null);
 
@@ -60,20 +66,20 @@ export const VirtualScroll: React.FC<{
 };
 
 // Image Lazy Loading with Intersection Observer
-export const LazyImage: React.FC<{
-  src: string;
-  alt: string;
-  className?: string;
-  placeholder?: string;
-  onLoad?: () => void;
-  onError?: () => void;
-}> = ({
+export const LazyImage = ({
   src,
   alt,
   className = "",
   placeholder = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjNmNGY2Ii8+PC9zdmc+",
   onLoad,
   onError
+}: {
+  src: string;
+  alt: string;
+  className?: string;
+  placeholder?: string;
+  onLoad?: () => void;
+  onError?: () => void;
 }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isInView, setIsInView] = useState(false);
@@ -231,18 +237,18 @@ export const usePerformanceMonitor = () => {
 };
 
 // Optimized Grid Component
-export const OptimizedGrid: React.FC<{
-  items: any[];
-  renderItem: (item: any, index: number) => React.ReactNode;
-  columns?: number;
-  gap?: number;
-  className?: string;
-}> = ({
+export const OptimizedGrid = ({
   items,
   renderItem,
   columns = 3,
   gap = 16,
   className = ""
+}: {
+  items: any[];
+  renderItem: (item: any, index: number) => React.ReactNode;
+  columns?: number;
+  gap?: number;
+  className?: string;
 }) => {
   const [visibleItems, setVisibleItems] = useState(items.slice(0, 20));
   const [isLoading, setIsLoading] = useState(false);
@@ -306,11 +312,15 @@ export const OptimizedGrid: React.FC<{
 };
 
 // Image Preloader
-export const ImagePreloader: React.FC<{
+export const ImagePreloader = ({
+  images,
+  onComplete,
+  onProgress
+}: {
   images: string[];
   onComplete?: () => void;
   onProgress?: (progress: number) => void;
-}> = ({ images, onComplete, onProgress }) => {
+}) => {
   const [loadedCount, setLoadedCount] = useState(0);
 
   useEffect(() => {
@@ -340,10 +350,10 @@ export const ImagePreloader: React.FC<{
 };
 
 // Scroll Performance Optimizer
-export const ScrollOptimizer: React.FC<{
+export const ScrollOptimizer: {
   children: React.ReactNode;
   throttleMs?: number;
-}> = ({ children, throttleMs = 16 }) => {
+} = ({ children, throttleMs = 16 }) => {
   const [scrollY, setScrollY] = useState(0);
   const [isScrolling, setIsScrolling] = useState(false);
 
@@ -401,3 +411,4 @@ export default {
   ImagePreloader,
   ScrollOptimizer
 };
+

@@ -12,7 +12,7 @@ type NavLinkProps = {
   onClick?: () => void;
 };
 
-const NavLink: React.FC<NavLinkProps> = ({ href, children, className, trackingId, external, ariaHasPopup, ariaExpanded, onClick }) => {
+const NavLink = ({ href, children, className, trackingId, external, ariaHasPopup, ariaExpanded, onClick }: NavLinkProps) => {
   const location = useLocation();
   const isActive = !external && (location.pathname === href || (href !== "/" && location.pathname.startsWith(href)));
 
@@ -49,3 +49,4 @@ const NavLink: React.FC<NavLinkProps> = ({ href, children, className, trackingId
 };
 
 export default NavLink;
+

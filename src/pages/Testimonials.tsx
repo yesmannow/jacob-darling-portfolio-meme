@@ -7,7 +7,7 @@ import { testimonials, getFeaturedTestimonials } from "../data/testimonials";
 import { fadeInUp } from "../utils/animations";
 import "./Testimonials.css";
 
-const Testimonials: React.FC = () => {
+const Testimonials = () => {
   const [showAll, setShowAll] = useState(false);
   const featuredTestimonials = getFeaturedTestimonials();
   const displayedTestimonials = showAll ? testimonials : featuredTestimonials;

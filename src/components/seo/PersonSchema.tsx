@@ -1,6 +1,6 @@
 import React from "react";
 
-const PersonSchema: React.FC = () => {
+const PersonSchema = () => {
   const schemaData = {
     "@context": "https://schema.org",
     "@type": "Person",
@@ -55,3 +55,4 @@ const PersonSchema: React.FC = () => {
 };
 
 export default PersonSchema;
+

@@ -15,7 +15,7 @@ const statsData: Stat[] = [
   { value: 70, suffix: "%", label: "Support Ticket Reduction" },
 ];
 
-const AnimatedCounter: React.FC<{ value: number; suffix: string }> = ({ value, suffix }) => {
+const AnimatedCounter: { value: number; suffix: string } = ({ value, suffix }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const motionValue = useMotionValue(0);
@@ -42,7 +42,7 @@ const AnimatedCounter: React.FC<{ value: number; suffix: string }> = ({ value, s
   );
 };
 
-const Stats: React.FC = () => {
+const Stats = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 

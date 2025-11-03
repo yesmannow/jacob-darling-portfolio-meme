@@ -18,14 +18,14 @@ interface LightboxProps {
   onPrevious: () => void;
 }
 
-const Lightbox: React.FC<LightboxProps> = ({
+const Lightbox = ({
   isOpen,
   images,
   currentIndex,
   onClose,
   onNext,
   onPrevious
-}) => {
+}: LightboxProps) => {
   const currentImage = images[currentIndex];
 
   // Keyboard navigation
@@ -266,3 +266,4 @@ const Lightbox: React.FC<LightboxProps> = ({
 };
 
 export default Lightbox;
+

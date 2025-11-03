@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { motion, useMotionValue, useTransform, useSpring } from "framer-motion";
 import { getLenis } from "../../utils/motion-sync";
 
-const ScrollProgress: React.FC = () => {
+const ScrollProgress = () => {
   const scrollProgress = useMotionValue(0);
   const scaleY = useSpring(scrollProgress, {
     stiffness: 100,
@@ -91,3 +91,4 @@ const ScrollProgress: React.FC = () => {
 };
 
 export default ScrollProgress;
+

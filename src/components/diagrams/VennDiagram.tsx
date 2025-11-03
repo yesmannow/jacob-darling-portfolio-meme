@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import './VennDiagram.css';
 
-const VennDiagram: React.FC = () => {
+const VennDiagram = () => {
   const [hoveredCircle, setHoveredCircle] = useState<'strategy' | 'systems' | 'overlap' | null>(null);
 
   return (
@@ -222,3 +222,4 @@ const VennDiagram: React.FC = () => {
 };
 
 export default VennDiagram;
+

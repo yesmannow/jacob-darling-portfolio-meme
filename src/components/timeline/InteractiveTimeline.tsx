@@ -31,7 +31,7 @@ const getIcon = (role: string): React.ReactNode => {
   return <Shield className="w-6 h-6" />;
 };
 
-const InteractiveTimeline: React.FC = () => {
+const InteractiveTimeline = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
 
@@ -129,4 +129,5 @@ const InteractiveTimeline: React.FC = () => {
 };
 
 export default InteractiveTimeline;
+
 

@@ -20,7 +20,7 @@ import MobileStickyCTA from "../components/business/MobileStickyCTA";
 // Lazy load additional heavy components for better performance
 const VideoIntroduction = lazy(() => import("../components/business/VideoIntroduction"));
 
-const HomePage: React.FC = () => {
+const HomePage = () => {
   useEffect(() => {
     // Set Bear Cave Marketing theme
     document.documentElement.setAttribute('data-brand', 'bear-cave');
@@ -84,3 +84,4 @@ const HomePage: React.FC = () => {
 };
 
 export default HomePage;
+

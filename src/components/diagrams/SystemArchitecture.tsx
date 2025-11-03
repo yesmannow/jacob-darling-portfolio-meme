@@ -26,12 +26,12 @@ interface SystemArchitectureProps {
   description?: string;
 }
 
-const SystemArchitecture: React.FC<SystemArchitectureProps> = ({
+const SystemArchitecture = ({
   nodes,
   connections,
   title,
   description
-}) => {
+}: SystemArchitectureProps) => {
   const [hoveredNode, setHoveredNode] = React.useState<string | null>(null);
 
   const getNodeById = (id: string) => nodes.find(n => n.id === id);
@@ -209,3 +209,4 @@ const SystemArchitecture: React.FC<SystemArchitectureProps> = ({
 };
 
 export default SystemArchitecture;
+

@@ -9,12 +9,12 @@ interface TagFilterProps {
   colorMap?: Record<string, string>;
 }
 
-const TagFilter: React.FC<TagFilterProps> = ({
+const TagFilter = ({
   tags,
   activeTag,
   onTagChange,
   colorMap = {}
-}) => {
+}: TagFilterProps) => {
   const defaultColors = {
     "All": "#667eea",
     "landscape": "#4facfe",
@@ -80,3 +80,4 @@ const TagFilter: React.FC<TagFilterProps> = ({
 };
 
 export default TagFilter;
+

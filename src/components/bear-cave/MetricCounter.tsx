@@ -76,12 +76,12 @@ interface AnimatedCounterProps {
   prefix?: string;
 }
 
-const AnimatedCounter: React.FC<AnimatedCounterProps> = ({
+const AnimatedCounter = ({
   end,
   duration = 2,
   suffix = '',
   prefix = ''
-}) => {
+}: AnimatedCounterProps) => {
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref, { once: true });
@@ -128,12 +128,12 @@ interface MetricCounterProps {
   animated?: boolean;
 }
 
-const MetricCounter: React.FC<MetricCounterProps> = ({
+const MetricCounter = ({
   className = '',
   layout = 'grid',
   maxItems,
   animated = true
-}) => {
+}: MetricCounterProps) => {
   const displayMetrics = maxItems ? metrics.slice(0, maxItems) : metrics;
 
   const gridClasses = layout === 'grid'

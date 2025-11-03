@@ -81,7 +81,7 @@ const renderRichSection = (content?: string | { paragraphs?: string[]; bullets?:
   return null;
 };
 
-const CaseStudyDetail: React.FC = () => {
+const CaseStudyDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const caseStudy = slug ? getCaseStudyBySlug(slug) : undefined;
   const diagrams = slug ? getCaseStudyDiagrams(slug) : [];
@@ -266,3 +266,4 @@ const CaseStudyDetail: React.FC = () => {
 };
 
 export default CaseStudyDetail;
+

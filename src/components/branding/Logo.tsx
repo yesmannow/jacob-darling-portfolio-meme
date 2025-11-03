@@ -7,7 +7,7 @@ interface LogoProps {
   size?: number;
 }
 
-const Logo: React.FC<LogoProps> = ({ className = "", animated = true, size = 48 }) => {
+const Logo = ({ className = "", animated = true, size = 48 }: LogoProps) => {
   const pathVariants = {
     hidden: {
       opacity: 0,
@@ -110,3 +110,4 @@ const Logo: React.FC<LogoProps> = ({ className = "", animated = true, size = 48 
 };
 
 export default Logo;
+

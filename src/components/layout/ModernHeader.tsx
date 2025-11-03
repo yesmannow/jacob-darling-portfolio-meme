@@ -34,7 +34,7 @@ interface NavigationGroup {
   items: DropdownItem[];
 }
 
-const ModernHeader: React.FC = () => {
+const ModernHeader = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [visible, setVisible] = useState(true);
@@ -398,3 +398,4 @@ const ModernHeader: React.FC = () => {
 };
 
 export default ModernHeader;
+

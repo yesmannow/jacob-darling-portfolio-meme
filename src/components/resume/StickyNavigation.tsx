@@ -37,7 +37,7 @@ const getIcon = (type: NavItem['iconType']) => {
   }
 };
 
-const StickyNavigation: React.FC = () => {
+const StickyNavigation = () => {
   const [activeSection, setActiveSection] = useState('summary');
   const [isVisible, setIsVisible] = useState(false);
 
@@ -172,4 +172,5 @@ const StickyNavigation: React.FC = () => {
 };
 
 export default StickyNavigation;
+
 

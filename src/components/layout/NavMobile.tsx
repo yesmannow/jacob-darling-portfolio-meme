@@ -8,7 +8,7 @@ type NavMobileProps = {
   onClose: () => void;
 };
 
-const NavMobile: React.FC<NavMobileProps> = ({ open, onClose }) => {
+const NavMobile = ({ open, onClose }: NavMobileProps) => {
   const drawerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -107,3 +107,4 @@ const NavMobile: React.FC<NavMobileProps> = ({ open, onClose }) => {
 };
 
 export default NavMobile;
+

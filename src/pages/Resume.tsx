@@ -19,7 +19,7 @@ const AwardsSection = lazy(() => import("../components/resume/AwardsSection"));
 const SkillsWithProgress = lazy(() => import("../components/resume/SkillsWithProgress"));
 const TestimonialsSection = lazy(() => import("../components/resume/TestimonialsSection"));
 
-const Resume: React.FC = () => {
+const Resume = () => {
   const [activeSection, setActiveSection] = useState<string>("experience");
   const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
   const [cinematicMode, setCinematicMode] = useState(true);
@@ -665,3 +665,4 @@ const Resume: React.FC = () => {
 };
 
 export default Resume;
+

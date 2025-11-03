@@ -8,7 +8,7 @@ interface CTASectionProps {
   nextProjectSlug: string;
 }
 
-const CTASection: React.FC<CTASectionProps> = ({ nextProjectSlug }) => {
+const CTASection = ({ nextProjectSlug }: CTASectionProps) => {
   return (
     <motion.section
       className="cta-section"
@@ -24,3 +24,4 @@ const CTASection: React.FC<CTASectionProps> = ({ nextProjectSlug }) => {
 };
 
 export default CTASection;
+
