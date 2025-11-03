@@ -1,3 +1,9 @@
+.case-study-detail-modern {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #0a0a0a 0%, #0d0d0d 30%, #0a0a0a 70%, #0d0d0d 100%);
+  color: #ffffff;
+}
+
 .detail-hero {
   --hero-bg-color: #88ABF2;
 }

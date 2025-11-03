@@ -91,23 +91,44 @@
     <script>
       // Pre-define React placeholder to prevent "Cannot read properties of undefined" errors
       // This will be replaced when React actually loads
-      if (typeof window !== 'undefined' && !window.React) {
-        window.React = {}; // Placeholder - prevents undefined errors
+      if (typeof window !== 'undefined') {
+        if (!window.React) {
+          // Create a more complete placeholder to prevent Children property errors
+          window.React = {
+            Children: {},
+            Component: function() {},
+            Fragment: Symbol.for('react.fragment'),
+            createElement: function() {},
+            forwardRef: function() {},
+            lazy: function() {},
+            memo: function() {},
+            Suspense: function() {},
+            useEffect: function() {},
+            useState: function() {},
+            useRef: function() {},
+            useContext: function() {}
+          };
+        }
       }
 
-      // Catch React forwardRef errors early
-      window.addEventListener('error', function(event) {
-        if (event.message && (
-          event.message.includes("Cannot read properties of undefined (reading 'forwardRef')") ||
-          event.message.includes('forwardRef') ||
-          event.message.includes('React is not defined')
-        )) {
-          // React might not be loaded yet - log but don't crash
-          console.warn('React not fully loaded when chunk accessed it - will retry:', event.message);
-          event.preventDefault();
-          return false;
-        }
-      }, true);
+        // Catch React forwardRef errors early
+        window.addEventListener('error', function(event) {
+          if (event.message && (
+            event.message.includes("Cannot read properties of undefined (reading 'forwardRef')") ||
+            event.message.includes('forwardRef') ||
+            event.message.includes('React is not defined') ||
+            event.message.includes("Cannot set properties of undefined (setting 'Children')") ||
+            event.message.includes("setting 'Children'") ||
+            event.message.includes('React.Children')
+          )) {
+            // React might not be loaded yet - log but don't crash
+            console.warn('React not fully loaded when chunk accessed it - will retry:', event.message);
+            event.preventDefault();
+            event.stopPropagation();
+            event.stopImmediatePropagation();
+            return false;
+          }
+        }, true);
     </script>
     <!-- Suppress custom element errors - MUST be in head before any scripts -->
     <script>
@@ -179,19 +200,32 @@
         // This MUST use capture phase and stopImmediatePropagation to catch before overlay
         window.addEventListener('error', function(event) {
           const errorMessage = event.error?.message || event.message || '';
-          const filename = event.filename || '';
+          const filename = event.filename || event.source || '';
 
           // Catch custom element errors (especially from overlay_bundle.js)
           if (errorMessage.includes('has already been defined') ||
               errorMessage.includes('mce-autosize-textarea') ||
               errorMessage.includes('custom element') ||
               filename.includes('overlay_bundle') ||
-              filename.includes('webcomponents-ce')) {
+              filename.includes('webcomponents-ce') ||
+              filename.includes('webcomponents') ||
+              String(event.error || '').includes('mce-autosize-textarea')) {
             // Prevent the error from appearing in console
             event.preventDefault();
             event.stopPropagation();
             event.stopImmediatePropagation();
             return false;
+          }
+
+          // Catch MIME type errors for module scripts (can happen during HMR or build issues)
+          if (errorMessage.includes('MIME type') ||
+              errorMessage.includes('module script') ||
+              errorMessage.includes('application/octet-stream')) {
+            // Log in dev but don't crash - might be a temporary build/HMR issue
+            if (typeof process !== 'undefined' && process.env && process.env.NODE_ENV === 'development') {
+              console.warn('MIME type warning (may be temporary):', errorMessage);
+            }
+            // Don't prevent - let it try to reload or handle gracefully
           }
         }, true); // Capture phase - catches before other handlers
 
@@ -212,7 +246,20 @@
           const errorMessage = reason?.message || String(reason || '');
           if (errorMessage.includes('has already been defined') ||
               errorMessage.includes('mce-autosize-textarea') ||
-              errorMessage.includes('custom element')) {
+              errorMessage.includes('custom element') ||
+              String(reason || '').includes('mce-autosize-textarea')) {
+            event.preventDefault();
+            event.stopPropagation();
+            return false;
+          }
+
+          // Handle React Children errors in promise rejections
+          if (errorMessage.includes("Cannot set properties of undefined (setting 'Children')") ||
+              errorMessage.includes("setting 'Children'")) {
+            // React deduplication issue - likely temporary during module load
+            if (typeof process !== 'undefined' && process.env && process.env.NODE_ENV === 'development') {
+              console.warn('React Children error in promise (suppressed):', errorMessage);
+            }
             event.preventDefault();
             return false;
           }

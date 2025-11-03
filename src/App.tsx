@@ -4,6 +4,7 @@ import ModernHeader from "./components/layout/ModernHeader";
 import Footer from "./components/layout/Footer";
 import ScrollToTop from "./components/utils/ScrollToTop";
 import BackToTop from "./components/utilities/BackToTop";
+import FloatingActionButtons from "./components/utils/FloatingActionButtons";
 import PersonSchema from "./components/seo/PersonSchema";
 import PerformanceMonitor from "./components/utils/PerformanceMonitor";
 import ErrorBoundary from "./components/ErrorBoundary";
@@ -67,6 +68,7 @@ const App: React.FC = () => {
           <ScrollToTop />
           <BackToTop />
           <ModernHeader />
+          <FloatingActionButtons />
           <AppRouter />
           <Footer />
         </div>

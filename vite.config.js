@@ -61,12 +61,11 @@ export default defineConfig({
       output: {
         manualChunks: (id) => {
           // Core React libraries - MUST be separate and load first
-          if (id.includes('node_modules/react/') || id.includes('node_modules/react-dom/')) {
-            return 'react-core';
-          }
-
-          // React runtime (jsx-runtime)
-          if (id.includes('node_modules/react/jsx-runtime') || id.includes('node_modules/react/jsx-dev-runtime')) {
+          // Include all React-related packages in react-core to prevent deduplication issues
+          if (id.includes('node_modules/react/') ||
+              id.includes('node_modules/react-dom/') ||
+              id.includes('node_modules/react/jsx-runtime') ||
+              id.includes('node_modules/react/jsx-dev-runtime')) {
             return 'react-core';
           }
 

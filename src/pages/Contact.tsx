@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { Mail, Linkedin, Github, Send, MessageSquare, User, Building2, Phone, FileText } from "lucide-react";
 import AnimatedSection from "../components/animations/AnimatedSection";
 import MagneticButton from "../components/interactive/MagneticButton";
 import SimpleIcon from "../components/icons/SimpleIcon";
@@ -131,7 +132,10 @@ const Contact: React.FC = () => {
               ) : (
                 <form onSubmit={handleSubmit} className="contact-form">
                   <div className="form-group">
-                    <label htmlFor="name">Name *</label>
+                    <label htmlFor="name">
+                      <User size={16} className="inline mr-2" />
+                      Name *
+                    </label>
                     <input
                       type="text"
                       id="name"
@@ -144,7 +148,10 @@ const Contact: React.FC = () => {
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor="email">Email *</label>
+                    <label htmlFor="email">
+                      <Mail size={16} className="inline mr-2" />
+                      Email *
+                    </label>
                     <input
                       type="email"
                       id="email"
@@ -157,7 +164,10 @@ const Contact: React.FC = () => {
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor="reason">Reason for Contact *</label>
+                    <label htmlFor="reason">
+                      <MessageSquare size={16} className="inline mr-2" />
+                      Reason for Contact *
+                    </label>
                     <select
                       id="reason"
                       name="reason"
@@ -175,7 +185,10 @@ const Contact: React.FC = () => {
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor="company">Company/Organization</label>
+                    <label htmlFor="company">
+                      <Building2 size={16} className="inline mr-2" />
+                      Company/Organization
+                    </label>
                     <input
                       type="text"
                       id="company"
@@ -187,7 +200,10 @@ const Contact: React.FC = () => {
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor="phone">Phone</label>
+                    <label htmlFor="phone">
+                      <Phone size={16} className="inline mr-2" />
+                      Phone
+                    </label>
                     <input
                       type="tel"
                       id="phone"
@@ -199,7 +215,10 @@ const Contact: React.FC = () => {
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor="message">Message *</label>
+                    <label htmlFor="message">
+                      <FileText size={16} className="inline mr-2" />
+                      Message *
+                    </label>
                     <textarea
                       id="message"
                       name="message"
@@ -213,9 +232,16 @@ const Contact: React.FC = () => {
 
                   {error && <div className="error-message">{error}</div>}
 
-                  <button type="submit" className="btn-primary" disabled={isSubmitting}>
+                  <motion.button
+                    type="submit"
+                    className="btn-primary"
+                    disabled={isSubmitting}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <Send size={18} className="inline mr-2" />
                     {isSubmitting ? "Sending..." : "Send Message"}
-                  </button>
+                  </motion.button>
                 </form>
               )}
             </div>
@@ -227,33 +253,54 @@ const Contact: React.FC = () => {
                 <p>Prefer to reach out directly? Use any of these options:</p>
 
                 <div className="contact-methods">
-                  <a href="mailto:jacob@jacobdarling.com" className="contact-method">
-                    <span className="icon">✉️</span>
+                  <motion.a
+                    href="mailto:jacob@jacobdarling.com"
+                    className="contact-method"
+                    whileHover={{ scale: 1.02, x: 5 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <span className="icon">
+                      <Mail size={24} />
+                    </span>
                     <div>
                       <strong>Email</strong>
                       <p>jacob@jacobdarling.com</p>
                     </div>
-                  </a>
+                  </motion.a>
 
-                  <a href="https://linkedin.com/in/jacobdarling" target="_blank" rel="noopener noreferrer" className="contact-method">
+                  <motion.a
+                    href="https://linkedin.com/in/jacobdarling"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="contact-method"
+                    whileHover={{ scale: 1.02, x: 5 }}
+                    transition={{ duration: 0.2 }}
+                  >
                     <span className="icon">
-                      <SimpleIcon name="LinkedIn" size={24} />
+                      <Linkedin size={24} />
                     </span>
                     <div>
                       <strong>LinkedIn</strong>
                       <p>Connect professionally</p>
                     </div>
-                  </a>
+                  </motion.a>
 
-                  <a href="https://github.com/JdarlingGT" target="_blank" rel="noopener noreferrer" className="contact-method">
+                  <motion.a
+                    href="https://github.com/JdarlingGT"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="contact-method"
+                    whileHover={{ scale: 1.02, x: 5 }}
+                    transition={{ duration: 0.2 }}
+                  >
                     <span className="icon">
-                      <SimpleIcon name="GitHub" size={24} />
+                      <Github size={24} />
                     </span>
                     <div>
                       <strong>GitHub</strong>
                       <p>View my code</p>
                     </div>
-                  </a>
+                  </motion.a>
                 </div>
               </div>
 

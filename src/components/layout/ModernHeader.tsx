@@ -13,7 +13,8 @@ import {
   FileText,
   ArrowRight,
   ExternalLink,
-  Download
+  Download,
+  Mail
 } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import "./ModernHeader.css";
@@ -244,19 +245,28 @@ const ModernHeader: React.FC = () => {
         {/* DESKTOP NAVIGATION */}
         {!isMobile && (
           <div className="hidden lg:flex items-center gap-6" ref={dropdownRef}>
-            {/* Resume CTA - Prominent */}
-            <Link
-              to="/resume"
-              className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg font-medium hover:from-blue-600 hover:to-purple-700 transition-all shadow-lg hover:shadow-xl"
-              onClick={() => {
-                if ((window as any).dataLayer) {
-                  (window as any).dataLayer.push({ event: 'header_resume_click' });
-                }
-              }}
-            >
-              <FileText className="w-4 h-4" />
-              <span>Resume</span>
-            </Link>
+            {/* Quick Links - Resume & Contact */}
+            <div className="flex items-center gap-2">
+              <Link
+                to="/resume"
+                className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg font-medium hover:from-blue-600 hover:to-purple-700 transition-all shadow-lg hover:shadow-xl text-sm"
+                onClick={() => {
+                  if ((window as any).dataLayer) {
+                    (window as any).dataLayer.push({ event: 'header_resume_click' });
+                  }
+                }}
+              >
+                <FileText className="w-4 h-4" />
+                <span>Resume</span>
+              </Link>
+              <Link
+                to="/contact"
+                className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg font-medium transition-all text-sm border border-white/20"
+              >
+                <Mail className="w-4 h-4" />
+                <span>Contact</span>
+              </Link>
+            </div>
 
             <div className="w-px h-8 bg-white/10" />
 

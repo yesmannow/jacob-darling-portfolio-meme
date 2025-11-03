@@ -73,7 +73,7 @@ const Resume: React.FC = () => {
 
   if (cinematicMode) {
     return (
-      <main className="bg-black text-white min-h-screen">
+      <main className="bg-black text-white min-h-screen relative">
         {/* Cinematic Mode Toggle */}
         <motion.button
           onClick={toggleCinematicMode}

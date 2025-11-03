@@ -14,7 +14,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: 
+  background:
     radial-gradient(circle at 20% 50%, rgba(184, 208, 217, 0.03) 0%, transparent 50%),
     radial-gradient(circle at 80% 80%, rgba(8, 30, 38, 0.4) 0%, transparent 50%);
   pointer-events: none;
@@ -384,7 +384,7 @@
   height: auto;
   margin: 0 auto 2rem;
   display: block;
-  background: white;
+  background: rgba(13, 13, 13, 0.8);
   padding: 1.5rem;
   border-radius: 12px;
   box-shadow: var(--shadow-md);

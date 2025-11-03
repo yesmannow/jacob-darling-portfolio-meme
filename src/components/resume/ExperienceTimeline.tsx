@@ -27,19 +27,19 @@ const ExperienceTimeline: React.FC<ExperienceTimelineProps> = ({ className = '' 
   // Extract metrics from achievements
   const extractMetrics = (achievements: string[]) => {
     const metrics: Array<{value: string, label: string, icon: React.ReactNode}> = [];
-    
+
     achievements.forEach(achievement => {
       // Look for percentage increases
       const percentMatch = achievement.match(/(\d+)%/);
       if (percentMatch) {
         metrics.push({
           value: `+${percentMatch[1]}%`,
-          label: achievement.includes('traffic') ? 'Traffic Growth' : 
+          label: achievement.includes('traffic') ? 'Traffic Growth' :
                  achievement.includes('cost') ? 'Cost Reduction' : 'Performance',
           icon: <TrendingUp className="w-4 h-4" />
         });
       }
-      
+
       // Look for dollar amounts
       const dollarMatch = achievement.match(/\$(\d+[KM]?\+?)/);
       if (dollarMatch) {
@@ -49,20 +49,20 @@ const ExperienceTimeline: React.FC<ExperienceTimelineProps> = ({ className = '' 
           icon: <Target className="w-4 h-4" />
         });
       }
-      
+
       // Look for large numbers
       const numberMatch = achievement.match(/(\d{2,}[KM]?\+?)/);
       if (numberMatch && !percentMatch && !dollarMatch) {
         metrics.push({
           value: numberMatch[1],
-          label: achievement.includes('contact') ? 'Contacts' : 
-                 achievement.includes('visit') ? 'Patient Visits' : 
+          label: achievement.includes('contact') ? 'Contacts' :
+                 achievement.includes('visit') ? 'Patient Visits' :
                  achievement.includes('workflow') ? 'Automations' : 'Results',
           icon: <Zap className="w-4 h-4" />
         });
       }
     });
-    
+
     return metrics.slice(0, 3); // Limit to 3 metrics per job
   };
 
@@ -95,15 +95,15 @@ const ExperienceTimeline: React.FC<ExperienceTimelineProps> = ({ className = '' 
               Career Journey
             </span>
           </h2>
-          
+
           <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            A cinematic progression through strategic growth, technical innovation, and transformative leadership — 
+            A cinematic progression through strategic growth, technical innovation, and transformative leadership —
             building systems that scale and strategies that deliver measurable impact.
           </p>
         </motion.div>
 
         {/* Experience Timeline */}
-        <div className="relative">
+        <div className="relative" style={{ position: 'relative' }}>
           {/* Central Timeline Line */}
           <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-blue-500 via-purple-500 to-pink-500 opacity-30" />
 
@@ -142,13 +142,13 @@ const ExperienceTimeline: React.FC<ExperienceTimelineProps> = ({ className = '' 
                   transition={{ duration: 0.3 }}
                 >
                   {/* Background with Company Theme */}
-                  <div 
+                  <div
                     className={`absolute inset-0 rounded-3xl opacity-10 bg-gradient-to-br ${theme.bgGradient}`}
                   />
-                  
+
                   {/* Main Content */}
                   <div className="relative bg-black/80 backdrop-blur-sm border border-white/10 rounded-3xl p-8 lg:p-12 hover:border-white/20 transition-all duration-500">
-                    
+
                     {/* Job Header */}
                     <div className="mb-8">
                       <motion.div
@@ -164,7 +164,7 @@ const ExperienceTimeline: React.FC<ExperienceTimelineProps> = ({ className = '' 
                             <span style={{ color: theme.primary }}>{job.company}</span>
                           </div>
                         </div>
-                        
+
                         <div className="text-gray-400 text-right">
                           <div className="flex items-center gap-2 mb-2">
                             <Calendar className="w-4 h-4" />
@@ -207,7 +207,7 @@ const ExperienceTimeline: React.FC<ExperienceTimelineProps> = ({ className = '' 
                             <div className="flex items-center justify-center mb-3" style={{ color: theme.accent }}>
                               {metric.icon}
                             </div>
-                            <div 
+                            <div
                               className="metric-counter text-3xl font-bold mb-2"
                               style={{ color: theme.primary }}
                               data-target={metric.value.replace(/[^\d]/g, '')}
@@ -233,7 +233,7 @@ const ExperienceTimeline: React.FC<ExperienceTimelineProps> = ({ className = '' 
                         <Award className="w-5 h-5" style={{ color: theme.primary }} />
                         <span style={{ color: theme.primary }}>Key Achievements</span>
                       </h4>
-                      
+
                       <div className="space-y-4">
                         {job.achievements.map((achievement, idx) => (
                           <motion.div
@@ -241,7 +241,7 @@ const ExperienceTimeline: React.FC<ExperienceTimelineProps> = ({ className = '' 
                             className="flex items-start gap-4 p-4 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-colors duration-300"
                             variants={motionVariants.staggerItem}
                           >
-                            <div 
+                            <div
                               className="w-2 h-2 rounded-full mt-2 flex-shrink-0"
                               style={{ backgroundColor: theme.accent }}
                             />
@@ -262,13 +262,13 @@ const ExperienceTimeline: React.FC<ExperienceTimelineProps> = ({ className = '' 
                           <Code className="w-5 h-5" style={{ color: theme.primary }} />
                           <span style={{ color: theme.primary }}>Technologies Used</span>
                         </h4>
-                        
+
                         <div className="flex flex-wrap gap-3">
                           {job.technologies.map((tech, idx) => (
                             <motion.span
                               key={tech}
                               className="px-4 py-2 border rounded-full text-sm hover:scale-105 transition-transform duration-200"
-                              style={{ 
+                              style={{
                                 borderColor: `${theme.primary}30`,
                                 backgroundColor: `${theme.primary}10`,
                                 color: theme.accent
