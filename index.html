@@ -1,3 +1,15 @@
+<script>
+  window.enableHotReplacement = true;
+  (function () {
+    if (window.__ceDefinePatched) return;
+    window.__ceDefinePatched = true;
+    const origDefine = customElements.define.bind(customElements);
+    customElements.define = (name, ctor, opts) => {
+      if (customElements.get(name)) return;
+      return origDefine(name, ctor, opts);
+    };
+  })();
+</script>
 <!doctype html>
 <html lang="en">
   <head>
