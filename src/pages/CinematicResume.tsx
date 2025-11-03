@@ -28,7 +28,7 @@ export default function CinematicResume() {
             <p className="text-lg text-gray-300 leading-relaxed mb-6">
               {summary}
             </p>
-            
+
             {/* Bio Photo Integration */}
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
@@ -100,7 +100,7 @@ export default function CinematicResume() {
               >
                 {/* Timeline Dot */}
                 <div className="absolute -left-2 top-0 w-4 h-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full" />
-                
+
                 <div className="mb-6">
                   <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-3">
                     <div>
@@ -121,9 +121,9 @@ export default function CinematicResume() {
                       </div>
                     </div>
                   </div>
-                  
+
                   <p className="text-gray-300 mb-4 leading-relaxed">{job.summary}</p>
-                  
+
                   {/* Achievements */}
                   <div className="mb-4">
                     <h4 className="text-sm font-semibold text-purple-400 mb-3 flex items-center gap-2">
@@ -132,21 +132,22 @@ export default function CinematicResume() {
                     </h4>
                     <ul className="space-y-2">
                       {job.achievements.map((achievement, idx) => (
-                        <motion.li
-                          key={idx}
-                          initial={{ opacity: 0, x: -20 }}
-                          whileInView={{ opacity: 1, x: 0 }}
-                          viewport={{ once: true }}
-                          transition={{ duration: 0.4, delay: (index * 0.1) + (idx * 0.05) }}
-                          className="flex items-start gap-3 text-gray-300 text-sm"
-                        >
-                          <div className="w-1.5 h-1.5 bg-purple-400 rounded-full mt-2 flex-shrink-0" />
-                          <span>{achievement}</span>
-                        </motion.li>
+                        <li key={idx}>
+                          <motion.div
+                            initial={{ opacity: 0, x: -20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.4, delay: (index * 0.1) + (idx * 0.05) }}
+                            className="flex items-start gap-3 text-gray-300 text-sm"
+                          >
+                            <div className="w-1.5 h-1.5 bg-purple-400 rounded-full mt-2 flex-shrink-0" />
+                            <span>{achievement}</span>
+                          </motion.div>
+                        </li>
                       ))}
                     </ul>
                   </div>
-                  
+
                   {/* Technologies */}
                   {job.technologies && (
                     <div>

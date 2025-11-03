@@ -104,6 +104,7 @@ const CTA: React.FC = () => {
           <div
             key={index}
             className="cta-particle absolute w-1 h-1 bg-white rounded-full"
+            // eslint-disable-next-line react/no-inline-styles
             style={{
               left,
               top,
@@ -144,13 +145,7 @@ const CTA: React.FC = () => {
 
           {/* Main Heading */}
           <motion.h2
-            className="text-5xl md:text-7xl font-bold text-white relative"
-            style={{
-              background: "linear-gradient(135deg, #ffffff 0%, #e2e8f0 100%)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text"
-            }}
+            className="text-5xl md:text-7xl font-bold text-white relative cta-heading-gradient"
           >
             Let's Build Something
             <br />

@@ -16,7 +16,9 @@
     "automations",
     "Marketo",
     "hubspot",
-    "yoyo"
+    "yoyo",
+    "FOUC",
+    "webcomponents"
   ],
   "ignoreWords": [],
   "import": [
