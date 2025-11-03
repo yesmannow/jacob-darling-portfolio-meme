@@ -1,4 +1,3 @@
-# jacob-darling-portfolio
 # Jacob Darling - Portfolio
 
 > Marketing Strategist & Systems Architect | Turning Complexity into Clarity
@@ -36,6 +35,7 @@ This portfolio is optimized for speed and performance:
 - **Font Loading**: Non-blocking, optimized
 
 **Performance Targets:**
+
 - First Contentful Paint: < 1.5s
 - Largest Contentful Paint: < 2.5s
 - Time to Interactive: < 3.5s
@@ -43,14 +43,18 @@ This portfolio is optimized for speed and performance:
 ## 📱 Key Sections
 
 ### The Playground
+
 Interactive web applications demonstrating technical expertise:
+
 - **GT9 Smart Pricing Tool** - Sales enablement with dynamic quote building
 - **License Requirements Hub** - Multi-state CE compliance database
 - **ROI Calculator** - Investment planning with break-even modeling
 - **Clinical Compass** - Intelligent protocol builder for clinicians
 
 ### Case Studies
+
 8 detailed project breakdowns showing problem → solution → impact:
+
 - The Proactive Support Engine (AI chatbot, 70% ticket reduction)
 - The Command Center (Events dashboard, revenue protection)
 - The Closer (Quote automation, 35% close rate increase)
@@ -87,3 +91,4 @@ npm run build
 
 # Preview production build
 npm run preview
+```

@@ -11,6 +11,7 @@ The error "The process cannot access the file because it is being used by anothe
 5. **Check OneDrive** - if the folder is syncing, pause OneDrive temporarily
 
 Then try the move command again:
+
 ```powershell
 Move-Item -Path "C:\Users\hoosi\OneDrive\Desktop\port55\jacob-darling-portfolio-meme\jacob-darling-portfolio-meme\jacob-darling-portfolio-meme" -Destination "C:\dev\bear-cave" -Force
 ```
@@ -31,6 +32,7 @@ Remove-Item -Path "C:\Users\hoosi\OneDrive\Desktop\port55\jacob-darling-portfoli
 ## Solution 3: Check What's Locking the File
 
 Run this to find processes locking the directory:
+
 ```powershell
 Get-Process | Where-Object {$_.Path -like "*jacob-darling-portfolio-meme*"}
 ```
@@ -48,4 +50,3 @@ If nothing else works, restart your computer (this closes all processes) and try
 3. Open a fresh PowerShell as Administrator
 4. Try Solution 1 (Move-Item) again
 5. If that fails, use Solution 2 (Robocopy)
-

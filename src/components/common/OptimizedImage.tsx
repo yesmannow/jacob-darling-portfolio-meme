@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
+import "./OptimizedImage.css";
 
 interface OptimizedImageProps {
   src: string;
@@ -99,37 +100,19 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
     <div
       ref={imgRef}
       className={`optimized-image-container ${className}`}
-      style={{
-        position: "relative",
-        overflow: "hidden",
-        ...style
-      }}
+      style={style}
       onClick={onClick}
     >
       {/* Loading placeholder */}
       {!isLoaded && (
         <motion.div
           className="image-placeholder"
-          style={{
-            position: "absolute",
-            inset: 0,
-            background: "linear-gradient(45deg, #1a1a1a, #2a2a2a)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center"
-          }}
           initial={{ opacity: 1 }}
           animate={{ opacity: isLoaded ? 0 : 1 }}
           transition={{ duration: 0.3 }}
         >
           <motion.div
-            style={{
-              width: "40px",
-              height: "40px",
-              border: "3px solid rgba(59, 130, 246, 0.3)",
-              borderTop: "3px solid #3B82F6",
-              borderRadius: "50%"
-            }}
+            className="image-spinner"
             animate={{ rotate: 360 }}
             transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
           />
@@ -139,10 +122,10 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
       {/* Optimized image with fallbacks */}
       {isInView && (
         <motion.picture
+          className="optimized-picture"
           initial={{ opacity: 0 }}
           animate={{ opacity: isLoaded ? 1 : 0 }}
           transition={{ duration: 0.5 }}
-          style={{ display: "block", width: "100%", height: "100%" }}
         >
           {/* AVIF source for modern browsers */}
           <source
@@ -165,13 +148,7 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
             loading={loading}
             onLoad={handleLoad}
             onError={handleError}
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              display: "block",
-              filter: hasError ? "grayscale(100%)" : "none"
-            }}
+            className={`optimized-image${hasError ? " optimized-image--error" : ""}`}
             sizes={sizes}
           />
         </motion.picture>
@@ -181,18 +158,6 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
       {hasError && (
         <motion.div
           className="image-error"
-          style={{
-            position: "absolute",
-            inset: 0,
-            background: "rgba(239, 68, 68, 0.1)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            color: "#EF4444",
-            fontSize: "0.875rem",
-            textAlign: "center",
-            padding: "1rem"
-          }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3 }}

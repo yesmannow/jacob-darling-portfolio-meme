@@ -1,0 +1,9 @@
+body.custom-cursor-enabled * {
+  cursor: none !important;
+}
+
+@media (max-width: 768px) {
+  body.custom-cursor-enabled * {
+    cursor: auto !important;
+  }
+}

@@ -127,10 +127,8 @@ const ExperienceTimeline: React.FC<ExperienceTimelineProps> = ({ className = '' 
               >
                 {/* Timeline Dot */}
                 <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-4 z-10">
-                  {/* eslint-disable-next-line react/no-inline-styles */}
                   <motion.div
-                    className={`timeline-dot w-6 h-6 rounded-full border-4 border-white shadow-lg`}
-                    style={{ '--timeline-dot-color': theme.primary } as React.CSSProperties}
+                    className="timeline-dot w-6 h-6 rounded-full border-4 border-white shadow-lg"
                     data-timeline-index={index}
                     variants={motionVariants.timelineDot}
                     whileHover="active"
@@ -161,8 +159,7 @@ const ExperienceTimeline: React.FC<ExperienceTimelineProps> = ({ className = '' 
                       >
                         <div>
                           <h3 className="text-3xl font-bold text-white mb-2">{job.role}</h3>
-                          {/* eslint-disable-next-line react/no-inline-styles */}
-                          <div className="flex items-center gap-3 text-xl font-semibold mb-3" style={{ '--company-primary-color': theme.primary } as React.CSSProperties}>
+                          <div className="flex items-center gap-3 text-xl font-semibold mb-3">
                             <Building2 className="w-5 h-5 company-icon" />
                             <span className="company-name">{job.company}</span>
                           </div>
@@ -201,13 +198,11 @@ const ExperienceTimeline: React.FC<ExperienceTimelineProps> = ({ className = '' 
                         viewport={{ once: true }}
                       >
                         {metrics.map((metric, idx) => (
-                          /* eslint-disable-next-line react/no-inline-styles */
                           <motion.div
                             key={idx}
                             className="text-center p-6 bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 transition-colors duration-300"
                             variants={motionVariants.counterReveal}
                             whileHover={{ scale: 1.05, y: -5 }}
-                            style={{ '--metric-accent-color': theme.accent, '--metric-primary-color': theme.primary } as React.CSSProperties}
                           >
                             <div className="flex items-center justify-center mb-3 metric-icon-container">
                               {metric.icon}
@@ -233,20 +228,17 @@ const ExperienceTimeline: React.FC<ExperienceTimelineProps> = ({ className = '' 
                       whileInView="visible"
                       viewport={{ once: true }}
                     >
-                      {/* eslint-disable-next-line react/no-inline-styles */}
-                      <h4 className="text-lg font-semibold mb-6 flex items-center gap-3 achievement-heading" style={{ '--achievement-primary-color': theme.primary } as React.CSSProperties}>
+                      <h4 className="text-lg font-semibold mb-6 flex items-center gap-3 achievement-heading">
                         <Award className="w-5 h-5" />
                         <span>Key Achievements</span>
                       </h4>
 
                       <div className="space-y-4">
                         {job.achievements.map((achievement, idx) => (
-                          /* eslint-disable-next-line react/no-inline-styles */
                           <motion.div
                             key={idx}
                             className="flex items-start gap-4 p-4 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-colors duration-300"
                             variants={motionVariants.staggerItem}
-                            style={{ '--achievement-accent-color': theme.accent } as React.CSSProperties}
                           >
                             <div className="w-2 h-2 rounded-full mt-2 flex-shrink-0 achievement-dot" />
                             <span className="text-gray-300 leading-relaxed">{achievement}</span>
@@ -262,23 +254,16 @@ const ExperienceTimeline: React.FC<ExperienceTimelineProps> = ({ className = '' 
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.6 }}
                       >
-                        {/* eslint-disable-next-line react/no-inline-styles */}
-                        <h4 className="text-lg font-semibold mb-4 flex items-center gap-3 technologies-heading" style={{ '--technologies-primary-color': theme.primary } as React.CSSProperties}>
+                        <h4 className="text-lg font-semibold mb-4 flex items-center gap-3 technologies-heading">
                           <Code className="w-5 h-5" />
                           <span>Technologies Used</span>
                         </h4>
 
                         <div className="flex flex-wrap gap-3">
                           {job.technologies.map((tech, idx) => (
-                            /* eslint-disable-next-line react/no-inline-styles */
                             <motion.span
                               key={tech}
                               className="px-4 py-2 border rounded-full text-sm hover:scale-105 transition-transform duration-200 technology-badge"
-                              style={{
-                                '--technology-border-color': `${theme.primary}30`,
-                                '--technology-bg-color': `${theme.primary}10`,
-                                '--technology-text-color': theme.accent
-                              } as React.CSSProperties}
                               initial={{ opacity: 0, scale: 0.8 }}
                               whileInView={{ opacity: 1, scale: 1 }}
                               transition={{ delay: 0.7 + (idx * 0.05) }}

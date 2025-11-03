@@ -1,0 +1,12 @@
+<svg width="96" height="96" viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Bear Cave logo placeholder">
+  <defs>
+    <linearGradient id="bc-gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#D49B41" />
+      <stop offset="100%" stop-color="#E5B65A" />
+    </linearGradient>
+  </defs>
+  <rect width="96" height="96" rx="16" fill="#1E1E1E" />
+  <path d="M16 68c0-22 14-40 32-40s32 18 32 40" fill="none" stroke="url(#bc-gold)" stroke-width="6" stroke-linecap="round" />
+  <circle cx="56" cy="56" r="6" fill="url(#bc-gold)" />
+  <path d="M36 60c4-6 12-10 20-10 10 0 18 4 22 10" fill="none" stroke="#F5F5F5" stroke-width="4" stroke-linecap="round" />
+</svg>

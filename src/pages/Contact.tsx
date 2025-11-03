@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Mail, Linkedin, Github, Send, MessageSquare, User, Building2, Phone, FileText, Globe, Facebook, Youtube } from "lucide-react";
@@ -21,6 +21,7 @@ import AnimatedSection from "../components/animations/AnimatedSection";
 import MagneticButton from "../components/interactive/MagneticButton";
 // SimpleIcon removed - using Lucide icons for UI elements
 import { fadeInUp } from "../utils/animations";
+import { trackPortfolioEngagement } from "../utils/analytics";
 import "./Contact.css";
 
 interface FormData {
@@ -55,10 +56,8 @@ const Contact: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   // Track form interactions
-  React.useEffect(() => {
-    import("../utils/analytics").then(({ trackPortfolioEngagement }) => {
-      trackPortfolioEngagement.contactFormStart();
-    });
+  useEffect(() => {
+    trackPortfolioEngagement.contactFormStart();
   }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -97,14 +96,10 @@ const Contact: React.FC = () => {
         setFormData({ name: "", email: "", message: "", reason: "", company: "", phone: "" });
 
         // Track successful submission
-        import("../utils/analytics").then(({ trackPortfolioEngagement }) => {
-          trackPortfolioEngagement.contactFormSubmit(formData.reason || "general");
-        });
+        trackPortfolioEngagement.contactFormSubmit(formData.reason || "general");
       } else {
         setError("Failed to send message. Please try again.");
-        import("../utils/analytics").then(({ trackPortfolioEngagement }) => {
-          trackPortfolioEngagement.contactFormError(result.message || "Unknown error");
-        });
+        trackPortfolioEngagement.contactFormError(result.message || "Unknown error");
       }
     } catch (err) {
       setError("An error occurred. Please try emailing directly.");

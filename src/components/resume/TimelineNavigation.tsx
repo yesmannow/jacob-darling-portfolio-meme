@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronUp, Building2, Award, User, GraduationCap, Eye, EyeOff } from 'lucide-react';
-import { scrollToSection, companyThemes } from '../../utils/narrativeMotion';
+import { scrollToSection } from '../../utils/narrativeMotion';
 import { scrollToTop } from '../../utils/scroll';
 import resumeData from '../../data/resume.json';
 import './TimelineNavigation.css';
@@ -30,7 +30,7 @@ const TimelineNavigation: React.FC<TimelineNavigationProps> = ({ className = '' 
       label: job.company,
       sublabel: job.role,
       icon: <Building2 className="w-4 h-4" />,
-      theme: companyThemes[getCompanyTheme(job.company)],
+      themeKey: getCompanyTheme(job.company),
       type: 'experience'
     })),
     {
@@ -38,7 +38,7 @@ const TimelineNavigation: React.FC<TimelineNavigationProps> = ({ className = '' 
       label: 'Awards',
       sublabel: 'Recognition',
       icon: <Award className="w-4 h-4" />,
-      theme: companyThemes.awards,
+      themeKey: 'awards' as const,
       type: 'awards'
     }
   ];
@@ -108,7 +108,9 @@ const TimelineNavigation: React.FC<TimelineNavigationProps> = ({ className = '' 
                   <motion.button
                     key={item.id}
                     onClick={() => handleNavClick(item.id, index)}
-                    className="relative w-full text-left group"
+                    className="timeline-nav-item relative w-full text-left group"
+                    data-theme={item.themeKey}
+                    data-active={isActive}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
@@ -117,12 +119,6 @@ const TimelineNavigation: React.FC<TimelineNavigationProps> = ({ className = '' 
                       {isActive && (
                         <motion.div
                           className="absolute inset-0 rounded-lg active-background"
-                          // eslint-disable-next-line react/no-inline-styles
-                          style={{
-                            '--active-primary': `${item.theme.primary}20`,
-                            '--active-secondary': `${item.theme.secondary}20`,
-                            '--active-border': `${item.theme.primary}30`
-                          } as React.CSSProperties}
                           initial={{ opacity: 0, scale: 0.8 }}
                           animate={{ opacity: 1, scale: 1 }}
                           exit={{ opacity: 0, scale: 0.8 }}
@@ -134,14 +130,8 @@ const TimelineNavigation: React.FC<TimelineNavigationProps> = ({ className = '' 
                     {/* Content */}
                     <div className="relative flex items-center gap-3 p-3 rounded-lg transition-colors duration-200">
                       {/* Dot Indicator */}
-                      {/* eslint-disable-next-line react/no-inline-styles */}
                       <motion.div
                         className="w-3 h-3 rounded-full border-2 border-white/30 flex-shrink-0 nav-dot"
-                        style={{
-                          '--nav-dot-bg': isActive ? item.theme.primary : 'transparent',
-                          '--nav-dot-border': isActive ? item.theme.primary : 'white',
-                          '--nav-dot-shadow': isActive ? `0 0 10px ${item.theme.primary}60` : 'none'
-                        } as React.CSSProperties}
                         animate={{
                           scale: isActive ? 1.2 : 1,
                         }}
@@ -150,37 +140,26 @@ const TimelineNavigation: React.FC<TimelineNavigationProps> = ({ className = '' 
 
                       {/* Text Content */}
                       <div className="min-w-0 flex-1">
-                        {/* eslint-disable-next-line react/no-inline-styles */}
-                        <div className="flex items-center gap-2 mb-1" style={{ '--nav-icon-color': isActive ? item.theme.primary : '#9CA3AF' } as React.CSSProperties}>
+                        <div className="flex items-center gap-2 mb-1">
                           <div className="nav-icon">
                             {item.icon}
                           </div>
-                          {/* eslint-disable-next-line react/no-inline-styles */}
                           <span
                             className="text-sm font-semibold truncate nav-label"
-                            style={{ '--nav-label-color': isActive ? item.theme.primary : '#D1D5DB' } as React.CSSProperties}
                           >
                             {item.label}
                           </span>
                         </div>
-                        {/* eslint-disable-next-line react/no-inline-styles */}
                         <p
                           className="text-xs truncate nav-sublabel"
-                          style={{ '--nav-sublabel-color': isActive ? item.theme.accent : '#9CA3AF' } as React.CSSProperties}
                         >
                           {item.sublabel}
                         </p>
                       </div>
 
                       {/* Hover Glow */}
-                      {/* eslint-disable-next-line react/no-inline-styles */}
                       <motion.div
                         className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover-glow"
-                        style={{
-                          '--hover-primary': `${item.theme.primary}10`,
-                          '--hover-secondary': `${item.theme.secondary}10`,
-                          '--hover-border': `${item.theme.primary}20`
-                        } as React.CSSProperties}
                       />
                     </div>
                   </motion.button>
@@ -204,12 +183,10 @@ const TimelineNavigation: React.FC<TimelineNavigationProps> = ({ className = '' 
 
             {/* Progress Indicator */}
             <div className="absolute -right-4 top-0 bottom-0 w-1 bg-white/10 rounded-full overflow-hidden">
-              {/* eslint-disable-next-line react/no-inline-styles */}
               <motion.div
-                className="w-full bg-gradient-to-b from-blue-500 via-purple-500 to-pink-500 rounded-full progress-indicator"
-                style={{
-                  '--progress-height': `${((activeSection + 1) / navItems.length) * 100}%`
-                } as React.CSSProperties}
+                className="w-full bg-gradient-to-b from-blue-500 via-purple-500 to-pink-500 rounded-full"
+                initial={{ height: 0 }}
+                animate={{ height: `${((activeSection + 1) / navItems.length) * 100}%` }}
                 transition={{ duration: 0.3 }}
               />
             </div>

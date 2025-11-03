@@ -5,6 +5,7 @@
 
 /* Import Brand Identity System */
 @import './tokens.css';
+@import './brand-tokens.css';
 @import './typography.css';
 @import './bear-cave-theme.css';
 @import './bio-cinematic.css';
@@ -72,7 +73,6 @@ main {
   flex: 1;
   position: relative;
   z-index: 1;
-  margin-top: var(--header-height); /* Ensure content starts below fixed header */
 }
 
 /* Utility class for pages that need extra top spacing */

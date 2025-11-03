@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import "./CustomCursor.css";
 
 const CustomCursor: React.FC = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -7,6 +8,14 @@ const CustomCursor: React.FC = () => {
   const [isClicking, setIsClicking] = useState(false);
 
   useEffect(() => {
+    if (typeof window === "undefined" || typeof document === "undefined") {
+      return;
+    }
+
+    if (window.matchMedia("(pointer: coarse)").matches) {
+      return;
+    }
+
     const updateMousePosition = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
@@ -59,7 +68,24 @@ const CustomCursor: React.FC = () => {
   // Hide on mobile devices
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
-    setIsMobile(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
+    if (typeof window === "undefined" || typeof document === "undefined") {
+      return;
+    }
+
+    const mobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    );
+    setIsMobile(mobile);
+
+    if (!mobile) {
+      document.body.classList.add("custom-cursor-enabled");
+    }
+
+    return () => {
+      if (!mobile) {
+        document.body.classList.remove("custom-cursor-enabled");
+      }
+    };
   }, []);
 
   if (isMobile) return null;
@@ -140,21 +166,6 @@ const CustomCursor: React.FC = () => {
       >
         <div className="w-20 h-20 bg-gradient-to-br from-blue-500/30 to-purple-600/30 rounded-full blur-xl" />
       </motion.div>
-
-      {/* CSS to hide default cursor */}
-      <style dangerouslySetInnerHTML={{
-        __html: `
-          * {
-            cursor: none !important;
-          }
-          
-          @media (max-width: 768px) {
-            * {
-              cursor: auto !important;
-            }
-          }
-        `
-      }} />
     </>
   );
 };

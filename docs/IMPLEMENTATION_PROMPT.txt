@@ -1,0 +1,2 @@
+This file is a placeholder for the Bear Cave Marketing implementation prompt.
+Provide setup instructions, rebuild steps, and automation guidance here.

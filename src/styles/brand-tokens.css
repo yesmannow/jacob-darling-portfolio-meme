@@ -1,0 +1,12 @@
+:root {
+  --bc-primary-dark: #1E1E1E;
+  --bc-accent-gold: #D49B41;
+  --bc-slate: #4A5A6A;
+  --bc-light: #F5F5F5;
+
+  --bc-gradient-cave-gold: linear-gradient(135deg, #D49B41 0%, #E5B65A 100%);
+  --bc-gradient-cave-dark: linear-gradient(135deg, #1E1E1E 0%, #2A2A2A 100%);
+  --bc-gradient-emergence: linear-gradient(135deg, #1E1E1E 0%, #4A5A6A 50%, #D49B41 100%);
+  --bc-gradient-bear-strength: linear-gradient(135deg, #D49B41 0%, #B8860B 100%);
+  --bc-gradient-dark-to-light: linear-gradient(180deg, #1E1E1E 0%, #F5F5F5 100%);
+}

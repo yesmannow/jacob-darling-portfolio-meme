@@ -1,3 +1,28 @@
+.timeline-nav-item {
+  --nav-dot-bg: transparent;
+  --nav-dot-border: rgba(255, 255, 255, 0.3);
+  --nav-dot-shadow: none;
+  --nav-icon-color: #9CA3AF;
+  --nav-label-color: #D1D5DB;
+  --nav-sublabel-color: #9CA3AF;
+  --hover-primary: rgba(255, 255, 255, 0.05);
+  --hover-secondary: rgba(255, 255, 255, 0.05);
+  --hover-border: rgba(255, 255, 255, 0.08);
+  --active-primary: rgba(255, 255, 255, 0.08);
+  --active-secondary: rgba(255, 255, 255, 0.08);
+  --active-border: rgba(255, 255, 255, 0.1);
+  --theme-glow: rgba(255, 255, 255, 0.25);
+}
+
+.timeline-nav-item[data-active="true"] {
+  --nav-dot-bg: var(--theme-primary);
+  --nav-dot-border: var(--theme-primary);
+  --nav-dot-shadow: var(--theme-glow);
+  --nav-icon-color: var(--theme-primary);
+  --nav-label-color: var(--theme-primary);
+  --nav-sublabel-color: var(--theme-accent);
+}
+
 .active-background {
   background: linear-gradient(135deg, var(--active-primary), var(--active-secondary));
   border: 1px solid var(--active-border);
@@ -26,7 +51,55 @@
   border: 1px solid var(--hover-border);
 }
 
-.progress-indicator {
-  height: var(--progress-height);
+.timeline-nav-item[data-theme="graston"] {
+  --theme-primary: #3B82F6;
+  --theme-secondary: #EC4899;
+  --theme-accent: #60A5FA;
+  --theme-glow: rgba(59, 130, 246, 0.45);
+  --hover-primary: rgba(59, 130, 246, 0.1);
+  --hover-secondary: rgba(236, 72, 153, 0.1);
+  --hover-border: rgba(59, 130, 246, 0.2);
+  --active-primary: rgba(59, 130, 246, 0.13);
+  --active-secondary: rgba(236, 72, 153, 0.13);
+  --active-border: rgba(59, 130, 246, 0.25);
+}
+
+.timeline-nav-item[data-theme="pike"] {
+  --theme-primary: #F472B6;
+  --theme-secondary: #EC4899;
+  --theme-accent: #F9A8D4;
+  --theme-glow: rgba(244, 114, 182, 0.45);
+  --hover-primary: rgba(244, 114, 182, 0.12);
+  --hover-secondary: rgba(236, 72, 153, 0.12);
+  --hover-border: rgba(244, 114, 182, 0.25);
+  --active-primary: rgba(244, 114, 182, 0.16);
+  --active-secondary: rgba(236, 72, 153, 0.16);
+  --active-border: rgba(244, 114, 182, 0.3);
+}
+
+.timeline-nav-item[data-theme="early-career"] {
+  --theme-primary: #06B6D4;
+  --theme-secondary: #3B82F6;
+  --theme-accent: #67E8F9;
+  --theme-glow: rgba(6, 182, 212, 0.45);
+  --hover-primary: rgba(6, 182, 212, 0.12);
+  --hover-secondary: rgba(59, 130, 246, 0.12);
+  --hover-border: rgba(6, 182, 212, 0.25);
+  --active-primary: rgba(6, 182, 212, 0.16);
+  --active-secondary: rgba(59, 130, 246, 0.16);
+  --active-border: rgba(6, 182, 212, 0.3);
+}
+
+.timeline-nav-item[data-theme="awards"] {
+  --theme-primary: #FFD700;
+  --theme-secondary: #FFA500;
+  --theme-accent: #FBBF24;
+  --theme-glow: rgba(255, 215, 0, 0.45);
+  --hover-primary: rgba(255, 215, 0, 0.12);
+  --hover-secondary: rgba(255, 165, 0, 0.12);
+  --hover-border: rgba(255, 215, 0, 0.25);
+  --active-primary: rgba(255, 215, 0, 0.18);
+  --active-secondary: rgba(255, 165, 0, 0.18);
+  --active-border: rgba(255, 215, 0, 0.3);
 }
 

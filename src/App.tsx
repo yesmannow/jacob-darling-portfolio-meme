@@ -1,6 +1,6 @@
 import React, { lazy, Suspense, useEffect } from "react";
 import AppRouter from "./router/AppRouter";
-import ModernHeader from "./components/layout/ModernHeader";
+import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import ScrollToTop from "./components/utils/ScrollToTop";
 import BackToTop from "./components/utilities/BackToTop";
@@ -65,7 +65,7 @@ const App: React.FC = () => {
           <PerformanceMonitor />
           <ScrollToTop />
           <BackToTop />
-          <ModernHeader />
+          <Header />
           <Suspense fallback={null}>
             <FloatingActionButtons />
           </Suspense>

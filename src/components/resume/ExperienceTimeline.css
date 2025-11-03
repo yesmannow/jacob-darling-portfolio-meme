@@ -48,3 +48,55 @@
   color: var(--technology-text-color);
 }
 
+.experience-section[data-theme="graston"] {
+  --timeline-dot-color: #3B82F6;
+  --company-primary-color: #3B82F6;
+  --metric-accent-color: #60A5FA;
+  --metric-primary-color: #3B82F6;
+  --achievement-primary-color: #3B82F6;
+  --achievement-accent-color: #60A5FA;
+  --technologies-primary-color: #3B82F6;
+  --technology-border-color: rgba(59, 130, 246, 0.3);
+  --technology-bg-color: rgba(59, 130, 246, 0.1);
+  --technology-text-color: #60A5FA;
+}
+
+.experience-section[data-theme="pike"] {
+  --timeline-dot-color: #F472B6;
+  --company-primary-color: #F472B6;
+  --metric-accent-color: #F9A8D4;
+  --metric-primary-color: #F472B6;
+  --achievement-primary-color: #F472B6;
+  --achievement-accent-color: #F9A8D4;
+  --technologies-primary-color: #F472B6;
+  --technology-border-color: rgba(244, 114, 182, 0.35);
+  --technology-bg-color: rgba(244, 114, 182, 0.12);
+  --technology-text-color: #F9A8D4;
+}
+
+.experience-section[data-theme="early-career"] {
+  --timeline-dot-color: #06B6D4;
+  --company-primary-color: #06B6D4;
+  --metric-accent-color: #67E8F9;
+  --metric-primary-color: #06B6D4;
+  --achievement-primary-color: #06B6D4;
+  --achievement-accent-color: #67E8F9;
+  --technologies-primary-color: #06B6D4;
+  --technology-border-color: rgba(6, 182, 212, 0.35);
+  --technology-bg-color: rgba(6, 182, 212, 0.12);
+  --technology-text-color: #67E8F9;
+}
+
+.experience-section[data-theme="awards"] {
+  --timeline-dot-color: #FFD700;
+  --company-primary-color: #FFD700;
+  --metric-accent-color: #FBBF24;
+  --metric-primary-color: #FFD700;
+  --achievement-primary-color: #FFD700;
+  --achievement-accent-color: #FBBF24;
+  --technologies-primary-color: #FFD700;
+  --technology-border-color: rgba(255, 215, 0, 0.35);
+  --technology-bg-color: rgba(255, 215, 0, 0.12);
+  --technology-text-color: #FBBF24;
+}
+
