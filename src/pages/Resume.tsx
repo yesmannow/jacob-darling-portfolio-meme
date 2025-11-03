@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Download, Share2, Mail, ExternalLink, Eye, FileText, Sparkles, Zap } from "lucide-react";
-import { PDFDownloadLink } from "@react-pdf/renderer";
-import { ResumePDF } from "../pdf/ResumePDF";
 import resumeData from "../data/resume.json";
 import HeroIntro from "../components/resume/HeroIntro";
 import Section from "../components/resume/Section";
@@ -12,13 +10,14 @@ import ExperienceTimeline from "../components/resume/ExperienceTimeline";
 import TimelineNavigation from "../components/resume/TimelineNavigation";
 import AwardShowcase from "../components/awards/AwardShowcase";
 import AwardsSection from "../components/resume/AwardsSection";
+import LazyPDFDownload from "../components/resume/LazyPDFDownload";
 import "./Resume.css";
 
 const Resume: React.FC = () => {
   const [activeSection, setActiveSection] = useState<string>("experience");
   const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
   const [cinematicMode, setCinematicMode] = useState(true);
-  
+
   const { name, title, summary, contact, experience, skills, tools, education, communityLeadership, stats } = resumeData;
 
   const handlePDFGeneration = () => {
@@ -87,7 +86,7 @@ const Resume: React.FC = () => {
               <p className="text-lg text-gray-300 leading-relaxed mb-6">
                 {summary}
               </p>
-              
+
               {/* Contact Info */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
                 <motion.div
@@ -269,7 +268,7 @@ const Resume: React.FC = () => {
         transition={{ duration: 0.6 }}
       >
         <header className="resume-header">
-          <motion.h1 
+          <motion.h1
             className="page-title"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -277,7 +276,7 @@ const Resume: React.FC = () => {
           >
             {name}
           </motion.h1>
-          <motion.p 
+          <motion.p
             className="page-subtitle"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -285,7 +284,7 @@ const Resume: React.FC = () => {
           >
             {title}
           </motion.p>
-          <motion.p 
+          <motion.p
             className="page-summary"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -294,38 +293,16 @@ const Resume: React.FC = () => {
             {summary}
           </motion.p>
 
-          <motion.div 
+          <motion.div
             className="resume-actions"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8, duration: 0.8 }}
           >
-            <PDFDownloadLink 
-              document={<ResumePDF />} 
-              fileName="Jacob-Darling-Resume.pdf"
-              className="action-btn primary"
-              onClick={handlePDFGeneration}
-            >
-              {({ loading }) => (
-                <motion.div
-                  className="flex items-center gap-2"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  {loading || isGeneratingPDF ? (
-                    <>
-                      <Sparkles size={20} className="animate-spin" />
-                      Generating PDF...
-                    </>
-                  ) : (
-                    <>
-                      <Download size={20} />
-                      Download PDF
-                    </>
-                  )}
-                </motion.div>
-              )}
-            </PDFDownloadLink>
+            <LazyPDFDownload
+              isGeneratingPDF={isGeneratingPDF}
+              setIsGeneratingPDF={setIsGeneratingPDF}
+            />
             <motion.button
               className="action-btn secondary"
               onClick={handleShare}
@@ -356,7 +333,7 @@ const Resume: React.FC = () => {
       >
         <div className="resume-stats">
           <div className="stat-card">
-            <motion.div 
+            <motion.div
               className="stat-number"
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -367,7 +344,7 @@ const Resume: React.FC = () => {
             <p className="stat-label">Years Experience</p>
           </div>
           <div className="stat-card">
-            <motion.div 
+            <motion.div
               className="stat-number"
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -378,7 +355,7 @@ const Resume: React.FC = () => {
             <p className="stat-label">Practitioners Served</p>
           </div>
           <div className="stat-card">
-            <motion.div 
+            <motion.div
               className="stat-number"
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -389,7 +366,7 @@ const Resume: React.FC = () => {
             <p className="stat-label">Case Studies</p>
           </div>
           <div className="stat-card">
-            <motion.div 
+            <motion.div
               className="stat-number"
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -625,7 +602,7 @@ const Resume: React.FC = () => {
               </motion.button>
             </Link>
           </div>
-          <motion.div 
+          <motion.div
             className="cinematic-frame"
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}

@@ -1,7 +1,7 @@
 # 🌈 INSPIRATION SYSTEM - DYNAMIC MOODBOARD ARCHITECTURE
 
-**System Version:** 1.0  
-**Last Updated:** October 12, 2025  
+**System Version:** 1.0
+**Last Updated:** October 12, 2025
 **Integration:** React + TypeScript + Node.js
 
 ---
@@ -33,7 +33,7 @@ graph TD
 
 ## 📁 FILE STRUCTURE
 
-```
+```text
 portfolio/
 ├── scripts/
 │   └── generate-moodboards.js      # Automated generation script
@@ -69,7 +69,7 @@ The core automation script (`generate-moodboards.js`) processes project folders 
 async function generateMoodboards() {
   const projectFolders = scanProjectDirectories();
   const results = [];
-  
+
   for (const folder of projectFolders) {
     const data = await analyzeProject(folder);
     if (data) {
@@ -77,7 +77,7 @@ async function generateMoodboards() {
       results.push(data);
     }
   }
-  
+
   writeCombinedMoodboards(results);
 }
 ```
@@ -89,16 +89,16 @@ Intelligent color palette generation based on project context and filename patte
 ```javascript
 function extractColorsFromFilename(filename) {
   const lower = filename.toLowerCase();
-  
+
   // Context-aware color associations
   if (lower.includes('bbq') || lower.includes('food')) {
     return ['#8B4513', '#D2691E', '#CD853F', '#F4A460', '#DEB887'];
   }
-  
+
   if (lower.includes('law') || lower.includes('legal')) {
     return ['#1E3A8A', '#3B82F6', '#60A5FA', '#93C5FD', '#DBEAFE'];
   }
-  
+
   // Default professional palette
   return ['#374151', '#6B7280', '#9CA3AF', '#D1D5DB', '#F3F4F6'];
 }
@@ -112,16 +112,16 @@ Semantic keyword extraction for enhanced discoverability and categorization:
 function generateKeywords(folderName, filename) {
   const keywords = new Set();
   const context = folderName.toLowerCase() + ' ' + filename.toLowerCase();
-  
+
   // Industry-specific keyword mapping
   if (context.includes('bbq')) {
     keywords.add('restaurant', 'branding', 'food', 'rustic', 'authentic');
   }
-  
+
   if (context.includes('legal')) {
     keywords.add('professional', 'corporate', 'trustworthy', 'established');
   }
-  
+
   return Array.from(keywords);
 }
 ```
@@ -217,7 +217,7 @@ The Inspiration component seamlessly integrates multiple data sources:
 const Inspiration: React.FC = () => {
   const [moodboardData, setMoodboardData] = useState<MoodboardData | null>(null);
   const [staticImages, setStaticImages] = useState<any[]>([]);
-  
+
   useEffect(() => {
     // Load static images from all collections
     const combined = [
@@ -226,9 +226,9 @@ const Inspiration: React.FC = () => {
       ...loadSideProjectImages().map(img => ({ ...img, source: 'Side Projects' })),
       ...loadBioImages().map(img => ({ ...img, source: 'Bio' }))
     ];
-    
+
     setStaticImages(combined);
-    
+
     // Load generated moodboard data (graceful fallback)
     fetch('/moodboards/moodboards.json')
       .then(response => response.json())
@@ -243,7 +243,7 @@ const Inspiration: React.FC = () => {
 ```typescript
 const getFilteredContent = () => {
   if (activeFilter === 'All') return staticImages;
-  return staticImages.filter(item => 
+  return staticImages.filter(item =>
     item.source === activeFilter || item.category === activeFilter
   );
 };
@@ -297,12 +297,14 @@ gsap.fromTo(gridItems,
 ## 🚀 PERFORMANCE OPTIMIZATIONS
 
 ### **Lazy Loading Strategy**
+
 - **Images**: Intersection Observer-based lazy loading
 - **Moodboard Data**: Async fetch with graceful fallbacks
 - **Filter Animations**: RequestAnimationFrame optimization
 - **Color Calculations**: Memoized color palette generation
 
 ### **Caching Strategy**
+
 - **Static Images**: Browser cache with long TTL
 - **Moodboard JSON**: CDN caching with periodic regeneration
 - **Component State**: React.memo for expensive calculations
@@ -325,12 +327,12 @@ gsap.fromTo(gridItems,
 // Extend color extraction logic in generate-moodboards.js
 function extractColorsFromFilename(filename) {
   const lower = filename.toLowerCase();
-  
+
   // Add new project type
   if (lower.includes('your-project-type')) {
     return ['#custom1', '#custom2', '#custom3'];
   }
-  
+
   return defaultPalette;
 }
 ```
@@ -341,12 +343,12 @@ function extractColorsFromFilename(filename) {
 // Extend keyword generation in generate-moodboards.js
 function generateKeywords(folderName, filename) {
   const keywords = new Set();
-  
+
   // Add new keyword logic
   if (context.includes('your-context')) {
     keywords.add('keyword1', 'keyword2', 'keyword3');
   }
-  
+
   return Array.from(keywords);
 }
 ```
@@ -356,12 +358,14 @@ function generateKeywords(folderName, filename) {
 ## 📈 ANALYTICS & INSIGHTS
 
 ### **Trackable Metrics**
+
 - **Color Palette Engagement**: Which palettes get the most interaction
 - **Filter Usage**: Most popular category filters
 - **Image Performance**: Most viewed/clicked images
 - **Moodboard Effectiveness**: Time spent on moodboard vs. static content
 
 ### **A/B Testing Opportunities**
+
 - **Grid Layout**: Masonry vs. uniform grid performance
 - **Color Display**: Horizontal strips vs. circular swatches
 - **Filter Placement**: Top bar vs. sidebar positioning
@@ -372,12 +376,14 @@ function generateKeywords(folderName, filename) {
 ## 🎯 FUTURE ENHANCEMENTS
 
 ### **Phase 2: Advanced Features**
+
 - **AI Color Extraction**: Integration with node-vibrant or sharp for real image analysis
 - **Semantic Search**: Natural language search across keywords and descriptions
 - **Dynamic Themes**: User-selectable color themes based on moodboard palettes
 - **Export Functionality**: Download moodboards as PDF or image collections
 
 ### **Phase 3: Intelligence Layer**
+
 - **Machine Learning**: Automated style and mood classification
 - **Trend Analysis**: Color and style trend identification across time
 - **Recommendation Engine**: "Similar projects" based on color and keyword similarity

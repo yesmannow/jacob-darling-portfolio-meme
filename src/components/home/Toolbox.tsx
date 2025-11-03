@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ExternalLink, Code, Palette, Database, Globe, Zap, Camera, Wrench } from "lucide-react";
+import "./Toolbox.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -166,8 +167,8 @@ const Toolbox: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const [selectedCategory, setSelectedCategory] = React.useState("All");
 
-  const filteredTools = selectedCategory === "All" 
-    ? tools 
+  const filteredTools = selectedCategory === "All"
+    ? tools
     : tools.filter(tool => tool.category === selectedCategory);
 
   useEffect(() => {
@@ -221,7 +222,7 @@ const Toolbox: React.FC = () => {
   }, [filteredTools]);
 
   return (
-    <section 
+    <section
       ref={sectionRef}
       className="py-32 bg-gradient-to-b from-black via-gray-900/20 to-black relative overflow-hidden"
     >
@@ -232,9 +233,9 @@ const Toolbox: React.FC = () => {
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
-        
+
         {/* Section Header */}
-        <motion.div 
+        <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -243,8 +244,8 @@ const Toolbox: React.FC = () => {
         >
           <motion.div
             className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-purple-500 to-cyan-500 rounded-full mb-6 shadow-2xl"
-            whileHover={{ 
-              scale: 1.1, 
+            whileHover={{
+              scale: 1.1,
               rotate: 360,
               boxShadow: "0 0 40px rgba(147, 51, 234, 0.6)"
             }}
@@ -258,15 +259,15 @@ const Toolbox: React.FC = () => {
               Creative Toolbox
             </span>
           </h2>
-          
+
           <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-            The arsenal of tools, technologies, and platforms that power innovative solutions — 
+            The arsenal of tools, technologies, and platforms that power innovative solutions —
             from design conception to technical execution.
           </p>
         </motion.div>
 
         {/* Category Filters */}
-        <motion.div 
+        <motion.div
           className="category-filters flex flex-wrap justify-center gap-3 mb-12"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -301,7 +302,7 @@ const Toolbox: React.FC = () => {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.8 }}
               transition={{ duration: 0.3, delay: index * 0.05 }}
-              whileHover={{ 
+              whileHover={{
                 scale: 1.05,
                 rotateY: 5,
                 boxShadow: `0 20px 40px ${tool.glowColor}`
@@ -309,10 +310,10 @@ const Toolbox: React.FC = () => {
             >
               {/* Card Background */}
               <div className="relative bg-gray-900/50 backdrop-blur-sm border border-white/10 rounded-2xl p-6 overflow-hidden group-hover:border-white/20 transition-all duration-300">
-                
+
                 {/* Gradient Overlay */}
                 <div className={`absolute inset-0 bg-gradient-to-br ${tool.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300`} />
-                
+
                 {/* Icon */}
                 <div className={`inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br ${tool.color} rounded-xl mb-4 shadow-lg`}>
                   <div className="text-white">
@@ -349,11 +350,11 @@ const Toolbox: React.FC = () => {
                     <span className="px-2 py-1 text-xs font-medium bg-gray-800/50 text-gray-300 rounded-full border border-gray-700">
                       {tool.category}
                     </span>
-                    
+
                     {/* Proficiency Bar */}
                     <div className="flex items-center gap-2">
                       <div className="w-16 h-1 bg-gray-700 rounded-full overflow-hidden">
-                        <motion.div 
+                        <motion.div
                           className={`h-full bg-gradient-to-r ${tool.color} rounded-full`}
                           initial={{ width: 0 }}
                           whileInView={{ width: `${tool.proficiency}%` }}
@@ -369,11 +370,9 @@ const Toolbox: React.FC = () => {
                 </div>
 
                 {/* Hover Glow */}
-                <div 
-                  className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-                  style={{
-                    boxShadow: `inset 0 0 20px ${tool.glowColor}`
-                  }}
+                <div
+                  className="tool-hover-glow"
+                  data-glow-color={tool.glowColor}
                 />
 
                 {/* Corner Accent */}
@@ -398,14 +397,14 @@ const Toolbox: React.FC = () => {
               </div>
               <div className="text-sm text-gray-400">Tools Mastered</div>
             </div>
-            
+
             <div className="text-center">
               <div className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-pink-400 bg-clip-text text-transparent mb-2">
                 {categories.length - 1}
               </div>
               <div className="text-sm text-gray-400">Specializations</div>
             </div>
-            
+
             <div className="text-center">
               <div className="text-3xl font-bold bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent mb-2">
                 15+
@@ -413,7 +412,7 @@ const Toolbox: React.FC = () => {
               <div className="text-sm text-gray-400">Years Experience</div>
             </div>
           </div>
-          
+
           <p className="text-gray-500 text-sm font-mono uppercase tracking-wider mt-8">
             DESIGN / CODE / AUTOMATE / OPTIMIZE
           </p>

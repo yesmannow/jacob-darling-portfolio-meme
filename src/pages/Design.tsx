@@ -20,8 +20,8 @@ const Design: React.FC = () => {
   const designPortfolio = useMemo(() => loadDesignImages(), []);
   const categories = useMemo(() => getDesignCategories(designPortfolio), [designPortfolio]);
 
-  const filteredDesigns = activeCategory === "All" 
-    ? designPortfolio 
+  const filteredDesigns = activeCategory === "All"
+    ? designPortfolio
     : designPortfolio.filter(design => design.category === activeCategory);
 
   const handleDesignClick = (design: DesignItem) => {
@@ -72,14 +72,14 @@ const Design: React.FC = () => {
   // Enhanced GSAP Cinematic Animations
   useEffect(() => {
     const designs = gsap.utils.toArray(".design-card");
-    
+
     designs.forEach((design: any, index) => {
       // Cinematic entrance with 3D depth
       gsap.fromTo(
         design,
-        { 
-          autoAlpha: 0, 
-          y: 70, 
+        {
+          autoAlpha: 0,
+          y: 70,
           scale: 0.88,
           rotateY: 15,
           rotateX: 10,
@@ -171,7 +171,7 @@ const Design: React.FC = () => {
 
     // Enhanced glow effect on category pills
     gsap.utils.toArray(".category-pill").forEach((pill: any, index) => {
-      gsap.fromTo(pill, 
+      gsap.fromTo(pill,
         {
           boxShadow: "0 0 0px rgba(136, 171, 242, 0)"
         },
@@ -197,14 +197,14 @@ const Design: React.FC = () => {
   return (
     <main className="design-page-modern">
       {/* Hero Section */}
-      <motion.section 
+      <motion.section
         className="design-hero"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
       >
         <div className="hero-content-design">
-          <motion.h1 
+          <motion.h1
             className="design-page-title"
             initial={{ y: 50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
@@ -212,7 +212,7 @@ const Design: React.FC = () => {
           >
             Design Portfolio
           </motion.h1>
-          <motion.p 
+          <motion.p
             className="design-page-subtitle"
             initial={{ y: 30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
@@ -221,9 +221,9 @@ const Design: React.FC = () => {
             Creating visual solutions that drive engagement and deliver results
           </motion.p>
         </div>
-        
+
         {/* Floating Category Pills */}
-        <motion.div 
+        <motion.div
           className="floating-categories"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -239,8 +239,8 @@ const Design: React.FC = () => {
               transition={{ delay: 0.7 + idx * 0.05 }}
               whileHover={{ scale: 1.1, y: -3 }}
               whileTap={{ scale: 0.95 }}
-              style={{ 
-                background: activeCategory === category 
+              style={{
+                background: activeCategory === category
                   ? `linear-gradient(135deg, ${categoryColors[category] || '#f093fb'}, ${categoryColors[category] || '#f5576c'})`
                   : 'rgba(136, 171, 242, 0.1)'
               }}
@@ -254,7 +254,7 @@ const Design: React.FC = () => {
       {/* Bento Grid Gallery */}
       <section className="bento-gallery">
         <AnimatePresence mode="wait">
-          <motion.div 
+          <motion.div
             key={activeCategory}
             className="design-bento-grid"
             initial={{ opacity: 0, y: 20 }}
@@ -274,26 +274,24 @@ const Design: React.FC = () => {
               >
                 <div className="design-card-inner">
                   <img src={design.src} alt={design.title} loading="lazy" />
-                  <motion.div 
+                  <motion.div
                     className="design-info"
                     initial={{ opacity: 0 }}
                     whileHover={{ opacity: 1 }}
                   >
                     <div className="design-info-content">
                       <h3>{design.title}</h3>
-                      <span 
+                      <span
                         className="category-badge"
-                        style={{ backgroundColor: categoryColors[design.category] || '#f093fb' }}
+                        data-category={design.category}
                       >
                         {design.category}
                       </span>
                     </div>
                   </motion.div>
-                  <div 
+                  <div
                     className="design-card-gradient"
-                    style={{ 
-                      background: `linear-gradient(135deg, ${categoryColors[design.category]}15 0%, ${categoryColors[design.category]}05 100%)`
-                    }}
+                    data-category={design.category}
                   />
                 </div>
               </motion.div>
@@ -303,14 +301,14 @@ const Design: React.FC = () => {
       </section>
 
       {/* View More CTA */}
-      <motion.section 
+      <motion.section
         className="view-more-cta"
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
       >
-        <motion.a 
+        <motion.a
           href="https://www.behance.net/your-portfolio"
           target="_blank"
           rel="noopener noreferrer"
@@ -427,7 +425,7 @@ const Design: React.FC = () => {
                 <h2>{selectedDesign.title}</h2>
                 <span
                   className="lightbox-category"
-                  style={{ backgroundColor: categoryColors[selectedDesign.category] }}
+                  data-category={selectedDesign.category}
                 >
                   {selectedDesign.category}
                 </span>

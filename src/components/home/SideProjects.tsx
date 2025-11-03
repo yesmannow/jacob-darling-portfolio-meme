@@ -20,7 +20,7 @@ const sideProjects = [
     id: "rbe-consulting",
     name: "RBE Consulting",
     subtitle: "Professional Services Branding",
-    image: "/images/side-projects/rbe-logo.png", 
+    image: "/images/side-projects/rbe-logo.png",
     category: "Brand Identity",
     description: "Strategic brand development for business consulting firm with focus on trust and expertise."
   },
@@ -45,7 +45,7 @@ const sideProjects = [
     name: "Ultimate Technologies",
     subtitle: "Technology Solutions Branding",
     image: "/images/side-projects/ultimate-tech-logo.png",
-    category: "Brand Identity", 
+    category: "Brand Identity",
     description: "Modern brand identity for technology solutions provider with emphasis on innovation."
   }
 ];
@@ -124,7 +124,7 @@ const SideProjects: React.FC = () => {
   };
 
   return (
-    <section 
+    <section
       ref={sectionRef}
       className="py-32 bg-gradient-to-b from-black via-gray-900/20 to-black relative overflow-hidden"
     >
@@ -135,9 +135,9 @@ const SideProjects: React.FC = () => {
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
-        
+
         {/* Section Header */}
-        <motion.div 
+        <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -150,21 +150,21 @@ const SideProjects: React.FC = () => {
             </span>
           </h2>
           <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-            Applied design and branding work across diverse industries — 
+            Applied design and branding work across diverse industries —
             from healthcare to hospitality, each project tells a unique story.
           </p>
         </motion.div>
 
         {/* Featured Carousel */}
         <div className="mb-16">
-          <div 
+          <div
             ref={carouselRef}
             className="relative bg-gray-900/30 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden"
             onMouseEnter={() => setIsAutoPlaying(false)}
             onMouseLeave={() => setIsAutoPlaying(true)}
           >
             <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[400px]">
-              
+
               {/* Project Image */}
               <div className="relative overflow-hidden bg-gray-800">
                 <motion.img
@@ -180,7 +180,7 @@ const SideProjects: React.FC = () => {
                     e.currentTarget.src = `data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300"><rect width="400" height="300" fill="%23374151"/><text x="200" y="150" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="16">${sideProjects[currentIndex].name}</text></svg>`;
                   }}
                 />
-                
+
                 {/* Gradient Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-transparent to-transparent" />
               </div>
@@ -198,19 +198,19 @@ const SideProjects: React.FC = () => {
                       {sideProjects[currentIndex].category}
                     </span>
                   </div>
-                  
+
                   <h3 className="text-3xl font-bold text-white mb-2">
                     {sideProjects[currentIndex].name}
                   </h3>
-                  
+
                   <p className="text-lg text-cyan-400 mb-4">
                     {sideProjects[currentIndex].subtitle}
                   </p>
-                  
+
                   <p className="text-gray-400 leading-relaxed mb-6">
                     {sideProjects[currentIndex].description}
                   </p>
-                  
+
                   <button className="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 font-medium transition-colors duration-300">
                     <span>View Project</span>
                     <ExternalLink size={16} />
@@ -223,13 +223,15 @@ const SideProjects: React.FC = () => {
             <div className="absolute bottom-6 left-6 flex items-center gap-4">
               <button
                 onClick={prevProject}
+                aria-label="Previous project"
                 className="w-10 h-10 bg-black/50 backdrop-blur-sm border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-black/70 transition-all duration-300"
               >
                 <ChevronLeft size={20} />
               </button>
-              
+
               <button
                 onClick={nextProject}
+                aria-label="Next project"
                 className="w-10 h-10 bg-black/50 backdrop-blur-sm border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-black/70 transition-all duration-300"
               >
                 <ChevronRight size={20} />
@@ -238,13 +240,14 @@ const SideProjects: React.FC = () => {
 
             {/* Dots Indicator */}
             <div className="absolute bottom-6 right-6 flex gap-2">
-              {sideProjects.map((_, index) => (
+              {sideProjects.map((project, index) => (
                 <button
                   key={index}
                   onClick={() => goToProject(index)}
+                  aria-label={`Go to project ${index + 1}: ${project.name}`}
                   className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                    index === currentIndex 
-                      ? 'bg-cyan-400 w-8' 
+                    index === currentIndex
+                      ? 'bg-cyan-400 w-8'
                       : 'bg-white/30 hover:bg-white/50'
                   }`}
                 />
@@ -280,11 +283,11 @@ const SideProjects: React.FC = () => {
                     {project.category}
                   </span>
                 </div>
-                
+
                 <h4 className="text-lg font-semibold text-white group-hover:text-cyan-300 transition-colors duration-300">
                   {project.name}
                 </h4>
-                
+
                 <p className="text-sm text-gray-400 mt-1">
                   {project.subtitle}
                 </p>

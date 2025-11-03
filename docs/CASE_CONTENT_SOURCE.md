@@ -1,4 +1,5 @@
 # CASE CONTENT SOURCE DOCUMENTATION
+
 ## Side Projects Content Parsing & Integration
 
 ### 📄 **Source File Analysis**
@@ -6,6 +7,7 @@
 **Primary Content File**: `/public/uploads/case content (2).docx`
 
 **Content Structure Extracted**:
+
 - Project titles and client information
 - Challenge statements and problem definitions
 - Strategic approaches and methodologies
@@ -16,7 +18,8 @@
 ### 🏗️ **Data Normalization Process**
 
 **Title → Slug Conversion**:
-```
+
+```text
 "317 BBQ Restaurant Branding" → "317-bbq"
 "Primary Care Indianapolis Medical Branding" → "primary-care-indy"
 "Perpetual Movement Fitness Brand Identity" → "perpetual-movement-fitness"
@@ -26,6 +29,7 @@
 ```
 
 **Content Fields Parsed**:
+
 - `title`: Project name and description
 - `category`: Industry classification
 - `challenge`: Problem statement and objectives
@@ -78,11 +82,13 @@
 ### 🖼️ **Image Asset Linking**
 
 **Directory Mapping**:
+
 - `/public/images/side-projects/` → Project asset directory
 - Automatic image-to-project association based on filename patterns
 - Category classification (logo, product, lifestyle, etc.)
 
 **Image Manifest Structure**:
+
 ```json
 {
   "sideProjectsImages": [
@@ -102,12 +108,14 @@
 ### 🎯 **Content Quality Validation**
 
 **Brand Tone Compliance**:
+
 - ✅ **Cinematic**: Visual storytelling approach in all descriptions
 - ✅ **Confident**: Assertive language showcasing expertise
 - ✅ **Intelligent**: Strategic thinking and problem-solving focus
 - ✅ **Warmly Human**: Approachable tone with client empathy
 
 **Content Standards**:
+
 - Challenge statements clearly define problems and objectives
 - Approach sections detail strategic methodology
 - Execution descriptions include specific deliverables
@@ -117,13 +125,16 @@
 ### 📈 **SEO Optimization**
 
 **Keyword Integration**:
+
 - Industry-specific terms naturally incorporated
 - Service keywords strategically placed
 - Location-based optimization where relevant
 - Long-tail keyword phrases for niche targeting
 
 **Meta Description Generation**:
+
 Each project challenge statement optimized as meta description:
+
 - 150-160 character limit compliance
 - Action-oriented language
 - Benefit-focused messaging
@@ -132,14 +143,16 @@ Each project challenge statement optimized as meta description:
 ### 🔍 **Content Categories & Services**
 
 **Industry Categories**:
+
 1. **Restaurant Branding** - Food service and hospitality
-2. **Healthcare Branding** - Medical and wellness practices  
+2. **Healthcare Branding** - Medical and wellness practices
 3. **Fitness Branding** - Sports and wellness facilities
 4. **Brand Strategy** - Comprehensive brand development
 5. **Product Branding** - Consumer product design
 6. **Coffee Branding** - Specialty food and beverage
 
 **Service Classifications**:
+
 - Brand Identity Development
 - Logo Design & Visual Systems
 - Marketing Materials & Collateral
@@ -150,6 +163,7 @@ Each project challenge statement optimized as meta description:
 ### 📝 **Content Enrichment Process**
 
 **Automatic Enhancement**:
+
 - Alt text generation for all images
 - Tag extraction from content
 - Category-based color coding
@@ -157,6 +171,7 @@ Each project challenge statement optimized as meta description:
 - Metrics standardization
 
 **Manual Curation**:
+
 - Content tone refinement
 - Strategic narrative development
 - Client confidentiality compliance
@@ -165,6 +180,7 @@ Each project challenge statement optimized as meta description:
 ### 🎬 **Cinematic Storytelling Structure**
 
 **Narrative Flow**:
+
 1. **Hero Introduction** - Project overview and context
 2. **Challenge Definition** - Problem identification and stakes
 3. **Strategic Approach** - Methodology and planning
@@ -173,6 +189,7 @@ Each project challenge statement optimized as meta description:
 6. **Key Insights** - Lessons learned and takeaways
 
 **Visual Storytelling Elements**:
+
 - Hero images establishing project context
 - Process documentation showing methodology
 - Before/after comparisons demonstrating impact
@@ -182,6 +199,7 @@ Each project challenge statement optimized as meta description:
 ### 🔄 **Content Maintenance Workflow**
 
 **Update Process**:
+
 1. Source content modification in original document
 2. JSON regeneration with updated data
 3. Image asset verification and linking
@@ -189,6 +207,7 @@ Each project challenge statement optimized as meta description:
 5. Performance testing and validation
 
 **Quality Assurance**:
+
 - Content accuracy verification
 - Brand tone consistency check
 - SEO optimization validation
@@ -199,6 +218,6 @@ Each project challenge statement optimized as meta description:
 
 **All side projects have been successfully parsed, normalized, and integrated into the cinematic portfolio system with comprehensive linking to local image assets and optimized for search engine visibility and user experience.**
 
-*Content Source: case content (2).docx*  
-*Processing Date: October 12, 2025*  
+*Content Source: case content (2).docx*
+*Processing Date: October 12, 2025*
 *Status: ✅ **COMPLETE***

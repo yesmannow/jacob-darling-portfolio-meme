@@ -230,6 +230,7 @@
   justify-content: center;
   flex-shrink: 0;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  background: var(--app-icon-gradient, linear-gradient(135deg, #88ABF2 0%, #B8D0D9 100%));
 }
 
 .icon-emoji {

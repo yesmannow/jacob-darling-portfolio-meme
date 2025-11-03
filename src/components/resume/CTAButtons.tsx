@@ -1,9 +1,8 @@
 import { motion } from "framer-motion";
-import { PDFDownloadLink } from "@react-pdf/renderer";
-import { ResumePDF } from "../../pdf/ResumePDF";
-import { Download, Share2, Mail, ExternalLink, Sparkles, FileText } from "lucide-react";
+import { Share2, Mail, ExternalLink, FileText } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import resumeData from "../../data/resume.json";
+import LazyPDFDownloadCTA from "./LazyPDFDownloadCTA";
 
 export default function CTAButtons() {
   const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
@@ -51,12 +50,12 @@ export default function CTAButtons() {
   };
 
   const buttonVariants = {
-    hover: { 
-      scale: 1.05, 
+    hover: {
+      scale: 1.05,
       y: -2,
       transition: { duration: 0.2 }
     },
-    tap: { 
+    tap: {
       scale: 0.95,
       transition: { duration: 0.1 }
     }
@@ -93,34 +92,11 @@ export default function CTAButtons() {
       className="flex flex-col items-center gap-4 mb-12"
     >
       {/* PDF Download Button */}
-      <PDFDownloadLink 
-        document={<ResumePDF />} 
-        fileName="Jacob-Darling-Resume.pdf"
-        className="group"
-        onClick={handlePDFGeneration}
-      >
-        {({ loading }) => (
-          <motion.button
-            variants={buttonVariants}
-            whileHover="hover"
-            whileTap="tap"
-            className="flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full font-semibold shadow-lg hover:shadow-xl transition-shadow duration-300"
-            disabled={loading || isGeneratingPDF}
-          >
-            {loading || isGeneratingPDF ? (
-              <>
-                <Sparkles size={20} className="animate-spin" />
-                <span>Generating PDF...</span>
-              </>
-            ) : (
-              <>
-                <Download size={20} />
-                <span>Download Resume</span>
-              </>
-            )}
-          </motion.button>
-        )}
-      </PDFDownloadLink>
+      <LazyPDFDownloadCTA
+        isGeneratingPDF={isGeneratingPDF}
+        handlePDFGeneration={handlePDFGeneration}
+        buttonVariants={buttonVariants}
+      />
 
       {/* Share Button */}
       <motion.button

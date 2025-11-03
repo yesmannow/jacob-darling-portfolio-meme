@@ -8,6 +8,7 @@
 @import './typography.css';
 @import './bio-cinematic.css';
 @import './enhanced-animations.css';
+@import './mobile-optimization.css';
 
 @tailwind base;
 @tailwind components;
@@ -26,6 +27,18 @@ body {
   color: var(--color-text);
   line-height: var(--leading-normal);
   overflow-x: hidden;
+  padding-top: 80px; /* Account for fixed header */
+}
+
+/* Smooth scrolling for better navigation UX */
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 #root {
@@ -38,10 +51,25 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 main {
   flex: 1;
+  position: relative;
+  z-index: 1;
+  margin-top: 80px; /* Ensure content starts below fixed header */
+}
+
+/* Utility class for pages that need extra top spacing */
+.page-content {
+  padding-top: 2rem; /* Additional spacing for page content */
+}
+
+/* Ensure hero sections account for header */
+.hero-section {
+  margin-top: -80px; /* Negative margin to account for header */
+  padding-top: 100px; /* Extra padding to compensate */
 }
 
 a {

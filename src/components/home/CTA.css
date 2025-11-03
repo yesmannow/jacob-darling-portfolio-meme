@@ -1,0 +1,14 @@
+.cta-particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: white;
+  border-radius: 50%;
+  left: var(--particle-left);
+  top: var(--particle-top);
+  animation-delay: var(--particle-delay);
+}
+
+/* Dynamic positioning values must use CSS custom properties set via style attribute
+   as they are computed from JavaScript and vary per particle. This is the standard
+   approach for dynamic values in React. */

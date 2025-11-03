@@ -48,10 +48,76 @@ export default defineConfig({
   build: {
     rollupOptions: {
       output: {
-        manualChunks: {
-          vendor: ["react", "react-dom", "framer-motion", "gsap"],
+        manualChunks: (id) => {
+          // Core React libraries
+          if (id.includes('node_modules/react') || id.includes('node_modules/react-dom')) {
+            return 'react-vendor';
+          }
+
+          // Animation libraries
+          if (id.includes('node_modules/framer-motion') || id.includes('node_modules/gsap')) {
+            return 'animation-vendor';
+          }
+
+          // UI libraries
+          if (id.includes('node_modules/lucide-react') || id.includes('node_modules/@radix-ui')) {
+            return 'ui-vendor';
+          }
+
+          // PDF libraries (large)
+          if (id.includes('node_modules/@react-pdf') || id.includes('node_modules/jspdf')) {
+            return 'pdf-vendor';
+          }
+
+          // Router libraries
+          if (id.includes('node_modules/react-router')) {
+            return 'router-vendor';
+          }
+
+          // Other node_modules
+          if (id.includes('node_modules')) {
+            return 'vendor';
+          }
         },
+        // Optimize chunk naming for better caching
+        chunkFileNames: (chunkInfo) => {
+          const facadeModuleId = chunkInfo.facadeModuleId ? chunkInfo.facadeModuleId.split('/').pop() : 'chunk';
+          return `assets/${facadeModuleId}-[hash].js`;
+        },
+        entryFileNames: 'assets/[name]-[hash].js',
+        assetFileNames: (assetInfo) => {
+          const info = assetInfo.name.split('.');
+          const ext = info[info.length - 1];
+          if (/\.(css)$/.test(assetInfo.name)) {
+            return `assets/[name]-[hash].${ext}`;
+          }
+          if (/\.(png|jpe?g|gif|svg|webp|avif)$/.test(assetInfo.name)) {
+            return `assets/images/[name]-[hash].${ext}`;
+          }
+          return `assets/[name]-[hash].${ext}`;
+        }
       },
     },
+    // Performance optimizations
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+        pure_funcs: ['console.log', 'console.info', 'console.debug', 'console.warn']
+      },
+      mangle: {
+        safari10: true
+      }
+    },
+    // Source maps for production debugging
+    sourcemap: false,
+    // Target modern browsers for better optimization
+    target: 'esnext',
+    // CSS code splitting
+    cssCodeSplit: true,
+    // Asset optimization
+    assetsInlineLimit: 4096, // 4kb inline limit
+    chunkSizeWarningLimit: 1000, // Increase limit to 1MB
   },
 });

@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { applications, getAllCategories } from "../data/applications";
 import { staggerContainer, staggerItem } from "../utils/animations";
 import AnimatedSection from "../components/animations/AnimatedSection";
+import SimpleIcon from "../components/icons/SimpleIcon";
 import "./Applications.css";
 
 
@@ -16,31 +17,31 @@ const Applications: React.FC = () => {
 
   const filteredApplications = useMemo(() => {
     let filtered = applications;
-    
+
     // Filter by category
     if (activeFilter !== "All") {
       filtered = filtered.filter(app => app.category.includes(activeFilter));
     }
-    
+
     // Filter by search term
     if (searchTerm) {
-      filtered = filtered.filter(app => 
+      filtered = filtered.filter(app =>
         app.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         app.tagline.toLowerCase().includes(searchTerm.toLowerCase()) ||
         app.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()))
       );
     }
-    
+
     // Sort
     if (sortBy === "name") {
       filtered = [...filtered].sort((a, b) => a.title.localeCompare(b.title));
     } else if (sortBy === "recent") {
       filtered = [...filtered].reverse();
     }
-    
+
     return filtered;
   }, [activeFilter, searchTerm, sortBy]);
-  
+
   const getAppImage = (appId: string) => {
     const imageMap: { [key: string]: string } = {
       'clinical-compass': '/apps/clinical-compass-thumbnail.png',
@@ -62,7 +63,7 @@ const Applications: React.FC = () => {
     };
     return iconMap[appId] || { icon: '🎓', gradient: 'linear-gradient(135deg, #88ABF2 0%, #B8D0D9 100%)' };
   };
-  
+
   const totalApps = applications.length;
   const totalTechnologies = new Set(applications.flatMap(app => app.technicalDetails.techStack)).size;
 
@@ -79,7 +80,7 @@ const Applications: React.FC = () => {
             Explore production-ready web applications demonstrating full-stack development,
             UX design, and complex problem-solving across marketing, sales, and clinical domains.
           </p>
-          
+
           {/* Stats Overview */}
           <div className="apps-stats">
             <div className="stat-item">
@@ -118,7 +119,7 @@ const Applications: React.FC = () => {
               </button>
             )}
           </div>
-          
+
           {/* Filters & Controls */}
           <div className="controls-group">
             {/* Category Filter */}
@@ -140,19 +141,21 @@ const Applications: React.FC = () => {
                 </motion.button>
               ))}
             </div>
-            
+
             {/* Sort & View Controls */}
             <div className="view-controls">
-              <select 
+              <select
                 className="sort-select"
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value as typeof sortBy)}
+                title="Sort applications"
+                aria-label="Sort applications"
               >
                 <option value="default">Default Order</option>
                 <option value="name">A-Z</option>
                 <option value="recent">Most Recent</option>
               </select>
-              
+
               <div className="view-toggle">
                 <button
                   className={`view-btn ${viewMode === "grid" ? "active" : ""}`}
@@ -191,7 +194,7 @@ const Applications: React.FC = () => {
             {searchTerm && ` matching "${searchTerm}"`}
           </span>
         </div>
-        
+
         <AnimatePresence mode="wait">
           <motion.div
             key={`${activeFilter}-${searchTerm}-${viewMode}`}
@@ -203,7 +206,7 @@ const Applications: React.FC = () => {
           >
             {filteredApplications.map((app) => {
               const iconData = getAppIcon(app.id);
-              
+
               return (
                 <motion.div
                   key={app.id}
@@ -227,7 +230,7 @@ const Applications: React.FC = () => {
                           </div>
                         </div>
                       </div>
-                      
+
                       {/* Live Indicator */}
                       <div className="live-indicator">
                         <span className="live-dot"></span>
@@ -238,7 +241,7 @@ const Applications: React.FC = () => {
                     {/* App Content */}
                     <div className="app-card-content">
                       <div className="app-header">
-                        <div className="app-icon-badge" style={{ background: iconData.gradient }}>
+                        <div className="app-icon-badge" data-gradient={iconData.gradient}>
                           <span className="icon-emoji">{iconData.icon}</span>
                         </div>
                         <div className="app-meta">
@@ -250,7 +253,10 @@ const Applications: React.FC = () => {
                       {/* Tech Stack */}
                       <div className="tech-stack">
                         {app.technicalDetails.techStack.slice(0, 3).map((tech, idx) => (
-                          <span key={idx} className="tech-pill">{tech}</span>
+                          <span key={idx} className="tech-pill">
+                            <SimpleIcon name={tech} size={16} className="tech-pill-icon" />
+                            <span>{tech}</span>
+                          </span>
                         ))}
                         {app.technicalDetails.techStack.length > 3 && (
                           <span className="tech-pill more">+{app.technicalDetails.techStack.length - 3}</span>
@@ -323,7 +329,7 @@ const Applications: React.FC = () => {
             <div className="no-results-icon">🔍</div>
             <h3>No Applications Found</h3>
             <p>No applications match your current filters or search term.</p>
-            <button 
+            <button
               className="reset-filters-btn"
               onClick={() => {
                 setActiveFilter("All");

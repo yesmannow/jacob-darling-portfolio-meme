@@ -3,8 +3,9 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import PageTransition from "../components/animations/PageTransition";
 import ScrollToTop from "../components/utils/ScrollToTop";
+import "./AppRouter.css";
 
-// Lazy load pages for code splitting
+// Lazy load pages for code splitting with better chunking
 const Home = React.lazy(() => import("../pages/index")); // Cinematic homepage
 const About = React.lazy(() => import("../pages/About"));
 const CaseStudies = React.lazy(() => import("../pages/CaseStudies"));
@@ -21,24 +22,18 @@ const SideProjectDetail = React.lazy(() => import("../pages/side-projects/SidePr
 const Testimonials = React.lazy(() => import("../pages/Testimonials"));
 const Resume = React.lazy(() => import("../pages/Resume"));
 const Contact = React.lazy(() => import("../pages/Contact"));
+const Inspiration = React.lazy(() => import("../pages/Inspiration"));
 
 // Loading component
 const PageLoader = () => (
-  <div className="hero" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-    <div style={{
-      width: '3rem',
-      height: '3rem',
-      border: '2px solid var(--color-accent)',
-      borderTop: '2px solid transparent',
-      borderRadius: '50%',
-      animation: 'spin 1s linear infinite'
-    }}></div>
+  <div className="hero page-loader">
+    <div className="loading-spinner"></div>
   </div>
 );
 
 const AppRouter: React.FC = () => {
   const location = useLocation();
-  
+
   return (
     <>
       <ScrollToTop />
@@ -56,6 +51,7 @@ const AppRouter: React.FC = () => {
             <Route path="/applications/:id" element={<PageTransition><ApplicationDetail /></PageTransition>} />
             <Route path="/photography" element={<PageTransition><Photography /></PageTransition>} />
             <Route path="/design" element={<PageTransition><Design /></PageTransition>} />
+            <Route path="/inspiration" element={<PageTransition><Inspiration /></PageTransition>} />
             <Route path="/side-projects" element={<PageTransition><SideProjects /></PageTransition>} />
             <Route path="/side-projects/:slug" element={<PageTransition><SideProjectDetail /></PageTransition>} />
             <Route path="/testimonials" element={<PageTransition><Testimonials /></PageTransition>} />

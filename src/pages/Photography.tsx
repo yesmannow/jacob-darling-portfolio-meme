@@ -20,8 +20,8 @@ const Photography: React.FC = () => {
   const photoGallery = useMemo(() => loadPhotographyImages(), []);
   const categories = useMemo(() => getPhotoCategories(photoGallery), [photoGallery]);
 
-  const filteredPhotos = activeCategory === "All" 
-    ? photoGallery 
+  const filteredPhotos = activeCategory === "All"
+    ? photoGallery
     : photoGallery.filter(photo => photo.category === activeCategory);
 
   const handlePhotoClick = (photo: PhotoItem) => {
@@ -72,14 +72,14 @@ const Photography: React.FC = () => {
   // Enhanced GSAP Cinematic Animations
   useEffect(() => {
     const photos = gsap.utils.toArray(".photo-card");
-    
-    photos.forEach((photo: any, index) => {
+
+    photos.forEach((photo: HTMLElement, index: number) => {
       // Cinematic entrance with depth
       gsap.fromTo(
         photo,
-        { 
-          autoAlpha: 0, 
-          y: 80, 
+        {
+          autoAlpha: 0,
+          y: 80,
           scale: 0.85,
           rotateX: 25,
           rotateY: 5,
@@ -145,21 +145,21 @@ const Photography: React.FC = () => {
     });
 
     return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      ScrollTrigger.getAll().forEach((trigger: ScrollTrigger) => trigger.kill());
     };
   }, [filteredPhotos]);
 
   return (
     <main className="photography-page-modern">
       {/* Hero Section with Parallax */}
-      <motion.section 
+      <motion.section
         className="photo-hero"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
       >
         <div className="hero-content-photo">
-          <motion.h1 
+          <motion.h1
             className="photo-page-title"
             initial={{ y: 50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
@@ -167,7 +167,7 @@ const Photography: React.FC = () => {
           >
             Visual Stories
           </motion.h1>
-          <motion.p 
+          <motion.p
             className="photo-page-subtitle"
             initial={{ y: 30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
@@ -176,9 +176,9 @@ const Photography: React.FC = () => {
             Capturing moments that inspire and connect
           </motion.p>
         </div>
-        
+
         {/* Floating Category Pills */}
-        <motion.div 
+        <motion.div
           className="floating-categories"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -194,8 +194,8 @@ const Photography: React.FC = () => {
               transition={{ delay: 0.7 + idx * 0.05 }}
               whileHover={{ scale: 1.1, y: -3 }}
               whileTap={{ scale: 0.95 }}
-              style={{ 
-                background: activeCategory === category 
+              style={{
+                background: activeCategory === category
                   ? `linear-gradient(135deg, ${categoryColors[category] || '#667eea'}, ${categoryColors[category] || '#764ba2'})`
                   : 'rgba(136, 171, 242, 0.1)'
               }}
@@ -209,7 +209,7 @@ const Photography: React.FC = () => {
       {/* Bento Grid Gallery */}
       <section className="bento-gallery">
         <AnimatePresence mode="wait">
-          <motion.div 
+          <motion.div
             key={activeCategory}
             className="photo-bento-grid"
             initial={{ opacity: 0, y: 20 }}
@@ -229,26 +229,24 @@ const Photography: React.FC = () => {
               >
                 <div className="photo-card-inner">
                   <img src={photo.src} alt={photo.title} loading="lazy" />
-                  <motion.div 
+                  <motion.div
                     className="photo-info"
                     initial={{ opacity: 0 }}
                     whileHover={{ opacity: 1 }}
                   >
                     <div className="photo-info-content">
                       <h3>{photo.title}</h3>
-                      <span 
+                      <span
                         className="category-badge"
-                        style={{ backgroundColor: categoryColors[photo.category] || '#667eea' }}
+                        data-category={photo.category}
                       >
                         {photo.category}
                       </span>
                     </div>
                   </motion.div>
-                  <div 
+                  <div
                     className="photo-card-gradient"
-                    style={{ 
-                      background: `linear-gradient(135deg, ${categoryColors[photo.category]}15 0%, ${categoryColors[photo.category]}05 100%)`
-                    }}
+                    data-category={photo.category}
                   />
                 </div>
               </motion.div>
@@ -258,14 +256,14 @@ const Photography: React.FC = () => {
       </section>
 
       {/* View More CTA */}
-      <motion.section 
+      <motion.section
         className="view-more-cta"
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
       >
-        <motion.a 
+        <motion.a
           href="https://lightroom.adobe.com/shares/1bd278c4190442cbbdc4eccfcef0d91b"
           target="_blank"
           rel="noopener noreferrer"
@@ -383,7 +381,7 @@ const Photography: React.FC = () => {
                 <h2>{selectedPhoto.title}</h2>
                 <span
                   className="lightbox-category"
-                  style={{ backgroundColor: categoryColors[selectedPhoto.category] }}
+                  data-category={selectedPhoto.category}
                 >
                   {selectedPhoto.category}
                 </span>

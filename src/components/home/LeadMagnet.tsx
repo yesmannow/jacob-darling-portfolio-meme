@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { Download, ExternalLink, Sparkles, CheckCircle } from "lucide-react";
 
 const LeadMagnet: React.FC = () => {
@@ -65,20 +66,20 @@ const LeadMagnet: React.FC = () => {
 
             <div className="lg:col-span-3 space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <a
-                  href="/resume"
-                  className="group flex items-center justify-center gap-3 px-6 py-4 rounded-2xl bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white font-semibold shadow-lg transition-transform duration-300 hover:-translate-y-0.5 hover:shadow-xl"
+                <Link
+                  to="/resume"
+                  className="group flex items-center justify-center gap-3 px-6 py-4 rounded-2xl bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white font-semibold shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:scale-105"
                 >
-                  <ExternalLink className="w-5 h-5" />
+                  <ExternalLink className="w-5 h-5 group-hover:rotate-45 transition-transform" />
                   View cinematic résumé experience
-                </a>
+                </Link>
                 <a
                   href="/documents/Jacob-Darling-Interview-Toolkit.pdf"
-                  className="group flex items-center justify-center gap-3 px-6 py-4 rounded-2xl border border-white/15 text-white font-semibold transition-all duration-300 hover:-translate-y-0.5 hover:border-white/40"
+                  className="group flex items-center justify-center gap-3 px-6 py-4 rounded-2xl border border-white/15 text-white font-semibold transition-all duration-300 hover:-translate-y-0.5 hover:border-white/40 hover:bg-white/5 hover:scale-105"
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <Download className="w-5 h-5" />
+                  <Download className="w-5 h-5 group-hover:animate-bounce" />
                   Download interview toolkit (PDF)
                 </a>
               </div>

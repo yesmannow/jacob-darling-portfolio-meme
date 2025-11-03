@@ -1,19 +1,24 @@
-import React, { Suspense, useEffect } from "react";
+import React, { Suspense, useEffect, lazy } from "react";
 import { motion } from "framer-motion";
 import Hero from "../components/home/Hero";
-import IntroStatement from "../components/home/IntroStatement";
-import GlanceMetrics from "../components/home/GlanceMetrics";
-import FeaturedWork from "../components/home/FeaturedWork";
-import AboutSnapshot from "../components/home/AboutSnapshot";
-import Services from "../components/home/Services";
-import Process from "../components/home/Process";
-import Testimonials from "../components/home/Testimonials";
-import LeadMagnet from "../components/home/LeadMagnet";
-import Toolbox from "../components/home/Toolbox";
-import Awards from "../components/home/Awards";
-import CTA from "../components/home/CTA";
 import ScrollProgress from "../components/ui/ScrollProgress";
 import { refreshLenis } from "../utils/motion-sync";
+
+// Lazy load heavy components for better performance
+const IntroStatement = lazy(() => import("../components/home/IntroStatement"));
+const GlanceMetrics = lazy(() => import("../components/home/GlanceMetrics"));
+const MarketingCommandCenter = lazy(() => import("../components/dashboard/MarketingCommandCenter"));
+const RedesignedFeaturedWork = lazy(() => import("../components/home/RedesignedFeaturedWork"));
+const ProcessSection = lazy(() => import("../components/home/ProcessSection"));
+const AboutSnapshot = lazy(() => import("../components/home/AboutSnapshot"));
+const InteractiveTimeline = lazy(() => import("../components/timeline/InteractiveTimeline"));
+const Services = lazy(() => import("../components/home/Services"));
+const Testimonials = lazy(() => import("../components/home/Testimonials"));
+const LeadMagnet = lazy(() => import("../components/home/LeadMagnet"));
+const Toolbox = lazy(() => import("../components/home/Toolbox"));
+const AIAutomationShowcase = lazy(() => import("../components/automation/AIAutomationShowcase"));
+const Awards = lazy(() => import("../components/home/Awards"));
+const CTA = lazy(() => import("../components/home/CTA"));
 
 const HomePage: React.FC = () => {
   useEffect(() => {
@@ -25,10 +30,10 @@ const HomePage: React.FC = () => {
     <>
       {/* UX Enhancement Components */}
       <ScrollProgress />
-      
+
       {/* Cinematic Hero Section */}
       <Hero />
-      
+
       <Suspense fallback={
         <div className="flex items-center justify-center min-h-screen bg-black">
           <div className="w-8 h-8 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
@@ -36,34 +41,43 @@ const HomePage: React.FC = () => {
       }>
         {/* Design Philosophy */}
         <IntroStatement />
-        
+
         {/* Impact Metrics Dashboard */}
         <GlanceMetrics />
-        
+
+        {/* Marketing Command Center */}
+        <MarketingCommandCenter />
+
         {/* Featured Case Studies */}
-        <FeaturedWork />
-        
+        <RedesignedFeaturedWork />
+
+        {/* Process Section */}
+        <ProcessSection />
+
         {/* About Snapshot */}
         <AboutSnapshot />
-        
+
+        {/* Interactive Timeline */}
+        <InteractiveTimeline />
+
         {/* Services Overview */}
         <Services />
-        
-        {/* Engagement Process */}
-        <Process />
-        
+
         {/* Testimonials */}
         <Testimonials />
-        
+
         {/* Lead Magnet */}
         <LeadMagnet />
-        
+
         {/* Creative Toolbox */}
         <Toolbox />
-        
+
+        {/* AI + Automation Showcase */}
+        <AIAutomationShowcase />
+
         {/* Awards & Recognition */}
         <Awards />
-        
+
         {/* Final CTA */}
         <CTA />
       </Suspense>

@@ -3,23 +3,27 @@ import { motion, AnimatePresence } from "framer-motion";
 import AnimatedSection from "../components/animations/AnimatedSection";
 import SkillsRadar from "../components/skills/SkillsRadar";
 import ToolboxEcosystem from "../components/diagrams/ToolboxEcosystem";
-import { 
-  ZapIcon, 
-  ShieldIcon, 
-  ActivityIcon, 
-  ServerIcon, 
-  TargetIcon, 
-  RepeatIcon, 
-  PaletteIcon, 
+import {
+  ZapIcon,
+  ShieldIcon,
+  ActivityIcon,
+  ServerIcon,
+  TargetIcon,
+  RepeatIcon,
+  PaletteIcon,
   CreditCardIcon,
-  ChevronDownIcon 
+  ChevronDownIcon
 } from "../components/icons/TechIcons";
+import SimpleIcon from "../components/icons/SimpleIcon";
+import TechTooltip from "../components/tooltips/TechTooltip";
 import { fadeInUp, staggerContainer, staggerItem } from "../utils/animations";
 import { technicalCategories, technologyStacks } from "../data/toolbox";
+import { getTechDescription } from "../data/techDescriptions";
 import "./Toolbox.css";
 
 const Toolbox: React.FC = () => {
   const [expandedCategory, setExpandedCategory] = useState<number | null>(null);
+  const [hoveredTech, setHoveredTech] = useState<string | null>(null);
 
   const toggleCategory = (index: number) => {
     setExpandedCategory(expandedCategory === index ? null : index);
@@ -43,11 +47,13 @@ const Toolbox: React.FC = () => {
     <main className="toolbox-page">
       <AnimatedSection>
         <section className="toolbox-header">
-          <motion.h1 variants={fadeInUp}>Technical Skills & Expertise</motion.h1>
+          <motion.h1 variants={fadeInUp}>Skills & Tools</motion.h1>
           <motion.p className="lead" variants={fadeInUp}>
-            My technical expertise powers marketing outcomes. Deep knowledge across performance optimization,
-            security implementation, analytics systems, and server administration enables me to build
-            marketing systems that are both sophisticated and reliable.
+            A unique combination of marketing and technical skills. I'm proficient in marketing automation platforms
+            (HubSpot, Marketo, Salesforce CRM), analytics tools (Google Analytics, Google Ads, Facebook Ads Manager),
+            email automation (Zapier, FluentCRM), alongside programming languages and frameworks (HTML/CSS, JavaScript,
+            Python, React, TypeScript). This dual expertise enables me to build complete marketing systems that
+            drive measurable ROI.
           </motion.p>
         </section>
       </AnimatedSection>
@@ -64,10 +70,12 @@ const Toolbox: React.FC = () => {
           </div>
 
           <div className="categories-list">
-            {technicalCategories.map((category, index) => (
+            {technicalCategories.map((category, index) => {
+              const isExpanded = expandedCategory === index;
+              return (
               <motion.div
                 key={index}
-                className={`category-card ${expandedCategory === index ? 'expanded' : ''}`}
+                className={`category-card ${isExpanded ? 'expanded' : ''}`}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -76,7 +84,7 @@ const Toolbox: React.FC = () => {
                 <button
                   className="category-header"
                   onClick={() => toggleCategory(index)}
-                  aria-expanded={expandedCategory === index}
+                  {...(isExpanded ? { 'aria-expanded': true } : { 'aria-expanded': false })}
                 >
                   <div className="header-content">
                     <div className="icon-wrapper">
@@ -91,7 +99,7 @@ const Toolbox: React.FC = () => {
                 </button>
 
                 <AnimatePresence initial={false}>
-                  {expandedCategory === index && (
+                  {isExpanded && (
                     <motion.div
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
@@ -102,8 +110,8 @@ const Toolbox: React.FC = () => {
                       <div className="category-skills">
                         <div className="skills-grid">
                           {category.skills.map((skill, skillIndex) => (
-                            <motion.div 
-                              key={skillIndex} 
+                            <motion.div
+                              key={skillIndex}
                               className="skill-item"
                               initial={{ opacity: 0, x: -10 }}
                               animate={{ opacity: 1, x: 0 }}
@@ -119,7 +127,8 @@ const Toolbox: React.FC = () => {
                   )}
                 </AnimatePresence>
               </motion.div>
-            ))}
+              );
+            })}
           </div>
         </section>
       </AnimatedSection>
@@ -151,11 +160,29 @@ const Toolbox: React.FC = () => {
                   <h3>{stack.category}</h3>
                 </div>
                 <div className="stack-technologies">
-                  {stack.technologies.map((tech, techIndex) => (
-                    <div key={techIndex} className="tech-item">
-                      {tech}
-                    </div>
-                  ))}
+                  {stack.technologies.map((tech, techIndex) => {
+                    const techInfo = getTechDescription(tech);
+                    return (
+                      <div
+                        key={techIndex}
+                        className="tech-item"
+                        onMouseEnter={() => setHoveredTech(`${stack.category}-${techIndex}`)}
+                        onMouseLeave={() => setHoveredTech(null)}
+                      >
+                        <SimpleIcon name={tech} size={18} className="tech-icon" />
+                        <span>{tech}</span>
+                        {techInfo && (
+                          <TechTooltip
+                            tech={tech}
+                            description={techInfo.description}
+                            usage={techInfo.usage}
+                            show={hoveredTech === `${stack.category}-${techIndex}`}
+                            position="top"
+                          />
+                        )}
+                      </div>
+                    );
+                  })}
                 </div>
               </motion.div>
             ))}

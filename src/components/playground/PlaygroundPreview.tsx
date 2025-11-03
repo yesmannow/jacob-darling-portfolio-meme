@@ -60,7 +60,7 @@ const PlaygroundPreview: React.FC = () => {
           {featuredApps.map((app, index) => {
             const iconData = getAppIcon(app.id);
             const isHovered = hoveredApp === app.id;
-            
+
             return (
               <motion.div
                 key={app.id}
@@ -84,7 +84,7 @@ const PlaygroundPreview: React.FC = () => {
                       </div>
                     </div>
                   </div>
-                  
+
                   {/* Live Indicator */}
                   <div className="live-indicator">
                     <span className="live-dot"></span>
@@ -95,7 +95,10 @@ const PlaygroundPreview: React.FC = () => {
                 {/* App Info */}
                 <div className="app-card-content">
                   <div className="app-header">
-                    <div className="app-icon-badge" style={{ background: iconData.gradient }}>
+                    <div
+                      className="app-icon-badge"
+                      data-app-gradient={iconData.gradient}
+                    >
                       <span className="icon-emoji">{iconData.icon}</span>
                     </div>
                     <div className="app-meta">

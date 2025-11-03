@@ -44,28 +44,28 @@ const IntroStatement: React.FC = () => {
   }, []);
 
   return (
-    <section 
+    <section
       ref={sectionRef}
       className="py-32 bg-black relative overflow-hidden"
     >
       {/* Subtle background gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-black via-gray-900/20 to-black" />
-      
+
       <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
-        <motion.p 
+        <motion.p
           ref={textRef}
           className="text-3xl md:text-4xl lg:text-5xl leading-relaxed text-white font-light"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
         >
-          I build{" "}
-          <motion.span 
+          I develop{" "}
+          <motion.span
             className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent font-semibold relative inline-block"
             whileHover={{ scale: 1.05 }}
           >
-            digital systems that think
-            <motion.span 
+            marketing automation systems
+            <motion.span
               className="absolute -bottom-2 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400 origin-left block"
               initial={{ scaleX: 0 }}
               whileInView={{ scaleX: 1 }}
@@ -73,13 +73,13 @@ const IntroStatement: React.FC = () => {
               transition={{ delay: 0.5, duration: 0.8 }}
             />
           </motion.span>
-          , and{" "}
-          <motion.span 
+          {" "}that drive{" "}
+          <motion.span
             className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent font-semibold relative inline-block"
             whileHover={{ scale: 1.05 }}
           >
-            brands that move
-            <motion.span 
+            measurable ROI
+            <motion.span
               className="absolute -bottom-2 left-0 right-0 h-0.5 bg-gradient-to-r from-purple-400 to-pink-400 origin-left block"
               initial={{ scaleX: 0 }}
               whileInView={{ scaleX: 1 }}
@@ -89,15 +89,17 @@ const IntroStatement: React.FC = () => {
           </motion.span>
           .
         </motion.p>
-        
-        <motion.p 
+
+        <motion.p
           className="text-xl md:text-2xl text-gray-400 mt-8 max-w-3xl mx-auto leading-relaxed"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.3, duration: 0.8 }}
         >
-          My work bridges storytelling and automation — where creativity meets computation.
+          Through analytics-driven strategy, cross-functional project management, and technical marketing expertise,
+          I deliver campaigns that convert—with 400+ marketing automations, 70% reduction in support tickets,
+          and 40% increase in checkout conversions to prove it.
         </motion.p>
 
         {/* Decorative elements */}

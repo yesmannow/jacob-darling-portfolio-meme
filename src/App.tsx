@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
 import AppRouter from "./router/AppRouter";
-import Header from "./components/layout/Header";
+import ModernHeader from "./components/layout/ModernHeader";
 import Footer from "./components/layout/Footer";
 import ScrollToTop from "./components/utils/ScrollToTop";
 import BackToTop from "./components/utilities/BackToTop";
 import PersonSchema from "./components/seo/PersonSchema";
+import PerformanceMonitor from "./components/utils/PerformanceMonitor";
 import { initLenis, destroyLenis } from "./utils/motion-sync";
 import "lenis/dist/lenis.css";
 
@@ -13,7 +14,7 @@ const App: React.FC = () => {
     // Ensure native scrolling works immediately
     document.documentElement.style.overflow = 'auto';
     document.body.style.overflow = 'auto';
-    
+
     // Initialize global Lenis instance (with error handling)
     try {
       const lenis = initLenis();
@@ -25,7 +26,7 @@ const App: React.FC = () => {
     } catch (error) {
       console.error("❌ App: Lenis initialization error:", error);
     }
-    
+
     // Cleanup on unmount
     return () => {
       try {
@@ -39,12 +40,13 @@ const App: React.FC = () => {
   return (
     <div className="app">
       <PersonSchema />
+      <PerformanceMonitor />
       {/* <LogoIntro /> */}
       {/* <BackgroundLogos /> */}
       {/* <CustomCursor /> */}
       <ScrollToTop />
       <BackToTop />
-      <Header />
+      <ModernHeader />
       <AppRouter />
       <Footer />
     </div>

@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import AnimatedSection from "../components/animations/AnimatedSection";
 import MagneticButton from "../components/interactive/MagneticButton";
+import SimpleIcon from "../components/icons/SimpleIcon";
 import { fadeInUp } from "../utils/animations";
 import "./Contact.css";
 
@@ -74,8 +75,10 @@ const Contact: React.FC = () => {
         <section className="contact-header">
           <motion.h1 variants={fadeInUp}>Let's Create What Doesn't Exist Yet.</motion.h1>
           <motion.p className="lead" variants={fadeInUp}>
-            Have a challenge that needs solving? A system that needs building?
-            An idea that needs shaping?
+            I'm currently open to new opportunities in marketing leadership and tech integration.
+            Feel free to reach out for interviews, collaborations, or any questions—I'd love to connect!
+            <br /><br />
+            Have a challenge that needs solving? A system that needs building? An idea that needs shaping?
             <br /><br />
             Let's talk.
           </motion.p>
@@ -179,7 +182,9 @@ const Contact: React.FC = () => {
                   </a>
 
                   <a href="https://linkedin.com/in/jacobdarling" target="_blank" rel="noopener noreferrer" className="contact-method">
-                    <span className="icon">💼</span>
+                    <span className="icon">
+                      <SimpleIcon name="LinkedIn" size={24} />
+                    </span>
                     <div>
                       <strong>LinkedIn</strong>
                       <p>Connect professionally</p>
@@ -187,7 +192,9 @@ const Contact: React.FC = () => {
                   </a>
 
                   <a href="https://github.com/JdarlingGT" target="_blank" rel="noopener noreferrer" className="contact-method">
-                    <span className="icon">💻</span>
+                    <span className="icon">
+                      <SimpleIcon name="GitHub" size={24} />
+                    </span>
                     <div>
                       <strong>GitHub</strong>
                       <p>View my code</p>

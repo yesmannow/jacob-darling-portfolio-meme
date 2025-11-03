@@ -132,9 +132,12 @@ export const technicalCategories: TechnicalCategory[] = [
 
 export const technologyStacks: TechnologyStack[] = [
   {
-    category: "Marketing Automation",
+    category: "Marketing Automation & CRM",
     icon: "🔄",
     technologies: [
+      "HubSpot",
+      "Marketo",
+      "Salesforce CRM",
       "FluentCRM",
       "ActiveCampaign",
       "Mailchimp",
@@ -155,11 +158,16 @@ export const technologyStacks: TechnologyStack[] = [
     ]
   },
   {
-    category: "Analytics",
+    category: "Analytics & Marketing Tools",
     icon: "📊",
     technologies: [
-      "GTM",
+      "Google Analytics",
+      "Google Tag Manager",
       "GA4",
+      "Google Ads",
+      "Facebook Ads Manager",
+      "Meta Ads",
+      "Google Search Console",
       "Umami",
       "Hotjar",
       "Microsoft Clarity"

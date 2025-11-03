@@ -398,7 +398,7 @@
   .photo-bento-grid {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   }
-  
+
   .photo-large,
   .photo-wide {
     grid-column: span 2;
@@ -410,26 +410,26 @@
     min-height: 60vh;
     padding: 4rem 1.5rem 3rem;
   }
-  
+
   .floating-categories {
     gap: 0.75rem;
   }
-  
+
   .category-pill {
     padding: 0.625rem 1.25rem;
     font-size: 0.85rem;
   }
-  
+
   .photo-bento-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
   }
-  
+
   .photo-large {
     grid-column: span 2;
     grid-row: span 1;
   }
-  
+
   .photo-wide,
   .photo-tall {
     grid-column: span 1;
@@ -441,7 +441,7 @@
   .photo-bento-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .photo-small,
   .photo-medium,
   .photo-large,
@@ -451,30 +451,30 @@
     grid-row: span 1;
     aspect-ratio: 4 / 3;
   }
-  
+
   .lightroom-cta {
     flex-direction: column;
     text-align: center;
     gap: 1.5rem;
     padding: 2rem;
   }
-  
+
   .cta-text h3 {
     font-size: 1.25rem;
   }
-  
+
   .lightbox-image-container {
     max-height: 80vh;
   }
-  
+
   .lightbox-details {
     padding: 1.5rem;
   }
-  
+
   .lightbox-details h2 {
     font-size: 1.25rem;
   }
-  
+
   .lightbox-close {
     top: 1rem;
     right: 1rem;
@@ -487,23 +487,84 @@
   .photo-page-title {
     font-size: 2.5rem;
   }
-  
+
   .floating-categories {
     gap: 0.5rem;
   }
-  
+
   .category-pill {
     padding: 0.5rem 1rem;
     font-size: 0.8rem;
   }
-  
+
   .bento-gallery {
     padding: 2rem 1rem;
   }
-  
+
   .view-more-cta {
     padding: 3rem 1rem;
   }
+}
+
+/* Category-based styling */
+.category-badge[data-category="Portrait"] {
+  background-color: #667eea;
+}
+
+.category-badge[data-category="Landscape"] {
+  background-color: #4facfe;
+}
+
+.category-badge[data-category="Street"] {
+  background-color: #f093fb;
+}
+
+.category-badge[data-category="Architecture"] {
+  background-color: #43e97b;
+}
+
+.category-badge[data-category="Abstract"] {
+  background-color: #fa709a;
+}
+
+.photo-card-gradient[data-category="Portrait"] {
+  background: linear-gradient(135deg, #667eea15 0%, #667eea05 100%);
+}
+
+.photo-card-gradient[data-category="Landscape"] {
+  background: linear-gradient(135deg, #4facfe15 0%, #4facfe05 100%);
+}
+
+.photo-card-gradient[data-category="Street"] {
+  background: linear-gradient(135deg, #f093fb15 0%, #f093fb05 100%);
+}
+
+.photo-card-gradient[data-category="Architecture"] {
+  background: linear-gradient(135deg, #43e97b15 0%, #43e97b05 100%);
+}
+
+.photo-card-gradient[data-category="Abstract"] {
+  background: linear-gradient(135deg, #fa709a15 0%, #fa709a05 100%);
+}
+
+.lightbox-category[data-category="Portrait"] {
+  background-color: #667eea;
+}
+
+.lightbox-category[data-category="Landscape"] {
+  background-color: #4facfe;
+}
+
+.lightbox-category[data-category="Street"] {
+  background-color: #f093fb;
+}
+
+.lightbox-category[data-category="Architecture"] {
+  background-color: #43e97b;
+}
+
+.lightbox-category[data-category="Abstract"] {
+  background-color: #fa709a;
 }
 
 /* Performance Optimizations */

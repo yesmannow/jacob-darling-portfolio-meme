@@ -398,7 +398,7 @@
   .design-bento-grid {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   }
-  
+
   .design-large,
   .design-wide {
     grid-column: span 2;
@@ -410,26 +410,26 @@
     min-height: 60vh;
     padding: 4rem 1.5rem 3rem;
   }
-  
+
   .floating-categories {
     gap: 0.75rem;
   }
-  
+
   .category-pill {
     padding: 0.625rem 1.25rem;
     font-size: 0.85rem;
   }
-  
+
   .design-bento-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
   }
-  
+
   .design-large {
     grid-column: span 2;
     grid-row: span 1;
   }
-  
+
   .design-wide,
   .design-tall {
     grid-column: span 1;
@@ -441,7 +441,7 @@
   .design-bento-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .design-small,
   .design-medium,
   .design-large,
@@ -451,30 +451,30 @@
     grid-row: span 1;
     aspect-ratio: 4 / 3;
   }
-  
+
   .portfolio-cta {
     flex-direction: column;
     text-align: center;
     gap: 1.5rem;
     padding: 2rem;
   }
-  
+
   .cta-text h3 {
     font-size: 1.25rem;
   }
-  
+
   .lightbox-image-container {
     max-height: 80vh;
   }
-  
+
   .lightbox-details {
     padding: 1.5rem;
   }
-  
+
   .lightbox-details h2 {
     font-size: 1.25rem;
   }
-  
+
   .lightbox-close {
     top: 1rem;
     right: 1rem;
@@ -487,23 +487,84 @@
   .design-page-title {
     font-size: 2.5rem;
   }
-  
+
   .floating-categories {
     gap: 0.5rem;
   }
-  
+
   .category-pill {
     padding: 0.5rem 1rem;
     font-size: 0.8rem;
   }
-  
+
   .bento-gallery {
     padding: 2rem 1rem;
   }
-  
+
   .view-more-cta {
     padding: 3rem 1rem;
   }
+}
+
+/* Category-based styling */
+.category-badge[data-category="UI/UX"] {
+  background-color: #f093fb;
+}
+
+.category-badge[data-category="Branding"] {
+  background-color: #4facfe;
+}
+
+.category-badge[data-category="Web Design"] {
+  background-color: #43e97b;
+}
+
+.category-badge[data-category="Print"] {
+  background-color: #fa709a;
+}
+
+.category-badge[data-category="Motion"] {
+  background-color: #667eea;
+}
+
+.design-card-gradient[data-category="UI/UX"] {
+  background: linear-gradient(135deg, #f093fb15 0%, #f093fb05 100%);
+}
+
+.design-card-gradient[data-category="Branding"] {
+  background: linear-gradient(135deg, #4facfe15 0%, #4facfe05 100%);
+}
+
+.design-card-gradient[data-category="Web Design"] {
+  background: linear-gradient(135deg, #43e97b15 0%, #43e97b05 100%);
+}
+
+.design-card-gradient[data-category="Print"] {
+  background: linear-gradient(135deg, #fa709a15 0%, #fa709a05 100%);
+}
+
+.design-card-gradient[data-category="Motion"] {
+  background: linear-gradient(135deg, #667eea15 0%, #667eea05 100%);
+}
+
+.lightbox-category[data-category="UI/UX"] {
+  background-color: #f093fb;
+}
+
+.lightbox-category[data-category="Branding"] {
+  background-color: #4facfe;
+}
+
+.lightbox-category[data-category="Web Design"] {
+  background-color: #43e97b;
+}
+
+.lightbox-category[data-category="Print"] {
+  background-color: #fa709a;
+}
+
+.lightbox-category[data-category="Motion"] {
+  background-color: #667eea;
 }
 
 /* Performance Optimizations */

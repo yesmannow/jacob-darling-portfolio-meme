@@ -1,3 +1,6 @@
+/* Import Modern Inspiration Styles */
+@import '../components/inspiration/ModernInspiration.css';
+
 /* Inspiration Page Modern Styles */
 
 .inspiration-page-modern {

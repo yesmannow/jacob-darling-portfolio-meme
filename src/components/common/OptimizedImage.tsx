@@ -10,6 +10,9 @@ interface OptimizedImageProps {
   onClick?: () => void;
   sizes?: string;
   priority?: boolean;
+  quality?: number;
+  placeholder?: "blur" | "empty";
+  blurDataURL?: string;
 }
 
 const OptimizedImage: React.FC<OptimizedImageProps> = ({
@@ -20,7 +23,10 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
   loading = "lazy",
   onClick,
   sizes = "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw",
-  priority = false
+  priority = false,
+  quality = 85,
+  placeholder = "empty",
+  blurDataURL
 }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isInView, setIsInView] = useState(false);
@@ -32,7 +38,7 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
   const getOptimizedSources = (originalSrc: string) => {
     const basePath = originalSrc.replace(/\.[^/.]+$/, "");
     const extension = originalSrc.split('.').pop()?.toLowerCase();
-    
+
     return {
       avif: `${basePath}.avif`,
       webp: `${basePath}.webp`,
@@ -73,21 +79,28 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
 
   const handleLoad = () => {
     setIsLoaded(true);
+
+    // Performance monitoring
+    if (typeof window !== 'undefined' && 'performance' in window) {
+      const loadTime = performance.now();
+      console.log(`🖼️ Image loaded: ${src} (${loadTime.toFixed(2)}ms)`);
+    }
   };
 
   const handleError = () => {
     setHasError(true);
     setIsLoaded(true);
+    console.warn(`❌ Image failed to load: ${src}`);
   };
 
   return (
-    <div 
+    <div
       ref={imgRef}
       className={`optimized-image-container ${className}`}
-      style={{ 
-        position: "relative", 
+      style={{
+        position: "relative",
         overflow: "hidden",
-        ...style 
+        ...style
       }}
       onClick={onClick}
     >
@@ -130,19 +143,19 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
           style={{ display: "block", width: "100%", height: "100%" }}
         >
           {/* AVIF source for modern browsers */}
-          <source 
-            srcSet={sources.avif} 
-            type="image/avif" 
+          <source
+            srcSet={sources.avif}
+            type="image/avif"
             sizes={sizes}
           />
-          
+
           {/* WebP source for wider compatibility */}
-          <source 
-            srcSet={sources.webp} 
-            type="image/webp" 
+          <source
+            srcSet={sources.webp}
+            type="image/webp"
             sizes={sizes}
           />
-          
+
           {/* Fallback to original format */}
           <img
             src={sources.original}

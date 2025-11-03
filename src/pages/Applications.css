@@ -555,6 +555,9 @@
 }
 
 .tech-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   font-size: 0.8rem;
   background: rgba(136, 171, 242, 0.1);
   color: #88ABF2;
@@ -563,6 +566,11 @@
   font-weight: 600;
   border: 1px solid rgba(136, 171, 242, 0.2);
   white-space: nowrap;
+}
+
+.tech-pill .tech-pill-icon {
+  flex-shrink: 0;
+  opacity: 0.9;
 }
 
 .tech-pill.more {
@@ -752,7 +760,7 @@
     grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
     gap: 1.5rem;
   }
-  
+
   .apps-stats {
     gap: 1.5rem;
   }
@@ -910,4 +918,29 @@
   .search-input {
     font-size: 0.95rem;
   }
+}
+
+/* Gradient data attribute styles */
+.app-icon-badge[data-gradient] {
+  background: var(--gradient-value);
+}
+
+.app-icon-badge[data-gradient="linear-gradient(135deg, #667eea 0%, #764ba2 100%)"] {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.app-icon-badge[data-gradient="linear-gradient(135deg, #f093fb 0%, #f5576c 100%)"] {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.app-icon-badge[data-gradient="linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)"] {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.app-icon-badge[data-gradient="linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)"] {
+  background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+}
+
+.app-icon-badge[data-gradient="linear-gradient(135deg, #fa709a 0%, #fee140 100%)"] {
+  background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
 }

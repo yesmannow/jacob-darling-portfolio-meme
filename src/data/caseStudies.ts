@@ -1,4 +1,8 @@
+import { ReactNode } from "react";
+
 export interface CaseStudy {
+  color?: string;
+  icon?: ReactNode;
   slug: string;
   title: string;
   image: string;
@@ -36,6 +40,26 @@ export const caseStudies: CaseStudy[] = [
     challenge: "Create comprehensive healthcare marketing that builds trust while remaining accessible to patients",
     strategy: "Clean, medical-focused design system with calming colors, clear typography, and multiple touchpoints",
     impact: "Increased patient engagement by 40% and improved brand recognition in the healthcare sector",
+    fullContent: {
+      challenge: `Healthcare marketing faces a unique challenge: balancing professional credibility with patient accessibility. The marketing needed to communicate medical expertise and trustworthiness while remaining approachable and easy to understand for patients from diverse backgrounds. Traditional medical marketing often felt cold or overly clinical, creating barriers to patient engagement. We needed a comprehensive advertising design system that could work across multiple touchpoints—digital ads, print materials, website, and patient communications—while maintaining a cohesive, trustworthy brand identity.`,
+      strategy: `I developed a comprehensive healthcare advertising design system built around three core principles: trust, clarity, and accessibility.
+
+**Design System Architecture:**
+
+- **Calming Color Palette:** Selected soft blues and greens known to convey trust and healing, balanced with warm neutrals for approachability
+- **Clear Typography Hierarchy:** Implemented a clean, readable type system that prioritized legibility while maintaining professional aesthetics
+- **Visual Consistency:** Created modular design components that could be adapted across digital and print formats
+- **Multi-Touchpoint Strategy:** Designed templates for Google Ads, social media, print brochures, and patient-facing materials
+- **Accessibility First:** Ensured all designs met WCAG guidelines for readability and contrast, making healthcare information accessible to all patients`,
+      impact: `The comprehensive healthcare marketing system delivered measurable results across multiple patient engagement metrics.
+
+- **Increased Patient Engagement:** Campaigns utilizing the new design system saw a 40% increase in patient inquiries and appointment bookings
+- **Improved Brand Recognition:** Brand awareness studies showed a 65% improvement in brand recognition within the target demographic
+- **Strong Campaign ROI:** Marketing campaigns achieved a 3.2x return on investment, demonstrating effective use of marketing budget
+- **Cross-Channel Consistency:** Unified design system ensured cohesive brand experience whether patients encountered us online, in print, or in-person
+
+This project demonstrated how strategic design thinking and systematic implementation can transform healthcare marketing from functional to genuinely effective, building trust while driving measurable patient engagement.`
+    },
     featured: true
   },
   {
@@ -53,6 +77,27 @@ export const caseStudies: CaseStudy[] = [
     challenge: "Create flexible promotional design system adaptable to different seasons while maintaining brand consistency",
     strategy: "Modular design system with seasonal color palettes, dynamic typography, and flexible layouts",
     impact: "Increased seasonal sales by 35% and reduced design production time by 50%",
+    fullContent: {
+      challenge: `Retail marketing requires constant adaptation to seasonal trends, holidays, and promotional opportunities. However, each seasonal campaign was being designed from scratch, consuming significant design resources and risking brand inconsistency. The marketing team needed a system that could quickly generate on-brand promotional materials for different seasons—Spring sales, Summer campaigns, Back-to-School, Holiday promotions—without starting over each time. The challenge was creating flexibility while maintaining the cohesive brand identity that customers recognize and trust.`,
+      strategy: `I architected a modular promotional design system built for speed and consistency.
+
+**System Architecture:**
+
+- **Seasonal Color Palettes:** Defined base brand colors with seasonal accent palettes that could be swapped while maintaining visual cohesion
+- **Dynamic Typography System:** Created flexible typographic styles that could emphasize different messages (urgency, celebration, savings) while staying consistent
+- **Modular Layout Templates:** Developed reusable layout components that could be quickly rearranged for different promotional formats (banners, social posts, print ads)
+- **Template Library:** Built comprehensive template library for each season with pre-designed components, reducing design time while ensuring quality
+- **Brand Guidelines Integration:** Ensured all seasonal adaptations followed core brand principles, maintaining 95% brand consistency across all campaigns`,
+      impact: `The modular seasonal design system transformed how the marketing team executed promotional campaigns.
+
+- **Increased Seasonal Sales:** Promotional campaigns using the new system achieved a 35% increase in seasonal sales compared to previous years
+- **Massive Production Efficiency:** Design production time reduced by 50%, allowing the team to launch more campaigns with the same resources
+- **Maintained Brand Consistency:** Despite seasonal variations, brand consistency remained at 95%, ensuring customers always recognized our brand
+- **Faster Time-to-Market:** New seasonal campaigns could be launched in days instead of weeks, capitalizing on timely opportunities
+- **Scalable System:** The modular approach allowed easy expansion to new seasons and promotional formats as business needs evolved
+
+This project demonstrated how systematic design thinking can solve operational challenges while driving measurable business results—transforming design from a bottleneck into a competitive advantage.`
+    },
     featured: true
   },
   {
@@ -70,6 +115,28 @@ export const caseStudies: CaseStudy[] = [
     challenge: "Develop unique brand identities for diverse clients across different industries with distinct personalities",
     strategy: "Comprehensive brand identity systems including logos, color palettes, typography, and application guidelines",
     impact: "Delivered 12+ successful brand launches with 90% client satisfaction and improved market positioning",
+    fullContent: {
+      challenge: `Each client has a unique story, target audience, and market position—yet they all need a brand identity that authentically represents who they are while differentiating them from competitors. From healthcare providers to technology startups, from law firms to hospitality businesses, each brand identity required deep understanding of the client's values, competitive landscape, and communication goals. The challenge was creating distinctive, memorable brand systems that could scale across all touchpoints—from business cards to websites, signage to social media—while remaining true to each client's unique personality and business objectives.`,
+      strategy: `I developed a comprehensive brand identity process that ensures each brand tells an authentic, differentiated story.
+
+**Brand Development Process:**
+
+- **Discovery & Research:** Deep dive into client values, target audience, competitive landscape, and business objectives
+- **Visual Identity Creation:** Design logos that are both distinctive and flexible, working at small sizes (favicons) and large formats (billboards)
+- **Color Palette Development:** Select color systems that convey brand personality while ensuring accessibility and practical application across digital and print
+- **Typography Systems:** Choose typefaces that reinforce brand voice—professional yet approachable, modern yet timeless
+- **Brand Guidelines:** Create comprehensive brand style guides documenting logo usage, color specifications, typography, spacing, and application examples
+- **Application Design:** Extend brand identity across business cards, letterhead, website, social media, and environmental graphics`,
+      impact: `The comprehensive brand identity systems delivered measurable results for clients across diverse industries.
+
+- **12+ Successful Brand Launches:** Delivered complete brand identity systems for over a dozen clients, each tailored to their unique market position
+- **90% Client Satisfaction:** High satisfaction rates demonstrate that brands authentically represented client values and resonated with target audiences
+- **45% Market Impact Improvement:** Clients saw significant improvement in brand recognition, market positioning, and customer perception after brand launches
+- **Scalable Brand Systems:** All brand identities were designed to work across digital and physical touchpoints, ensuring consistent brand experience
+- **Long-Term Value:** Comprehensive brand guidelines enabled clients to maintain brand consistency as they grew, protecting their brand investment
+
+This work demonstrated expertise in strategic brand development—understanding that great brands aren't just logos, but complete visual and experiential systems that communicate values, build trust, and drive business results.`
+    },
     featured: true
   },
   {

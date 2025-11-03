@@ -24,28 +24,28 @@ const timelineNodes: TimelineNode[] = [
     id: "launchpad",
     title: "The Launchpad",
     subtitle: "My First Marketing Position",
-    content: "Stretched budgets. Designed visuals. Proved ROI when no one thought marketing could be measured.",
+    content: "Learned to stretch marketing budgets while proving measurable ROI. Designed campaign visuals and implemented tracking systems that demonstrated marketing's impact through data-driven analytics.",
     year: "Early Career"
   },
   {
     id: "pike-medical",
     title: "Pike Medical Consultants",
-    subtitle: "Healthcare Meets Hustle",
-    content: "Built two healthcare sites from scratch. Ran ads that drove thousands through the door. Designed everything from logos to billboards.\n\nThen blended it all into one patient acquisition machine.",
+    subtitle: "Healthcare Marketing & Digital Strategy",
+    content: "Built two healthcare websites from scratch and implemented digital marketing campaigns that drove thousands of patient visits. Managed Google Ads and Meta Ads campaigns, designed brand assets from logos to billboards, and created an integrated patient acquisition system combining web, advertising, and CRM automation.",
     year: "Agency Experience"
   },
   {
     id: "graston-technique",
     title: "Graston Technique®",
-    subtitle: "National Transformation",
-    content: "Built a marketing system that thinks for itself.\n\n400+ automations. AI support that cut tickets by 70%. A checkout flow that lifted conversions 40%.\n\nThis is where I learned to make strategy and systems speak the same language.",
+    subtitle: "Enterprise Marketing Automation & Growth",
+    content: "Developed and implemented a comprehensive marketing automation system with 400+ workflows using FluentCRM and custom integrations. Built AI-powered customer support that reduced support tickets by 70%. Optimized WooCommerce checkout flows that increased conversions by 40%. Managed multi-channel advertising campaigns (Google Ads, Meta Ads, LinkedIn Ads) with measurable ROI. Configured advanced analytics with Google Tag Manager and GA4 for comprehensive campaign tracking.",
     year: "Enterprise Role"
   },
   {
     id: "current-portfolio",
     title: "Current Portfolio",
-    subtitle: "Marketing Strategist & Systems Architect",
-    content: "I bridge the gap between brand and build.\n\nFrom AI to animation. SEO to storytelling. Strategy to systems.\n\nI turn what you imagine into what you measure.",
+    subtitle: "Marketing Strategist & Marketing Technologist",
+    content: "I bridge marketing strategy and technical execution.\n\nSpecializing in marketing automation, CRM campaigns, SEO/SEM optimization, analytics-driven strategy, and cross-functional project management. I build custom marketing tools, implement campaign automation, and deliver solutions with documented ROI that serve 30,000+ users worldwide.\n\nFrom strategy to systems—I turn marketing goals into measurable results.",
     year: "Present"
   }
 ];
@@ -96,22 +96,22 @@ const About: React.FC = () => {
       <AnimatedSection>
         <section className="about-intro">
           <motion.h1 variants={fadeInUp}>About Me</motion.h1>
-          
+
           <motion.div className="intro-content" variants={fadeInUp}>
             <div className="bio-photo-wrapper">
               {/* Cinematic Rotating Bio Gallery */}
-              <div className="bio-gallery" style={{ position: "relative", width: "100%", height: "400px", borderRadius: "1rem", overflow: "hidden" }}>
+              <div className="bio-gallery bio-gallery-container">
                 <AnimatePresence mode="wait">
                   <motion.img
                     key={currentImageIndex}
                     src={bioImages[currentImageIndex].src}
                     alt={bioImages[currentImageIndex].alt}
                     className="bio-photo"
-                    style={{ 
+                    style={{
                       position: "absolute",
                       inset: 0,
-                      width: "100%", 
-                      height: "100%", 
+                      width: "100%",
+                      height: "100%",
                       objectFit: "cover",
                       filter: "contrast(1.05) saturate(1.1) brightness(0.95)"
                     }}
@@ -121,17 +121,9 @@ const About: React.FC = () => {
                     transition={{ duration: 1.2, ease: "easeInOut" }}
                   />
                 </AnimatePresence>
-                
+
                 {/* Image indicator dots */}
-                <div style={{ 
-                  position: "absolute", 
-                  bottom: "1rem", 
-                  left: "50%", 
-                  transform: "translateX(-50%)",
-                  display: "flex",
-                  gap: "0.5rem",
-                  zIndex: 10
-                }}>
+                <div className="bio-gallery-indicators">
                   {bioImages.map((_, index) => (
                     <motion.button
                       key={index}
@@ -153,19 +145,23 @@ const About: React.FC = () => {
             </div>
             <div className="intro-text">
               <p className="lead">
-                Great marketing ideas often break at the handoff—the critical point where a creative vision meets 
-                the complex reality of technical execution. My career has been built to solve this problem.
+                Hello, I'm Jacob Darling—a Marketing Strategist & Systems Architect with over a decade of experience
+                driving growth through data-driven marketing and innovative tech solutions. I specialize in marketing
+                automation, CRM campaigns, SEO/SEM optimization, analytics-driven strategy, and cross-functional project
+                management. My unique strength lies in bridging marketing strategy and technical execution, turning marketing
+                goals into measurable results.
               </p>
               <p>
-                I'm Jacob Darling, a marketing leader who operates as both a brand strategist and a systems architect. 
-                On one side, I direct bold rebrands, craft compelling narratives, and launch creative campaigns. 
-                On the other, I design and build the underlying technical infrastructure—the CRM logic, automation workflows, 
-                and web architecture—that makes those campaigns scalable, measurable, and sustainable.
+                <strong>Key Strengths:</strong> Campaign optimization, team leadership, data analysis, creative content
+                development, marketing automation, and full-stack development. I'm passionate about leveraging AI and
+                automation to improve marketing ROI, continuously learning new technologies, and building collaborative
+                relationships with cross-functional teams.
               </p>
               <p>
-                This hybrid approach allows me to create deeply integrated solutions that don't just look good, 
-                but function brilliantly. Whether I'm relaunching a national brand or building a custom GPT-powered tool, 
-                I thrive on turning abstract goals into powerful, revenue-focused marketing engines.
+                <strong>Proven Results:</strong> At Graston Technique®, I built a marketing automation system with 400+
+                workflows that reduced support tickets by 70%, optimized checkout flows that increased conversions by 40%,
+                and managed multi-channel advertising campaigns (Google Ads, Meta Ads, LinkedIn Ads) with measurable ROI.
+                These are documented results from production systems serving 30,000+ practitioners worldwide.
               </p>
             </div>
           </motion.div>
@@ -179,7 +175,7 @@ const About: React.FC = () => {
       <AnimatedSection delay={0.2}>
         <section className="philosophy-section">
           <h2>My Philosophy</h2>
-          
+
           <div className="philosophy-quote">
             <blockquote>
               Strategy without architecture is a daydream; architecture without strategy is a machine with no purpose.
@@ -188,26 +184,31 @@ const About: React.FC = () => {
 
           <div className="philosophy-grid">
             <div className="philosophy-card">
-              <div className="icon">🏗️</div>
-              <h3>Build for the System</h3>
+              <div className="icon">📊</div>
+              <h3>Analytics-Driven Strategy</h3>
               <p>
-                Every component works in concert with the whole for scalability and seamless experience.
+                Every marketing decision is backed by data. I configure Google Tag Manager, GA4, and custom event tracking
+                to measure campaign performance, conversion funnels, and ROI—ensuring every marketing dollar drives measurable results.
               </p>
             </div>
 
             <div className="philosophy-card">
               <div className="icon">🔄</div>
-              <h3>Translate Complexity</h3>
+              <h3>Marketing Automation Excellence</h3>
               <p>
-                Bridge the gap between creative vision and technical implementation.
+                I bridge marketing strategy and technical execution by building CRM workflows, email automation sequences,
+                and campaign automation systems. At Graston Technique®, I developed 400+ marketing automations that reduced
+                support workload by 70% while improving customer experience.
               </p>
             </div>
 
             <div className="philosophy-card">
-              <div className="icon">📈</div>
-              <h3>Measure & Automate</h3>
+              <div className="icon">🎯</div>
+              <h3>Cross-Functional Campaign Management</h3>
               <p>
-                Focus on KPIs that drive growth while automating repetitive tasks.
+                I lead multi-channel marketing campaigns across Google Ads, Meta Ads, and LinkedIn Ads with cross-functional
+                project management. My campaigns are designed for scalability, with proven results: 40% increase in checkout
+                conversions, 30% improvement in lead conversion rates, and measurable ROI across all channels.
               </p>
             </div>
           </div>
@@ -261,7 +262,7 @@ const About: React.FC = () => {
 
                   <AnimatePresence mode="wait">
                     {expandedNode === node.id && (
-                      <motion.div 
+                      <motion.div
                         className="card-content"
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
@@ -283,14 +284,14 @@ const About: React.FC = () => {
         <section className="volunteering-section">
           <h2>Community & Volunteer Work</h2>
           <p className="section-intro">
-            Beyond professional work, I believe in giving back to the community through leadership, 
-            creative support, and strategic guidance. Whether leading homeowner associations, 
-            supporting local arts, or mentoring students, I apply the same systems-thinking 
+            Beyond professional work, I believe in giving back to the community through leadership,
+            creative support, and strategic guidance. Whether leading homeowner associations,
+            supporting local arts, or mentoring students, I apply the same systems-thinking
             and strategic approach to community initiatives.
           </p>
 
           <div className="volunteering-grid">
-            <motion.div 
+            <motion.div
               className="volunteer-card"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -302,13 +303,13 @@ const About: React.FC = () => {
               <h4>School 80 Condominiums HOA</h4>
               <p className="volunteer-period">Oct 2019 - Present · 6+ years</p>
               <p className="volunteer-description">
-                Lead governance, financial planning, and community relations for residential 
-                condominium association, applying strategic thinking to property management 
+                Lead governance, financial planning, and community relations for residential
+                condominium association, applying strategic thinking to property management
                 and community building.
               </p>
             </motion.div>
 
-            <motion.div 
+            <motion.div
               className="volunteer-card"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -320,13 +321,13 @@ const About: React.FC = () => {
               <h4>Primary Colours</h4>
               <p className="volunteer-period">2017 - Present · 8+ years</p>
               <p className="volunteer-description">
-                Design website and print materials for annual Installation Nation event. 
-                Served as Board Member (2018-2019) for this non-profit dedicated to connecting 
+                Design website and print materials for annual Installation Nation event.
+                Served as Board Member (2018-2019) for this non-profit dedicated to connecting
                 visual artists with their communities through exhibitions and cultural events.
               </p>
             </motion.div>
 
-            <motion.div 
+            <motion.div
               className="volunteer-card"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -338,12 +339,12 @@ const About: React.FC = () => {
               <h4>School 80 Condominiums HOA</h4>
               <p className="volunteer-period">2015 - 2019 · 4 years</p>
               <p className="volunteer-description">
-                Served as board member before assuming presidency, contributing to strategic 
+                Served as board member before assuming presidency, contributing to strategic
                 planning, community communications, and operational improvements.
               </p>
             </motion.div>
 
-            <motion.div 
+            <motion.div
               className="volunteer-card"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -355,12 +356,12 @@ const About: React.FC = () => {
               <h4>Frances W Parker IPS School 56</h4>
               <p className="volunteer-period">2017 · 2 months</p>
               <p className="volunteer-description">
-                Designed 12 posters for the school's Situational VALUES project, 
+                Designed 12 posters for the school's Situational VALUES project,
                 creating visual materials to reinforce positive character development.
               </p>
             </motion.div>
 
-            <motion.div 
+            <motion.div
               className="volunteer-card"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -372,12 +373,12 @@ const About: React.FC = () => {
               <h4>SMART - Anti Bullying at School #96</h4>
               <p className="volunteer-period">2013 · 5 months</p>
               <p className="volunteer-description">
-                Guided students in developing business and marketing plan for their 
+                Guided students in developing business and marketing plan for their
                 anti-bullying program, teaching real-world strategy and planning skills.
               </p>
             </motion.div>
 
-            <motion.div 
+            <motion.div
               className="volunteer-card"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -389,7 +390,7 @@ const About: React.FC = () => {
               <h4>Eastwood Middle School Soccer Team</h4>
               <p className="volunteer-period">2017 - Present · 8+ years</p>
               <p className="volunteer-description">
-                Design and print custom shirts for Eastwood Middle School women's soccer team, 
+                Design and print custom shirts for Eastwood Middle School women's soccer team,
                 supporting youth athletics through visual identity.
               </p>
             </motion.div>
@@ -405,7 +406,7 @@ const About: React.FC = () => {
         <section className="cta-section">
           <h2>Let's Build Something Together</h2>
           <p>
-            Inspired by structured creativity and system automation, I bring a relentless work ethic 
+            Inspired by structured creativity and system automation, I bring a relentless work ethic
             and Indiana roots to every project.
           </p>
           <div className="cta-buttons">

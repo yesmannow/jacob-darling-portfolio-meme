@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { motion as motionTokens } from "../../styles/motion-tokens.js";
 import { useNavigate } from "react-router-dom";
+import "./CaseStudies.css";
 
 const caseStudies = [
   { slug: "graston-dashboard", title: "Graston Dashboard", cover: "./case-studies/graston-dashboard/cover.webp" },
@@ -15,12 +16,6 @@ const CaseStudies: React.FC = () => {
   return (
     <motion.section
       className="case-studies"
-      style={{
-        padding: '4rem 2rem',
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
-        gap: '1rem'
-      }}
       {...motionTokens.fadeIn}
     >
       {caseStudies.map((study, index) => (
@@ -28,25 +23,12 @@ const CaseStudies: React.FC = () => {
           key={index}
           className="case-study-card"
           style={{
-            backgroundImage: `url(${study.cover})`,
-            backgroundSize: 'cover',
-            borderRadius: '8px',
-            height: '200px',
-            cursor: 'pointer'
+            backgroundImage: `url(${study.cover})`
           }}
           whileHover={{ scale: 1.05, boxShadow: 'var(--glow-brand)' }}
           onClick={() => navigate(`/case-studies/${study.slug}`)}
         >
-          <div style={{
-            background: 'rgba(0, 0, 0, 0.5)',
-            color: 'white',
-            padding: '1rem',
-            borderRadius: '8px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            height: '100%'
-          }}>
+          <div className="card-overlay">
             <h3>{study.title}</h3>
           </div>
         </motion.div>

@@ -4,6 +4,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Link } from "react-router-dom";
 import { ArrowRight, Mail, MessageCircle, Sparkles } from "lucide-react";
+import "./CTA.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -86,17 +87,18 @@ const CTA: React.FC = () => {
   }, []);
 
   return (
-    <section 
+    <section
       ref={sectionRef}
       className="py-32 bg-black relative overflow-hidden"
     >
       {/* Background Glow */}
-      <div 
+      <div
         ref={glowRef}
         className="absolute inset-0 bg-gradient-to-br from-blue-500/20 via-purple-500/20 to-pink-500/20 blur-3xl"
       />
-      
+
       {/* Floating Particles */}
+      {/* Note: CSS custom properties must be set inline as they are dynamically computed per particle */}
       <div className="absolute inset-0">
         {particleConfigs.map(({ left, top, delay, index }) => (
           <div
@@ -106,7 +108,7 @@ const CTA: React.FC = () => {
               left,
               top,
               animationDelay: `${delay}s`
-            }}
+            } as React.CSSProperties}
           />
         ))}
       </div>
@@ -124,14 +126,14 @@ const CTA: React.FC = () => {
       </div>
 
       <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
-        
+
         <div className="cta-content space-y-8">
-          
+
           {/* Icon */}
           <motion.div
             className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full shadow-2xl"
-            whileHover={{ 
-              scale: 1.1, 
+            whileHover={{
+              scale: 1.1,
               rotate: 360,
               boxShadow: "0 0 40px rgba(59, 130, 246, 0.6)"
             }}
@@ -141,7 +143,7 @@ const CTA: React.FC = () => {
           </motion.div>
 
           {/* Main Heading */}
-          <motion.h2 
+          <motion.h2
             className="text-5xl md:text-7xl font-bold text-white relative"
             style={{
               background: "linear-gradient(135deg, #ffffff 0%, #e2e8f0 100%)",
@@ -160,23 +162,23 @@ const CTA: React.FC = () => {
           </motion.h2>
 
           {/* Subtitle */}
-          <motion.p 
+          <motion.p
             className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed"
           >
-            Ready to transform your vision into reality? Let's discuss how strategic design, 
-            technical innovation, and creative storytelling can elevate your next project.
+            Ready to scale your marketing operations with automation that delivers measurable ROI? Let's discuss how
+            marketing automation, CRM integration, and analytics-driven strategy can drive growth for your business.
           </motion.p>
 
           {/* CTA Buttons */}
-          <motion.div 
+          <motion.div
             className="flex flex-col sm:flex-row gap-6 justify-center items-center pt-8"
           >
-            
+
             {/* Primary CTA */}
             <Link to="/contact">
               <motion.button
                 className="group relative px-10 py-5 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold text-lg rounded-full shadow-lg overflow-hidden glow-pulse ripple-effect soft-glint"
-                whileHover={{ 
+                whileHover={{
                   scale: 1.05,
                   boxShadow: "0 20px 40px rgba(59, 130, 246, 0.4)"
                 }}
@@ -184,7 +186,7 @@ const CTA: React.FC = () => {
               >
                 {/* Button Background Animation */}
                 <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                
+
                 <div className="relative flex items-center gap-3">
                   <Mail className="w-6 h-6" />
                   <span>Contact Me</span>
@@ -208,19 +210,19 @@ const CTA: React.FC = () => {
           </motion.div>
 
           {/* Contact Info */}
-          <motion.div 
+          <motion.div
             className="pt-12 space-y-4"
           >
             <p className="text-gray-400">
               Or reach out directly at{" "}
-              <a 
-                href="mailto:jacob@jacobdarling.com" 
+              <a
+                href="mailto:jacob@jacobdarling.com"
                 className="text-blue-400 hover:text-blue-300 transition-colors duration-300 font-medium"
               >
                 jacob@jacobdarling.com
               </a>
             </p>
-            
+
             <div className="flex justify-center items-center gap-4 text-sm text-gray-500">
               <span>Indianapolis, IN</span>
               <div className="w-1 h-1 bg-gray-500 rounded-full" />

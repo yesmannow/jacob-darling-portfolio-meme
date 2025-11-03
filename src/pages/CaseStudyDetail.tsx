@@ -19,9 +19,9 @@ const CaseStudyDetail: React.FC = () => {
   return (
     <main className="case-study-detail-modern">
       {/* Hero Section */}
-      <motion.section 
+      <motion.section
         className="detail-hero"
-        style={{ background: `radial-gradient(circle at 50% 20%, ${caseStudy.color}15 0%, transparent 60%)` }}
+        data-hero-bg-color={caseStudy.color || '#88ABF2'}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
@@ -34,17 +34,19 @@ const CaseStudyDetail: React.FC = () => {
             Back to Case Studies
           </Link>
 
-          <motion.div 
-            className="hero-icon-large"
-            style={{ background: `${caseStudy.color}15` }}
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ delay: 0.2, duration: 0.6 }}
-          >
-            <span className="icon-large" style={{ filter: `drop-shadow(0 4px 12px ${caseStudy.color}60)` }}>
-              {caseStudy.icon}
-            </span>
-          </motion.div>
+          {caseStudy.icon && (
+            <motion.div
+              className="hero-icon-large"
+              data-icon-bg-color={caseStudy.color || '#88ABF2'}
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ delay: 0.2, duration: 0.6 }}
+            >
+              <span className="icon-large" data-icon-shadow-color={caseStudy.color || '#88ABF2'}>
+                {caseStudy.icon}
+              </span>
+            </motion.div>
+          )}
 
           <motion.div
             initial={{ y: 30, opacity: 0 }}
@@ -55,7 +57,7 @@ const CaseStudyDetail: React.FC = () => {
             <p className="detail-tagline">{caseStudy.tagline}</p>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             className="detail-meta"
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
@@ -63,14 +65,10 @@ const CaseStudyDetail: React.FC = () => {
           >
             <div className="meta-categories">
               {caseStudy.category.map(cat => (
-                <span 
-                  key={cat} 
+                <span
+                  key={cat}
                   className="meta-category"
-                  style={{ 
-                    background: `${caseStudy.color}20`,
-                    color: caseStudy.color,
-                    borderColor: `${caseStudy.color}30`
-                  }}
+                  data-category-color={caseStudy.color || '#88ABF2'}
                 >
                   {cat}
                 </span>
@@ -102,9 +100,9 @@ const CaseStudyDetail: React.FC = () => {
                 variants={staggerItem}
                 whileHover={{ y: -8, scale: 1.02 }}
               >
-                <div 
-                  className="metric-accent" 
-                  style={{ background: `linear-gradient(135deg, ${caseStudy.color}, ${caseStudy.color}80)` }}
+                <div
+                  className="metric-accent"
+                  data-metric-color={caseStudy.color || '#88ABF2'}
                 />
                 <div className="metric-modern-value">{metric.value}</div>
                 <div className="metric-modern-label">{metric.label}</div>
@@ -120,9 +118,13 @@ const CaseStudyDetail: React.FC = () => {
             <div className="section-icon">⚠️</div>
             <h2>The Challenge</h2>
             <div className="section-content">
-              {caseStudy.fullContent?.challenge.split('\n\n').map((paragraph, idx) => (
-                <p key={idx}>{paragraph}</p>
-              ))}
+              {caseStudy.fullContent?.challenge ? (
+                caseStudy.fullContent.challenge.split('\n\n').map((paragraph, idx) => (
+                  <p key={idx}>{paragraph}</p>
+                ))
+              ) : (
+                <p>{caseStudy.challenge}</p>
+              )}
             </div>
           </section>
         </AnimatedSection>
@@ -131,18 +133,20 @@ const CaseStudyDetail: React.FC = () => {
           <section className="content-section strategy">
             <div className="section-icon">🎯</div>
             <h2>The Strategy & Solution</h2>
-            <div 
+            <div
               className="section-content"
-              dangerouslySetInnerHTML={{ 
+              dangerouslySetInnerHTML={{
                 __html: caseStudy.fullContent?.strategy
-                  .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-                  .replace(/- \*\*(.*?)\*\*/g, '<li><strong>$1</strong>')
-                  .replace(/^- (.*?)$/gm, '<li>$1</li>')
-                  .replace(/\n\n/g, '</p><p>')
-                  .replace(/^(.+)$/gm, '<p>$1</p>') || ''
+                  ? caseStudy.fullContent.strategy
+                      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                      .replace(/- \*\*(.*?)\*\*/g, '<li><strong>$1</strong>')
+                      .replace(/^- (.*?)$/gm, '<li>$1</li>')
+                      .replace(/\n\n/g, '</p><p>')
+                      .replace(/^(.+)$/gm, '<p>$1</p>')
+                  : `<p>${caseStudy.strategy}</p>`
               }}
             />
-            
+
             {/* Visual Architecture Diagrams */}
             {diagrams.length > 0 && (
               <div className="architecture-diagrams">
@@ -158,15 +162,17 @@ const CaseStudyDetail: React.FC = () => {
           <section className="content-section impact">
             <div className="section-icon">🚀</div>
             <h2>The Value & Impact</h2>
-            <div 
+            <div
               className="section-content"
-              dangerouslySetInnerHTML={{ 
+              dangerouslySetInnerHTML={{
                 __html: caseStudy.fullContent?.impact
-                  .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-                  .replace(/- \*\*(.*?)\*\*/g, '<li><strong>$1</strong>')
-                  .replace(/^- (.*?)$/gm, '<li>$1</li>')
-                  .replace(/\n\n/g, '</p><p>')
-                  .replace(/^(.+)$/gm, '<p>$1</p>') || ''
+                  ? caseStudy.fullContent.impact
+                      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                      .replace(/- \*\*(.*?)\*\*/g, '<li><strong>$1</strong>')
+                      .replace(/^- (.*?)$/gm, '<li>$1</li>')
+                      .replace(/\n\n/g, '</p><p>')
+                      .replace(/^(.+)$/gm, '<p>$1</p>')
+                  : `<p>${caseStudy.impact}</p>`
               }}
             />
           </section>

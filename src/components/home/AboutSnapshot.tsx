@@ -48,7 +48,7 @@ const AboutSnapshot: React.FC = () => {
   }, []);
 
   return (
-    <section 
+    <section
       id="about-snapshot"
       ref={sectionRef}
       className="py-32 bg-black relative overflow-hidden"
@@ -61,9 +61,9 @@ const AboutSnapshot: React.FC = () => {
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          
+
           {/* Portrait Section */}
-          <motion.div 
+          <motion.div
             ref={imageRef}
             className="relative"
             initial={{ opacity: 0, scale: 0.9 }}
@@ -81,13 +81,13 @@ const AboutSnapshot: React.FC = () => {
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.3 }}
               />
-              
+
               {/* Gradient Overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent rounded-2xl z-20" />
             </div>
 
             {/* Floating Stats */}
-            <motion.div 
+            <motion.div
               className="absolute -bottom-6 -right-6 bg-gray-900/80 backdrop-blur-sm border border-white/10 rounded-xl p-4"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -103,7 +103,7 @@ const AboutSnapshot: React.FC = () => {
 
           {/* Content Section */}
           <div ref={contentRef} className="space-y-8">
-            
+
             {/* Section Title */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -120,7 +120,7 @@ const AboutSnapshot: React.FC = () => {
             </motion.div>
 
             {/* Bio Text */}
-            <motion.div 
+            <motion.div
               className="space-y-6"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -128,20 +128,22 @@ const AboutSnapshot: React.FC = () => {
               transition={{ delay: 0.2, duration: 0.8 }}
             >
               <p className="text-xl text-gray-300 leading-relaxed">
-                I'm Jacob — a creative technologist from Indianapolis, blending design intuition 
-                with technical architecture. I've led transformations for global brands and built 
-                the systems that power them.
+                I'm Jacob Darling, a marketing strategist and systems architect based in Indianapolis.
+                I specialize in marketing automation, CRM campaigns, SEO/SEM optimization, and analytics-driven
+                strategy. My unique strength is combining marketing strategy with technical implementation—building
+                the systems that make campaigns scalable, measurable, and profitable.
               </p>
-              
+
               <p className="text-lg text-gray-400 leading-relaxed">
-                My journey spans from winning the Gold Key in Photography to architecting 
-                marketing automation systems that serve 30,000+ practitioners worldwide. 
-                I believe the best solutions emerge when creativity meets computation.
+                At Graston Technique®, I developed a marketing automation system with 400+ workflows that reduced
+                support tickets by 70% and increased checkout conversions by 40%. My marketing systems serve
+                30,000+ practitioners worldwide, and I've managed multi-channel campaigns with proven ROI across
+                Google Ads, Meta Ads, and LinkedIn advertising platforms.
               </p>
             </motion.div>
 
             {/* Key Stats */}
-            <motion.div 
+            <motion.div
               className="grid grid-cols-2 gap-6"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -154,7 +156,7 @@ const AboutSnapshot: React.FC = () => {
                 </div>
                 <div className="text-sm text-gray-400">Years Experience</div>
               </div>
-              
+
               <div className="text-center p-4 bg-gray-900/30 border border-white/10 rounded-xl">
                 <div className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-2">
                   30K+
@@ -164,7 +166,7 @@ const AboutSnapshot: React.FC = () => {
             </motion.div>
 
             {/* Location & Role */}
-            <motion.div 
+            <motion.div
               className="flex flex-col sm:flex-row gap-4"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -175,10 +177,10 @@ const AboutSnapshot: React.FC = () => {
                 <MapPin size={20} className="text-blue-400" />
                 <span>Indianapolis, IN</span>
               </div>
-              
+
               <div className="flex items-center gap-3 text-gray-400">
                 <Briefcase size={20} className="text-purple-400" />
-                <span>Marketing Director & Systems Architect</span>
+                <span>Marketing Strategist & Marketing Technologist</span>
               </div>
             </motion.div>
 
@@ -189,14 +191,14 @@ const AboutSnapshot: React.FC = () => {
               viewport={{ once: true }}
               transition={{ delay: 0.8, duration: 0.8 }}
             >
-              <Link 
+              <Link
                 to="/about"
                 className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold rounded-full hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300 group"
               >
                 <span>Learn More About Me</span>
-                <ArrowRight 
-                  size={20} 
-                  className="group-hover:translate-x-1 transition-transform duration-300" 
+                <ArrowRight
+                  size={20}
+                  className="group-hover:translate-x-1 transition-transform duration-300"
                 />
               </Link>
             </motion.div>

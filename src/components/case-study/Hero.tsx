@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { motion as motionTokens } from "../../styles/motion-tokens.js";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import "./Hero.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -13,6 +14,14 @@ interface HeroProps {
 }
 
 const Hero: React.FC<HeroProps> = ({ title, subtitle, backgroundImage }) => {
+  const heroRef = React.useRef<HTMLElement>(null);
+
+  React.useEffect(() => {
+    if (heroRef.current) {
+      heroRef.current.style.setProperty('--hero-background-image', `url(${backgroundImage})`);
+    }
+  }, [backgroundImage]);
+
   React.useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.timeline({
@@ -33,10 +42,10 @@ const Hero: React.FC<HeroProps> = ({ title, subtitle, backgroundImage }) => {
   }, []);
 
   return (
-    <section className="hero" style={{ height: "100vh", backgroundImage: `url(${backgroundImage})`, backgroundSize: 'cover', backgroundPosition: 'center', position: 'relative' }}>
-      <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", textAlign: "center", color: "white", textShadow: "0 0 20px rgba(0, 0, 0, 0.5)" }}>
-        <motion.h1 className="hero-title" style={{ fontSize: "clamp(2rem, 6vw, 5rem)", fontWeight: 800 }}>{title}</motion.h1>
-        <motion.p className="hero-subtitle" style={{ fontSize: "1.25rem" }}>{subtitle}</motion.p>
+    <section ref={heroRef} className="hero">
+      <div className="hero-content">
+        <motion.h1 className="hero-title">{title}</motion.h1>
+        <motion.p className="hero-subtitle">{subtitle}</motion.p>
       </div>
     </section>
   );
