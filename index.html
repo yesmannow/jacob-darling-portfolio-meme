@@ -260,12 +260,12 @@
             // This often happens when the server returns wrong Content-Type header
             event.preventDefault();
             event.stopPropagation();
-            
+
             // Log in dev but don't crash - might be a temporary build/HMR issue
             if (typeof process !== 'undefined' && process.env && process.env.NODE_ENV === 'development') {
               console.warn('MIME type warning (suppressed):', errorMessage);
             }
-            
+
             // Try to reload the script with correct type
             if (event.target && event.target.tagName === 'SCRIPT') {
               const script = event.target;
@@ -322,7 +322,7 @@
                 only: function() {}
               };
             }
-            
+
             if (typeof process !== 'undefined' && process.env && process.env.NODE_ENV === 'development') {
               console.warn('React Children error in promise (suppressed):', errorMessage);
             }

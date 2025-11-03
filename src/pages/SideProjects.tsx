@@ -88,7 +88,7 @@ const SideProjects: React.FC = () => {
   const filteredProjects = useMemo(() => {
     if (activeFilter === "All") return sideProjectsData.projects;
     if (activeFilter === "Logo Design") return sideProjectsData.projects.filter(p => p.logoOnly === true);
-    return sideProjectsData.projects.filter(p => 
+    return sideProjectsData.projects.filter(p =>
       p.category.toLowerCase().includes(activeFilter.toLowerCase()) ||
       p.services.some(s => s.toLowerCase().includes(activeFilter.toLowerCase()))
     );
@@ -211,8 +211,8 @@ const SideProjects: React.FC = () => {
                 <Link to={`/side-projects/${project.slug}`} className="card-link">
                   <div className="card-image">
                     {project.images && project.images.length > 0 ? (
-                      <img 
-                        src={project.images[0]} 
+                      <img
+                        src={project.images[0]}
                         alt={project.title}
                         loading="lazy"
                       />

@@ -166,9 +166,9 @@ const ProactiveSupportHero: React.FC = () => {
           </h1>
 
           <p ref={subtitleRef} className="hero-subtitle">
-            15+ years transforming marketing challenges into scalable solutions. 
-            I build the systems and strategies that drive measurable growth—from marketing automation and CRM campaigns 
-            to SEO/SEM optimization and analytics-driven decision making. Currently seeking senior marketing leadership 
+            15+ years transforming marketing challenges into scalable solutions.
+            I build the systems and strategies that drive measurable growth—from marketing automation and CRM campaigns
+            to SEO/SEM optimization and analytics-driven decision making. Currently seeking senior marketing leadership
             roles where I can combine strategic vision with technical execution.
           </p>
 

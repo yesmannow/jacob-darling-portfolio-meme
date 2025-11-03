@@ -3,14 +3,14 @@ import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { 
-  ArrowLeft, 
-  ExternalLink, 
-  Calendar, 
-  Clock, 
-  Target, 
-  Lightbulb, 
-  CheckCircle, 
+import {
+  ArrowLeft,
+  ExternalLink,
+  Calendar,
+  Clock,
+  Target,
+  Lightbulb,
+  CheckCircle,
   TrendingUp,
   Eye,
   Heart,

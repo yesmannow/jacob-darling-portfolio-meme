@@ -17,27 +17,27 @@ const Hero: React.FC = () => {
 
   return (
     <section className="hero">
-      <motion.div 
+      <motion.div
         className="hero-content"
         {...stagger.cinematicStagger}
       >
-        <motion.h1 
+        <motion.h1
           className="hero-title gradient-text"
           {...motionTokens.cinematicEntry}
         >
           Where Complexity Becomes{" "}
           <span className="gradient-text">Clarity</span>.
         </motion.h1>
-        
-        <motion.p 
+
+        <motion.p
           className="hero-subtitle"
           {...motionTokens.slideUp}
         >
           I craft systems where design and technology move as one.
           Turning curiosity into conversion. Chaos into clarity.
         </motion.p>
-        
-        <motion.div 
+
+        <motion.div
           className="cta-group"
           {...motionTokens.fadeIn}
         >
@@ -47,19 +47,19 @@ const Hero: React.FC = () => {
             </Link>
           </motion.div>
           <motion.div whileHover={motionTokens.buttonHover} whileTap={{ scale: 0.95 }}>
-            <a 
-              className="btn-secondary" 
-              href="/resume/Resume JD draft.pdf" 
+            <a
+              className="btn-secondary"
+              href="/resume/Resume JD draft.pdf"
               download="Jacob-Darling-Resume.pdf"
-              target="_blank" 
+              target="_blank"
               rel="noopener noreferrer"
             >
               View My Story
             </a>
           </motion.div>
         </motion.div>
-        
-        <motion.div 
+
+        <motion.div
           className="tagline-rotation"
           {...motionTokens.fadeInSlow}
         >
@@ -83,13 +83,13 @@ const Hero: React.FC = () => {
           ))}
         </motion.div>
       </motion.div>
-      
+
       <div className="hero-background">
-        <motion.div 
+        <motion.div
           className="gradient-orb orb-1"
           {...motionTokens.glowPulse}
         />
-        <motion.div 
+        <motion.div
           className="gradient-orb orb-2"
           animate={{
             scale: [1, 1.1, 1],
