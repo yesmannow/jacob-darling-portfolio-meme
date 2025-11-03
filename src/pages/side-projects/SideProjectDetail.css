@@ -412,6 +412,115 @@
   font-weight: 600;
 }
 
+/* Design Breakdown for Logo-Only Projects */
+.design-breakdown {
+  margin-top: 2rem;
+  display: grid;
+  gap: 1.5rem;
+}
+
+.design-element {
+  padding: 1.5rem;
+  background: rgba(136, 171, 242, 0.05);
+  border-left: 3px solid #88ABF2;
+  border-radius: 8px;
+}
+
+.design-element h4 {
+  color: #88ABF2;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.design-element p {
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* Brand Elements Grid */
+.brand-elements-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+.element-card {
+  padding: 2rem;
+  background: rgba(136, 171, 242, 0.08);
+  border: 1px solid rgba(136, 171, 242, 0.2);
+  border-radius: 16px;
+  transition: all 0.3s ease;
+}
+
+.element-card:hover {
+  background: rgba(136, 171, 242, 0.12);
+  border-color: rgba(136, 171, 242, 0.4);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(136, 171, 242, 0.2);
+}
+
+.element-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(136, 171, 242, 0.15);
+  border-radius: 12px;
+  color: #88ABF2;
+  margin-bottom: 1rem;
+}
+
+.element-card h4 {
+  color: #ffffff;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.element-card p {
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* Variations Info */
+.variations-info {
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  background: rgba(136, 171, 242, 0.05);
+  border-radius: 12px;
+}
+
+.variations-info p {
+  margin-bottom: 1rem;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.7;
+}
+
+.variations-info p:last-child {
+  margin-bottom: 0;
+}
+
+/* Brand Story Section */
+.brand-story-content {
+  margin-top: 1rem;
+}
+
+.brand-story-content p {
+  margin-bottom: 1.5rem;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.8;
+  font-size: 1.05rem;
+}
+
+.brand-story-content p:last-child {
+  margin-bottom: 0;
+}
+
 /* Overview Section */
 .overview-section .section-grid {
   display: grid;
