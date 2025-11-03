@@ -51,6 +51,21 @@ html {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  position: relative; /* Required for Framer Motion scroll calculations */
+}
+
+/* Fix Framer Motion position:static warning - ensure all motion containers have positioning context */
+[data-framer-name],
+[data-framer-component],
+section,
+article {
+  position: relative; /* Ensure Framer Motion can calculate scroll offsets */
+}
+
+/* Ensure scroll containers have proper positioning for Framer Motion */
+.scroll-container,
+.scroll-wrapper,
+.animation-container {
   position: relative;
 }
 

@@ -33,6 +33,46 @@ main {
   position: relative;
 }
 
+/* Active navigation state for scrollspy */
+nav a.active,
+nav button.active {
+  color: #3b82f6 !important;
+  position: relative;
+}
+
+nav a.active::after,
+nav button.active::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+  border-radius: 2px;
+}
+
+/* Smooth scrolling for anchor links */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Ensure mobile touch targets are at least 44px */
+.mobile-nav-item {
+  min-height: 44px;
+  padding: 0.875rem 1rem; /* Increased padding for better touch targets */
+}
+
+.mobile-nav-item-button {
+  min-height: 44px;
+  padding: 0.875rem 1rem;
+}
+
+button[aria-label] {
+  min-height: 44px;
+  min-width: 44px;
+}
+
 .nav-group-button {
   display: flex;
   align-items: center;

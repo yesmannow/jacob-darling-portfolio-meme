@@ -12,7 +12,8 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
-  Legend
+  Legend,
+  Cell
 } from "recharts";
 import { TrendingUp, TrendingDown, Mail, Users, DollarSign, MousePointerClick } from "lucide-react";
 import "./MarketingCommandCenter.css";
@@ -230,7 +231,7 @@ const MarketingCommandCenter: React.FC = () => {
                 />
                 <Bar dataKey="value" animationDuration={1000}>
                   {channelData.map((entry, index) => (
-                    <Bar.Cell key={index} fill={entry.color} />
+                    <Cell key={index} fill={entry.color} />
                   ))}
                 </Bar>
               </BarChart>

@@ -12,9 +12,11 @@ import {
   Wrench,
   FileText,
   ArrowRight,
-  ExternalLink
+  ExternalLink,
+  Download
 } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
+import ThemeToggle from "../theme/ThemeToggle";
 import "./ModernHeader.css";
 
 interface DropdownItem {
@@ -38,6 +40,7 @@ const ModernHeader: React.FC = () => {
   const [scrollDir, setScrollDir] = useState("up");
   const [glow, setGlow] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [activeNavItem, setActiveNavItem] = useState<string | null>(null);
   const { pathname } = useLocation();
 
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -72,10 +75,10 @@ const ModernHeader: React.FC = () => {
       ]
     },
     {
-      label: "Resources",
+      label: "Skills & Tools",
       icon: <Wrench className="w-4 h-4" />,
       items: [
-        { label: "Toolbox", to: "/toolbox", icon: <Wrench className="w-4 h-4" />, description: "My tech stack and tools" },
+        { label: "Skills & Tools", to: "/toolbox", icon: <Wrench className="w-4 h-4" />, description: "My tech stack and skills" },
       ]
     }
   ];
@@ -104,6 +107,64 @@ const ModernHeader: React.FC = () => {
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  // Scrollspy: Highlight active navigation item based on scroll position
+  useEffect(() => {
+    // Only apply scrollspy on home page or if sections are available
+    if (pathname !== "/") return;
+
+    const sections = document.querySelectorAll("section[id], [data-section]");
+    const navLinks = document.querySelectorAll('nav a[href^="#"]');
+
+    const updateActiveNav = () => {
+      const scrollPos = window.scrollY + 100; // Account for header height
+
+      sections.forEach((section) => {
+        const sectionTop = (section as HTMLElement).offsetTop;
+        const sectionHeight = (section as HTMLElement).offsetHeight;
+        const sectionId = section.id || section.getAttribute("data-section");
+
+        if (
+          scrollPos >= sectionTop &&
+          scrollPos < sectionTop + sectionHeight &&
+          sectionId
+        ) {
+          setActiveNavItem(`#${sectionId}`);
+          // Update all nav links
+          navLinks.forEach((link) => {
+            const href = link.getAttribute("href");
+            if (href === `#${sectionId}`) {
+              link.classList.add("active");
+            } else {
+              link.classList.remove("active");
+            }
+          });
+        }
+      });
+    };
+
+    window.addEventListener("scroll", updateActiveNav);
+    updateActiveNav(); // Initial check
+
+    return () => window.removeEventListener("scroll", updateActiveNav);
+  }, [pathname]);
+
+  // Smooth scroll to top when logo is clicked
+  const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (pathname === "/") {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
+  // Handle resume download
+  const handleResumeDownload = () => {
+    const resumePath = "/resume/jacob-darling-resume.pdf";
+    const link = document.createElement("a");
+    link.href = resumePath;
+    link.download = "Jacob-Darling-Resume.pdf";
+    link.click();
+  };
 
   // Handle dropdown hover
   const handleDropdownEnter = (groupLabel: string) => {
@@ -143,7 +204,11 @@ const ModernHeader: React.FC = () => {
     >
       <nav className="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto">
         {/* BRAND */}
-        <Link to="/" className="flex items-center gap-2 group">
+        <Link
+          to="/"
+          className="flex items-center gap-2 group"
+          onClick={handleLogoClick}
+        >
           <motion.svg
             width="110"
             height="110"
@@ -239,12 +304,28 @@ const ModernHeader: React.FC = () => {
               </div>
             ))}
 
-            {/* CONTACT BUTTON */}
+            {/* THEME TOGGLE */}
+            <div className="hidden lg:flex items-center">
+              <ThemeToggle />
+            </div>
+
+            {/* RESUME DOWNLOAD CTA BUTTON */}
+            <button
+              onClick={handleResumeDownload}
+              className="flex items-center gap-2 px-5 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full font-medium hover:scale-105 transition-all shadow-lg hover:shadow-purple-500/25"
+              aria-label="Download Resume"
+            >
+              <Download className="w-4 h-4" />
+              <span className="hidden xl:inline">Download Resume</span>
+              <span className="xl:hidden">Resume</span>
+            </button>
+
+            {/* LET'S CONNECT BUTTON */}
             <Link
               to="/contact"
-              className="ml-4 px-6 py-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-full font-medium hover:scale-105 transition-all shadow-lg hover:shadow-blue-500/25"
+              className="ml-2 px-6 py-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-full font-medium hover:scale-105 transition-all shadow-lg hover:shadow-blue-500/25"
             >
-              Contact
+              Let's Connect
             </Link>
           </div>
         )}
@@ -305,14 +386,29 @@ const ModernHeader: React.FC = () => {
                 </div>
               ))}
 
-              {/* MOBILE CONTACT BUTTON */}
-              <div className="pt-4 border-t border-white/10">
+              {/* MOBILE THEME TOGGLE */}
+              <div className="pt-4 border-t border-white/10 pb-3">
+                <ThemeToggle />
+              </div>
+
+              {/* MOBILE RESUME & CONTACT BUTTONS */}
+              <div className="pt-4 border-t border-white/10 space-y-3">
+                <button
+                  onClick={() => {
+                    handleResumeDownload();
+                    setMobileOpen(false);
+                  }}
+                  className="flex items-center justify-center gap-2 w-full px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-xl font-medium hover:scale-105 transition-all"
+                >
+                  <Download className="w-5 h-5" />
+                  Download Resume
+                </button>
                 <Link
                   to="/contact"
                   onClick={() => setMobileOpen(false)}
                   className="block w-full px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-xl font-medium text-center hover:scale-105 transition-all"
                 >
-                  Contact Me
+                  Let's Connect
                 </Link>
               </div>
             </div>

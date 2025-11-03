@@ -6,19 +6,37 @@ type State = {
   error?: Error | null;
 };
 
-export class ErrorBoundary extends React.Component<{}, State> {
-  constructor(props: {}) {
+type Props = {
+  children: React.ReactNode;
+};
+
+export class ErrorBoundary extends React.Component<Props, State> {
+  constructor(props: Props) {
     super(props);
     this.state = { hasError: false, error: null };
   }
 
-  static getDerivedStateFromError(error: Error) {
-    return { hasError: true, error };
+  static getDerivedStateFromError(error: Error | unknown) {
+    // Handle cases where error might not be an Error object
+    const errorObj = error instanceof Error
+      ? error
+      : new Error(error === undefined || error === null
+          ? 'Unknown error (undefined/null)'
+          : String(error));
+
+    return { hasError: true, error: errorObj };
   }
 
-  componentDidCatch(error: Error, info: any) {
+  componentDidCatch(error: Error | unknown, info: any) {
+    // Ensure we always log a proper error object
+    const errorObj = error instanceof Error
+      ? error
+      : new Error(error === undefined || error === null
+          ? 'Unknown error (undefined/null)'
+          : String(error));
+
     // You can log error to an external service here
-    // console.error('ErrorBoundary caught:', error, info);
+    console.error('ErrorBoundary caught:', errorObj, info);
   }
 
   render() {

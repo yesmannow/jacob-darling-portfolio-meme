@@ -1,8 +1,7 @@
-import dynamic from 'next/dynamic';
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 
-// Dynamically import the editor component with SSR disabled so third-party scripts run only on client
-const Editor = dynamic(() => import('./Editor').then(mod => mod.default || mod), { ssr: false });
+// Dynamically import the editor component so third-party scripts run only on client
+const Editor = lazy(() => import('./Editor').then(mod => ({ default: mod.default || mod })));
 
 type EditorWrapperProps = {
   initialValue?: string;
@@ -10,5 +9,9 @@ type EditorWrapperProps = {
 };
 
 export default function EditorWrapper(props: EditorWrapperProps) {
-  return <Editor {...props} />;
+  return (
+    <Suspense fallback={<div>Loading editor...</div>}>
+      <Editor {...props} />
+    </Suspense>
+  );
 }

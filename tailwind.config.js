@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: ['class'], // controlled via .dark class on <html>
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
@@ -7,6 +8,15 @@ export default {
   theme: {
     extend: {
       colors: {
+        // Theme-aware colors using CSS variables
+        bg: 'var(--bg)',
+        card: 'var(--card)',
+        text: 'var(--text)',
+        mute: 'var(--muted)',
+        accent: 'var(--accent)',
+        ring: 'var(--ring)',
+        border: 'var(--border)',
+        // Legacy color support (maintained for compatibility)
         primary: {
           50: '#eff6ff',
           100: '#dbeafe',
@@ -31,22 +41,22 @@ export default {
           800: '#9d174d',
           900: '#831843',
         },
-        accent: {
-          50: '#f0f9ff',
-          100: '#e0f2fe',
-          200: '#bae6fd',
-          300: '#7dd3fc',
-          400: '#38bdf8',
-          500: '#0ea5e9',
-          600: '#0284c7',
-          700: '#0369a1',
-          800: '#075985',
-          900: '#0c4a6e',
-        }
+      },
+      borderColor: {
+        DEFAULT: 'var(--border)',
+      },
+      boxShadow: {
+        soft: '0 10px 30px rgba(0,0,0,.06)',
+        'soft-dark': '0 10px 30px rgba(0,0,0,.3)',
       },
       fontFamily: {
-        'display': ['Clash Display', 'system-ui', 'sans-serif'],
-        'body': ['Inter', 'system-ui', 'sans-serif'],
+        brand: ['var(--font-brand)', 'Inter', 'system-ui', 'sans-serif'],
+        ui: ['var(--font-ui)', 'Inter', 'system-ui', 'sans-serif'],
+        display: ['Clash Display', 'system-ui', 'sans-serif'],
+        body: ['Inter', 'system-ui', 'sans-serif'],
+      },
+      borderRadius: {
+        'theme': 'var(--radius)',
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-in-out',

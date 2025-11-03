@@ -12,8 +12,10 @@ let lenis: Lenis | null = null;
  * Ensures only one instance exists across the entire app
  */
 export function initLenis(): Lenis | null {
-  // Prevent multiple instances
-  if (lenis) return lenis;
+  // Prevent multiple instances - return existing instance without logging
+  if (lenis) {
+    return lenis; // Silent return - already initialized
+  }
 
   // Only initialize in browser environment
   if (typeof window === 'undefined') return null;
@@ -42,7 +44,8 @@ export function initLenis(): Lenis | null {
         ScrollTrigger.update();
       });
     }
-    
+
+    // Only log on actual initialization (first call)
     console.log("✅ Lenis initialized successfully", lenis);
 
     return lenis;
@@ -64,6 +67,8 @@ export function getLenis(): Lenis | null {
 
 /**
  * Destroy Lenis instance
+ * Note: In React StrictMode dev mode, this should typically not be called
+ * as it can cause re-initialization issues. Lenis should persist for app lifetime.
  */
 export function destroyLenis(): void {
   if (lenis) {
@@ -72,6 +77,7 @@ export function destroyLenis(): void {
         lenis.destroy();
       }
       lenis = null;
+      console.log("🔄 Lenis destroyed (cleanup)");
     } catch (error) {
       console.error("Error destroying Lenis:", error);
       lenis = null;
@@ -84,10 +90,10 @@ export function refreshLenis() {
   if (lenis) {
     // Force a resize to recalculate scroll height
     lenis.resize();
-    
+
     // Refresh ScrollTrigger instances
     ScrollTrigger.refresh();
-    
+
     // Additional refresh after a delay to catch any lazy-loaded content
     setTimeout(() => {
       if (lenis) {
@@ -110,7 +116,7 @@ export function debugScrolling() {
 class MotionSync {
   private activeAnimations: Set<any> = new Set();
   private scrollAnimations: Set<gsap.core.Tween> = new Set();
-  
+
   // Register anime.js animation for cleanup
   registerAnime(animation: any) {
     this.activeAnimations.add(animation);
@@ -177,8 +183,8 @@ export function useCinematicScrollSync() {
       start: "top bottom",
       end: "bottom top",
       onEnter: () => {
-        const tween = gsap.to(section, { 
-          opacity: 1, 
+        const tween = gsap.to(section, {
+          opacity: 1,
           y: 0,
           scale: 1,
           filter: "blur(0px)",
@@ -188,8 +194,8 @@ export function useCinematicScrollSync() {
         motionSync.registerGsap(tween);
       },
       onLeaveBack: () => {
-        const tween = gsap.to(section, { 
-          opacity: 0.5, 
+        const tween = gsap.to(section, {
+          opacity: 0.5,
           y: 50,
           scale: 0.98,
           filter: "blur(2px)",
@@ -205,7 +211,7 @@ export function useCinematicScrollSync() {
 // Cinematic page transitions
 export function createPageTransition(element: HTMLElement, direction: 'in' | 'out') {
   const isEntering = direction === 'in';
-  
+
   // Temporarily using GSAP instead of anime.js for deployment
   return gsap.to(element, {
     opacity: isEntering ? 1 : 0,
@@ -233,7 +239,7 @@ export function createHoverSync(element: HTMLElement, options: {
   duration?: number;
 }) {
   const { scale = 1.05, y = -5, glow = true, duration = 300 } = options;
-  
+
   const enterAnimation = () => {
     const gsapInstance = gsap.to(element, {
       scale: scale,
@@ -272,7 +278,7 @@ export function enablePerformanceMode() {
     gsap.config({ force3D: false });
     // anime.suspendWhenDocumentHidden = true; // Not available in this version
   }
-  
+
   // Pause animations when tab is not visible
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) {

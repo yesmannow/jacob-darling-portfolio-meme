@@ -7,6 +7,7 @@ import BackToTop from "./components/utilities/BackToTop";
 import PersonSchema from "./components/seo/PersonSchema";
 import PerformanceMonitor from "./components/utils/PerformanceMonitor";
 import ErrorBoundary from "./components/ErrorBoundary";
+import { ThemeProvider } from "./components/theme/ThemeProvider";
 import { initLenis, destroyLenis } from "./utils/motion-sync";
 import "lenis/dist/lenis.css";
 
@@ -17,9 +18,11 @@ const App: React.FC = () => {
     document.body.style.overflow = 'auto';
 
     // Initialize global Lenis instance (with error handling)
+    // initLenis() has a guard to prevent multiple initializations
     try {
       const lenis = initLenis();
       if (lenis) {
+        // Only log once per actual initialization (guard prevents duplicate logs)
         console.log("✅ App: Lenis ready");
       } else {
         console.warn("⚠️ App: Lenis not initialized, using native scroll");
@@ -29,29 +32,37 @@ const App: React.FC = () => {
     }
 
     // Cleanup on unmount
+    // Note: In React StrictMode (dev), effects run twice, but we shouldn't
+    // destroy Lenis between these runs. Only destroy on actual unmount.
     return () => {
-      try {
-        destroyLenis();
-      } catch (error) {
-        console.error("❌ App: Cleanup error:", error);
+      // Only destroy on actual app unmount, not during StrictMode remounts
+      // This prevents duplicate initialization during dev mode
+      if (process.env.NODE_ENV === 'production') {
+        try {
+          destroyLenis();
+        } catch (error) {
+          console.error("❌ App: Cleanup error:", error);
+        }
       }
     };
   }, []);
 
   return (
     <ErrorBoundary>
-      <div className="app">
-        <PersonSchema />
-        <PerformanceMonitor />
-        {/* <LogoIntro /> */}
-        {/* <BackgroundLogos /> */}
-        {/* <CustomCursor /> */}
-        <ScrollToTop />
-        <BackToTop />
-        <ModernHeader />
-        <AppRouter />
-        <Footer />
-      </div>
+      <ThemeProvider>
+        <div className="app bg-bg text-text font-ui">
+          <PersonSchema />
+          <PerformanceMonitor />
+          {/* <LogoIntro /> */}
+          {/* <BackgroundLogos /> */}
+          {/* <CustomCursor /> */}
+          <ScrollToTop />
+          <BackToTop />
+          <ModernHeader />
+          <AppRouter />
+          <Footer />
+        </div>
+      </ThemeProvider>
     </ErrorBoundary>
   );
 };

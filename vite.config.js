@@ -13,7 +13,7 @@ export default defineConfig({
           title: 'Jacob Darling — Design. Motion. Code.',
           description: 'A cinematic portfolio by Jacob Darling — bridging creativity, technology, and storytelling.',
           ogTitle: 'Jacob Darling — Cinematic Portfolio',
-          ogDescription: 'Explore Jacob’s cinematic digital work — where design, code, and motion move as one.',
+          ogDescription: 'Explore Jacob\'s cinematic digital work — where design, code, and motion move as one.',
           ogImage: '/images/og-cover.webp',
           ogUrl: 'https://jacobdarling.com',
           twitterCard: 'summary_large_image',
@@ -37,10 +37,21 @@ export default defineConfig({
       }
     })
   ],
+  server: {
+    fs: {
+      strict: false
+    },
+    hmr: {
+      overlay: true // Keep overlay but our error handlers will catch duplicate element errors
+    }
+  },
   resolve: {
     alias: {
-      "@": "/src",
+      "@": path.resolve(__dirname, "./src"),
+      "react": path.resolve(__dirname, "./node_modules/react"),
+      "react-dom": path.resolve(__dirname, "./node_modules/react-dom"),
     },
+    dedupe: ["react", "react-dom"],
   },
   optimizeDeps: {
     include: ["react", "react-dom", "react/jsx-runtime", "lenis", "framer-motion", "gsap"],
