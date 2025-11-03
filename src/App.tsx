@@ -29,11 +29,11 @@ const App: React.FC = () => {
       const lenis = initLenis();
       if (lenis) {
         // Only log once per actual initialization (guard prevents duplicate logs)
-        if (process.env.NODE_ENV === 'development') {
+        if (import.meta.env.DEV) {
           console.log("✅ App: Lenis ready");
         }
       } else {
-        if (process.env.NODE_ENV === 'development') {
+        if (import.meta.env.DEV) {
           console.warn("⚠️ App: Lenis not initialized, using native scroll");
         }
       }
@@ -47,7 +47,7 @@ const App: React.FC = () => {
     return () => {
       // Only destroy on actual app unmount, not during StrictMode remounts
       // This prevents duplicate initialization during dev mode
-      if (process.env.NODE_ENV === 'production') {
+      if (import.meta.env.PROD) {
         try {
           destroyLenis();
         } catch (error) {

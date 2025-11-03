@@ -44,7 +44,7 @@ export function defineCustomElementIfNeeded(
       }
 
       // Log success in development
-      if (process.env.NODE_ENV === 'development') {
+      if (import.meta.env.DEV) {
         console.log(`Custom element "${name}" registered successfully.`);
       }
     } catch (err) {
@@ -62,7 +62,7 @@ export function defineCustomElementIfNeeded(
         // By catching this specific error, we prevent the program from crashing
         // and simply return, effectively suppressing known false-positive errors
         // (e.g., from Vite's HMR overlay system).
-        if (process.env.NODE_ENV === 'development') {
+        if (import.meta.env.DEV) {
           console.warn(`Custom element "${name}" was defined by another script during registration. Skipping.`);
         }
         return;
@@ -73,7 +73,7 @@ export function defineCustomElementIfNeeded(
     }
   } else {
     // Element already exists - skip registration
-    if (process.env.NODE_ENV === 'development') {
+    if (import.meta.env.DEV) {
       console.warn(`Custom element "${name}" is already registered. Skipping re-registration.`);
     }
   }

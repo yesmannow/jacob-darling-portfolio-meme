@@ -39,14 +39,14 @@ try {
   console.log('\n2. Checking main script...');
   const html = execSync(`curl -s ${deploymentUrl}`, { encoding: 'utf-8' });
   const scriptMatch = html.match(/src="([^"]+\.js)"/);
-  
+
   if (scriptMatch) {
     const scriptUrl = scriptMatch[1].startsWith('http') ? scriptMatch[1] : `${deploymentUrl}${scriptMatch[1]}`;
     console.log(`   Found script: ${scriptUrl}`);
-    
+
     const scriptHeaders = execSync(`curl -s -I ${scriptUrl}`, { encoding: 'utf-8' });
     const contentType = scriptHeaders.match(/content-type:\s*([^\r\n]+)/i);
-    
+
     if (contentType) {
       checks['Main script loads'] = true;
       const ct = contentType[1].trim().toLowerCase();

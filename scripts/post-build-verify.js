@@ -16,7 +16,7 @@ const distAssets = 'dist/assets';
 // Run asset-checker
 try {
   console.log('Running asset-checker...');
-  const output = execSync('node ./mcp-tools/asset-checker.js', { encoding: 'utf-8', stdio: 'pipe' });
+  const output = execSync('node ./mcp-tools/asset-checker.cjs', { encoding: 'utf-8', stdio: 'pipe' });
   const result = JSON.parse(output);
 
   if (result.status === 'OK') {

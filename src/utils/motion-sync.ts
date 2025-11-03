@@ -46,7 +46,7 @@ export function initLenis(): Lenis | null {
     }
 
     // Only log on actual initialization (first call)
-      if (process.env.NODE_ENV === 'development') {
+      if (import.meta.env.DEV) {
         console.log("✅ Lenis initialized successfully", lenis);
       }
 
@@ -79,7 +79,7 @@ export function destroyLenis(): void {
         lenis.destroy();
       }
       lenis = null;
-      if (process.env.NODE_ENV === 'development') {
+      if (import.meta.env.DEV) {
         console.log("🔄 Lenis destroyed (cleanup)");
       }
     } catch (error) {
@@ -111,7 +111,7 @@ export function refreshLenis() {
 // Debug function to check if scrolling is working
 export function debugScrolling() {
   // Debug logging (only in development)
-  if (process.env.NODE_ENV === 'development') {
+  if (import.meta.env.DEV) {
     console.log('Lenis instance:', lenis);
     console.log('Document height:', document.documentElement.scrollHeight);
     console.log('Window height:', window.innerHeight);

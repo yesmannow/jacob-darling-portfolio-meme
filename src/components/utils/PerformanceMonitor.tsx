@@ -19,7 +19,7 @@ const PerformanceMonitor: React.FC = () => {
 
   useEffect(() => {
     // Only run in production
-    if (process.env.NODE_ENV !== 'production') return;
+    if (!import.meta.env.PROD) return;
 
     // Store all observers for cleanup
     let lcpObserver: PerformanceObserver | null = null;
@@ -112,7 +112,7 @@ const PerformanceMonitor: React.FC = () => {
 
   // Send metrics to analytics (if configured)
   useEffect(() => {
-    if (process.env.NODE_ENV === 'production' && metrics.lcp && metrics.fid && metrics.cls) {
+    if (import.meta.env.PROD && metrics.lcp && metrics.fid && metrics.cls) {
       // Example: Send to Google Analytics
       if (typeof window !== 'undefined' && 'gtag' in window) {
         (window as any).gtag('event', 'web_vitals', {

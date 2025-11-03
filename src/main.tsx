@@ -58,7 +58,7 @@ if (typeof window !== 'undefined') {
                   (errorMsg.includes('has already been used') ||
                    errorMsg.includes('has already been defined'))) {
                 // Race condition - element was defined by another script between check and call
-                if (process.env.NODE_ENV === 'development') {
+                if (import.meta.env.DEV) {
                   console.warn(`[main.tsx] Custom element "${name}" was defined during registration. Skipping.`);
                 }
                 return; // Silently skip duplicate definitions
@@ -68,7 +68,7 @@ if (typeof window !== 'undefined') {
             }
           }
           // Element already exists - skip registration
-          if (process.env.NODE_ENV === 'development') {
+          if (import.meta.env.DEV) {
             console.warn(`[main.tsx] Custom element "${name}" is already registered. Skipping.`);
           }
         };
@@ -184,7 +184,7 @@ if (!React || !ReactDOM) {
       console.log('Initializing React app...');
       console.log('React version:', React.version);
       console.log('ReactDOM available:', !!ReactDOM);
-      console.log('Environment:', process.env.NODE_ENV || 'unknown');
+      console.log('Environment:', import.meta.env.MODE || 'unknown');
 
       // Log script loading status
       const scripts = document.querySelectorAll('script[type="module"]');
@@ -218,7 +218,7 @@ if (!React || !ReactDOM) {
       // Clear timeout once React mounts
       setTimeout(() => {
         clearTimeout(mountTimeout);
-        if (process.env.NODE_ENV === 'development') {
+        if (import.meta.env.DEV) {
           console.log('React app initialized successfully');
         }
       }, 100);

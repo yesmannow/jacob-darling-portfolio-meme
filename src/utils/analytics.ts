@@ -52,7 +52,7 @@ export const trackEvent = (eventData: AnalyticsEvent) => {
   }
 
   // Console log in development
-  if (process.env.NODE_ENV === 'development') {
+  if (import.meta.env.DEV) {
     console.log('📊 Analytics Event:', event);
   }
 };
