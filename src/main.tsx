@@ -35,80 +35,20 @@ if (typeof window !== 'undefined') {
   // Custom element guard is now handled by index.html script for consistency
 }
 
+function hideLoadingScreen() {
+  const loading = document.getElementById('loading-screen');
+  if (loading) loading.style.display = 'none';
+}
+
+function showErrorScreen(message: string) {
+  const loading = document.getElementById('loading-screen');
+  if (loading) loading.innerHTML = `<div style="color:red; text-align: center;">⚠️ ${message}</div>`;
+}
+
 // Set a timeout to show error if React doesn't mount within 10 seconds
 const mountTimeout = setTimeout(() => {
-  const rootElement = document.getElementById('root');
-  if (rootElement) {
-    const firstChild = rootElement.children.length > 0 ? rootElement.children[0] : null;
-    // Check if we're still showing the loading spinner
-    if (firstChild && firstChild.classList && firstChild.classList.contains('initial-loader')) {
-      console.error('React app failed to mount within timeout');
-      const errorStyles = `
-        <style>
-          .error-boundary-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            background: #0A0A0A;
-            color: #FFFFFF;
-            padding: 2rem;
-          }
-          .error-boundary-content {
-            text-align: center;
-            max-width: 600px;
-          }
-          .error-boundary-title {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            color: #3B82F6;
-          }
-          .error-boundary-message {
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-            opacity: 0.9;
-          }
-          .error-boundary-details {
-            font-size: 0.9rem;
-            opacity: 0.7;
-            margin-top: 1rem;
-          }
-          .error-boundary-button {
-            margin-top: 2rem;
-            padding: 0.75rem 2rem;
-            background: #3B82F6;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            cursor: pointer;
-          }
-          .error-boundary-button:hover {
-            background: #2563EB;
-          }
-        </style>
-      `;
-      rootElement.innerHTML = errorStyles + `
-        <div class="error-boundary-container">
-          <div class="error-boundary-content">
-            <h2 class="error-boundary-title">Loading Timeout</h2>
-            <p class="error-boundary-message">
-              The application is taking longer than expected to load. This might be due to a network issue or a JavaScript error.
-            </p>
-            <p class="error-boundary-details">
-              Please check your browser console (F12) for errors and try refreshing the page.
-            </p>
-            <button
-              onclick="window.location.reload()"
-              class="error-boundary-button"
-            >
-              Reload Page
-            </button>
-          </div>
-        </div>
-      `;
-    }
-  }
+  console.warn("⏳ React mount timeout triggered");
+  showErrorScreen("Something went wrong. Please refresh.");
 }, 10000);
 
 // Verify React and ReactDOM are available before proceeding
@@ -137,29 +77,9 @@ if (!React || !ReactDOM) {
     if (!rootElement) {
       console.error('Root element not found');
       clearTimeout(mountTimeout);
+      showErrorScreen("Root element not found.");
     } else {
-      // Always log initialization in production for debugging
-      console.log('Initializing React app...');
-      console.log('React version:', React.version);
-      console.log('ReactDOM available:', !!ReactDOM);
-      console.log('Environment:', import.meta.env.MODE || 'unknown');
-
-      // Log script loading status
-      const scripts = document.querySelectorAll('script[type="module"]');
-      console.log('Module scripts found:', scripts.length);
-      scripts.forEach((script, i) => {
-        console.log(`Script ${i}:`, (script as HTMLScriptElement).src || 'inline');
-      });
-
       const root = ReactDOM.createRoot(rootElement);
-
-      // Verify React.createElement exists
-      if (!React.createElement) {
-        throw new Error('React.createElement is not available');
-      }
-
-      // Wrap in error boundary at the root level
-      // Add React Router v7 future flags to suppress warnings and prepare for migration
       root.render(
         React.createElement(React.StrictMode, null,
           React.createElement(BrowserRouter, {
@@ -173,95 +93,16 @@ if (!React || !ReactDOM) {
         )
       );
 
-      // Clear timeout once React mounts
       setTimeout(() => {
+        hideLoadingScreen();
+        console.log("✅ React app mounted");
         clearTimeout(mountTimeout);
-        if (import.meta.env.DEV) {
-          console.log('React app initialized successfully');
-        }
       }, 100);
     }
-  } catch (error) {
+  } catch (err) {
     clearTimeout(mountTimeout);
-    console.error('Failed to initialize React app:', error);
-    console.error('Error details:', {
-      message: error instanceof Error ? error.message : String(error),
-      stack: error instanceof Error ? error.stack : undefined,
-      name: error instanceof Error ? error.name : undefined
-    });
-    console.error('React availability check:', {
-      React: !!React,
-      ReactDOM: !!ReactDOM,
-      ReactCreateElement: !!(React && React.createElement),
-      ReactStrictMode: !!(React && React.StrictMode)
-    });
-
-    // Show error in the UI
-    const rootElement = document.getElementById('root');
-    if (rootElement) {
-      const errorStyles = `
-        <style>
-          .error-boundary-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            background: #0A0A0A;
-            color: #FFFFFF;
-            padding: 2rem;
-          }
-          .error-boundary-content {
-            text-align: center;
-            max-width: 600px;
-          }
-          .error-boundary-title {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            color: #EF4444;
-          }
-          .error-boundary-message {
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-            opacity: 0.9;
-          }
-          .error-boundary-details {
-            font-size: 0.9rem;
-            opacity: 0.7;
-            margin-top: 1rem;
-            font-family: monospace;
-            background: rgba(255,255,255,0.1);
-            padding: 1rem;
-            border-radius: 8px;
-            word-break: break-all;
-          }
-          .error-boundary-button {
-            margin-top: 2rem;
-            padding: 0.75rem 2rem;
-            background: #3B82F6;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            cursor: pointer;
-          }
-          .error-boundary-button:hover {
-            background: #2563EB;
-          }
-        </style>
-      `;
-      rootElement.innerHTML = errorStyles + `
-        <div class="error-boundary-container">
-          <div class="error-boundary-content">
-            <h2 class="error-boundary-title">Application Error</h2>
-            <p class="error-boundary-message">Failed to load the portfolio application.</p>
-            <p class="error-boundary-details">${error instanceof Error ? error.message : 'Unknown error'}</p>
-            <button onclick="window.location.reload()" class="error-boundary-button">
-              Reload Page
-            </button>
-          </div>
-        </div>
-      `;
-    }
+    console.error("❌ React mount error:", err);
+    showErrorScreen("App failed to load.");
   }
 }
 
