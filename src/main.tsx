@@ -87,52 +87,89 @@ const mountTimeout = setTimeout(() => {
   }
 }, 10000);
 
-try {
-  const rootElement = document.getElementById('root');
-  if (!rootElement) {
-    console.error('Root element not found');
-  } else {
-    console.log('Initializing React app...');
-    const root = ReactDOM.createRoot(rootElement);
-
-    // Wrap in error boundary at the root level
-    root.render(
-      React.createElement(React.StrictMode, null,
-        React.createElement(BrowserRouter, null,
-          React.createElement(App)
-        )
-      )
-    );
-
-    // Clear timeout once React mounts
-    setTimeout(() => {
-      clearTimeout(mountTimeout);
-      console.log('React app initialized successfully');
-    }, 100);
-  }
-} catch (error) {
-  clearTimeout(mountTimeout);
-  console.error('Failed to initialize React app:', error);
-  console.error('Error details:', {
-    message: error instanceof Error ? error.message : String(error),
-    stack: error instanceof Error ? error.stack : undefined,
-    name: error instanceof Error ? error.name : undefined
-  });
-
-  // Show error in the UI
+// Verify React and ReactDOM are available before proceeding
+if (!React || !ReactDOM) {
+  console.error('React or ReactDOM is not available', { React, ReactDOM });
   const rootElement = document.getElementById('root');
   if (rootElement) {
     rootElement.innerHTML = `
-      <div style="display: flex; align-items: center; justify-content: center; min-height: 100vh; background-color: #0A0A0A; color: #FFFFFF; font-family: 'Inter', sans-serif; padding: 2rem;">
-        <div style="text-align: center; max-width: 600px;">
-          <h2 style="color: #EF4444; margin-bottom: 1rem;">Application Error</h2>
-          <p style="opacity: 0.8; margin-bottom: 1rem;">Failed to load the portfolio application.</p>
-          <p style="opacity: 0.6; font-size: 0.9rem; margin-bottom: 2rem;">${error instanceof Error ? error.message : 'Unknown error'}</p>
-          <button onclick="window.location.reload()" style="padding: 0.75rem 1.5rem; background: #3B82F6; color: white; border: none; border-radius: 0.5rem; cursor: pointer; font-family: 'Inter', sans-serif;">
+      <div class="error-boundary-container">
+        <div class="error-boundary-content">
+          <h2 class="error-boundary-title">React Not Loaded</h2>
+          <p class="error-boundary-message">
+            React library failed to load. Please check your network connection and try refreshing the page.
+          </p>
+          <button onclick="window.location.reload()" class="error-boundary-button">
             Reload Page
           </button>
         </div>
       </div>
     `;
+  }
+  clearTimeout(mountTimeout);
+} else {
+  try {
+    const rootElement = document.getElementById('root');
+    if (!rootElement) {
+      console.error('Root element not found');
+      clearTimeout(mountTimeout);
+    } else {
+      console.log('Initializing React app...');
+      console.log('React version:', React.version);
+      console.log('ReactDOM available:', !!ReactDOM);
+      
+      const root = ReactDOM.createRoot(rootElement);
+      
+      // Verify React.createElement exists
+      if (!React.createElement) {
+        throw new Error('React.createElement is not available');
+      }
+      
+      // Wrap in error boundary at the root level
+      root.render(
+        React.createElement(React.StrictMode, null,
+          React.createElement(BrowserRouter, null,
+            React.createElement(App)
+          )
+        )
+      );
+      
+      // Clear timeout once React mounts
+      setTimeout(() => {
+        clearTimeout(mountTimeout);
+        console.log('React app initialized successfully');
+      }, 100);
+    }
+  } catch (error) {
+    clearTimeout(mountTimeout);
+    console.error('Failed to initialize React app:', error);
+    console.error('Error details:', {
+      message: error instanceof Error ? error.message : String(error),
+      stack: error instanceof Error ? error.stack : undefined,
+      name: error instanceof Error ? error.name : undefined
+    });
+    console.error('React availability check:', {
+      React: !!React,
+      ReactDOM: !!ReactDOM,
+      ReactCreateElement: !!(React && React.createElement),
+      ReactStrictMode: !!(React && React.StrictMode)
+    });
+
+    // Show error in the UI
+    const rootElement = document.getElementById('root');
+    if (rootElement) {
+      rootElement.innerHTML = `
+        <div class="error-boundary-container">
+          <div class="error-boundary-content">
+            <h2 class="error-boundary-title">Application Error</h2>
+            <p class="error-boundary-message">Failed to load the portfolio application.</p>
+            <p class="error-boundary-details">${error instanceof Error ? error.message : 'Unknown error'}</p>
+            <button onclick="window.location.reload()" class="error-boundary-button">
+              Reload Page
+            </button>
+          </div>
+        </div>
+      `;
+    }
   }
 }
