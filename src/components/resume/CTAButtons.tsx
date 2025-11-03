@@ -1,20 +1,16 @@
 import { motion } from "framer-motion";
-import { Share2, Mail, ExternalLink } from "lucide-react";
+import { Share2, Mail, ExternalLink, Download } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import resumeData from "../../data/resume.json";
-import LazyPDFDownloadCTA from "./LazyPDFDownloadCTA";
 import { trackPortfolioEngagement } from "../../utils/analytics";
 
 export default function CTAButtons() {
-  const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
   const [shareMessage, setShareMessage] = useState<string | null>(null);
   const timeoutRef = useRef<number | null>(null);
   const { contact } = resumeData;
 
-  const handlePDFGeneration = () => {
-    setIsGeneratingPDF(true);
+  const handlePDFDownload = () => {
     trackPortfolioEngagement.resumeDownload('pdf');
-    setTimeout(() => setIsGeneratingPDF(false), 2000);
   };
 
   const handleShare = async () => {
@@ -94,11 +90,18 @@ export default function CTAButtons() {
       className="flex flex-col items-center gap-4 mb-12"
     >
       {/* PDF Download Button */}
-      <LazyPDFDownloadCTA
-        isGeneratingPDF={isGeneratingPDF}
-        handlePDFGeneration={handlePDFGeneration}
-        buttonVariants={buttonVariants}
-      />
+      <motion.a
+        href="/resume/jacob-darling-resume.pdf"
+        download="Jacob-Darling-Resume.pdf"
+        variants={buttonVariants}
+        whileHover="hover"
+        whileTap="tap"
+        onClick={handlePDFDownload}
+        className="flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full font-semibold shadow-lg hover:shadow-xl transition-shadow duration-300"
+      >
+        <Download size={20} />
+        <span>Download PDF</span>
+      </motion.a>
 
       {/* Share Button */}
       <motion.button
