@@ -1,64 +1,19 @@
-<script>
-  window.enableHotReplacement = true;
-  (function () {
-    if (window.__ceDefinePatched) return;
-    window.__ceDefinePatched = true;
-    const origDefine = customElements.define.bind(customElements);
-    customElements.define = (name, ctor, opts) => {
-      if (customElements.get(name)) return;
-      return origDefine(name, ctor, opts);
-    };
-  })();
-</script>
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <!-- Enable hot replacement globally -->
     <script>
       window.enableHotReplacement = true;
-    </script>
-
-    <!-- Custom Element Registration Guard - Load FIRST to prevent all duplicate registration errors -->
-    <!-- This intercepts ALL customElements.define() calls to prevent re-registration -->
-    <script>
       (function () {
-        'use strict';
-
-        if (typeof window === "undefined" || !window.customElements) return;
-
-        const originalDefine = window.customElements.define;
-        if (!originalDefine) return;
-
-        // Prevent double-wrapping
-        if (window.customElements.__defineGuardInstalled) return;
-        window.customElements.__defineGuardInstalled = true;
-
-        // Override customElements.define to check before defining
-        window.customElements.define = function (name, constructor, options) {
-          // Check if element is already defined - this is the recommended pattern
-          if (window.customElements.get(name)) {
-            // Element already exists - skip re-registration
-            console.warn(`Custom element "${name}" is already registered. Skipping re-registration.`);
-            return;
-          }
-
-          // Element doesn't exist yet - safe to define
-          try {
-            return originalDefine.call(this, name, constructor, options);
-          } catch (error) {
-            // Handle race conditions where element might be defined between check and call
-            const errorMsg = error?.message || String(error);
-            if (errorMsg && errorMsg.includes('has already been used') ||
-                errorMsg.includes('has already been defined')) {
-              // Race condition - element was defined by another script between check and call
-              console.warn(`Custom element "${name}" was defined by another script during registration. Skipping.`);
-              return; // Silently skip duplicate definitions
-            }
-            // Re-throw other errors (not duplicate registration errors)
-            throw error;
-          }
+        if (window.__ceDefinePatched) return;
+        window.__ceDefinePatched = true;
+        const origDefine = customElements.define.bind(customElements);
+        customElements.define = (name, ctor, opts) => {
+          if (customElements.get(name)) return;
+          return origDefine(name, ctor, opts);
         };
       })();
     </script>
@@ -185,75 +140,6 @@
       ]
     }
     </script>
-    <!-- Critical CSS for initial render -->
-    <style>
-      * { box-sizing: border-box; }
-      html, body {
-        margin: 0;
-        padding: 0;
-        background-color: #0A0A0A;
-        color: #FFFFFF;
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-      }
-      html {
-        /* Cross-browser theme support: color-scheme works in Firefox/Opera */
-        /* theme-color meta tag (line 91) handles Chrome/Edge/Safari */
-        color-scheme: dark light;
-      }
-      #root {
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-      }
-      .initial-loader {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 100vh;
-        background-color: #0A0A0A;
-        color: #FFFFFF;
-      }
-      .initial-loader-content {
-        text-align: center;
-      }
-      .spinner {
-        width: 40px;
-        height: 40px;
-        border: 4px solid rgba(255,255,255,0.1);
-        border-top-color: #3B82F6;
-        border-radius: 50%;
-        animation: spin 0.8s linear infinite;
-        margin: 0 auto 1rem;
-      }
-      .initial-loader-text {
-        font-family: 'Inter', sans-serif;
-        font-size: 14px;
-        opacity: 0.7;
-      }
-      @keyframes spin {
-        to { transform: rotate(360deg); }
-      }
-      .noscript-message {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 100vh;
-        background-color: #0A0A0A;
-        color: #FFFFFF;
-        text-align: center;
-        padding: 2rem;
-      }
-      .noscript-message h1 {
-        font-family: 'Inter', sans-serif;
-        margin-bottom: 1rem;
-      }
-      .noscript-message p {
-        font-family: 'Inter', sans-serif;
-        opacity: 0.7;
-      }
-    </style>
   </head>
   <body>
     <div id="root">
