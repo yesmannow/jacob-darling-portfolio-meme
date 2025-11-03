@@ -152,14 +152,13 @@ const styles = StyleSheet.create({
     paddingLeft: 4
   },
   achievementsTitle: {
-    fontSize: 9.5,
+    fontSize: 8.5,
     fontWeight: 600,
     color: "#111827",
     marginBottom: 6,
     marginTop: 6,
     textTransform: "uppercase",
-    letterSpacing: 0.5,
-    fontSize: 8.5
+    letterSpacing: 0.5
   },
   achievementItem: {
     fontSize: 9.5,
