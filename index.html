@@ -140,70 +140,112 @@
         }, true);
     </script>
     <!-- Suppress custom element errors - MUST be in head before any scripts -->
+    <!-- This runs IMMEDIATELY to catch any early registrations -->
     <script>
       (function() {
         'use strict';
-        // Wait for DOMContentLoaded or use a small delay to ensure customElements API is available
-        function setupCustomElementSuppression() {
+        
+        // Override customElements.define IMMEDIATELY - don't wait for DOM
+        // This must run before ANY scripts that might define custom elements
+        function protectCustomElements() {
           // Check if customElements API is available
           if (typeof window === 'undefined' || !window.customElements) {
-            // Retry after a short delay if not available yet
-            if (document.readyState === 'loading') {
-              document.addEventListener('DOMContentLoaded', setupCustomElementSuppression);
-            } else {
-              setTimeout(setupCustomElementSuppression, 10);
+            // Retry immediately if not available (should be available in modern browsers)
+            if (typeof window !== 'undefined') {
+              setTimeout(protectCustomElements, 0);
             }
             return;
           }
 
           const originalDefine = window.customElements.define;
 
-          // Override customElements.define IMMEDIATELY
-          // This implements the exact recommended pattern: check !customElements.get() before defining
-          if (originalDefine) {
+          // Override customElements.define with the recommended fix pattern
+          if (originalDefine && !window.customElements._defineProtected) {
+            window.customElements._defineProtected = true; // Flag to prevent double-wrapping
+            
             window.customElements.define = function(name, constructor, options) {
-              // Recommended pattern: Check if element is already defined using customElements.get()
-              // This prevents "has already been defined" errors
-              try {
-                if (window.customElements && typeof window.customElements.get === 'function') {
-                  // Explicit check before defining (the suggested fix pattern)
-                  if (window.customElements.get(name)) {
-                    // Element already exists - return early to prevent duplicate definition
+              // RECOMMENDED FIX: Check if element is already defined using !customElements.get()
+              // This is the exact pattern the user suggested
+              if (!customElements.get(name)) {
+                // Element doesn't exist - safe to define
+                try {
+                  return originalDefine.call(this, name, constructor, options);
+                } catch (error) {
+                  // If definition fails (race condition), check again
+                  if (error && error.message && error.message.includes('has already been defined')) {
+                    // Element was defined between our check and the actual define() call
+                    // This is a race condition - silently ignore it
                     return;
                   }
-
-                  // Special check for mce-autosize-textarea (the problematic element)
-                  if (name === 'mce-autosize-textarea' && window.customElements.get('mce-autosize-textarea')) {
-                    // Already defined - skip redefinition
-                    return;
-                  }
+                  // Re-throw non-duplicate errors
+                  throw error;
                 }
-              } catch (e) {
-                // If get() fails, assume not defined and proceed
-              }
-
-              // Now safe to define (element doesn't exist yet)
-              try {
-                return originalDefine.call(this, name, constructor, options);
-              } catch (error) {
-                // If definition still fails (race condition), catch the error
-                const errorMessage = error?.message || String(error || '');
-                if (errorMessage.includes('has already been defined') ||
-                    errorMessage.includes('custom element') ||
-                    String(name || '').includes('mce-') ||
-                    String(name || '').includes('autosize-textarea')) {
-                  // Silently ignore - element is already registered (likely race condition)
-                  return;
-                }
-                // Re-throw other errors
-                throw error;
+              } else {
+                // Element already exists - silently return (prevents "already been defined" error)
+                // This is the fix: check BEFORE defining
+                return;
               }
             };
           }
         }
-
-        // Start setup immediately, will retry if customElements not ready
-        setupCustomElementSuppression();
+        
+        // Try to protect immediately (runs before any other scripts)
+        if (document.readyState === 'loading') {
+          // If DOM is still loading, wait for it
+          document.addEventListener('DOMContentLoaded', protectCustomElements);
+        } else {
+          // DOM already loaded, protect immediately
+          protectCustomElements();
+        }
+        
+        // Also catch any errors that slip through
+        window.addEventListener('error', function(event) {
+          const error = event.error;
+          const message = (error && error.message) || event.message || '';
+          
+          // Catch "already been defined" errors
+          if (message.includes('has already been defined') ||
+              message.includes('mce-autosize-textarea') ||
+              (error && error.name === 'NotSupportedError' && message.includes('custom element'))) {
+            // Prevent the error from propagating
+            event.preventDefault();
+            event.stopPropagation();
+            event.stopImmediatePropagation();
+            return false;
+          }
+        }, true); // Use capture phase to catch early
+        
+        // Also catch promise rejections
+        window.addEventListener('unhandledrejection', function(event) {
+          const reason = event.reason;
+          const message = (reason && reason.message) || String(reason || '');
+          
+          if (message.includes('has already been defined') ||
+              message.includes('mce-autosize-textarea') ||
+              (reason && reason.name === 'NotSupportedError' && message.includes('custom element'))) {
+            event.preventDefault();
+            return;
+          }
+        });
+        
+        // Start protection immediately
+        protectCustomElements();
+        
+        // Also try after a tiny delay to catch any that were defined in the meantime
+        setTimeout(protectCustomElements, 0);
+        
+        // And after DOM is ready
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', function() {
+            protectCustomElements();
+          });
+        }
+        
+        // Final attempt after window load
+        window.addEventListener('load', protectCustomElements);
+        
+        // Start protection immediately
+        protectCustomElements();
 
         // Global error handler with capture phase to catch early
         // This MUST use capture phase and stopImmediatePropagation to catch before overlay
@@ -474,6 +516,132 @@
         </div>
       </div>
     </noscript>
-    <script type="module" src="/src/main.tsx"></script>
+    <!-- Vite will automatically inject the correct entry script during build -->
+    <script type="module" crossorigin src="/src/main.tsx"></script>
+
+    <!-- Enhanced error detection for production -->
+    <script>
+      // Enhanced error detection to help diagnose loading issues
+      window.addEventListener('error', function(e) {
+        console.error('Global error caught:', {
+          message: e.message,
+          filename: e.filename,
+          lineno: e.lineno,
+          colno: e.colno,
+          error: e.error
+        });
+
+        // If it's a module loading error, show helpful message
+        if (e.message && (e.message.includes('Failed to fetch') ||
+                          e.message.includes('module script') ||
+                          e.message.includes('MIME type') ||
+                          e.message.includes('net::ERR'))) {
+          const root = document.getElementById('root');
+          if (root && root.querySelector('.initial-loader')) {
+            root.innerHTML = `
+              <style>
+                .error-container {
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  min-height: 100vh;
+                  background: #0A0A0A;
+                  color: #FFFFFF;
+                  padding: 2rem;
+                  text-align: center;
+                }
+                .error-title {
+                  font-size: 1.5rem;
+                  margin-bottom: 1rem;
+                  color: #EF4444;
+                }
+                .error-message {
+                  opacity: 0.8;
+                  margin-bottom: 1rem;
+                  font-family: monospace;
+                  font-size: 0.9rem;
+                }
+                .error-button {
+                  margin-top: 1rem;
+                  padding: 0.75rem 2rem;
+                  background: #3B82F6;
+                  color: white;
+                  border: none;
+                  border-radius: 8px;
+                  cursor: pointer;
+                }
+              </style>
+              <div class="error-container">
+                <div>
+                  <h2 class="error-title">Script Loading Error</h2>
+                  <p class="error-message">${e.message}</p>
+                  <p style="opacity: 0.7; margin-top: 1rem;">
+                    The application scripts failed to load. This might be a network issue or a build configuration problem.
+                  </p>
+                  <button class="error-button" onclick="window.location.reload()">
+                    Reload Page
+                  </button>
+                </div>
+              </div>
+            `;
+          }
+        }
+      }, true);
+
+      // Also catch unhandled promise rejections
+      window.addEventListener('unhandledrejection', function(e) {
+        console.error('Unhandled promise rejection:', e.reason);
+      });
+
+      // Timeout to detect if nothing loads after 15 seconds
+      setTimeout(function() {
+        const root = document.getElementById('root');
+        if (root && root.querySelector('.initial-loader')) {
+          console.error('Application failed to load after 15 seconds');
+          root.innerHTML = `
+            <style>
+              .timeout-container {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                min-height: 100vh;
+                background: #0A0A0A;
+                color: #FFFFFF;
+                padding: 2rem;
+                text-align: center;
+              }
+              .timeout-title {
+                font-size: 1.5rem;
+                margin-bottom: 1rem;
+                color: #F59E0B;
+              }
+              .timeout-button {
+                margin-top: 1rem;
+                padding: 0.75rem 2rem;
+                background: #3B82F6;
+                color: white;
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+              }
+            </style>
+            <div class="timeout-container">
+              <div>
+                <h2 class="timeout-title">Loading Timeout</h2>
+                <p style="opacity: 0.8; margin-bottom: 1rem;">
+                  The application is taking longer than expected to load.
+                </p>
+                <p style="opacity: 0.6; font-size: 0.9rem; margin-bottom: 1rem;">
+                  Please check the browser console (F12) for errors.
+                </p>
+                <button class="timeout-button" onclick="window.location.reload()">
+                  Reload Page
+                </button>
+              </div>
+            </div>
+          `;
+        }
+      }, 15000);
+    </script>
   </body>
 </html>

@@ -39,36 +39,37 @@ if (typeof window !== 'undefined') {
     }
   }, true); // Use capture phase to catch early
 
-  // Override customElements.define to prevent duplicates
-  // This implements the exact pattern suggested: check !customElements.get() before defining
-  const originalDefine = window.customElements?.define;
-  if (originalDefine) {
-    window.customElements.define = function(name, constructor, options) {
-      // Explicit check: if element is already defined, don't redefine it
-      // This is the recommended pattern: !customElements.get(name) before define()
-      if (customElements.get(name)) {
-        // Element already exists - silently return (prevents duplicate definition error)
-        return;
-      }
-
-      // For mce-autosize-textarea specifically, add extra protection
-      if (name === 'mce-autosize-textarea' && customElements.get('mce-autosize-textarea')) {
-        return; // Already defined, skip
-      }
-
-      try {
-        return originalDefine.call(this, name, constructor, options);
-      } catch (error) {
-        // If definition still fails (race condition), catch the error
-        if (error && (error.message?.includes('has already been defined') ||
-                      error.message?.includes('custom element') ||
-                      name?.includes('mce-'))) {
-          // Silently ignore duplicate registrations, especially TinyMCE elements
-          return undefined;
+  // Override customElements.define to prevent duplicates (if not already protected)
+  // This uses the recommended pattern: check !customElements.get() before defining
+  if (window.customElements && !window.customElements._defineProtected) {
+    const originalDefine = window.customElements.define;
+    if (originalDefine) {
+      window.customElements._defineProtected = true; // Flag to prevent double-wrapping
+      
+      window.customElements.define = function(name, constructor, options) {
+        // RECOMMENDED FIX: Check if element is already defined using !customElements.get()
+        // This is the exact fix pattern suggested by the user
+        if (!customElements.get(name)) {
+          // Element doesn't exist - safe to define
+          try {
+            return originalDefine.call(this, name, constructor, options);
+          } catch (error) {
+            // If definition fails (race condition), check again
+            if (error && error.message && error.message.includes('has already been defined')) {
+              // Element was defined between our check and the actual define() call
+              // This is a race condition - silently ignore it
+              return;
+            }
+            // Re-throw non-duplicate errors
+            throw error;
+          }
+        } else {
+          // Element already exists - silently return (prevents "already been defined" error)
+          // This is the fix: check BEFORE defining
+          return;
         }
-        throw error;
-      }
-    };
+      };
+    }
   }
 }
 
