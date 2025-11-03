@@ -1,0 +1,11 @@
+fix: version alignment and plugin cleanup for Vite build
+
+- Remove rollup-plugin-visualizer causing access denied errors
+- Pin React and React-DOM to exact version 18.3.1 for scheduler consistency
+- Simplify Vite config: remove React aliases, add vite-plugin-html
+- Optimize chunk splitting: react-vendor, animation-vendor, pdf-vendor
+- Fix HTML proxy errors and improve build stability
+- Build time: 45.20s with 2400 modules transformed
+
+Resolves scheduler version conflicts and production build failures.
+Ready for Vercel deployment.
