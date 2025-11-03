@@ -3,24 +3,28 @@
 Components that can be safely removed from the codebase:
 
 ## Layout Components
+
 - `src/components/layout/Header.tsx` - Replaced by `ModernHeader.tsx`
 - `src/components/hero/Hero.tsx` - Not imported anywhere
 - `src/components/home/Hero.tsx` - Not imported anywhere
 - `src/components/case-study/Hero.tsx` - Case studies use `HeroSection.tsx` instead
 
 ## Animation Components (Unused)
+
 - `src/components/animations/LogoIntro.tsx` - Not imported
 - `src/components/animations/FloatingElements.tsx` - Not imported
 - `src/components/animations/BackgroundLogos.tsx` - Not imported
 - `src/components/animations/AnimatedCounter.tsx` - Has internal implementations but not imported standalone
 
 ## Branding Components (Unused)
+
 - `src/components/branding/LogoFull.tsx` - Not imported
 - `src/components/branding/NewLogo.tsx` - Not imported
 - `src/components/branding/SplashIntro.tsx` - Not imported
 - `src/components/branding/Logo.tsx` - Check if used (may be imported via index)
 
 ## Home Components (Unused)
+
 - `src/components/home/About.tsx` - Not imported
 - `src/components/home/Awards.tsx` - Not imported
 - `src/components/home/FeaturedWork.tsx` - Not imported
@@ -39,6 +43,7 @@ Components that can be safely removed from the codebase:
 - `src/components/home/CTA.tsx` - Not imported
 
 ## Utility/UI Components (Unused)
+
 - `src/components/stats/Stats.tsx` - Not imported
 - `src/components/timeline/InteractiveTimeline.tsx` - Not imported
 - `src/components/theme/ThemeToggle.tsx` - Not imported (ThemeProvider is used)
@@ -48,9 +53,11 @@ Components that can be safely removed from the codebase:
 - `src/components/interactive/CustomCursor.tsx` - Not imported
 
 ## Diagram Components (Unused)
+
 - `src/components/diagrams/ProcessDiagram.tsx` - Not imported
 
 ## Inspiration Components (Unused)
+
 - `src/components/inspiration/AdvancedFilterSystem.tsx` - Only used in ResponsiveInspirationWrapper
 - `src/components/inspiration/AnimationTemplates.tsx` - Not imported
 - `src/components/inspiration/ColorPaletteExtractor.tsx` - Only used in ResponsiveInspirationWrapper
@@ -61,6 +68,7 @@ Components that can be safely removed from the codebase:
 - `src/components/inspiration/ResponsiveInspirationWrapper.tsx` - Not imported (Inspiration page uses custom implementation)
 
 ## Resume Components (Unused)
+
 - `src/components/resume/ExperienceSection.tsx` - Not imported (Resume.tsx uses ExperienceTimeline)
 - `src/components/resume/EducationSection.tsx` - Not imported
 - `src/components/resume/LeadershipSection.tsx` - Not imported
@@ -69,13 +77,16 @@ Components that can be safely removed from the codebase:
 - `src/components/resume/LazyPDFDownloadCTA.tsx` - Not imported
 
 ## SEO Components (Unused)
+
 - `src/components/seo/GallerySchema.tsx` - Not imported
 - `src/components/seo/SideProjectSchema.tsx` - Not imported
 
 ## Utils Components (Unused)
+
 - `src/components/utils/LazyBusinessComponents.tsx` - Not imported
 
 ## Summary
+
 **Total unused components: ~45+ files**
 
 These components can be safely deleted to reduce bundle size and improve maintainability. Some components like the inspiration wrapper components are only used internally by ResponsiveInspirationWrapper, which itself is not used, so the entire chain can be removed.
