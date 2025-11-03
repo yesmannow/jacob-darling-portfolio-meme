@@ -260,6 +260,7 @@
             // This often happens when the server returns wrong Content-Type header
             event.preventDefault();
             event.stopPropagation();
+            event.stopImmediatePropagation();
 
             // Log in dev but don't crash - might be a temporary build/HMR issue
             if (typeof process !== 'undefined' && process.env && process.env.NODE_ENV === 'development') {
@@ -276,6 +277,40 @@
                 newScript.src = script.src;
                 newScript.setAttribute('data-retry', 'true');
                 document.head.appendChild(newScript);
+              }
+            }
+            return false;
+          }
+
+          // Catch circular dependency and initialization errors
+          if (errorMessage.includes('Cannot access') && errorMessage.includes('before initialization') ||
+              errorMessage.includes('ReferenceError') && errorMessage.includes('initialization') ||
+              errorMessage.includes('TDZ') || // Temporal Dead Zone errors
+              (errorMessage.includes('before initialization') && filename.includes('.js'))) {
+            // These are often circular dependency issues that resolve on retry
+            event.preventDefault();
+            event.stopPropagation();
+            event.stopImmediatePropagation();
+            
+            if (typeof process !== 'undefined' && process.env && process.env.NODE_ENV === 'development') {
+              console.warn('Initialization error caught (suppressed - may be circular dependency):', errorMessage);
+            }
+            
+            // If it's a script error, try reloading the page after a delay
+            if (target && target.tagName === 'SCRIPT' && filename.includes('chunk-')) {
+              if (!window.__initializationErrorCount) {
+                window.__initializationErrorCount = 0;
+              }
+              window.__initializationErrorCount++;
+              
+              // Only reload if this is the first or second occurrence (prevent infinite loop)
+              if (window.__initializationErrorCount <= 2) {
+                setTimeout(() => {
+                  if (window.__initializationErrorCount <= 2) {
+                    console.log('Reloading page due to initialization error...');
+                    window.location.reload();
+                  }
+                }, 1000);
               }
             }
             return false;

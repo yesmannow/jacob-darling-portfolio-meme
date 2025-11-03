@@ -5,17 +5,36 @@ import { User, Briefcase, GraduationCap, Award, Users, Code, FileText, ArrowUp }
 interface NavItem {
   id: string;
   label: string;
-  icon: React.ReactNode;
+  iconType: 'file' | 'briefcase' | 'code' | 'graduation' | 'award' | 'users';
 }
 
 const navItems: NavItem[] = [
-  { id: 'summary', label: 'Summary', icon: <FileText size={16} /> },
-  { id: 'experience', label: 'Experience', icon: <Briefcase size={16} /> },
-  { id: 'skills', label: 'Skills', icon: <Code size={16} /> },
-  { id: 'education', label: 'Education', icon: <GraduationCap size={16} /> },
-  { id: 'awards', label: 'Awards', icon: <Award size={16} /> },
-  { id: 'testimonials', label: 'Testimonials', icon: <Users size={16} /> },
+  { id: 'summary', label: 'Summary', iconType: 'file' },
+  { id: 'experience', label: 'Experience', iconType: 'briefcase' },
+  { id: 'skills', label: 'Skills', iconType: 'code' },
+  { id: 'education', label: 'Education', iconType: 'graduation' },
+  { id: 'awards', label: 'Awards', iconType: 'award' },
+  { id: 'testimonials', label: 'Testimonials', iconType: 'users' },
 ];
+
+const getIcon = (type: NavItem['iconType']) => {
+  switch (type) {
+    case 'file':
+      return <FileText size={16} />;
+    case 'briefcase':
+      return <Briefcase size={16} />;
+    case 'code':
+      return <Code size={16} />;
+    case 'graduation':
+      return <GraduationCap size={16} />;
+    case 'award':
+      return <Award size={16} />;
+    case 'users':
+      return <Users size={16} />;
+    default:
+      return <FileText size={16} />;
+  }
+};
 
 const StickyNavigation: React.FC = () => {
   const [activeSection, setActiveSection] = useState('summary');
@@ -103,7 +122,7 @@ const StickyNavigation: React.FC = () => {
                 whileTap={{ scale: 0.95 }}
               >
                 <div className={`${activeSection === item.id ? 'text-blue-400' : 'text-gray-500'}`}>
-                  {item.icon}
+                  {getIcon(item.iconType)}
                 </div>
                 <span className="text-sm font-medium whitespace-nowrap">{item.label}</span>
                 {activeSection === item.id && (
@@ -138,7 +157,7 @@ const StickyNavigation: React.FC = () => {
               }`}
               whileTap={{ scale: 0.9 }}
             >
-              {item.icon}
+              {getIcon(item.iconType)}
               <span className="text-xs font-medium">{item.label}</span>
             </motion.button>
           ))}
