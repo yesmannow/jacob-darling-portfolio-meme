@@ -56,6 +56,37 @@ window.addEventListener('unhandledrejection', (event) => {
   }
 });
 
+// Set a timeout to show error if React doesn't mount within 10 seconds
+const mountTimeout = setTimeout(() => {
+  const rootElement = document.getElementById('root');
+  if (rootElement && rootElement.children.length > 0) {
+    const firstChild = rootElement.children[0];
+    // Check if we're still showing the loading spinner
+    if (firstChild.classList.contains('initial-loader')) {
+      console.error('React app failed to mount within timeout');
+      rootElement.innerHTML = `
+        <div class="error-boundary-container">
+          <div class="error-boundary-content">
+            <h2 class="error-boundary-title">Loading Timeout</h2>
+            <p class="error-boundary-message">
+              The application is taking longer than expected to load. This might be due to a network issue or a JavaScript error.
+            </p>
+            <p class="error-boundary-details" style="margin-top: 1rem;">
+              Please check your browser console for errors and try refreshing the page.
+            </p>
+            <button
+              onclick="window.location.reload()"
+              class="error-boundary-button"
+            >
+              Reload Page
+            </button>
+          </div>
+        </div>
+      `;
+    }
+  }
+}, 10000);
+
 try {
   const rootElement = document.getElementById('root');
   if (!rootElement) {
@@ -73,16 +104,21 @@ try {
       )
     );
     
-    console.log('React app initialized successfully');
+    // Clear timeout once React mounts
+    setTimeout(() => {
+      clearTimeout(mountTimeout);
+      console.log('React app initialized successfully');
+    }, 100);
   }
 } catch (error) {
+  clearTimeout(mountTimeout);
   console.error('Failed to initialize React app:', error);
   console.error('Error details:', {
     message: error instanceof Error ? error.message : String(error),
     stack: error instanceof Error ? error.stack : undefined,
     name: error instanceof Error ? error.name : undefined
   });
-  
+
   // Show error in the UI
   const rootElement = document.getElementById('root');
   if (rootElement) {

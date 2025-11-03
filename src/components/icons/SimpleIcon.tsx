@@ -7,24 +7,24 @@ const getSimpleIcon = (slug: string): any => {
   try {
     // Try multiple methods to access icons
     const slugLower = slug.toLowerCase();
-    
+
     // Method 1: Direct property access with slug
     if ((simpleIcons as any)[slugLower]) {
       return (simpleIcons as any)[slugLower];
     }
-    
+
     // Method 2: Try with dashes removed
     const slugNoDashes = slugLower.replace(/-/g, '');
     if ((simpleIcons as any)[slugNoDashes]) {
       return (simpleIcons as any)[slugNoDashes];
     }
-    
+
     // Method 3: If there's a getIcons or similar method
     if (typeof (simpleIcons as any).getIcons === 'function') {
       const icons = (simpleIcons as any).getIcons();
       return icons[slugLower] || icons[slugNoDashes] || null;
     }
-    
+
     return null;
   } catch (e) {
     // Silently fail - don't crash the app
