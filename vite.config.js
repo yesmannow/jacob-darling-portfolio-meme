@@ -42,7 +42,11 @@ export default defineConfig({
       strict: false
     },
     hmr: {
-      overlay: true // Keep overlay but our error handlers will catch duplicate element errors
+      overlay: false, // Disable overlay to let our error handlers manage errors
+      clientPort: 5173
+    },
+    headers: {
+      'Content-Type': 'text/javascript; charset=utf-8'
     }
   },
   resolve: {
@@ -55,10 +59,16 @@ export default defineConfig({
   },
   optimizeDeps: {
     include: ["react", "react-dom", "react/jsx-runtime", "lenis", "framer-motion", "gsap"],
+    esbuildOptions: {
+      // Fix potential circular dependency issues
+      keepNames: true,
+    },
   },
   build: {
     rollupOptions: {
       output: {
+        // Prevent circular dependency warnings
+        hoistTransitiveImports: false,
         manualChunks: (id) => {
           // Core React libraries - MUST be separate and load first
           // Include all React-related packages in react-core to prevent deduplication issues
