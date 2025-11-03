@@ -117,14 +117,14 @@ if (!React || !ReactDOM) {
       console.log('Initializing React app...');
       console.log('React version:', React.version);
       console.log('ReactDOM available:', !!ReactDOM);
-      
+
       const root = ReactDOM.createRoot(rootElement);
-      
+
       // Verify React.createElement exists
       if (!React.createElement) {
         throw new Error('React.createElement is not available');
       }
-      
+
       // Wrap in error boundary at the root level
       root.render(
         React.createElement(React.StrictMode, null,
@@ -133,7 +133,7 @@ if (!React || !ReactDOM) {
           )
         )
       );
-      
+
       // Clear timeout once React mounts
       setTimeout(() => {
         clearTimeout(mountTimeout);
