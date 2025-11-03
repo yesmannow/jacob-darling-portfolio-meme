@@ -40,6 +40,19 @@ if (!existsSync(distAssets)) {
   process.exit(1);
 }
 
+// Check index.html references hashed JS
+const html = fs.readFileSync(join(distAssets, '../index.html'), 'utf-8');
+if (!html.includes('/assets/index-') || html.includes('/src/main.tsx')) {
+  console.error('❌ index.html references invalid entry point');
+  process.exit(1);
+}
+
+// Check asset sizes
+const files = await readdir(distAssets);
+const jsFile = files.find(f => f.endsWith('.js'));
+const stats = fs.statSync(join(distAssets, jsFile));
+console.log(`✅ JS bundle size: ${(stats.size / 1024).toFixed(2)} KB`);
+
 try {
   const files = await readdir(distAssets);
   const jsFiles = files.filter(f => f.endsWith('.js'));
@@ -62,7 +75,7 @@ try {
     console.warn(`⚠️  Warning: No JavaScript files found in build output`);
   }
 
-  console.log(`\n✅ Build output verification passed!`);
+  console.log('✅ Build output verification passed!');
 } catch (error) {
   console.error(`❌ Error verifying build output: ${error.message}`);
   process.exit(1);

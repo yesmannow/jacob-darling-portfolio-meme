@@ -8,11 +8,12 @@ import PersonSchema from "./components/seo/PersonSchema";
 import PerformanceMonitor from "./components/utils/PerformanceMonitor";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./components/theme/ThemeProvider";
-import { initLenis, destroyLenis } from "./utils/motion-sync";
+import { destroyLenis } from "./utils/motion-sync";
 import { initAnalytics } from "./utils/analytics";
-import "lenis/dist/lenis.css";
 
-const FloatingActionButtons = lazy(() => import("./components/utils/FloatingActionButtons"));
+const FloatingActionButtons = React.lazy(() =>
+  import('./components/utils/FloatingActionButtons')
+);
 
 const App = () => {
   useEffect(() => {
@@ -23,23 +24,15 @@ const App = () => {
     document.documentElement.style.overflow = 'auto';
     document.body.style.overflow = 'auto';
 
-    // Initialize global Lenis instance (with error handling)
-    // initLenis() has a guard to prevent multiple initializations
-    try {
-      const lenis = initLenis();
-      if (lenis) {
-        // Only log once per actual initialization (guard prevents duplicate logs)
-        if (import.meta.env.DEV) {
-          console.log("✅ App: Lenis ready");
-        }
-      } else {
-        if (import.meta.env.DEV) {
-          console.warn("⚠️ App: Lenis not initialized, using native scroll");
-        }
+    // Dynamic import Lenis
+    (async () => {
+      let Lenis: any;
+      try {
+        Lenis = await import('lenis').then(m => m.default ?? m);
+      } catch (err) {
+        console.warn('Lenis failed to load:', err);
       }
-    } catch (error) {
-      console.error("❌ App: Lenis initialization error:", error);
-    }
+    })();
 
     // Cleanup on unmount
     // Note: In React StrictMode (dev), effects run twice, but we shouldn't

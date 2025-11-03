@@ -49,9 +49,13 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+      - name: Type check
+        run: npm run type-check
 
       - name: Build
         run: npm run build
+      - name: Post-build verify
+        run: node scripts/post-build-verify.js
         # This automatically runs:
         # - prebuild (runs all MCP tools)
         # - build (vite build)
