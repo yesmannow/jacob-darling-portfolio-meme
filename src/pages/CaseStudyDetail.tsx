@@ -128,8 +128,10 @@ const CaseStudyDetail: React.FC = () => {
       <div className="content-sections">
         <AnimatedSection delay={0.3}>
           <section className="content-section challenge">
-            <div className="section-icon">⚠️</div>
-            <h2>The Challenge</h2>
+            <h2>
+              <span className="section-icon">⚠️</span>
+              The Challenge
+            </h2>
             <div className="section-content">
               {caseStudy.fullContent?.challenge ? (
                 caseStudy.fullContent.challenge.split('\n\n').map((paragraph, idx) => (
@@ -144,8 +146,10 @@ const CaseStudyDetail: React.FC = () => {
 
         <AnimatedSection delay={0.4}>
           <section className="content-section strategy">
-            <div className="section-icon">🎯</div>
-            <h2>The Strategy & Solution</h2>
+            <h2>
+              <span className="section-icon">🎯</span>
+              The Strategy & Solution
+            </h2>
             <div
               className="section-content"
               dangerouslySetInnerHTML={{
@@ -173,8 +177,10 @@ const CaseStudyDetail: React.FC = () => {
 
         <AnimatedSection delay={0.5}>
           <section className="content-section impact">
-            <div className="section-icon">🚀</div>
-            <h2>The Value & Impact</h2>
+            <h2>
+              <span className="section-icon">🚀</span>
+              The Value & Impact
+            </h2>
             <div
               className="section-content"
               dangerouslySetInnerHTML={{
