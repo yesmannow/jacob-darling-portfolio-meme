@@ -11,6 +11,9 @@ import TimelineNavigation from "../components/resume/TimelineNavigation";
 import AwardShowcase from "../components/awards/AwardShowcase";
 import AwardsSection from "../components/resume/AwardsSection";
 import LazyPDFDownload from "../components/resume/LazyPDFDownload";
+import StickyNavigation from "../components/resume/StickyNavigation";
+import SkillsWithProgress from "../components/resume/SkillsWithProgress";
+import TestimonialsSection from "../components/resume/TestimonialsSection";
 import { trackPortfolioEngagement, createTimeTracker } from "../utils/analytics";
 import "./Resume.css";
 
@@ -88,10 +91,14 @@ const Resume: React.FC = () => {
         {/* Hero Section */}
         <HeroIntro />
 
+        {/* Sticky Navigation */}
+        <StickyNavigation />
+
         {/* Main Content */}
         <div className="relative px-6 py-20 max-w-7xl mx-auto">
           {/* Professional Summary */}
           <Section title="Professional Summary" gradient="blue" delay={0.1}>
+            <div id="summary" className="scroll-mt-32" />
             <motion.div
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
@@ -147,31 +154,19 @@ const Resume: React.FC = () => {
           <TimelineNavigation />
 
           {/* Cinematic Experience Timeline */}
+          <div id="experience" className="scroll-mt-32" />
           <ExperienceTimeline />
 
           {/* Awards & Recognition */}
-          <div id="awards-section">
+          <div id="awards" className="scroll-mt-32">
             <AwardShowcase />
           </div>
 
           {/* Skills & Tools Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <Section title="Core Skills" gradient="cyan" delay={0.3}>
-              <div className="grid grid-cols-1 gap-4">
-                {skills.map((skill, index) => (
-                  <motion.div
-                    key={skill}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: index * 0.05 }}
-                    className="flex items-center gap-3 p-3 bg-cyan-500/10 border border-cyan-500/20 rounded-lg hover:bg-cyan-500/20 transition-colors duration-300"
-                  >
-                    <div className="w-2 h-2 bg-cyan-400 rounded-full" />
-                    <span className="text-gray-300">{skill}</span>
-                  </motion.div>
-                ))}
-              </div>
+              <div id="skills" className="scroll-mt-32" />
+              <SkillsWithProgress />
             </Section>
 
             <Section title="Technologies & Tools" gradient="pink" delay={0.4}>
@@ -195,6 +190,7 @@ const Resume: React.FC = () => {
 
           {/* Education */}
           <Section title="Education" gradient="blue" delay={0.5}>
+            <div id="education" className="scroll-mt-32" />
             {education.map((edu, index) => (
               <motion.div
                 key={index}
@@ -241,6 +237,9 @@ const Resume: React.FC = () => {
 
           {/* 🏆 Gold Key Award Section */}
           <AwardsSection />
+
+          {/* Testimonials Section */}
+          <TestimonialsSection />
 
           {/* Final CTA */}
           <motion.div

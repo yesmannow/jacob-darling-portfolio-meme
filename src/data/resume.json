@@ -11,72 +11,97 @@
   },
   "experience": [
     {
-      "company": "Graston Technique®",
+      "company": "Graston Technique, LLC",
       "image": "/images/auto-generated/graston-technique/placeholder.webp",
       "role": "Marketing Director",
-      "dates": "Aug 2023 – Present",
+      "dates": "August 2023 – Present",
       "location": "Indianapolis, IN",
       "summary": "Lead both marketing strategy and hands-on technical execution for a high-volume educational platform, managing a cross-functional team and engineering the core digital infrastructure for 30,000+ clinicians.",
       "achievements": [
-        "Orchestrated a complete brand transformation, including a new visual identity, messaging framework, and digital ecosystem",
-        "Built and deployed 4+ custom web applications (e.g., clinical decision support, ROI calculators) using vanilla JavaScript",
-        "Engineered a unified data pipeline with over 400 automations connecting web, LMS, and CRM systems",
-        "Increased organic search traffic by over 300% through advanced technical SEO and content strategy",
-        "Reduced marketing technology costs by 40% while improving functionality through consolidation and custom builds",
-        "Streamlined customer support by deploying an integrated OpenAI-powered assistant, handling 70% of inquiries"
+        "Built an integrated ecosystem with LearnDash LMS, WooCommerce, WP Fusion, Gravity Forms, Uncanny Automator, and FluentCRM",
+        "Architected 'Buy Now, Choose Later' credit system for training bundles and CEU Short access",
+        "Launched tiered provider directory with analytics dashboards and premium profile upsell paths",
+        "Built and deployed a GPT-powered assistant connected via REST APIs for CEU rules, order lookups, training suggestions, and user escalation",
+        "Created 400+ automations using Uncanny Automator and WP Fusion triggered by tags, training progress, or form submissions",
+        "Created provider analytics dashboards syncing GA4 data via GTM and Analytify with page views, link clicks, social metrics, UTM sources, and benchmark comparisons",
+        "Optimized site speed with WP Rocket, LiteSpeed, Cloudflare CDN, async/defer scripts, and GTM server-side tagging",
+        "Built REST-based frontend dashboards with Cloudflare Workers + Mapbox for training event coordination",
+        "Implemented comprehensive Cloudflare optimizations: Rate-limiting, WAF rules, Bot Fight Mode, Caching & Tiered Cache, Managed Transforms, Page Rules, SSL/TLS Origin Cert, DNSSEC Setup",
+        "Managed cross-functional sprints with developers, designers, instructors, and marketing associates, translating business goals into dev-ready specifications",
+        "Implemented Form Submission Tracking (Gravity Forms / GTM / Google Ads), GTM Engagement Tracking, Google Ads Conversion Optimization, and PixelYourSite Pro tracking"
       ],
-      "technologies": ["LearnDash", "WooCommerce", "FluentCRM", "WordPress", "JavaScript", "Google Analytics", "ACF Pro", "FacetWP", "REST APIs", "Mapbox", "Cloudflare Workers", "WP Rocket", "LiteSpeed", "Cloudflare CDN"]
+      "technologies": ["LearnDash", "WooCommerce", "WP Fusion", "Gravity Forms", "Uncanny Automator", "FluentCRM", "WordPress", "JavaScript", "Google Analytics 4", "Google Tag Manager", "Analytify", "Cloudflare Workers", "Mapbox", "WP Rocket", "LiteSpeed", "Cloudflare CDN", "REST APIs", "OpenAI", "Netdata", "PHP 8.3", "GTM Server-Side Tagging"]
     },
     {
       "company": "Ultimate Technologies Group",
       "role": "Interim Director of Marketing",
-      "dates": "Mar 2023 – Jul 2023",
+      "dates": "February 2023 – June 2023",
       "location": "Fishers, IN",
-      "summary": "Directed multi-channel marketing strategy for a B2B technology integrator during a key leadership transition.",
+      "summary": "Spearheaded marketing strategy and execution during a key transitional period, ensuring business continuity and brand consistency across all channels.",
       "achievements": [
-        "Streamlined lead generation workflows and improved GTM tracking for precise campaign attribution",
-        "Reduced campaign production timelines by 40% through process optimization and clear project scoping"
+        "Managed end-to-end marketing communications, including internal messaging, external campaigns, and stakeholder engagement",
+        "Led the development and optimization of Google Ads campaigns, improving lead generation, CTR, and overall ROI",
+        "Oversaw content creation for website, email marketing, social media, and sales collateral to support business development initiatives",
+        "Coordinated with cross-functional teams (sales, customer success, executive leadership) to align marketing strategy with organizational goals",
+        "Implemented marketing automation workflows and CRM integrations to streamline operations and enhance campaign performance tracking",
+        "Conducted market research and competitive analysis to refine targeting and positioning strategies",
+        "Managed and optimized paid media and SEO efforts, driving qualified traffic and enhancing online visibility",
+        "Directed branding updates and ensured visual and messaging alignment across all customer touchpoints",
+        "Provided leadership and mentoring to the marketing team, ensuring high performance during organizational change"
       ],
-      "technologies": ["Marketing Strategy", "Lead Generation", "Campaign Management"]
+      "technologies": ["Marketing Strategy", "Google Ads", "Marketing Automation", "CRM Integration", "SEO", "Paid Media", "Brand Management", "Campaign Management"]
     },
     {
       "company": "Riley Bennett Egloff, LLP",
       "image": "/images/auto-generated/riley-bennett-egloff/placeholder.webp",
-      "role": "Marketing Manager (2022-2023) & Administrator (2015-2022)",
-      "dates": "Jun 2015 – Mar 2023",
+      "role": "Marketing Manager",
+      "dates": "June 2015 – March 2023",
       "location": "Indianapolis, IN",
-      "summary": "Promoted to lead all marketing initiatives, successfully rebranding the firm and building its digital presence from the ground up.",
+      "summary": "Led strategic marketing, digital communications, and client development for legal and professional services.",
       "achievements": [
-        "Led a complete digital rebrand and technical SEO overhaul, resulting in a 35% increase in qualified client inquiries",
-        "Designed, produced, and project-managed all marketing materials, including the quarterly RBE Magazine, establishing significant thought leadership in the legal community",
-        "Worked directly with attorneys to develop and execute practice-specific business development plans"
+        "Designed, built, and managed comprehensive marketing materials, including brochures, advertisements, email campaigns, newsletters, social media content, and RBE magazines",
+        "Oversaw firm branding and content strategy across digital platforms, including full ownership of the RBE website—enhancing performance, SEO, and user experience",
+        "Led public and media relations efforts: cultivated media relationships, drafted press releases, and secured firm publicity in legal news, thought leadership, and client matters",
+        "Created and executed direct email marketing and social media campaigns; tracked performance metrics and optimized results",
+        "Partnered with attorneys to develop and manage individualized business development plans—successfully identifying new opportunities for client engagement and growth",
+        "Developed strategic pitch materials and managed RFP/proposal responses, showcasing firm capabilities with precision and impact",
+        "Played a key role in industry submissions and award nominations, increasing firm visibility and market recognition",
+        "Provided market intelligence insights to guide future strategy and business development planning",
+        "Actively participated in practice group meetings, contributing actionable insights that drove firm-wide initiatives forward",
+        "Established trusted relationships with practice group leaders and attorneys to support cross-selling and firm-wide business growth"
       ],
-      "technologies": ["Digital Marketing", "SEO", "Content Strategy", "Project Management"]
+      "technologies": ["Strategic Marketing", "Digital Marketing", "SEO", "Content Strategy", "Email Marketing", "Social Media", "Public Relations", "Business Development", "RFP Management", "Project Management", "Brand Management"]
     },
     {
       "company": "Deerfield Financial Advisors",
       "role": "Marketing Coordinator",
-      "dates": "Jun 2013 – Jun 2015",
+      "dates": "June 2013 – June 2015",
       "location": "Indianapolis, IN",
-      "summary": "Developed and executed marketing initiatives for a financial advisory firm, focusing on client events and compliant communications.",
+      "summary": "Executed marketing initiatives and campaigns to elevate brand awareness and attract new clients while supporting ongoing engagement with existing clients and professional partners.",
       "achievements": [
-        "Maintained and developed copy for the company website, email campaigns, and printed marketing materials",
-        "Researched and implemented new technology platforms that improved client services and overall company efficiency"
+        "Planned and managed successful client-facing seminars and events, enhancing client retention and brand credibility",
+        "Wrote and maintained content for the company website, email marketing campaigns, and printed collateral, ensuring consistency and clarity in brand messaging",
+        "Researched, evaluated, and implemented new technology platforms, improving both client services and internal operational efficiency",
+        "Collaborated with the Chief Compliance Officer to review all marketing materials, ensuring full compliance with FINRA and SEC regulations"
       ],
-      "technologies": ["Content Development", "Email Marketing", "Technology Implementation"]
+      "technologies": ["Content Development", "Email Marketing", "Event Management", "Website Management", "Technology Implementation", "FINRA Compliance", "SEC Compliance"]
     },
     {
       "company": "Pike Medical Consultants",
       "image": "/images/auto-generated/pike-medical/placeholder.webp",
       "role": "Marketing Coordinator",
-      "dates": "Sep 2009 – Jun 2013",
+      "dates": "January 2009 – December 2013",
       "location": "Indianapolis, IN",
-      "summary": "Directed all marketing activities, including budgeting, advertising, and brand awareness for two distinct healthcare divisions (UrgentCare Indy & PrimaryCare Indy).",
+      "summary": "Directed all marketing functions for the organization, including strategic planning, budgeting, advertising, branding, public relations, website development, and event management, while reporting directly to the company president.",
       "achievements": [
-        "Delivered an average of 45% growth in patient visits over three years with a consistently positive ROI on all marketing initiatives",
-        "Led the development of two new websites, integrated online check-in systems, and ran targeted Google Ads campaigns to drive patient acquisition"
+        "Drove a 45% increase in patient visits over three years, maintaining a consistently positive ROI across all marketing initiatives",
+        "Designed and executed integrated marketing and advertising campaigns that directly contributed to sustained company growth",
+        "Led the creation of a new company website, modernizing the digital presence and improving patient engagement and lead generation",
+        "Developed and managed internal and external communication strategies to strengthen brand positioning and market visibility",
+        "Oversaw public relations efforts to increase awareness and credibility in the healthcare community",
+        "Implemented data-driven tracking and evaluation processes to measure the effectiveness of campaigns and inform future strategy"
       ],
-      "technologies": ["Website Development", "Google Ads", "Online Check-in Systems", "Patient Acquisition"]
+      "technologies": ["Strategic Planning", "Budgeting", "Website Development", "Google Ads", "Public Relations", "Brand Management", "Campaign Management", "Data Analytics", "Event Management"]
     },
     {
       "company": "OrthoIndy",
@@ -132,9 +157,9 @@
   ],
   "education": [
     {
-      "institution": "Indiana University Bloomington",
-      "degree": "BS, Business Management",
-      "year": "2004 - 2008",
+      "institution": "Indiana University-Bloomington",
+      "degree": "Bachelor's degree in Business Management",
+      "year": "August 2004 – May 2008",
       "details": "Won 2006 Target Marketing Competition"
     }
   ],
