@@ -1,28 +1,39 @@
 import React from "react";
+// simple-icons v15+ uses named exports with "si" prefix
 import * as simpleIcons from "simple-icons";
 
 // Helper to safely get an icon from simple-icons
-// Note: simple-icons v15+ uses a different API
+// Note: simple-icons v15+ uses named exports with "si" prefix (e.g., siReact, siJavascript)
 const getSimpleIcon = (slug: string): any => {
   try {
-    // Try multiple methods to access icons
+    // Convert slug to camelCase with "si" prefix
+    // e.g., "react" -> "siReact", "javascript" -> "siJavascript"
     const slugLower = slug.toLowerCase();
+    const camelCase = slugLower
+      .split('-')
+      .map((word, index) =>
+        index === 0 ? word : word.charAt(0).toUpperCase() + word.slice(1)
+      )
+      .join('');
 
-    // Method 1: Direct property access with slug
+    const iconKey = `si${camelCase.charAt(0).toUpperCase()}${camelCase.slice(1)}`;
+
+    // Method 1: Try exact match with si prefix
+    if ((simpleIcons as any)[iconKey]) {
+      return (simpleIcons as any)[iconKey];
+    }
+
+    // Method 2: Try with original slug as key
     if ((simpleIcons as any)[slugLower]) {
       return (simpleIcons as any)[slugLower];
     }
 
-    // Method 2: Try with dashes removed
-    const slugNoDashes = slugLower.replace(/-/g, '');
-    if ((simpleIcons as any)[slugNoDashes]) {
-      return (simpleIcons as any)[slugNoDashes];
-    }
-
-    // Method 3: If there's a getIcons or similar method
-    if (typeof (simpleIcons as any).getIcons === 'function') {
-      const icons = (simpleIcons as any).getIcons();
-      return icons[slugLower] || icons[slugNoDashes] || null;
+    // Method 3: Try to find by iterating through exports
+    for (const key in simpleIcons) {
+      if (key.toLowerCase().includes(slugLower) ||
+          (simpleIcons as any)[key]?.slug === slugLower) {
+        return (simpleIcons as any)[key];
+      }
     }
 
     return null;

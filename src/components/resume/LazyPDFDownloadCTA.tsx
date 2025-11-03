@@ -1,8 +1,10 @@
-import React, { Component, ErrorInfo, ReactNode, Suspense } from "react";
+import React, { Component, ErrorInfo, ReactNode, Suspense, lazy } from "react";
 import { motion } from "framer-motion";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import { Download, Sparkles } from "lucide-react";
-import { ResumePDF } from "../../pdf/ResumePDF";
+
+// Lazy load ResumePDF to avoid duplicate imports and reduce bundle size
+const ResumePDF = lazy(() => import("../../pdf/ResumePDF").then(module => ({ default: module.ResumePDF })));
 
 interface LazyPDFDownloadCTAProps {
   isGeneratingPDF: boolean;

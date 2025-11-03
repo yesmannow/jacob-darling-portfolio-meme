@@ -44,10 +44,8 @@ export default defineConfig({
     hmr: {
       overlay: false, // Disable overlay to let our error handlers manage errors
       clientPort: 5173
-    },
-    headers: {
-      'Content-Type': 'text/javascript; charset=utf-8'
     }
+    // Removed incorrect global Content-Type header that was causing HTML to be served as JavaScript
   },
   resolve: {
     alias: {
@@ -81,12 +79,11 @@ export default defineConfig({
             return 'react-core';
           }
 
-          // Animation libraries
-          if (id.includes('node_modules/framer-motion')) {
-            return 'animation-vendor';
-          }
-
-          if (id.includes('node_modules/gsap')) {
+          // Animation libraries (large, bundle together)
+          if (id.includes('node_modules/framer-motion') ||
+              id.includes('node_modules/gsap') ||
+              id.includes('node_modules/animejs') ||
+              id.includes('node_modules/lenis')) {
             return 'animation-vendor';
           }
 
@@ -95,14 +92,19 @@ export default defineConfig({
             return 'router-vendor';
           }
 
-          // PDF libraries (large, lazy load these)
+          // PDF libraries (large, lazy load these separately)
           if (id.includes('node_modules/@react-pdf') || id.includes('node_modules/jspdf')) {
             return 'pdf-vendor';
           }
 
-          // Three.js related (large)
+          // Three.js related (very large, separate chunk)
           if (id.includes('node_modules/three') || id.includes('node_modules/@react-three')) {
             return 'three-vendor';
+          }
+
+          // Simple-icons (large icon library, separate chunk)
+          if (id.includes('node_modules/simple-icons')) {
+            return 'icons-vendor';
           }
 
           // UI libraries
@@ -114,15 +116,36 @@ export default defineConfig({
             return 'ui-vendor';
           }
 
-          // Other large libraries
+          // Charting libraries
           if (id.includes('node_modules/recharts')) {
             return 'charts-vendor';
           }
 
-          // Other node_modules (split more aggressively)
+          // Particle systems
+          if (id.includes('node_modules/tsparticles')) {
+            return 'particles-vendor';
+          }
+
+          // Image processing libraries (large)
+          if (id.includes('node_modules/jimp') || id.includes('node_modules/node-vibrant')) {
+            return 'image-vendor';
+          }
+
+          // Other node_modules (split remaining vendors)
           if (id.includes('node_modules')) {
             // Prevent single huge vendor chunk
             return 'vendor';
+          }
+
+          // Split large source files into logical chunks
+          if (id.includes('/src/pdf/')) {
+            return 'pdf-app';
+          }
+
+          if (id.includes('/src/pages/')) {
+            // Pages are already lazy loaded via React.lazy
+            // This ensures page-related code is chunked properly
+            return undefined; // Let Vite handle page chunks automatically
           }
         },
         // Optimize chunk naming for better caching
@@ -185,6 +208,10 @@ export default defineConfig({
     cssCodeSplit: true,
     // Asset optimization
     assetsInlineLimit: 4096, // 4kb inline limit
-    chunkSizeWarningLimit: 1000, // Increase limit to 1MB
+    chunkSizeWarningLimit: 1000, // Warning at 1MB (chunks will still be built, but warned)
+    // Report compressed sizes
+    reportCompressedSize: true,
+    // Minify CSS
+    cssMinify: true,
   },
 });

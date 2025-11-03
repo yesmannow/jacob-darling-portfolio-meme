@@ -1,4 +1,5 @@
 # Technical Implementation Guide
+
 ## Jacob Darling Cinematic Portfolio System
 
 ### 🏗️ Architecture Overview
@@ -8,17 +9,20 @@ The portfolio system is built on a modern React/TypeScript stack with advanced a
 ## Core Technology Stack
 
 ### **Frontend Framework**
+
 - **React 18.3.1** - Component-based UI library
 - **TypeScript 5.5.3** - Type-safe development
 - **Vite 7.1.9** - Fast build tool and dev server
 
 ### **Animation Libraries**
+
 - **Framer Motion 11.5.4** - Component-level animations and gestures
 - **GSAP 3.13.0** - High-performance scroll animations
 - **Anime.js 4.2.2** - SVG path animations and complex sequences
 - **Lenis 1.0.42** - Smooth scrolling experience
 
 ### **UI Components**
+
 - **Lucide React 0.545.0** - Icon system
 - **React Router DOM 6.26.0** - Client-side routing
 
@@ -27,6 +31,7 @@ The portfolio system is built on a modern React/TypeScript stack with advanced a
 ### **Branding System**
 
 #### AnimatedLogo Component
+
 ```typescript
 // Location: src/components/branding/AnimatedLogo.tsx
 interface AnimatedLogoProps {
@@ -37,18 +42,21 @@ interface AnimatedLogoProps {
 ```
 
 **Key Features:**
+
 - SVG path animation using stroke-dashoffset
 - Three size variants with adaptive styling
 - Hover effects with glow and scale transforms
 - Performance-optimized with will-change properties
 
 **Animation Sequence:**
+
 1. Hexagon frame draws in (1200ms)
 2. "JD" letters animate with staggered delay (800ms)
 3. Accent dot appears with bounce effect (400ms)
 4. Glow effect activates on completion
 
 #### SplashIntro Component
+
 ```typescript
 // Location: src/components/branding/SplashIntro.tsx
 interface SplashIntroProps {
@@ -59,6 +67,7 @@ interface SplashIntroProps {
 ```
 
 **Animation Timeline:**
+
 1. Background gradient transition (2000ms)
 2. Logo entrance with scale animation (600ms)
 3. Tagline reveal with text gradient (800ms)
@@ -69,30 +78,35 @@ interface SplashIntroProps {
 ### **Gallery Systems**
 
 #### Photography Page
+
 ```typescript
 // Location: src/pages/Photography.tsx
 // Features: Masonry layout, category filtering, GSAP scroll animations
 ```
 
 **Performance Optimizations:**
+
 - Lazy loading with Intersection Observer
 - GSAP scroll triggers with scrub animation
 - Category-based color theming
 - Responsive breakpoint management
 
 #### Design Page
+
 ```typescript
 // Location: src/pages/Design.tsx
 // Features: Bento grid, hover effects, parallax scrolling
 ```
 
 **Interactive Elements:**
+
 - 3D hover transforms with GSAP
 - Category-based gradient overlays
 - Lightbox integration
 - External portfolio links
 
 #### Lightbox Component
+
 ```typescript
 // Location: src/components/gallery/Lightbox.tsx
 interface LightboxProps {
@@ -112,6 +126,7 @@ interface LightboxProps {
 ```
 
 **Features:**
+
 - Keyboard navigation (ESC, Arrow keys)
 - Touch/swipe support
 - Download and share functionality
@@ -121,12 +136,13 @@ interface LightboxProps {
 ## 🎭 Motion System
 
 ### Motion Sync Utility
+
 ```typescript
 // Location: src/utils/motion-sync.ts
 class MotionSync {
   private activeAnimations: Set<any> = new Set();
   private scrollAnimations: Set<gsap.core.Tween> = new Set();
-  
+
   registerAnime(animation: any): void
   registerGsap(animation: gsap.core.Tween): void
   pauseAll(): void
@@ -136,12 +152,14 @@ class MotionSync {
 ```
 
 **Coordination Features:**
+
 - Cross-library animation management
 - Performance monitoring and throttling
 - Visibility-based animation control
 - Memory cleanup for completed animations
 
 ### Lenis Smooth Scroll Configuration
+
 ```typescript
 const lenis = new Lenis({
   duration: 1.2,
@@ -153,6 +171,7 @@ const lenis = new Lenis({
 ```
 
 ### GSAP ScrollTrigger Integration
+
 ```typescript
 export function useCinematicScrollSync() {
   gsap.utils.toArray<HTMLElement>("[data-scroll-section]").forEach((section) => {
@@ -161,8 +180,8 @@ export function useCinematicScrollSync() {
       start: "top bottom",
       end: "bottom top",
       onEnter: () => {
-        gsap.to(section, { 
-          opacity: 1, 
+        gsap.to(section, {
+          opacity: 1,
           y: 0,
           scale: 1,
           filter: "blur(0px)",
@@ -178,6 +197,7 @@ export function useCinematicScrollSync() {
 ## 📊 Asset Management
 
 ### Image Manifest System
+
 ```json
 // Location: public/images/*/manifest.json
 {
@@ -203,6 +223,7 @@ export function useCinematicScrollSync() {
 ```
 
 ### Bio Image Integration
+
 ```typescript
 // Location: src/pages/About.tsx
 const bioImages = [
@@ -226,23 +247,25 @@ useEffect(() => {
 ## ⚡ Performance Optimizations
 
 ### Animation Performance
+
 ```typescript
 // RAF loop with performance monitoring
 function raf(time: number) {
   const deltaTime = time - lastTime;
   lastTime = time;
-  
+
   // Throttle if frame rate drops below 30fps
   if (deltaTime < 33) {
     lenis.raf(time);
     ScrollTrigger.update();
   }
-  
+
   requestAnimationFrame(raf);
 }
 ```
 
 ### Memory Management
+
 ```typescript
 // Automatic cleanup every 60 frames
 if (Math.floor(time / 1000) % 1 === 0) {
@@ -260,6 +283,7 @@ document.addEventListener('visibilitychange', () => {
 ```
 
 ### Hardware Acceleration
+
 ```css
 /* CSS optimizations */
 .animated-logo * {
@@ -276,10 +300,11 @@ document.addEventListener('visibilitychange', () => {
 ## 🎯 Category System
 
 ### Dynamic Color Coding
+
 ```typescript
 export const categoryColors = {
   "Landscape": "#667eea",
-  "Portrait": "#f093fb", 
+  "Portrait": "#f093fb",
   "Nature": "#4facfe",
   "Creative": "#43e97b",
   "Digital Art": "#fa709a",
@@ -288,15 +313,17 @@ export const categoryColors = {
 ```
 
 ### Filter Implementation
+
 ```typescript
-const filteredPhotos = activeCategory === "All" 
-  ? photoGallery 
+const filteredPhotos = activeCategory === "All"
+  ? photoGallery
   : photoGallery.filter(photo => photo.category === activeCategory);
 ```
 
 ## 🔧 Development Workflow
 
 ### Build Commands
+
 ```bash
 npm run dev      # Development server
 npm run build    # Production build
@@ -304,7 +331,8 @@ npm run preview  # Preview production build
 ```
 
 ### File Structure
-```
+
+```text
 src/
 ├── components/
 │   ├── branding/
@@ -333,17 +361,20 @@ src/
 ## 🚀 Deployment Considerations
 
 ### Environment Configuration
+
 - Vite configuration for asset optimization
 - TypeScript strict mode enabled
 - ESLint and Prettier for code quality
 
 ### Performance Targets
+
 - First Contentful Paint: <1.5s
 - Largest Contentful Paint: <2.5s
 - Cumulative Layout Shift: <0.1
 - First Input Delay: <100ms
 
 ### Browser Support
+
 - Modern browsers with ES2020 support
 - Graceful degradation for older browsers
 - Progressive enhancement for animations

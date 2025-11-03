@@ -1,8 +1,8 @@
 # 🚀 FINAL DEPLOYMENT PLAN - JACOB DARLING PORTFOLIO
 
-**Target Platform:** Vercel  
-**Domain:** jacobdarling.com  
-**Build System:** Vite 7.1.9  
+**Target Platform:** Vercel
+**Domain:** jacobdarling.com
+**Build System:** Vite 7.1.9
 **Deployment Date:** October 12, 2025
 
 ---
@@ -10,6 +10,7 @@
 ## 🎯 PRE-DEPLOYMENT CHECKLIST
 
 ### **✅ Code Quality & Structure**
+
 - [x] All duplicate components removed (Navbar conflicts resolved)
 - [x] Hero component conflicts resolved (using `components/home/Hero.tsx`)
 - [x] Homepage routing optimized (`index.tsx` as single entry)
@@ -20,6 +21,7 @@
 - [x] ESLint warnings addressed
 
 ### **✅ Performance Optimization**
+
 - [x] Image lazy loading implemented
 - [x] Dynamic imports for heavy components
 - [x] GSAP animations optimized for 60fps
@@ -30,6 +32,7 @@
 - [x] Compression enabled (gzip/brotli)
 
 ### **✅ SEO & Meta Tags**
+
 - [x] HTML meta tags configured
 - [x] Open Graph tags implemented
 - [x] Twitter Card meta data
@@ -39,6 +42,7 @@
 - [x] Canonical URLs set
 
 ### **✅ Accessibility Compliance**
+
 - [x] ARIA labels on interactive elements
 - [x] Keyboard navigation support
 - [x] Screen reader compatibility
@@ -52,6 +56,7 @@
 ## 🏗️ BUILD CONFIGURATION
 
 ### **Vite Configuration**
+
 ```javascript
 // vite.config.js
 export default defineConfig({
@@ -78,8 +83,10 @@ export default defineConfig({
 ```
 
 ### **Vercel Configuration**
+
 ```json
 // vercel.json
+
 {
   "version": 2,
   "builds": [
@@ -116,6 +123,7 @@ export default defineConfig({
 ## 📊 PERFORMANCE TARGETS
 
 ### **Core Web Vitals**
+
 | Metric | Target | Current | Status |
 |--------|--------|---------|--------|
 | **LCP** (Largest Contentful Paint) | < 2.5s | 1.8s | ✅ |
@@ -123,6 +131,7 @@ export default defineConfig({
 | **CLS** (Cumulative Layout Shift) | < 0.1 | 0.05 | ✅ |
 
 ### **Lighthouse Scores**
+
 | Category | Target | Expected | Status |
 |----------|--------|----------|--------|
 | **Performance** | ≥ 95 | 97 | ✅ |
@@ -131,6 +140,7 @@ export default defineConfig({
 | **SEO** | ≥ 95 | 98 | ✅ |
 
 ### **Bundle Analysis**
+
 ```bash
 # Bundle size breakdown
 Main Bundle: 245KB (gzipped: 78KB)
@@ -145,6 +155,7 @@ Total Initial Load: 490KB (gzipped: 158KB)
 ## 🔧 DEPLOYMENT COMMANDS
 
 ### **Local Build & Test**
+
 ```bash
 # Clean install dependencies
 npm ci
@@ -163,6 +174,7 @@ npx lighthouse http://localhost:4173 --output html --output-path ./lighthouse-re
 ```
 
 ### **Vercel Deployment**
+
 ```bash
 # Install Vercel CLI (if not already installed)
 npm i -g vercel
@@ -182,13 +194,15 @@ vercel ls
 ## 🌐 DOMAIN & DNS CONFIGURATION
 
 ### **Custom Domain Setup**
+
 1. **Domain Verification**: Add TXT record for domain ownership
 2. **DNS Configuration**: Point CNAME to vercel-dns.com
 3. **SSL Certificate**: Automatic Let's Encrypt certificate
 4. **Redirect Setup**: www → apex domain redirect
 
 ### **DNS Records**
-```
+
+```text
 Type: CNAME
 Name: www
 Value: cname.vercel-dns.com
@@ -207,18 +221,21 @@ Value: "vercel-verification=abc123def456"
 ## 📈 MONITORING & ANALYTICS
 
 ### **Performance Monitoring**
+
 - **Vercel Analytics**: Real-time performance metrics
 - **Core Web Vitals**: Continuous monitoring
 - **Error Tracking**: Automatic error reporting
 - **Speed Index**: Page load performance tracking
 
 ### **User Analytics**
+
 - **Google Analytics 4**: User behavior tracking
 - **Hotjar**: User session recordings
 - **Search Console**: SEO performance monitoring
 - **Uptime Monitoring**: 99.9% availability target
 
 ### **Key Metrics to Track**
+
 ```javascript
 // Analytics events to monitor
 {
@@ -236,6 +253,7 @@ Value: "vercel-verification=abc123def456"
 ## 🔒 SECURITY CONSIDERATIONS
 
 ### **Content Security Policy**
+
 ```html
 <meta http-equiv="Content-Security-Policy" content="
   default-src 'self';
@@ -248,6 +266,7 @@ Value: "vercel-verification=abc123def456"
 ```
 
 ### **Security Headers**
+
 - **HTTPS Only**: Force SSL redirect
 - **HSTS**: HTTP Strict Transport Security
 - **X-Frame-Options**: Prevent clickjacking
@@ -259,6 +278,7 @@ Value: "vercel-verification=abc123def456"
 ## 🚨 ROLLBACK PLAN
 
 ### **Deployment Rollback Strategy**
+
 ```bash
 # List recent deployments
 vercel ls
@@ -271,6 +291,7 @@ vercel rollback --safe
 ```
 
 ### **Backup Procedures**
+
 - **Code Repository**: GitHub with protected main branch
 - **Asset Backup**: Automated backup to cloud storage
 - **Database Backup**: N/A (static site)
@@ -281,6 +302,7 @@ vercel rollback --safe
 ## 📋 POST-DEPLOYMENT VERIFICATION
 
 ### **Functional Testing Checklist**
+
 - [ ] Homepage loads correctly
 - [ ] Navigation works across all pages
 - [ ] Hero animations trigger properly
@@ -294,6 +316,7 @@ vercel rollback --safe
 - [ ] Cross-browser compatibility confirmed
 
 ### **Performance Verification**
+
 ```bash
 # Run post-deployment audits
 npx lighthouse https://jacobdarling.com --output json
@@ -305,6 +328,7 @@ curl -s "https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=https://
 ```
 
 ### **SEO Verification**
+
 - [ ] Google Search Console verification
 - [ ] Sitemap submission
 - [ ] Meta tags rendering correctly
@@ -317,6 +341,7 @@ curl -s "https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=https://
 ## 🎯 SUCCESS CRITERIA
 
 ### **Technical Metrics**
+
 - ✅ Build completes without errors
 - ✅ All pages load within 2 seconds
 - ✅ Lighthouse scores meet targets
@@ -325,6 +350,7 @@ curl -s "https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=https://
 - ✅ Accessibility standards met
 
 ### **Business Metrics**
+
 - 📈 **Bounce Rate**: < 40%
 - 📈 **Session Duration**: > 2 minutes
 - 📈 **Page Views per Session**: > 3
@@ -337,6 +363,7 @@ curl -s "https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=https://
 ## 🎬 LAUNCH SEQUENCE
 
 ### **T-24 Hours: Final Preparation**
+
 - [ ] Code freeze implemented
 - [ ] Final build testing completed
 - [ ] Performance audits passed
@@ -344,6 +371,7 @@ curl -s "https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=https://
 - [ ] Backup procedures verified
 
 ### **T-2 Hours: Pre-Launch**
+
 - [ ] DNS propagation verified
 - [ ] SSL certificate active
 - [ ] Analytics tracking confirmed
@@ -351,6 +379,7 @@ curl -s "https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=https://
 - [ ] Team notifications set up
 
 ### **T-0: Launch Execution**
+
 - [ ] Production deployment triggered
 - [ ] Domain propagation verified
 - [ ] Functional testing completed
@@ -358,6 +387,7 @@ curl -s "https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=https://
 - [ ] Launch announcement prepared
 
 ### **T+1 Hour: Post-Launch Monitoring**
+
 - [ ] Traffic monitoring active
 - [ ] Error rates within normal range
 - [ ] Performance metrics stable

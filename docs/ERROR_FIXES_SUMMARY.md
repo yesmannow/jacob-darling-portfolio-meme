@@ -4,11 +4,11 @@
 
 ### 1. Custom Element Error: `mce-autosize-textarea`
 
-**Root Cause:** The error originates from Vite's HMR (Hot Module Replacement) error overlay system (`overlay_bundle.js`), NOT from the application code. There is no TinyMCE installation in this project - the Editor component has commented-out TinyMCE imports that are not being used.
+**Root Cause:** The error originates from Vite's HMR (Hot Module Replacement) error overlay system (`overlay_bundle.js`), NOT from the application code. There is no TinyMCE installation in this project.
 
 **Evidence:**
 - No TinyMCE in `package.json`
-- Editor.tsx has only commented-out TinyMCE code
+- Editor.tsx and EditorWrapper.tsx have been removed (were unused)
 - Error stack trace points to `overlay_bundle.js:149` which is Vite's dev overlay
 
 **Solution:** Comprehensive error suppression that:
@@ -89,6 +89,6 @@ The suppression code:
 
 If TinyMCE is ever actually added to the project:
 1. Use the `defineCustomElementIfNeeded` utility from `src/utils/defineCustomElementGuard.ts`
-2. Ensure TinyMCE is only initialized once (see Editor.tsx comments)
+2. Ensure TinyMCE is only initialized once
 3. The suppression will still work but actual TinyMCE initialization should be guarded
 
