@@ -12,4 +12,3 @@ declare module "gsap/ScrollTrigger" {
 
 declare module "lucide-react";
 
-declare module "@react-pdf/renderer";

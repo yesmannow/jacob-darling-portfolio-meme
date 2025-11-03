@@ -1,12 +1,11 @@
 import React, { useState, useEffect, lazy, Suspense } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Download, Share2, Mail, ExternalLink, Eye, FileText, Sparkles, Zap } from "lucide-react";
+import { Download, Share2, Mail, ExternalLink, Eye, FileText, Zap } from "lucide-react";
 import resumeData from "../data/resume.json";
 import HeroIntro from "../components/resume/HeroIntro";
 import Section from "../components/resume/Section";
 import CTAButtons from "../components/resume/CTAButtons";
-import LazyPDFDownload from "../components/resume/LazyPDFDownload";
 import StickyNavigation from "../components/resume/StickyNavigation";
 import { trackPortfolioEngagement, createTimeTracker } from "../utils/analytics";
 import "./Resume.css";
@@ -21,8 +20,8 @@ const TestimonialsSection = lazy(() => import("../components/resume/Testimonials
 
 const Resume: React.FC = () => {
   const [activeSection, setActiveSection] = useState<string>("experience");
-  const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
   const [cinematicMode, setCinematicMode] = useState(true);
+  const resumePdfPath = "/resume/jacob-darling-resume.pdf";
 
   const { name, title, summary, contact, experience, skills, tools, education, communityLeadership, stats } = resumeData;
 
@@ -41,15 +40,8 @@ const Resume: React.FC = () => {
     trackPortfolioEngagement.resumeSectionView(activeSection);
   }, [activeSection]);
 
-  const handlePDFGeneration = () => {
-    setIsGeneratingPDF(true);
-    setTimeout(() => setIsGeneratingPDF(false), 2000);
-  };
-
-  const handleDownload = () => {
-    // Legacy PDF download - will be replaced by dynamic PDF generation
-    const legacyPDF = "/resume/Resume JD draft.pdf";
-    window.open(legacyPDF, "_blank");
+  const handleResumeDownload = () => {
+    trackPortfolioEngagement.resumeDownload('pdf');
   };
 
   const handleShare = () => {
@@ -245,7 +237,7 @@ const Resume: React.FC = () => {
             </div>
           </Section>
 
-          {/* 🏆 Gold Key Award Section */}
+          {/* ?? Gold Key Award Section */}
           <Suspense fallback={<div className="h-48 flex items-center justify-center"><div className="loading-spinner" /></div>}>
             <AwardsSection />
           </Suspense>
@@ -328,10 +320,17 @@ const Resume: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8, duration: 0.8 }}
           >
-            <LazyPDFDownload
-              isGeneratingPDF={isGeneratingPDF}
-              setIsGeneratingPDF={setIsGeneratingPDF}
-            />
+            <motion.a
+              className="action-btn primary"
+              href={resumePdfPath}
+              download="Jacob-Darling-Resume.pdf"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={handleResumeDownload}
+            >
+              <Download size={20} />
+              Download PDF
+            </motion.a>
             <motion.button
               className="action-btn secondary"
               onClick={handleShare}
@@ -611,15 +610,17 @@ const Resume: React.FC = () => {
           <h3>Interested in working together?</h3>
           <p>Download my full resume or get in touch to discuss opportunities.</p>
           <div className="cta-buttons">
-            <motion.button
+            <motion.a
               className="cta-btn primary"
-              onClick={handleDownload}
+              href={resumePdfPath}
+              download="Jacob-Darling-Resume.pdf"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              onClick={handleResumeDownload}
             >
               <Download size={20} />
               Download Full Resume
-            </motion.button>
+            </motion.a>
             <Link to="/contact">
               <motion.button
                 className="cta-btn secondary"
@@ -642,7 +643,7 @@ const Resume: React.FC = () => {
                 <FileText size={48} className="text-blue-400 mb-4" />
                 <h4 className="text-xl font-semibold mb-2">Dynamic Resume System</h4>
                 <p className="text-gray-400 text-sm mb-4">
-                  This resume is powered by JSON data and generates a fresh PDF on every download.
+                  This resume is powered by structured data and links to an always-current PDF version.
                 </p>
                 <div className="contact-info">
                   <p className="text-sm text-gray-300">
