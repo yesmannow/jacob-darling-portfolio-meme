@@ -21,6 +21,7 @@
       },
       "tags": ["branding", "restaurant", "logo design", "food industry", "local business"],
       "featured": true,
+      "website": "https://317bbq.com",
       "images": [
         "/images/side-projects/317BBQ+Logo-11.jpg",
         "/images/side-projects/317BBQ+Logo_wht.png",
@@ -49,6 +50,7 @@
       },
       "tags": ["healthcare", "medical branding", "digital marketing", "web design", "patient care"],
       "featured": true,
+      "website": "https://primarycareindy.com",
       "images": [
         "/images/side-projects/Primary Care Logo with PMC.png",
         "/images/side-projects/cropped-PC_LOGO1-1024x174.jpg",
@@ -109,6 +111,7 @@
       },
       "tags": ["brand strategy", "brand guidelines", "documentation", "business growth", "visual identity"],
       "featured": true,
+      "website": "https://www.tbmattorneys.com",
       "images": [
         "/images/side-projects/TBM Logo.png",
         "/images/side-projects/TBM Brand Playbook Demo.png"
@@ -243,6 +246,7 @@
       },
       "tags": ["healthcare", "web design", "digital marketing", "patient experience", "seo"],
       "featured": true,
+      "website": "https://urgentcareindy.com",
       "images": [
         "/images/side-projects/Urgent Care Indy Logo - 22.png",
         "/images/side-projects/dot-physicals-header.jpg",
@@ -274,6 +278,7 @@
       },
       "tags": ["home services", "website redesign", "trust building", "local seo", "conversion"],
       "featured": true,
+      "website": "https://russellpaintingcompany.com",
       "images": [
         "/images/projects/Russell painting/New-Logo-Transparent-1.png",
         "/images/projects/Russell painting/Screenshot of Power Washing _ Russell Painting Company, Inc.jpg",
@@ -304,6 +309,7 @@
       },
       "tags": ["e-commerce", "pet care", "amazon", "brand development", "multi-channel"],
       "featured": true,
+      "website": "https://resqorganics.com",
       "images": [
         "/images/side-projects/CBD-for-Pets-and-Pet-Skin-Care.png",
         "/images/side-projects/CBD-Oil-for-Pets.png",
@@ -311,11 +317,131 @@
         "/images/side-projects/dog-dry-skin-remedy.jpg",
         "/images/side-projects/Complete Solution Dogs.png"
       ]
+    },
+    {
+      "id": "graston-technique",
+      "title": "Graston Technique Training Platform & Educational Website",
+      "slug": "graston-technique",
+      "category": "Healthcare Education",
+      "client": "Graston Technique",
+      "year": "2024",
+      "duration": "8 months",
+      "services": ["Web Design", "Educational Platform", "E-commerce Integration", "Training Portal", "SEO"],
+      "challenge": "Build comprehensive educational platform for healthcare professionals learning the Graston Technique, including training course management, CEU tracking, e-commerce for instruments, and resource library.",
+      "approach": "Developed multi-faceted platform supporting self-paced, virtual, and in-person training delivery. Created seamless e-commerce integration for instrument sales, comprehensive course management system, and resource library for clinicians.",
+      "execution": "Built responsive website with flexible training delivery options (self-paced, virtual, in-person), integrated e-commerce for Graston instruments and training bundles, created course management and CEU tracking system, developed resource library with research materials, and implemented comprehensive SEO strategy.",
+      "results": "Successful platform launch supporting multiple training modalities, improved accessibility for clinicians worldwide, enhanced e-commerce functionality for instrument sales, and better resource accessibility for practicing clinicians.",
+      "takeaway": "Educational platforms for healthcare professionals require flexibility in delivery methods. Combining training content with e-commerce and resources creates comprehensive value proposition for professional development.",
+      "metrics": {
+        "trainingOptions": "3 delivery modes",
+        "platformAccess": "Global reach",
+        "ceusAvailable": "Multiple pathways"
+      },
+      "tags": ["healthcare education", "training platform", "e-commerce", "ceus", "professional development"],
+      "featured": true,
+      "website": "https://grastontechnique.com",
+      "images": []
+    },
+    {
+      "id": "rbe-law",
+      "title": "RBE Law Firm Website & Digital Presence",
+      "slug": "rbe-law",
+      "category": "Legal Services",
+      "client": "RBE Law",
+      "year": "2023",
+      "duration": "4 months",
+      "services": ["Web Design", "Legal Marketing", "SEO", "Content Strategy", "Conversion Optimization"],
+      "challenge": "Create professional, trustworthy website for law firm that builds client confidence, clearly communicates legal services, and generates qualified leads in competitive legal market.",
+      "approach": "Developed clean, professional design emphasizing trust and credibility. Focused on clear service descriptions, attorney profiles, case results, and easy contact methods. Implemented strong SEO strategy for local legal searches.",
+      "execution": "Built responsive website with service pages, attorney bios, practice area descriptions, case study sections, client testimonials, easy contact forms, blog integration, and comprehensive local SEO optimization.",
+      "results": "Enhanced professional credibility and trust perception, improved search engine visibility for legal services, increased qualified lead generation, and better client engagement through clear information architecture.",
+      "takeaway": "Legal website design must prioritize trust and professionalism. Clear communication of services and easy contact methods are essential for converting visitors to clients in competitive legal markets.",
+      "metrics": {
+        "leadGeneration": "Increased",
+        "searchVisibility": "Enhanced",
+        "professionalCredibility": "Strengthened"
+      },
+      "tags": ["legal services", "web design", "legal marketing", "seo", "conversion"],
+      "featured": false,
+      "website": "https://rbelaw.com",
+      "images": []
+    },
+    {
+      "id": "hoosier-boy-barbershop",
+      "title": "Hoosier Boy Barbershop Website & Branding",
+      "slug": "hoosier-boy-barbershop",
+      "category": "Service Business",
+      "client": "Hoosier Boy Barbershop",
+      "year": "2023",
+      "duration": "3 months",
+      "services": ["Web Design", "Brand Identity", "Local SEO", "Online Booking", "Social Media Integration"],
+      "challenge": "Create modern, appealing website for barbershop that attracts local customers, enables online booking, showcases services and atmosphere, and builds brand recognition in competitive market.",
+      "approach": "Developed clean, modern design reflecting barbershop's style and atmosphere. Focused on easy online booking, service descriptions, barber profiles, pricing transparency, and strong local SEO for Indianapolis market.",
+      "execution": "Built responsive website with online booking integration, service and pricing pages, barber/stylist profiles, gallery showcasing work, location and hours information, and comprehensive local SEO strategy.",
+      "results": "Increased online bookings and walk-in traffic, improved brand recognition in local market, enhanced customer engagement through easy booking process, and better search visibility for barbershop services.",
+      "takeaway": "Service business websites must prioritize booking and contact functionality. Combining modern design with easy booking creates seamless customer experience that drives business growth.",
+      "metrics": {
+        "onlineBookings": "Increased",
+        "localVisibility": "Enhanced",
+        "customerEngagement": "Improved"
+      },
+      "tags": ["service business", "web design", "online booking", "local seo", "barbershop"],
+      "featured": false,
+      "website": "https://hoosierboybarbershop.com",
+      "images": []
+    },
+    {
+      "id": "school-80-condos",
+      "title": "School 80 Condos Real Estate Website",
+      "slug": "school-80-condos",
+      "category": "Real Estate",
+      "client": "School 80 Condos",
+      "year": "2024",
+      "duration": "5 months",
+      "services": ["Web Design", "Real Estate Marketing", "Property Showcase", "Lead Generation", "SEO"],
+      "challenge": "Create compelling website for condominium development that showcases property features, generates qualified leads, provides virtual tour capabilities, and positions development as desirable living option.",
+      "approach": "Developed immersive website showcasing condominium features, amenities, location benefits, and lifestyle. Focused on high-quality imagery, virtual tours, easy contact methods, and clear pricing/availability information.",
+      "execution": "Built responsive website with property galleries, virtual tour integration, floor plans and specifications, amenities showcase, location information, contact forms, and SEO optimization for real estate searches.",
+      "results": "Enhanced property visibility and appeal, increased qualified lead generation, improved inquiry conversion rates, and better positioning in competitive real estate market.",
+      "takeaway": "Real estate websites must create emotional connection with potential buyers. High-quality imagery, virtual tours, and clear information help visitors envision themselves in the property.",
+      "metrics": {
+        "leadGeneration": "Increased",
+        "inquiryConversion": "Improved",
+        "propertyVisibility": "Enhanced"
+      },
+      "tags": ["real estate", "web design", "property marketing", "lead generation", "virtual tours"],
+      "featured": false,
+      "website": "https://school80condos.com",
+      "images": []
+    },
+    {
+      "id": "pike-medical-consultants",
+      "title": "Pike Medical Consultants Corporate Website",
+      "slug": "pike-medical-consultants",
+      "category": "Healthcare Corporate",
+      "client": "Pike Medical Consultants",
+      "year": "2024",
+      "duration": "6 months",
+      "services": ["Corporate Web Design", "Healthcare Branding", "Service Integration", "SEO", "Digital Strategy"],
+      "challenge": "Create comprehensive corporate website for medical consulting group that showcases services across multiple divisions (UrgentCare, Primary Care), builds professional credibility, and supports business development.",
+      "approach": "Developed cohesive corporate presence unifying multiple service divisions. Focused on clear service differentiation, professional credibility, comprehensive service information, and strategic positioning in healthcare market.",
+      "execution": "Built corporate website with service division pages, comprehensive service descriptions, provider information, location details, integrated branding across divisions, and comprehensive SEO strategy.",
+      "results": "Enhanced corporate brand presence and credibility, improved service visibility across divisions, strengthened market positioning, and supported business development initiatives.",
+      "takeaway": "Corporate healthcare websites must unify multiple service lines while maintaining clear differentiation. Professional design and comprehensive information build trust and support business growth.",
+      "metrics": {
+        "brandPresence": "Strengthened",
+        "serviceVisibility": "Enhanced",
+        "businessDevelopment": "Supported"
+      },
+      "tags": ["healthcare corporate", "web design", "corporate branding", "service integration", "digital strategy"],
+      "featured": false,
+      "website": "https://pikemedical.com",
+      "images": []
     }
   ],
   "metadata": {
-    "totalProjects": 11,
-    "categories": ["Restaurant Branding", "Healthcare Branding", "Fitness Branding", "Brand Strategy", "Product Branding", "Coffee Branding", "Non-Profit Marketing", "Medical Branding", "Healthcare Digital", "Service Business", "E-commerce Branding"],
+    "totalProjects": 16,
+    "categories": ["Restaurant Branding", "Healthcare Branding", "Fitness Branding", "Brand Strategy", "Product Branding", "Coffee Branding", "Non-Profit Marketing", "Medical Branding", "Healthcare Digital", "Service Business", "E-commerce Branding", "Healthcare Education", "Legal Services", "Real Estate", "Healthcare Corporate"],
     "services": ["Brand Identity", "Logo Design", "Marketing Materials", "Web Design", "Package Design", "Brand Strategy", "Event Marketing", "Sponsorship Strategy", "E-commerce Design", "Amazon Optimization", "SEO", "Digital Marketing"],
     "lastUpdated": "2025-11-03",
     "brandTone": "cinematic, confident, intelligent, warmly human"

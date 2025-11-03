@@ -3,14 +3,14 @@ import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { 
-  ArrowLeft, 
-  ExternalLink, 
-  Calendar, 
-  Clock, 
-  Target, 
-  Lightbulb, 
-  CheckCircle, 
+import {
+  ArrowLeft,
+  ExternalLink,
+  Calendar,
+  Clock,
+  Target,
+  Lightbulb,
+  CheckCircle,
   TrendingUp,
   Eye,
   Heart
@@ -26,7 +26,7 @@ const SideProjectDetail: React.FC = () => {
   const [project, setProject] = useState<any>(null);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  
+
   const heroRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
 
@@ -41,8 +41,8 @@ const SideProjectDetail: React.FC = () => {
     // Hero parallax animation
     if (heroRef.current) {
       gsap.fromTo(heroRef.current.querySelector('.hero-content'),
-        { 
-          opacity: 0, 
+        {
+          opacity: 0,
           y: 100,
           scale: 0.95
         },
@@ -71,7 +71,7 @@ const SideProjectDetail: React.FC = () => {
     // Content sections stagger animation
     if (contentRef.current) {
       const sections = contentRef.current.querySelectorAll('.content-section');
-      
+
       sections.forEach((section, index) => {
         gsap.fromTo(section,
           {
@@ -131,7 +131,7 @@ const SideProjectDetail: React.FC = () => {
   };
 
   return (
-    <motion.div 
+    <motion.div
       className="side-project-detail"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -149,15 +149,15 @@ const SideProjectDetail: React.FC = () => {
       <section className="project-hero" ref={heroRef}>
         <div className="hero-background">
           <div className="hero-image">
-            <img 
-              src={project.images[0]} 
+            <img
+              src={project.images[0]}
               alt={project.title}
               onClick={() => openLightbox(0)}
             />
           </div>
           <div className="hero-overlay"></div>
         </div>
-        
+
         <div className="hero-content">
           <motion.div
             className="hero-text"
@@ -169,9 +169,9 @@ const SideProjectDetail: React.FC = () => {
               <span className="category">{project.category}</span>
               <span className="client">{project.client}</span>
             </div>
-            
+
             <h1 className="project-title">{project.title}</h1>
-            
+
             <div className="project-details">
               <div className="detail-item">
                 <Calendar size={16} />
@@ -189,7 +189,7 @@ const SideProjectDetail: React.FC = () => {
       {/* Content Sections */}
       <div className="project-content" ref={contentRef}>
         <div className="container">
-          
+
           {/* Logo Display */}
           {project.images && project.images.length > 0 && (
             <section className="content-section logo-section">
@@ -203,6 +203,43 @@ const SideProjectDetail: React.FC = () => {
               </div>
             </section>
           )}
+
+          {/* Website Showcase */}
+          {project.website && (
+            <section className="content-section website-showcase">
+              <div className="website-showcase-container">
+                <div className="website-showcase-content">
+                  <h2 className="website-showcase-title">Live Website</h2>
+                  <p className="website-showcase-description">
+                    Explore the fully deployed website for {project.client}
+                  </p>
+                  <a 
+                    href={project.website} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="website-cta-button"
+                  >
+                    <span>Visit Live Site</span>
+                    <ExternalLink size={20} />
+                  </a>
+                  <div className="website-url">
+                    <span className="website-url-label">URL:</span>
+                    <a 
+                      href={project.website} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="website-link"
+                    >
+                      {project.website.replace(/^https?:\/\//, '')}
+                    </a>
+                  </div>
+                </div>
+                <div className="website-showcase-icon">
+                  <ExternalLink size={64} />
+                </div>
+              </div>
+            </section>
+          )}
           
           {/* Overview */}
           <section className="content-section overview-section">
@@ -210,7 +247,7 @@ const SideProjectDetail: React.FC = () => {
               <div className="section-text">
                 <h2>Project Overview</h2>
                 <p className="lead-text">{project.challenge}</p>
-                
+
                 <div className="services-list">
                   <h3>Services Provided</h3>
                   <ul>
@@ -223,7 +260,7 @@ const SideProjectDetail: React.FC = () => {
                   </ul>
                 </div>
               </div>
-              
+
               <div className="section-visual">
                 <div className="stats-grid">
                   {project.metrics && Object.entries(project.metrics).map(([key, value], index) => (
