@@ -1,6 +1,37 @@
 import React from "react";
 import * as simpleIcons from "simple-icons";
 
+// Helper to safely get an icon from simple-icons
+// Note: simple-icons v15+ uses a different API
+const getSimpleIcon = (slug: string): any => {
+  try {
+    // Try multiple methods to access icons
+    const slugLower = slug.toLowerCase();
+    
+    // Method 1: Direct property access with slug
+    if ((simpleIcons as any)[slugLower]) {
+      return (simpleIcons as any)[slugLower];
+    }
+    
+    // Method 2: Try with dashes removed
+    const slugNoDashes = slugLower.replace(/-/g, '');
+    if ((simpleIcons as any)[slugNoDashes]) {
+      return (simpleIcons as any)[slugNoDashes];
+    }
+    
+    // Method 3: If there's a getIcons or similar method
+    if (typeof (simpleIcons as any).getIcons === 'function') {
+      const icons = (simpleIcons as any).getIcons();
+      return icons[slugLower] || icons[slugNoDashes] || null;
+    }
+    
+    return null;
+  } catch (e) {
+    // Silently fail - don't crash the app
+    return null;
+  }
+};
+
 interface SimpleIconProps {
   name: string;
   size?: number;
@@ -140,12 +171,8 @@ export const getIconSlug = (name: string): string | null => {
   }
 
   // Try to find by slug directly (e.g., if name is already a slug)
-  try {
-    const icon = simpleIcons.get(name.toLowerCase());
-    if (icon) return name.toLowerCase();
-  } catch (e) {
-    // Not found
-  }
+  const icon = getSimpleIcon(name.toLowerCase());
+  if (icon) return name.toLowerCase();
 
   return null;
 };
@@ -167,7 +194,7 @@ const SimpleIcon: React.FC<SimpleIconProps> = ({
   }
 
   try {
-    const icon = simpleIcons.get(slug);
+    const icon = getSimpleIcon(slug);
     if (!icon) return null;
 
     const iconColor = color || `#${icon.hex}`;

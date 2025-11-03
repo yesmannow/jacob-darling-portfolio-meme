@@ -61,31 +61,42 @@ try {
   if (!rootElement) {
     console.error('Root element not found');
   } else {
-    ReactDOM.createRoot(rootElement).render(
+    console.log('Initializing React app...');
+    const root = ReactDOM.createRoot(rootElement);
+    
+    // Wrap in error boundary at the root level
+    root.render(
       React.createElement(React.StrictMode, null,
         React.createElement(BrowserRouter, null,
           React.createElement(App)
         )
       )
     );
+    
+    console.log('React app initialized successfully');
   }
 } catch (error) {
   console.error('Failed to initialize React app:', error);
-  // Fallback rendering
-  document.body.innerHTML = `
-    <div style="display: flex; align-items: center; justify-content: center; height: 100vh; font-family: Arial, sans-serif;">
-      <div style="text-align: center; padding: 2rem; background: #f0f0f0; border-radius: 8px;">
-        <h2>Portfolio Loading...</h2>
-        <p>Please refresh the page or check the console for errors.</p>
-        <p><strong>Available Routes:</strong></p>
-        <ul style="text-align: left;">
-          <li><a href="/">Home</a></li>
-          <li><a href="/resume">Resume</a></li>
-          <li><a href="/applications">Applications</a></li>
-          <li><a href="/design">Design</a></li>
-          <li><a href="/photography">Photography</a></li>
-        </ul>
+  console.error('Error details:', {
+    message: error instanceof Error ? error.message : String(error),
+    stack: error instanceof Error ? error.stack : undefined,
+    name: error instanceof Error ? error.name : undefined
+  });
+  
+  // Show error in the UI
+  const rootElement = document.getElementById('root');
+  if (rootElement) {
+    rootElement.innerHTML = `
+      <div style="display: flex; align-items: center; justify-content: center; min-height: 100vh; background-color: #0A0A0A; color: #FFFFFF; font-family: 'Inter', sans-serif; padding: 2rem;">
+        <div style="text-align: center; max-width: 600px;">
+          <h2 style="color: #EF4444; margin-bottom: 1rem;">Application Error</h2>
+          <p style="opacity: 0.8; margin-bottom: 1rem;">Failed to load the portfolio application.</p>
+          <p style="opacity: 0.6; font-size: 0.9rem; margin-bottom: 2rem;">${error instanceof Error ? error.message : 'Unknown error'}</p>
+          <button onclick="window.location.reload()" style="padding: 0.75rem 1.5rem; background: #3B82F6; color: white; border: none; border-radius: 0.5rem; cursor: pointer; font-family: 'Inter', sans-serif;">
+            Reload Page
+          </button>
+        </div>
       </div>
-    </div>
-  `;
+    `;
+  }
 }

@@ -6,6 +6,7 @@ import ScrollToTop from "./components/utils/ScrollToTop";
 import BackToTop from "./components/utilities/BackToTop";
 import PersonSchema from "./components/seo/PersonSchema";
 import PerformanceMonitor from "./components/utils/PerformanceMonitor";
+import ErrorBoundary from "./components/ErrorBoundary";
 import { initLenis, destroyLenis } from "./utils/motion-sync";
 import "lenis/dist/lenis.css";
 
@@ -38,18 +39,20 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <div className="app">
-      <PersonSchema />
-      <PerformanceMonitor />
-      {/* <LogoIntro /> */}
-      {/* <BackgroundLogos /> */}
-      {/* <CustomCursor /> */}
-      <ScrollToTop />
-      <BackToTop />
-      <ModernHeader />
-      <AppRouter />
-      <Footer />
-    </div>
+    <ErrorBoundary>
+      <div className="app">
+        <PersonSchema />
+        <PerformanceMonitor />
+        {/* <LogoIntro /> */}
+        {/* <BackgroundLogos /> */}
+        {/* <CustomCursor /> */}
+        <ScrollToTop />
+        <BackToTop />
+        <ModernHeader />
+        <AppRouter />
+        <Footer />
+      </div>
+    </ErrorBoundary>
   );
 };
 
