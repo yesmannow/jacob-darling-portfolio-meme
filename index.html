@@ -4,7 +4,50 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Theme Init - Zero-FOUC theme loading (must be first script) -->
+    <!-- Custom Element Registration Guard - Load FIRST to prevent all duplicate registration errors -->
+    <!-- This intercepts ALL customElements.define() calls to prevent re-registration -->
+    <script>
+      (function () {
+        'use strict';
+
+        if (typeof window === "undefined" || !window.customElements) return;
+
+        const originalDefine = window.customElements.define;
+        if (!originalDefine) return;
+
+        // Prevent double-wrapping
+        if (window.customElements.__defineGuardInstalled) return;
+        window.customElements.__defineGuardInstalled = true;
+
+        // Override customElements.define to check before defining
+        window.customElements.define = function (name, constructor, options) {
+          // Check if element is already defined - this is the recommended pattern
+          if (window.customElements.get(name)) {
+            // Element already exists - skip re-registration
+            console.warn(`Custom element "${name}" is already registered. Skipping re-registration.`);
+            return;
+          }
+
+          // Element doesn't exist yet - safe to define
+          try {
+            return originalDefine.call(this, name, constructor, options);
+          } catch (error) {
+            // Handle race conditions where element might be defined between check and call
+            const errorMsg = error?.message || String(error);
+            if (errorMsg && errorMsg.includes('has already been used') ||
+                errorMsg.includes('has already been defined')) {
+              // Race condition - element was defined by another script between check and call
+              console.warn(`Custom element "${name}" was defined by another script during registration. Skipping.`);
+              return; // Silently skip duplicate definitions
+            }
+            // Re-throw other errors (not duplicate registration errors)
+            throw error;
+          }
+        };
+      })();
+    </script>
+
+    <!-- Theme Init - Zero-FOUC theme loading -->
     <script>
       (function() {
         'use strict';
@@ -85,53 +128,6 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-
-    <!-- Custom Element Registration Guard - Prevents duplicate registration errors -->
-    <!-- This intercepts ALL customElements.define() calls to prevent re-registration -->
-    <script>
-      (function () {
-        'use strict';
-
-        if (typeof window === "undefined" || !window.customElements) return;
-
-        const originalDefine = window.customElements.define;
-        if (!originalDefine) return;
-
-        // Prevent double-wrapping
-        if (window.customElements.__defineGuardInstalled) return;
-        window.customElements.__defineGuardInstalled = true;
-
-        // Override customElements.define to check before defining
-        window.customElements.define = function (name, constructor, options) {
-          // Check if element is already defined - this is the recommended pattern
-          if (window.customElements.get(name)) {
-            // Element already exists - skip re-registration
-            if (process?.env?.NODE_ENV === 'development' || window.location.hostname === 'localhost') {
-              console.warn(`Custom element "${name}" is already registered. Skipping re-registration.`);
-            }
-            return;
-          }
-
-          // Element doesn't exist yet - safe to define
-          try {
-            return originalDefine.call(this, name, constructor, options);
-          } catch (error) {
-            // Handle race conditions where element might be defined between check and call
-            const errorMsg = error?.message || String(error);
-            if (errorMsg && errorMsg.includes('has already been used') ||
-                errorMsg.includes('has already been defined')) {
-              // Race condition - element was defined by another script between check and call
-              if (process?.env?.NODE_ENV === 'development' || window.location.hostname === 'localhost') {
-                console.warn(`Custom element "${name}" was defined by another script during registration. Skipping.`);
-              }
-              return; // Silently skip duplicate definitions
-            }
-            // Re-throw other errors (not duplicate registration errors)
-            throw error;
-          }
-        };
-      })();
-    </script>
 
     <!-- Structured Data -->
     <script type="application/ld+json">

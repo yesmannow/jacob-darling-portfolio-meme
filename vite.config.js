@@ -62,9 +62,11 @@ export default defineConfig({
   server: {
     fs: {
       strict: false
+    },
+    // Disable HMR overlay to prevent mce-autosize-textarea duplicate definition
+    hmr: {
+      overlay: false
     }
-    // HMR config removed entirely - relying on Vite defaults prevents overlay_bundle.js injection
-    // This prevents mce-autosize-textarea from being registered by the error overlay
   },
   resolve: {
     alias: {
