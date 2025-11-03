@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import NavDesktop from "./NavDesktop";
 import NavMobile from "./NavMobile";
 import { BRAND_TAGLINE, CTA_PRIMARY } from "../../config/nav";
-import "./header.css";
+import "../../styles/header.css";
 
 const Header: React.FC = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
