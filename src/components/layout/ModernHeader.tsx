@@ -329,25 +329,6 @@ const ModernHeader: React.FC = () => {
                   </AnimatePresence>
                 </div>
               ))}
-
-              {/* RESUME DOWNLOAD CTA BUTTON */}
-              <button
-                onClick={handleResumeDownload}
-                className="flex items-center gap-2 px-5 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full font-medium hover:scale-105 transition-all shadow-lg hover:shadow-purple-500/25"
-                aria-label="Download Resume"
-              >
-                <Download className="w-4 h-4" />
-                <span className="hidden xl:inline">Download Resume</span>
-                <span className="xl:hidden">Resume</span>
-              </button>
-
-              {/* LET'S CONNECT BUTTON */}
-              <Link
-                to="/contact"
-                className="ml-2 px-6 py-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-full font-medium hover:scale-105 transition-all shadow-lg hover:shadow-blue-500/25"
-              >
-                Let's Connect
-              </Link>
             </div>
           </div>
         )}
@@ -407,27 +388,6 @@ const ModernHeader: React.FC = () => {
                   </div>
                 </div>
               ))}
-
-              {/* MOBILE RESUME & CONTACT BUTTONS */}
-              <div className="pt-4 border-t border-white/10 space-y-3">
-                <button
-                  onClick={() => {
-                    handleResumeDownload();
-                    setMobileOpen(false);
-                  }}
-                  className="flex items-center justify-center gap-2 w-full px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-xl font-medium hover:scale-105 transition-all"
-                >
-                  <Download className="w-5 h-5" />
-                  Download Resume
-                </button>
-                <Link
-                  to="/contact"
-                  onClick={() => setMobileOpen(false)}
-                  className="block w-full px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-xl font-medium text-center hover:scale-105 transition-all"
-                >
-                  Let's Connect
-                </Link>
-              </div>
             </div>
           </motion.div>
         )}
