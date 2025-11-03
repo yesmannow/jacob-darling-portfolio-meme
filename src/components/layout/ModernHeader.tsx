@@ -61,7 +61,7 @@ const ModernHeader: React.FC = () => {
       icon: <Briefcase className="w-4 h-4" />,
       items: [
         { label: "Case Studies", to: "/case-studies", icon: <Briefcase className="w-4 h-4" />, description: "Detailed project breakdowns" },
-        { label: "Client Work", to: "/side-projects", icon: <ExternalLink className="w-4 h-4" />, description: "Client projects and collaborations" },
+        { label: "Marketing Services", to: "/side-projects", icon: <ExternalLink className="w-4 h-4" />, description: "Contract marketing and design projects" },
         { label: "Applications", to: "/applications", icon: <Wrench className="w-4 h-4" />, description: "Interactive tools and demos" },
       ]
     },

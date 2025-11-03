@@ -105,13 +105,13 @@ const SideProjects: React.FC = () => {
             transition={{ delay: 0.3, duration: 0.8 }}
           >
             <h1 className="hero-title">
-              Client Work &
-              <span className="gradient-text"> Side Projects</span>
+              Marketing
+              <span className="gradient-text"> Services</span>
             </h1>
             <p className="hero-subtitle">
-              A curated collection of branding, design, and strategic work 
-              across industries—from healthcare to hospitality, 
-              each project crafted with cinematic attention to detail.
+              Contract marketing, branding, and design projects across diverse industries. 
+              From healthcare to hospitality, e-commerce to non-profits—each project delivered 
+              with strategic insight and creative excellence as an independent contractor.
             </p>
           </motion.div>
 
@@ -147,8 +147,8 @@ const SideProjects: React.FC = () => {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <h2>Featured Work</h2>
-            <p>Each project represents a unique challenge solved through strategic design thinking and creative execution.</p>
+            <h2>Contract Projects</h2>
+            <p>Strategic marketing, branding, and design solutions delivered as an independent contractor across diverse industries and business types.</p>
           </motion.div>
 
           <div className="projects-grid" ref={gridRef}>
