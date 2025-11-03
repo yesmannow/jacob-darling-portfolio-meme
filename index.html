@@ -144,7 +144,7 @@
     <script>
       (function() {
         'use strict';
-        
+
         // Override customElements.define IMMEDIATELY - don't wait for DOM
         // This must run before ANY scripts that might define custom elements
         function protectCustomElements() {
@@ -160,9 +160,10 @@
           const originalDefine = window.customElements.define;
 
           // Override customElements.define with the recommended fix pattern
+          // Use a more robust check to prevent double-wrapping
           if (originalDefine && !window.customElements._defineProtected) {
             window.customElements._defineProtected = true; // Flag to prevent double-wrapping
-            
+
             window.customElements.define = function(name, constructor, options) {
               // RECOMMENDED FIX: Check if element is already defined using !customElements.get()
               // This is the exact pattern the user suggested
@@ -172,9 +173,9 @@
                   return originalDefine.call(this, name, constructor, options);
                 } catch (error) {
                   // If definition fails (race condition), check again
-                  if (error && error.message && error.message.includes('has already been defined')) {
+                  if (error && (error.message || String(error)).includes('has already been defined')) {
                     // Element was defined between our check and the actual define() call
-                    // This is a race condition - silently ignore it
+                    // This is a race condition - silently ignore it (prevents error)
                     return;
                   }
                   // Re-throw non-duplicate errors
@@ -183,26 +184,37 @@
               } else {
                 // Element already exists - silently return (prevents "already been defined" error)
                 // This is the fix: check BEFORE defining
+                // Log in dev mode only for debugging
+                if (typeof process !== 'undefined' && process.env && process.env.NODE_ENV === 'development') {
+                  console.debug('[CustomElements] Element already defined, skipping:', name);
+                }
                 return;
               }
             };
           }
         }
-        
-        // Try to protect immediately (runs before any other scripts)
+
+        // PROTECT IMMEDIATELY - run synchronously if possible
+        // Try multiple times to ensure we catch it before any scripts load
+        protectCustomElements();
+
+        // Also protect after a microtask (catches any that were defined during script parsing)
+        if (typeof Promise !== 'undefined' && Promise.resolve) {
+          Promise.resolve().then(protectCustomElements);
+        }
+
+        // And protect after DOM is ready (if DOM is already ready, this runs immediately)
         if (document.readyState === 'loading') {
-          // If DOM is still loading, wait for it
           document.addEventListener('DOMContentLoaded', protectCustomElements);
         } else {
-          // DOM already loaded, protect immediately
           protectCustomElements();
         }
-        
+
         // Also catch any errors that slip through
         window.addEventListener('error', function(event) {
           const error = event.error;
           const message = (error && error.message) || event.message || '';
-          
+
           // Catch "already been defined" errors
           if (message.includes('has already been defined') ||
               message.includes('mce-autosize-textarea') ||
@@ -214,12 +226,12 @@
             return false;
           }
         }, true); // Use capture phase to catch early
-        
+
         // Also catch promise rejections
         window.addEventListener('unhandledrejection', function(event) {
           const reason = event.reason;
           const message = (reason && reason.message) || String(reason || '');
-          
+
           if (message.includes('has already been defined') ||
               message.includes('mce-autosize-textarea') ||
               (reason && reason.name === 'NotSupportedError' && message.includes('custom element'))) {
@@ -227,25 +239,9 @@
             return;
           }
         });
-        
-        // Start protection immediately
-        protectCustomElements();
-        
-        // Also try after a tiny delay to catch any that were defined in the meantime
-        setTimeout(protectCustomElements, 0);
-        
-        // And after DOM is ready
-        if (document.readyState === 'loading') {
-          document.addEventListener('DOMContentLoaded', function() {
-            protectCustomElements();
-          });
-        }
-        
-        // Final attempt after window load
+
+        // Final attempt after window load (catches late-loading scripts)
         window.addEventListener('load', protectCustomElements);
-        
-        // Start protection immediately
-        protectCustomElements();
 
         // Global error handler with capture phase to catch early
         // This MUST use capture phase and stopImmediatePropagation to catch before overlay

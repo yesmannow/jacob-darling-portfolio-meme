@@ -41,11 +41,12 @@ if (typeof window !== 'undefined') {
 
   // Override customElements.define to prevent duplicates (if not already protected)
   // This uses the recommended pattern: check !customElements.get() before defining
+  // Note: This is a backup protection in case index.html protection doesn't catch everything
   if (window.customElements && !window.customElements._defineProtected) {
     const originalDefine = window.customElements.define;
     if (originalDefine) {
       window.customElements._defineProtected = true; // Flag to prevent double-wrapping
-      
+
       window.customElements.define = function(name, constructor, options) {
         // RECOMMENDED FIX: Check if element is already defined using !customElements.get()
         // This is the exact fix pattern suggested by the user
@@ -55,9 +56,10 @@ if (typeof window !== 'undefined') {
             return originalDefine.call(this, name, constructor, options);
           } catch (error) {
             // If definition fails (race condition), check again
-            if (error && error.message && error.message.includes('has already been defined')) {
+            const errorMsg = error && (error.message || String(error));
+            if (errorMsg && errorMsg.includes('has already been defined')) {
               // Element was defined between our check and the actual define() call
-              // This is a race condition - silently ignore it
+              // This is a race condition - silently ignore it (prevents error)
               return;
             }
             // Re-throw non-duplicate errors
