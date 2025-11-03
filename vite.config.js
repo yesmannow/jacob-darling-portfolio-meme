@@ -146,7 +146,7 @@ export default defineConfig({
         assetFileNames: (assetInfo) => {
           const info = assetInfo.name.split('.');
           const ext = info[info.length - 1];
-          
+
           // Prevent .tsx/.ts files from being copied as assets
           if (/\.(tsx|ts)$/.test(assetInfo.name)) {
             // These shouldn't be assets - they should be chunks
@@ -154,7 +154,7 @@ export default defineConfig({
             const baseName = assetInfo.name.replace(/\.(tsx|ts)$/, '');
             return `assets/${baseName}-[hash].js`;
           }
-          
+
           if (/\.(css)$/.test(assetInfo.name)) {
             return `assets/[name]-[hash].${ext}`;
           }
