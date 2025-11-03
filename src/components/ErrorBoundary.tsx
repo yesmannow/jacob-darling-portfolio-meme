@@ -1,58 +1,33 @@
-import React, { Component, ReactNode } from 'react';
-import './ErrorBoundary.css';
+import React from 'react';
+import styles from './ErrorBoundary.module.css';
 
-interface Props {
-  children: ReactNode;
-  fallback?: ReactNode;
-}
-
-interface State {
+type State = {
   hasError: boolean;
-  error: Error | null;
-}
+  error?: Error | null;
+};
 
-class ErrorBoundary extends Component<Props, State> {
-  constructor(props: Props) {
+export class ErrorBoundary extends React.Component<{}, State> {
+  constructor(props: {}) {
     super(props);
     this.state = { hasError: false, error: null };
   }
 
-  static getDerivedStateFromError(error: Error): State {
+  static getDerivedStateFromError(error: Error) {
     return { hasError: true, error };
   }
 
-  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-    console.error('ErrorBoundary caught an error:', error, errorInfo);
+  componentDidCatch(error: Error, info: any) {
+    // You can log error to an external service here
+    // console.error('ErrorBoundary caught:', error, info);
   }
 
   render() {
     if (this.state.hasError) {
-      if (this.props.fallback) {
-        return this.props.fallback;
-      }
-
       return (
-        <div className="error-boundary-container">
-          <div className="error-boundary-content">
-            <h2 className="error-boundary-title">Something went wrong</h2>
-            <p className="error-boundary-message">
-              The application encountered an error. Please refresh the page.
-            </p>
-            {this.state.error && (
-              <details className="error-boundary-details">
-                <summary className="error-boundary-details-summary">Error details</summary>
-                <pre className="error-boundary-details-pre">
-                  {this.state.error.message}
-                  {this.state.error.stack && '\n\n' + this.state.error.stack}
-                </pre>
-              </details>
-            )}
-            <button
-              onClick={() => window.location.reload()}
-              className="error-boundary-button"
-            >
-              Reload Page
-            </button>
+        <div className={styles.container}>
+          <div className={styles.card}>
+            <h1 className={styles.title}>Loading profile....</h1>
+            <p className={styles.message}>Something went wrong while loading the profile. Try reloading the page.</p>
           </div>
         </div>
       );
