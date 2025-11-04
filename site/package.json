@@ -1,0 +1,32 @@
+{
+  "name": "site",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "npm run type-check && vite build",
+    "preview": "vite preview --port 4173",
+    "type-check": "tsc --noEmit",
+    "lint": "eslint 'src/**/*.{ts,tsx}' --max-warnings=0",
+    "prebuild": "node scripts/pre-build-check.cjs",
+    "postbuild": "node scripts/post-build-verify.js"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.14.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.28",
+    "@types/react-dom": "^18.0.11",
+    "typescript": "^5.6.0",
+    "vite": "^5.0.0",
+    "@vitejs/plugin-react": "^4.0.0",
+    "tailwindcss": "^3.5.0",
+    "autoprefixer": "^10.4.14",
+    "postcss": "^8.4.20",
+    "eslint": "^8.40.0",
+    "eslint-plugin-react": "^7.32.2"
+  }
+}

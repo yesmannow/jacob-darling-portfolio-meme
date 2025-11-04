@@ -1,0 +1,15 @@
+name: Site CI
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node
+        uses: actions/setup-node@v4
+        with: node-version: 18
+      - run: cd site && npm ci
+      - run: cd site && node scripts/pre-build-check.cjs
+      - run: cd site && npm run type-check
+      - run: cd site && npm run build
+      - run: cd site && npm run postbuild
