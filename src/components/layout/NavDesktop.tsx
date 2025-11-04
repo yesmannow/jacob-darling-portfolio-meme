@@ -28,7 +28,11 @@ const NavDesktop = () => {
                   {item.label}
                 </NavLink>
               ) : (
-                <span className="bc-nav-link" aria-haspopup={hasChildren || undefined} aria-expanded={false}>
+                <span
+                  className="bc-nav-link"
+                  role="menuitem"
+                  {...(hasChildren ? { "aria-haspopup": true, "aria-expanded": false } : {})}
+                >
                   {item.label}
                 </span>
               )}
@@ -42,6 +46,7 @@ const NavDesktop = () => {
                         trackingId={child.trackingId}
                         external={child.external}
                         className="bc-submenu-link"
+                        role="menuitem"
                       >
                         {child.label}
                       </NavLink>

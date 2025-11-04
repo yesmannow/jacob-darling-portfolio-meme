@@ -8,11 +8,18 @@ import "./CTA.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
+interface ParticleConfig {
+  left: string;
+  top: string;
+  delay: number;
+  index: number;
+}
+
 const CTA = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const glowRef = useRef<HTMLDivElement>(null);
 
-  const particleConfigs = useMemo(() => (
+  const particleConfigs = useMemo<ParticleConfig[]>(() => (
     Array.from({ length: 15 }).map((_, i) => ({
       left: `${Math.random() * 100}%`,
       top: `${Math.random() * 100}%`,
@@ -103,7 +110,7 @@ const CTA = () => {
       {/* Floating Particles */}
       {/* Note: CSS custom properties must be set inline as they are dynamically computed per particle */}
       <div className="absolute inset-0">
-        {particleConfigs.map(({ left, top, delay, index }) => (
+        {particleConfigs.map(({ left, top, delay, index }: ParticleConfig) => (
           <div
             key={index}
             className="cta-particle absolute w-1 h-1 bg-white rounded-full"

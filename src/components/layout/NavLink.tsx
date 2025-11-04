@@ -10,9 +10,10 @@ type NavLinkProps = {
   ariaHasPopup?: boolean;
   ariaExpanded?: boolean;
   onClick?: () => void;
+  role?: React.AriaRole;
 };
 
-const NavLink = ({ href, children, className, trackingId, external, ariaHasPopup, ariaExpanded, onClick }: NavLinkProps) => {
+const NavLink = ({ href, children, className, trackingId, external, ariaHasPopup, ariaExpanded, onClick, role }: NavLinkProps) => {
   const location = useLocation();
   const isActive = !external && (location.pathname === href || (href !== "/" && location.pathname.startsWith(href)));
 
@@ -27,6 +28,7 @@ const NavLink = ({ href, children, className, trackingId, external, ariaHasPopup
         onClick={onClick}
         aria-haspopup={ariaHasPopup || undefined}
         aria-expanded={ariaExpanded}
+        role={role}
       >
         {children}
       </a>
@@ -42,6 +44,7 @@ const NavLink = ({ href, children, className, trackingId, external, ariaHasPopup
       aria-current={isActive ? "page" : undefined}
       aria-haspopup={ariaHasPopup || undefined}
       aria-expanded={ariaExpanded}
+      role={role}
     >
       {children}
     </Link>
