@@ -6,6 +6,7 @@
   background: rgba(30, 30, 30, 0.8);
   backdrop-filter: blur(16px);
   border-bottom: 1px solid rgba(212, 155, 65, 0.15);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
 .bc-header::after {
@@ -95,12 +96,33 @@
   transition: color 0.2s ease, background 0.2s ease;
 }
 
+.bc-nav-link:focus-visible {
+  outline: 2px solid var(--bc-accent-gold);
+  outline-offset: 2px;
+}
+
 .bc-nav-link:hover,
 .bc-nav-link:focus-visible,
 .bc-nav-link[aria-current="page"] {
   color: var(--bc-accent-gold);
   background: rgba(212, 155, 65, 0.12);
   outline: none;
+}
+
+.bc-nav-link[aria-current="page"] {
+  position: relative;
+}
+
+.bc-nav-link[aria-current="page"]::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 2px;
+  background: var(--bc-accent-gold);
+  border-radius: 1px;
 }
 
 .bc-nav-item--has-children:hover .bc-submenu,

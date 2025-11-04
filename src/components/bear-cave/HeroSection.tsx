@@ -50,11 +50,9 @@ const HeroSection = ({ className = '' }: HeroSectionProps) => {
         >
           <motion.h1
             className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-bear-cave-light leading-tight tracking-tight mb-6"
-            style={{ fontFamily: 'var(--font-heading)' }}
+            style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(2rem, 5vw, 4rem)' }}
           >
-            EMERGE INTO
-            <br />
-            <span className="bear-cave-text-gradient">GROWTH</span>
+            I architect systems that empower teams and AI assistants.
           </motion.h1>
 
           <motion.p
@@ -63,11 +61,7 @@ const HeroSection = ({ className = '' }: HeroSectionProps) => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            Where marketing systems emerge from the cave of complexity into the light of growth.
-            <br />
-            <span className="text-bear-cave-accent-gold font-semibold">
-              Delivering measurable ROI for CMOs who demand results.
-            </span>
+            From monorepos to real-time dashboards, I build for clarity, scale, and strategic action.
           </motion.p>
         </motion.div>
 
@@ -115,7 +109,7 @@ const HeroSection = ({ className = '' }: HeroSectionProps) => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            SCHEDULE MARKETING ROI
+            Explore Projects
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </motion.button>
 
@@ -124,7 +118,7 @@ const HeroSection = ({ className = '' }: HeroSectionProps) => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            VIEW CASE STUDIES
+            View Dashboard
           </motion.button>
         </motion.div>
 

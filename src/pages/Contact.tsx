@@ -112,8 +112,8 @@ const Contact = () => {
     <main className="contact-page">
       <AnimatedSection>
         <section className="contact-header">
-          <motion.h1 variants={fadeInUp}>Let's Create What Doesn't Exist Yet.</motion.h1>
-          <motion.p className="lead" variants={fadeInUp}>
+          <motion.h1 variants={fadeInUp} style={{ fontSize: 'clamp(2rem, 5vw, 4rem)' }}>Let's Create What Doesn't Exist Yet.</motion.h1>
+          <motion.p className="lead prose max-w-prose" variants={fadeInUp}>
             I'm currently open to new opportunities in marketing leadership and tech integration.
             <br /><br />
             Have a challenge that needs solving? A system that needs building? A campaign that needs optimizing?
@@ -417,6 +417,10 @@ const Contact = () => {
                 <blockquote>
                   "Systems create freedom — let's design one that works for you."
                 </blockquote>
+              </div>
+
+              <div className="accessibility-note">
+                <p>Built with accessibility in mind</p>
               </div>
 
               <div className="cta-card">

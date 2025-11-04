@@ -143,7 +143,7 @@ const About = () => {
                 </div>
               </div>
             </div>
-            <div className="intro-text">
+            <div className="intro-text prose max-w-prose">
               <p className="lead">
                 Hello, I'm Jacob Darling—a Marketing Strategist & Systems Architect with over a decade of experience
                 driving growth through data-driven marketing and innovative tech solutions. I specialize in marketing
@@ -174,7 +174,7 @@ const About = () => {
 
       <AnimatedSection delay={0.2}>
         <section className="philosophy-section">
-          <h2>My Philosophy</h2>
+          <h2 style={{ fontSize: 'clamp(1.5rem, 3vw, 2.25rem)' }}>My Philosophy</h2>
 
           <div className="philosophy-quote">
             <blockquote>
@@ -217,7 +217,7 @@ const About = () => {
 
       <AnimatedSection delay={0.3}>
         <section className="timeline-section">
-          <h2>Career Journey</h2>
+          <h2 style={{ fontSize: 'clamp(1.5rem, 3vw, 2.25rem)' }}>Career Journey</h2>
 
           <div className="timeline">
             <div className="timeline-line"></div>
@@ -282,7 +282,7 @@ const About = () => {
 
       <AnimatedSection delay={0.4}>
         <section className="volunteering-section">
-          <h2>Community & Volunteer Work</h2>
+          <h2 style={{ fontSize: 'clamp(1.5rem, 3vw, 2.25rem)' }}>Community & Volunteer Work</h2>
           <p className="section-intro">
             Beyond professional work, I believe in giving back to the community through leadership,
             creative support, and strategic guidance. Whether leading homeowner associations,
@@ -404,7 +404,7 @@ const About = () => {
 
       <AnimatedSection delay={0.6}>
         <section className="cta-section">
-          <h2>Let's Build Something Together</h2>
+          <h2 style={{ fontSize: 'clamp(1.5rem, 3vw, 2.25rem)' }}>Let's Build Something Together</h2>
           <p>
             Inspired by structured creativity and system automation, I bring a relentless work ethic
             and Indiana roots to every project.

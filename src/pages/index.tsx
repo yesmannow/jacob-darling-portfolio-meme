@@ -54,12 +54,27 @@ const HomePage = () => {
       {/* Section 4: Metrics Counter - Light Theme */}
       <MetricCounter maxItems={6} />
 
-      {/* Section 5: Case Studies - Light Theme */}
-      <CaseStudyGrid
-        caseStudies={featuredCaseStudies}
-        maxItems={3}
-        featuredFirst={true}
-      />
+      {/* Section 5: Featured Projects - Light Theme */}
+      <div className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <motion.h2
+            className="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-900 prose prose-xl max-w-none"
+            style={{ fontSize: 'clamp(1.875rem, 4vw, 2.25rem)' }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            Featured Projects
+          </motion.h2>
+          <div className="animate-fade-in">
+            <CaseStudyGrid
+              caseStudies={featuredCaseStudies}
+              maxItems={3}
+              featuredFirst={true}
+            />
+          </div>
+        </div>
+      </div>
 
       {/* Section 6: Testimonials - Dark Theme */}
       <TestimonialBlock
