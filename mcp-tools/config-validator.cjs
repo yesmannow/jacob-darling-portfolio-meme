@@ -14,8 +14,10 @@ if (ts) {
     const j = JSON.parse(ts);
     const co = j.compilerOptions || {};
     if (co.jsx !== "react-jsx") report.issues.push('tsconfig: compilerOptions.jsx should be "react-jsx"');
-    if (!["node","Node","NodeNext","node16"].includes(String(co.moduleResolution || "").toLowerCase()))
-      report.issues.push('tsconfig: compilerOptions.moduleResolution should be "node" (or NodeNext)');
+    const moduleResolution = String(co.moduleResolution || "").toLowerCase();
+    if (!["node", "node16", "nodenext", "bundler"].includes(moduleResolution)) {
+      report.issues.push('tsconfig: compilerOptions.moduleResolution should be "node" (or NodeNext/Bundler)');
+    }
     if (!Array.isArray(co.types) || !co.types.includes("vite/client"))
       report.issues.push('tsconfig: compilerOptions.types should include "vite/client"');
   } catch {

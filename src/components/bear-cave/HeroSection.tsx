@@ -7,7 +7,10 @@ interface HeroSectionProps {
 }
 
 const HeroSection = ({ className = '' }: HeroSectionProps) => {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  // Guard the DOM ref before passing to APIs expecting non-null HTMLDivElement.
+  // If the library accepts null, use containerRef directly; otherwise
+  // check and only call when present.
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"]

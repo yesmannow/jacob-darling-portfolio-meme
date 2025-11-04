@@ -6,7 +6,7 @@ import "@/styles/header.css";
 const NavDesktop = () => {
   return (
     <nav className="bc-nav-desktop" aria-label="Primary navigation">
-      <ul className="bc-nav-list" role="menubar">
+      <ul className="bc-nav-list">
         {NAV_ITEMS.map((item) => {
           const hasChildren = Boolean(item.children?.length);
 
@@ -14,7 +14,6 @@ const NavDesktop = () => {
             <li
               key={item.label}
               className={hasChildren ? "bc-nav-item bc-nav-item--has-children" : "bc-nav-item"}
-              role="none"
             >
               {item.href ? (
                 <NavLink
@@ -30,7 +29,6 @@ const NavDesktop = () => {
               ) : (
                 <span
                   className="bc-nav-link"
-                  role="menuitem"
                   {...(hasChildren ? { "aria-haspopup": true, "aria-expanded": false } : {})}
                 >
                   {item.label}
@@ -38,15 +36,14 @@ const NavDesktop = () => {
               )}
 
               {hasChildren && (
-                <ul className="bc-submenu" role="menu">
+                <ul className="bc-submenu">
                   {item.children!.map((child) => (
-                    <li key={child.label} role="none">
+                    <li key={child.label}>
                       <NavLink
                         href={child.href}
                         trackingId={child.trackingId}
                         external={child.external}
                         className="bc-submenu-link"
-                        role="menuitem"
                       >
                         {child.label}
                       </NavLink>

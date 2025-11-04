@@ -10,12 +10,19 @@ type NavLinkProps = {
   ariaHasPopup?: boolean;
   ariaExpanded?: boolean;
   onClick?: () => void;
-  role?: React.AriaRole;
+  role?: string;
 };
 
 const NavLink = ({ href, children, className, trackingId, external, ariaHasPopup, ariaExpanded, onClick, role }: NavLinkProps) => {
   const location = useLocation();
   const isActive = !external && (location.pathname === href || (href !== "/" && location.pathname.startsWith(href)));
+
+  // Prefer native link semantics; avoid assigning role unless inside a proper widget.
+  // aria-haspopup and aria-expanded must be booleans when used; only add if defined.
+  const ariaProps: Record<string, boolean | string> = {};
+  if (ariaHasPopup !== undefined) ariaProps['aria-haspopup'] = ariaHasPopup;
+  if (ariaExpanded !== undefined) ariaProps['aria-expanded'] = ariaExpanded;
+  if (role !== undefined) ariaProps['role'] = role;
 
   if (external) {
     return (
@@ -26,9 +33,7 @@ const NavLink = ({ href, children, className, trackingId, external, ariaHasPopup
         target="_blank"
         rel="noopener noreferrer"
         onClick={onClick}
-        aria-haspopup={ariaHasPopup || undefined}
-        aria-expanded={ariaExpanded}
-        role={role}
+        {...ariaProps}
       >
         {children}
       </a>
@@ -42,9 +47,7 @@ const NavLink = ({ href, children, className, trackingId, external, ariaHasPopup
       onClick={onClick}
       data-analytics={trackingId}
       aria-current={isActive ? "page" : undefined}
-      aria-haspopup={ariaHasPopup || undefined}
-      aria-expanded={ariaExpanded}
-      role={role}
+      {...ariaProps}
     >
       {children}
     </Link>
