@@ -7,6 +7,8 @@ import "@/styles/header.css";
 
 const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
+  // mobile nav toggle id for aria-controls
+  const mobileNavId = 'mobile-navigation';
 
   return (
     <header className="bc-header" role="banner">
@@ -22,17 +24,22 @@ const Header = () => {
         <NavDesktop />
 
         <button
+          id="mobile-nav-toggle"
           type="button"
           className="bc-mobile-toggle"
-          aria-controls="mobile-navigation"
+          aria-controls={mobileNavId}
+          // aria-expanded must be a boolean (true/false), not a string/template
           aria-expanded={mobileOpen}
+          aria-label={mobileOpen ? 'Close navigation' : 'Open navigation'}
           onClick={() => setMobileOpen((prev) => !prev)}
         >
+          <span className="sr-only">{mobileOpen ? 'Close' : 'Open'} navigation</span>
           {mobileOpen ? "Close" : "Menu"}
         </button>
       </div>
 
       <NavMobile
+        id={mobileNavId}
         open={mobileOpen}
         onClose={() => setMobileOpen(false)}
       />
