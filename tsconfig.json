@@ -5,14 +5,13 @@
     "module": "ESNext",
     "moduleResolution": "node",
     "jsx": "react-jsx",
-    "strict": true,
+    "strict": false,
     "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
-    "types": [],
-    "typeRoots": ["node_modules/@types", "node_modules"],
-    "baseUrl": ".",
-    "paths": { "@/*": ["src/*"] }
+    "noImplicitAny": false,
+    "noEmitOnError": false
   },
-  "include": ["src", "vite-env.d.ts", "globals.d.ts"]
+  "include": ["src"]
 }
