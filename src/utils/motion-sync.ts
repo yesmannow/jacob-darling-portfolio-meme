@@ -184,7 +184,9 @@ export const motionSync = new MotionSync();
 
 // Cinematic scroll synchronization with enhanced effects
 export function useCinematicScrollSync() {
-  gsap.utils.toArray<HTMLElement>("[data-scroll-section]").forEach((section) => {
+  // gsap.utils may not provide a properly typed generic in installed GSAP types.
+  // Cast to any to allow using a typed array here without a TS2347 error.
+  (gsap.utils as any).toArray<HTMLElement>("[data-scroll-section]").forEach((section) => {
     const scrollTrigger = ScrollTrigger.create({
       trigger: section,
       start: "top bottom",

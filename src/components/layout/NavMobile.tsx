@@ -4,11 +4,12 @@ import { NAV_ITEMS, CTA_PRIMARY } from "../../config/nav";
 import "@/styles/header.css";
 
 type NavMobileProps = {
+  id?: string;
   open: boolean;
   onClose: () => void;
 };
 
-const NavMobile = ({ open, onClose }: NavMobileProps) => {
+const NavMobile = ({ id, open, onClose }: NavMobileProps) => {
   const drawerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -52,7 +53,7 @@ const NavMobile = ({ open, onClose }: NavMobileProps) => {
         <button type="button" className="bc-mobile-close" onClick={onClose} aria-label="Close menu">
           ×
         </button>
-        <nav>
+        <nav id={id}>
           <ul className="bc-mobile-list">
             {NAV_ITEMS.map((item) => (
               <li key={item.label}>

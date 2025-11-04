@@ -2,8 +2,13 @@
 node_modules/
 
 # Build output
-dist/
-assets/
+/dist/
+/assets/
+
+# Local caches
+.parcel-cache/
+.turbo/
+.vercel/
 
 # Environment variables
 .env

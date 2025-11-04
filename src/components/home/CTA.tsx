@@ -8,11 +8,18 @@ import "./CTA.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const CTA = () => {
-  const sectionRef = useRef<HTMLElement>(null);
-  const glowRef = useRef<HTMLDivElement>(null);
+interface ParticleConfig {
+  left: string;
+  top: string;
+  delay: number;
+  index: number;
+}
 
-  const particleConfigs = useMemo(() => (
+const CTA = () => {
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const glowRef = useRef<HTMLDivElement | null>(null);
+
+  const particleConfigs = useMemo<ParticleConfig[]>(() => (
     Array.from({ length: 15 }).map((_, i) => ({
       left: `${Math.random() * 100}%`,
       top: `${Math.random() * 100}%`,
@@ -29,16 +36,21 @@ const CTA = () => {
     }
 
     // 🎯 Scoping: Pass sectionRef as second argument to ensure selectors only target elements within this component
+    // Guard references to avoid passing null into functions that expect HTMLElement.
+    if (!sectionRef.current) return;
+
     const ctx = gsap.context(() => {
       // Gradient glow background animation (uses ref, already scoped)
-      gsap.to(glowRef.current, {
-        scale: 1.2,
-        opacity: 0.8,
-        duration: 4,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut"
-      });
+      if (glowRef.current) {
+        gsap.to(glowRef.current, {
+          scale: 1.2,
+          opacity: 0.8,
+          duration: 4,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut"
+        });
+      }
 
       // Line animation under text - SCOPED to sectionRef
       gsap.fromTo(".cta-underline",
@@ -103,7 +115,7 @@ const CTA = () => {
       {/* Floating Particles */}
       {/* Note: CSS custom properties must be set inline as they are dynamically computed per particle */}
       <div className="absolute inset-0">
-        {particleConfigs.map(({ left, top, delay, index }) => (
+        {particleConfigs.map(({ left, top, delay, index }: ParticleConfig) => (
           <div
             key={index}
             className="cta-particle absolute w-1 h-1 bg-white rounded-full"

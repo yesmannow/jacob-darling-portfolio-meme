@@ -5,7 +5,7 @@
  */
 
 import { execSync } from 'child_process';
-import { existsSync, writeFileSync } from 'fs';
+import { existsSync, writeFileSync, readFileSync, statSync } from 'fs';
 import { readdir } from 'fs/promises';
 import { join } from 'path';
 
@@ -41,19 +41,14 @@ if (!existsSync(distAssets)) {
 }
 
 // Check index.html references hashed JS
-const html = fs.readFileSync(join(distAssets, '../index.html'), 'utf-8');
+const html = readFileSync(join(distAssets, '../index.html'), 'utf-8');
 if (!html.includes('/assets/index-') || html.includes('/src/main.tsx')) {
   console.error('❌ index.html references invalid entry point');
   process.exit(1);
 }
 
-// Check asset sizes
-const files = await readdir(distAssets);
-const jsFile = files.find(f => f.endsWith('.js'));
-const stats = fs.statSync(join(distAssets, jsFile));
-console.log(`✅ JS bundle size: ${(stats.size / 1024).toFixed(2)} KB`);
-
 try {
+  // Check asset sizes and build output
   const files = await readdir(distAssets);
   const jsFiles = files.filter(f => f.endsWith('.js'));
   const cssFiles = files.filter(f => f.endsWith('.css'));
@@ -75,14 +70,32 @@ try {
     console.warn(`⚠️  Warning: No JavaScript files found in build output`);
   }
 
+  // Calculate file sizes for deploy.json
+  let jsSizeKB = 0;
+  let cssSizeKB = 0;
+  
+  if (jsFiles.length > 0) {
+    const jsFile = jsFiles[0];
+    const jsStats = statSync(join(distAssets, jsFile));
+    jsSizeKB = jsStats.size / 1024;
+    console.log(`✅ JS bundle size: ${jsSizeKB.toFixed(2)} KB`);
+  }
+  
+  if (cssFiles.length > 0) {
+    const cssFile = cssFiles[0];
+    const cssStats = statSync(join(distAssets, cssFile));
+    cssSizeKB = cssStats.size / 1024;
+    console.log(`✅ CSS bundle size: ${cssSizeKB.toFixed(2)} KB`);
+  }
+
   console.log('✅ Build output verification passed!');
 
   // Write deploy.json with build metrics
   const distPath = 'dist';
   const deployData = {
     timestamp: new Date().toISOString(),
-    jsSizeKB: (jsStats.size / 1024).toFixed(2),
-    cssSizeKB: (cssStats.size / 1024).toFixed(2),
+    jsSizeKB: jsSizeKB.toFixed(2),
+    cssSizeKB: cssSizeKB.toFixed(2),
     status: "Healthy"
   };
 

@@ -15,7 +15,7 @@ const defaultProps: Required<IconProps> = {
 };
 
 // Brain Icon (replaces 🧠)
-export const IconBrain = (props: IconProps) =>props) => {
+export const IconBrain = (props: IconProps) => {
   const { size, color, className, strokeWidth } = { ...defaultProps, ...props };
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className} stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round">
@@ -31,7 +31,7 @@ export const IconBrain = (props: IconProps) =>props) => {
 };
 
 // Diamond Icon (replaces 💎)
-export const IconDiamond = (props: IconProps) =>props) => {
+export const IconDiamond = (props: IconProps) => {
   const { size, color, className, strokeWidth } = { ...defaultProps, ...props };
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className} stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round">
@@ -43,7 +43,7 @@ export const IconDiamond = (props: IconProps) =>props) => {
 };
 
 // Book Icon (replaces 📚)
-export const IconBook = (props: IconProps) =>props) => {
+export const IconBook = (props: IconProps) => {
   const { size, color, className, strokeWidth } = { ...defaultProps, ...props };
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className} stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round">
@@ -55,7 +55,7 @@ export const IconBook = (props: IconProps) =>props) => {
 };
 
 // Chart Icon (replaces 📊 📈)
-export const IconChart = (props: IconProps) =>props) => {
+export const IconChart = (props: IconProps) => {
   const { size, color, className, strokeWidth } = { ...defaultProps, ...props };
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className} stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round">
@@ -67,7 +67,7 @@ export const IconChart = (props: IconProps) =>props) => {
 };
 
 // Building Icon (replaces 🏗️ 🏛️)
-export const IconBuilding = (props: IconProps) =>props) => {
+export const IconBuilding = (props: IconProps) => {
   const { size, color, className, strokeWidth } = { ...defaultProps, ...props };
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className} stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round">
@@ -87,7 +87,7 @@ export const IconBuilding = (props: IconProps) =>props) => {
 };
 
 // Refresh Icon (replaces 🔄)
-export const IconRefresh = (props: IconProps) =>props) => {
+export const IconRefresh = (props: IconProps) => {
   const { size, color, className, strokeWidth } = { ...defaultProps, ...props };
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className} stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round">
@@ -100,7 +100,7 @@ export const IconRefresh = (props: IconProps) =>props) => {
 };
 
 // Target Icon (replaces 🎯)
-export const IconTarget = (props: IconProps) =>props) => {
+export const IconTarget = (props: IconProps) => {
   const { size, color, className, strokeWidth } = { ...defaultProps, ...props };
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className} stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round">
@@ -112,7 +112,7 @@ export const IconTarget = (props: IconProps) =>props) => {
 };
 
 // Rocket Icon (replaces 🚀)
-export const IconRocket = (props: IconProps) =>props) => {
+export const IconRocket = (props: IconProps) => {
   const { size, color, className, strokeWidth } = { ...defaultProps, ...props };
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className} stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round">
@@ -125,7 +125,7 @@ export const IconRocket = (props: IconProps) =>props) => {
 };
 
 // Alert Icon (replaces ⚠️)
-export const IconAlert = (props: IconProps) =>props) => {
+export const IconAlert = (props: IconProps) => {
   const { size, color, className, strokeWidth } = { ...defaultProps, ...props };
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className} stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round">
@@ -137,7 +137,7 @@ export const IconAlert = (props: IconProps) =>props) => {
 };
 
 // Lightbulb Icon (replaces 💡)
-export const IconLightbulb = (props: IconProps) =>props) => {
+export const IconLightbulb = (props: IconProps) => {
   const { size, color, className, strokeWidth } = { ...defaultProps, ...props };
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className} stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round">
@@ -149,7 +149,7 @@ export const IconLightbulb = (props: IconProps) =>props) => {
 };
 
 // Palette Icon (replaces 🎨)
-export const IconPalette = (props: IconProps) =>props) => {
+export const IconPalette = (props: IconProps) => {
   const { size, color, className, strokeWidth } = { ...defaultProps, ...props };
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className} stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round">
@@ -163,7 +163,7 @@ export const IconPalette = (props: IconProps) =>props) => {
 };
 
 // Users Icon (replaces 👥)
-export const IconUsers = (props: IconProps) =>props) => {
+export const IconUsers = (props: IconProps) => {
   const { size, color, className, strokeWidth } = { ...defaultProps, ...props };
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className} stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round">
@@ -176,7 +176,7 @@ export const IconUsers = (props: IconProps) =>props) => {
 };
 
 // GraduationCap Icon (replaces 🎓)
-export const IconGraduationCap = (props: IconProps) =>props) => {
+export const IconGraduationCap = (props: IconProps) => {
   const { size, color, className, strokeWidth } = { ...defaultProps, ...props };
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className} stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round">
@@ -187,7 +187,7 @@ export const IconGraduationCap = (props: IconProps) =>props) => {
 };
 
 // Briefcase Icon (replaces 💼)
-export const IconBriefcase = (props: IconProps) =>props) => {
+export const IconBriefcase = (props: IconProps) => {
   const { size, color, className, strokeWidth } = { ...defaultProps, ...props };
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className} stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round">
@@ -198,7 +198,7 @@ export const IconBriefcase = (props: IconProps) =>props) => {
 };
 
 // Mail Icon (replaces ✉️)
-export const IconMail = (props: IconProps) =>props) => {
+export const IconMail = (props: IconProps) => {
   const { size, color, className, strokeWidth } = { ...defaultProps, ...props };
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className} stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round">
@@ -209,7 +209,7 @@ export const IconMail = (props: IconProps) =>props) => {
 };
 
 // Code Icon (replaces 💻)
-export const IconCode = (props: IconProps) =>props) => {
+export const IconCode = (props: IconProps) => {
   const { size, color, className, strokeWidth } = { ...defaultProps, ...props };
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className} stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round">
@@ -220,7 +220,7 @@ export const IconCode = (props: IconProps) =>props) => {
 };
 
 // Soccer Ball Icon (replaces ⚽)
-export const IconSoccer = (props: IconProps) =>props) => {
+export const IconSoccer = (props: IconProps) => {
   const { size, color, className, strokeWidth } = { ...defaultProps, ...props };
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className} stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round">
@@ -232,7 +232,7 @@ export const IconSoccer = (props: IconProps) =>props) => {
 };
 
 // Tool/Wrench Icon (replaces 🔧)
-export const IconTool = (props: IconProps) =>props) => {
+export const IconTool = (props: IconProps) => {
   const { size, color, className, strokeWidth } = { ...defaultProps, ...props };
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className} stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round">
@@ -242,7 +242,7 @@ export const IconTool = (props: IconProps) =>props) => {
 };
 
 // Trending Up Icon (replaces 📈)
-export const IconTrendingUp = (props: IconProps) =>props) => {
+export const IconTrendingUp = (props: IconProps) => {
   const { size, color, className, strokeWidth } = { ...defaultProps, ...props };
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className} stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round">
@@ -253,7 +253,7 @@ export const IconTrendingUp = (props: IconProps) =>props) => {
 };
 
 // Map Icon (replaces 🗺️)
-export const IconMap = (props: IconProps) =>props) => {
+export const IconMap = (props: IconProps) => {
   const { size, color, className, strokeWidth } = { ...defaultProps, ...props };
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className} stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round">
@@ -265,7 +265,7 @@ export const IconMap = (props: IconProps) =>props) => {
 };
 
 // Robot/AI Icon (replaces 🤖)
-export const IconRobot = (props: IconProps) =>props) => {
+export const IconRobot = (props: IconProps) => {
   const { size, color, className, strokeWidth } = { ...defaultProps, ...props };
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className} stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round">
@@ -279,7 +279,7 @@ export const IconRobot = (props: IconProps) =>props) => {
 };
 
 // Star Icon (replaces ⭐)
-export const IconStar = (props: IconProps) =>props) => {
+export const IconStar = (props: IconProps) => {
   const { size, color, className, strokeWidth } = { ...defaultProps, ...props };
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className} stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round">
@@ -289,7 +289,7 @@ export const IconStar = (props: IconProps) =>props) => {
 };
 
 // Package/Box Icon (replaces 📦)
-export const IconPackage = (props: IconProps) =>props) => {
+export const IconPackage = (props: IconProps) => {
   const { size, color, className, strokeWidth } = { ...defaultProps, ...props };
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className} stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round">
@@ -301,7 +301,7 @@ export const IconPackage = (props: IconProps) =>props) => {
 };
 
 // Dollar/Money Icon (replaces 💰)
-export const IconDollar = (props: IconProps) =>props) => {
+export const IconDollar = (props: IconProps) => {
   const { size, color, className, strokeWidth } = { ...defaultProps, ...props };
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className} stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round">
@@ -312,7 +312,7 @@ export const IconDollar = (props: IconProps) =>props) => {
 };
 
 // Search/Magnifier Icon (replaces 🔍)
-export const IconSearch = (props: IconProps) =>props) => {
+export const IconSearch = (props: IconProps) => {
   const { size, color, className, strokeWidth } = { ...defaultProps, ...props };
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className} stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round">
@@ -323,7 +323,7 @@ export const IconSearch = (props: IconProps) =>props) => {
 };
 
 // Credit Card Icon (replaces 💳)
-export const IconCreditCard = (props: IconProps) =>props) => {
+export const IconCreditCard = (props: IconProps) => {
   const { size, color, className, strokeWidth } = { ...defaultProps, ...props };
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className} stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round">
@@ -334,7 +334,7 @@ export const IconCreditCard = (props: IconProps) =>props) => {
 };
 
 // Clipboard/List Icon (replaces 📋 📑)
-export const IconClipboard = (props: IconProps) =>props) => {
+export const IconClipboard = (props: IconProps) => {
   const { size, color, className, strokeWidth } = { ...defaultProps, ...props };
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className} stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round">
@@ -345,7 +345,7 @@ export const IconClipboard = (props: IconProps) =>props) => {
 };
 
 // Hospital/Medical Icon (replaces 🏥)
-export const IconHospital = (props: IconProps) =>props) => {
+export const IconHospital = (props: IconProps) => {
   const { size, color, className, strokeWidth } = { ...defaultProps, ...props };
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className} stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round">
