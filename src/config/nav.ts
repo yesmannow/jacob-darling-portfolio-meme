@@ -52,6 +52,7 @@ export const NAV_ITEMS: NavItem[] = [
     ],
   },
   { label: "Toolbox", href: "/toolbox", trackingId: "nav_toolbox" },
+  { label: "Dashboard", href: "/dashboard", trackingId: "nav_dashboard" },
   { label: "Résumé", href: "/resume", trackingId: "nav_resume" },
 ];
 

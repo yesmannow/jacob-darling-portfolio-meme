@@ -24,6 +24,7 @@ const Testimonials = lazy(() => import("../pages/Testimonials"));
 const Resume = lazy(() => import("../pages/Resume"));
 const Contact = lazy(() => import("../pages/Contact"));
 const Inspiration = lazy(() => import("../pages/Inspiration"));
+const Dashboard = lazy(() => import("../pages/Dashboard"));
 
 // Loading component - use unique class to avoid GSAP selector conflicts
 const PageLoader = () => (
@@ -98,6 +99,7 @@ const AppRouter = () => {
             <Route path="/testimonials" element={<PageTransition><Testimonials /></PageTransition>} />
             <Route path="/resume" element={<PageTransition><Resume /></PageTransition>} />
             <Route path="/contact" element={<PageTransition><Contact /></PageTransition>} />
+            <Route path="/dashboard" element={<PageTransition><Dashboard /></PageTransition>} />
           </Routes>
         </Suspense>
       </AnimatePresence>

@@ -5,7 +5,7 @@
  */
 
 import { execSync } from 'child_process';
-import { existsSync } from 'fs';
+import { existsSync, writeFileSync } from 'fs';
 import { readdir } from 'fs/promises';
 import { join } from 'path';
 
@@ -76,6 +76,21 @@ try {
   }
 
   console.log('✅ Build output verification passed!');
+
+  // Write deploy.json with build metrics
+  const distPath = 'dist';
+  const deployData = {
+    timestamp: new Date().toISOString(),
+    jsSizeKB: (jsStats.size / 1024).toFixed(2),
+    cssSizeKB: (cssStats.size / 1024).toFixed(2),
+    status: "Healthy"
+  };
+
+  writeFileSync(
+    join(distPath, 'deploy.json'),
+    JSON.stringify(deployData, null, 2)
+  );
+  console.log("✅ deploy.json written");
 } catch (error) {
   console.error(`❌ Error verifying build output: ${error.message}`);
   process.exit(1);

@@ -26,3 +26,6 @@ npm-debug.log*
 .vercel
 node_modules/.vite/
 *.timestamp-*.mjs
+
+*storybook.log
+storybook-static

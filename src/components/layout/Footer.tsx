@@ -115,6 +115,11 @@ const Footer = () => (
     <div className="footer-bottom">
       <p>&copy; 2025 Jacob Darling. All rights reserved.</p>
       <p className="footer-quote">"Systems create freedom."</p>
+      <p className="footer-api-link">
+        <a href="/api/openapi.json" target="_blank" rel="noopener noreferrer">
+          View API Schema
+        </a>
+      </p>
     </div>
   </footer>
 );
